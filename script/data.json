@@ -1,0 +1,28 @@
+{
+  "user": [
+    {"email": "cody@email.com", "password": "123"},
+    {"email": "murphy@email.com", "password": "123"}
+  ],
+  "list": [
+    {"name": "Christmas", "userId": 1},
+    {"name": "Christmas", "userId": 2}
+  ],
+  "item": [
+    {"url": "http://store.apple.com/macbook"},
+    {"url": "https://www.amazon.com/All-new-Echo-Dot-3rd-Gen/dp/B0792R1RSN/ref=redir_mobile_desktop?_encoding=UTF8&ref_=ods_gw_ha_dt_dc_092318"},
+    {"url": "https://www.jcrew.com/p/J3272"},
+    {"url": "https://www.crateandbarrel.com/french-kitchen-marble-paper-towel-holder"}
+  ],
+  "receiver": [
+    {"name": "Michael Scott", "listId": 1},
+    {"name": "Jim Halpert", "listId": 2},
+    {"name": "Angela Martin", "listId": 1},
+    {"name": "Dwight Schrute", "listId": 2}
+  ],
+  "gift": [
+    {"status": "Purchased", "itemId": 1, "receiverId": 1},
+    {"status": "Pending", "itemId": 2, "receiverId": 1},
+    {"status": "Given", "itemId": 3, "receiverId": 2},
+    {"status": "Purchased", "itemId": 2, "receiverId": 3}
+  ]
+}
