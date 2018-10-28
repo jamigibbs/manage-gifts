@@ -1,16 +1,6 @@
 import axios from 'axios'
 import history from '../history'
-
-/**
- * ACTION TYPES
- */
-const GET_USER = 'GET_USER'
-const REMOVE_USER = 'REMOVE_USER'
-
-/**
- * INITIAL STATE
- */
-const defaultUser = {}
+import { GET_USER, REMOVE_USER} from '../constants'
 
 /**
  * ACTION CREATORS
@@ -24,7 +14,7 @@ const removeUser = () => ({type: REMOVE_USER})
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
-    dispatch(getUser(res.data || defaultUser))
+    dispatch(getUser(res.data || {} ))
   } catch (err) {
     console.error(err)
   }
