@@ -1,29 +1,24 @@
 import React, { Component } from 'react'
-
-const receivers = {
-  "all": [
-    {"id": 1, "name": "Michael Scott", "listId": 1},
-    {"id": 2, "name": "Jim Halpert", "listId": 1},
-    {"id": 3, "name": "Angela Martin", "listId": 1},
-    {"id": 4, "name": "Dwight Schrute", "listId": 1}
-  ]
-}
-
+import { connect } from 'react-redux'
+import { getAllReceivers } from '../actions'
+ 
 class ReceiversList extends Component {
   constructor(props){
     super()
-    this.state = {
-      receivers: receivers.all
-    }
   }
   
+  componentDidMount(){
+    const { listId, auth } = this.props
+    this.props.getAllReceivers(listId, auth)
+  }
+
   render(){
-    const { receivers } = this.state
+    const { receivers } = this.props
     return (
       <div>
         <h3>Receivers List</h3>
         <ul>
-          {
+          { receivers.length &&
             receivers.map(function(receiver){
               return <li key={receiver.id}>{receiver.name}</li>
             })
@@ -34,4 +29,18 @@ class ReceiversList extends Component {
   }
 }
 
-export default ReceiversList
+const mapStateToProps = (state) => {
+  return {
+    receivers: state.receivers.all
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getAllReceivers: (listId, auth) => {
+      dispatch(getAllReceivers(listId, auth))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReceiversList)
