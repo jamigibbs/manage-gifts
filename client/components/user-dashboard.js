@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import ReceiverAdd from './receiver-add'
+import ReceiversList from './receivers-list'
 
 /**
  * COMPONENT
@@ -13,6 +14,7 @@ export const UserDashboard = props => {
     <div>
       <h3>Welcome, {email}</h3>
       <ReceiverAdd listId={1} auth={email}/>
+      <ReceiversList />
     </div>
   )
 }
