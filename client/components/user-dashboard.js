@@ -12,7 +12,7 @@ export const UserDashboard = props => {
 
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+      <h2>Welcome, {email}</h2>
       <ReceiverAdd listId={1} auth={email} />
       <ReceiversList listId={1} auth={email} />
     </div>
