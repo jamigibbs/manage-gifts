@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/jamigibbs/gift-manager.svg?branch=development)](https://travis-ci.com/jamigibbs/gift-manager)
+
 # Gift Manager
 
 Step away from the spreadsheet
