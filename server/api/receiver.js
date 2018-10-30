@@ -2,7 +2,11 @@ const router = require('express').Router()
 const { Receiver } = require('../db/models')
 
 const userAuth = function(req, res, next) {
-  return req.body.auth === req.user.email ? next() : res.status(401).send('Unauthorized user')
+  if (req.body.auth === req.user.email || req.query.auth === req.user.email ) {
+    next()
+  } else {
+    res.status(401).send('Unauthorized user')
+  }
 }
 
 // POST /api/receiver
@@ -11,9 +15,20 @@ router.post('/', userAuth, async (req, res, next) => {
   try {
     const receiver = await Receiver.create({name, listId})
     res.json(receiver)
-  } catch (err) {
-    next(err)
-  }
+  } catch (err) { next(err) }
+})
+
+// GET /api/receiver/all
+router.get('/all/', userAuth, async (req, res, next) => {
+  const { listId } = req.query
+  try {
+    const receivers = await Receiver.findAll({
+      where: {
+        listId
+      }
+    })
+    res.json(receivers)
+  } catch (err) { next(err) }
 })
 
 module.exports = router
