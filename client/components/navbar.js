@@ -4,27 +4,45 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../actions'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>Gift Manager</h1>
+import { withStyles } from '@material-ui/core/styles'
+import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
+
+const styles = {
+  root: {
+    flexGrow: 1,
+  },
+  grow: {
+    flexGrow: 1,
+  }
+};
+
+const Navbar = ({handleClick, isLoggedIn, classes}) => (
+  <div className={classes.root}>
+
+  <AppBar position="static">
+  <Toolbar>
+  <Typography variant="h6" color="inherit" className={classes.grow}>
+    Gift Manager
+  </Typography >
     <nav>
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
-          <Link to="/dashboard">Dashboard</Link>
-          <a href="#" onClick={handleClick}>
+          <Button color="inherit"><Link to="/dashboard">Dashboard</Link></Button>
+          <Button onClick={handleClick} color="inherit">
             Logout
-          </a>
+          </Button>
         </div>
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          <Button color="inherit"><Link to="/login">Login</Link></Button>
+          <Button color="inherit"><Link to="/signup">Sign Up</Link></Button>
         </div>
       )}
     </nav>
-    <hr />
+    </Toolbar>
+    </AppBar>
   </div>
 )
 
@@ -45,12 +63,13 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(Navbar)
+export default connect(mapState, mapDispatch)(withStyles(styles)(Navbar))
 
 /**
  * PROP TYPES
  */
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
+  classes: PropTypes.object.isRequired
 }
