@@ -1,36 +1,113 @@
+import './auth-form.scss'
+
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { auth } from '../actions'
 
-/**
- * COMPONENT
- */
+import { withStyles } from '@material-ui/core/styles'
+import { Grid, Paper, TextField, Button, Typography } from '@material-ui/core'
+
+const styles = theme => ({
+  submitButton: {
+    marginTop: '10px',
+    marginBottom: '20px'
+  },
+  googleButton: {
+    marginTop: '10px',
+    marginBottom: '20px',
+  },
+  title: {
+    marginTop: '20px',
+    lineHeight: '2.33',
+  }
+})
+
 const AuthForm = props => {
-  const {name, displayName, handleSubmit, error} = props
+  const { name, displayName, handleSubmit, error, classes } = props
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
+    <Grid
+      container
+      direction="column"
+      justify="center"
+      alignItems="center"
+    >
+
+      <Typography
+        variant="h5"
+        color="default"
+        align="center"
+        className={classes.title}
+      >
+        {displayName}
+      </Typography>
+
+      <Paper elevation={1} square={true} className="auth-form">
+
+      <form className="auth-form__form" onSubmit={handleSubmit} name={name}>
+
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+        >
+
+        <TextField
+          id="outlined-email-input"
+          label="Email"
+          type="email"
+          name="email"
+          autoComplete="email"
+          margin="normal"
+          required={true}
+          fullWidth={true}
+        />
+
+        <TextField
+          id="outlined-password-input"
+          label="Password"
+          type="password"
+          name="password"
+          margin="normal"
+          required={true}
+          fullWidth={true}
+        />
+        <Button
+          variant="outlined"
+          color="primary"
+          type="submit"
+          fullWidth={true}
+          className={classes.submitButton}
+        >
+          {displayName}
+        </Button>
+
+        {error && error.response &&
+          <Typography
+            variant="body2"
+            color="error"
+            align="center"
+          >
+            {error.response.data}
+          </Typography>
+        }
+
+        </Grid>
+
       </form>
-      <a href="/auth/google">{displayName} with Google</a>
-    </div>
+
+      <hr />
+
+      {/* <a href="/auth/google">{displayName} with Google</a> */}
+
+      <Button href="/auth/google" variant="contained" color="primary" fullWidth={true} className={classes.googleButton}>
+        {displayName} with Google
+      </Button>
+
+      </Paper>
+    </Grid>
   )
 }
 
@@ -69,8 +146,8 @@ const mapDispatch = dispatch => {
   }
 }
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm)
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
+export const Login = connect(mapLogin, mapDispatch)(withStyles(styles)(AuthForm))
+export const Signup = connect(mapSignup, mapDispatch)(withStyles(styles)(AuthForm))
 
 /**
  * PROP TYPES

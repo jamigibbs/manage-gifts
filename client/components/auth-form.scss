@@ -1,0 +1,11 @@
+@import '../../styles/utils/mixins';
+
+.auth-form {
+  padding: 1rem 2rem;
+  &__form {
+    width: 250px;
+  }
+  label {
+    font-size: 12px;
+  }
+}

@@ -526,6 +526,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Signup = exports.Login = void 0;
 
+__webpack_require__(/*! ./auth-form.scss */ "./client/components/auth-form.scss");
+
 var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
@@ -534,34 +536,92 @@ var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ ".
 
 var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
 
+var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+
+var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/**
- * COMPONENT
- */
+var styles = function styles(theme) {
+  return {
+    submitButton: {
+      marginTop: '10px',
+      marginBottom: '20px'
+    },
+    googleButton: {
+      marginTop: '10px',
+      marginBottom: '20px'
+    },
+    title: {
+      marginTop: '20px',
+      lineHeight: '2.33'
+    }
+  };
+};
+
 var AuthForm = function AuthForm(props) {
   var name = props.name,
       displayName = props.displayName,
       handleSubmit = props.handleSubmit,
-      error = props.error;
-  return _react.default.createElement("div", null, _react.default.createElement("form", {
+      error = props.error,
+      classes = props.classes;
+  return _react.default.createElement(_core.Grid, {
+    container: true,
+    direction: "column",
+    justify: "center",
+    alignItems: "center"
+  }, _react.default.createElement(_core.Typography, {
+    variant: "h5",
+    color: "default",
+    align: "center",
+    className: classes.title
+  }, displayName), _react.default.createElement(_core.Paper, {
+    elevation: 1,
+    square: true,
+    className: "auth-form"
+  }, _react.default.createElement("form", {
+    className: "auth-form__form",
     onSubmit: handleSubmit,
     name: name
-  }, _react.default.createElement("div", null, _react.default.createElement("label", {
-    htmlFor: "email"
-  }, _react.default.createElement("small", null, "Email")), _react.default.createElement("input", {
+  }, _react.default.createElement(_core.Grid, {
+    container: true,
+    direction: "column",
+    justify: "center",
+    alignItems: "center"
+  }, _react.default.createElement(_core.TextField, {
+    id: "outlined-email-input",
+    label: "Email",
+    type: "email",
     name: "email",
-    type: "text"
-  })), _react.default.createElement("div", null, _react.default.createElement("label", {
-    htmlFor: "password"
-  }, _react.default.createElement("small", null, "Password")), _react.default.createElement("input", {
+    autoComplete: "email",
+    margin: "normal",
+    required: true,
+    fullWidth: true
+  }), _react.default.createElement(_core.TextField, {
+    id: "outlined-password-input",
+    label: "Password",
+    type: "password",
     name: "password",
-    type: "password"
-  })), _react.default.createElement("div", null, _react.default.createElement("button", {
-    type: "submit"
-  }, displayName)), error && error.response && _react.default.createElement("div", null, " ", error.response.data, " ")), _react.default.createElement("a", {
-    href: "/auth/google"
-  }, displayName, " with Google"));
+    margin: "normal",
+    required: true,
+    fullWidth: true
+  }), _react.default.createElement(_core.Button, {
+    variant: "outlined",
+    color: "primary",
+    type: "submit",
+    fullWidth: true,
+    className: classes.submitButton
+  }, displayName), error && error.response && _react.default.createElement(_core.Typography, {
+    variant: "body2",
+    color: "error",
+    align: "center"
+  }, error.response.data))), _react.default.createElement("hr", null), _react.default.createElement(_core.Button, {
+    href: "/auth/google",
+    variant: "contained",
+    color: "primary",
+    fullWidth: true,
+    className: classes.googleButton
+  }, displayName, " with Google")));
 };
 /**
  * CONTAINER
@@ -600,9 +660,9 @@ var mapDispatch = function mapDispatch(dispatch) {
   };
 };
 
-var Login = (0, _reactRedux.connect)(mapLogin, mapDispatch)(AuthForm);
+var Login = (0, _reactRedux.connect)(mapLogin, mapDispatch)((0, _styles.withStyles)(styles)(AuthForm));
 exports.Login = Login;
-var Signup = (0, _reactRedux.connect)(mapSignup, mapDispatch)(AuthForm);
+var Signup = (0, _reactRedux.connect)(mapSignup, mapDispatch)((0, _styles.withStyles)(styles)(AuthForm));
 /**
  * PROP TYPES
  */
@@ -614,6 +674,36 @@ AuthForm.propTypes = {
   handleSubmit: _propTypes.default.func.isRequired,
   error: _propTypes.default.object
 };
+
+/***/ }),
+
+/***/ "./client/components/auth-form.scss":
+/*!******************************************!*\
+  !*** ./client/components/auth-form.scss ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../node_modules/css-loader!../../node_modules/sass-loader/lib/loader.js!./auth-form.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./client/components/auth-form.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
 
 /***/ }),
 
@@ -47763,6 +47853,25 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./client/components/auth-form.scss":
+/*!*************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./client/components/auth-form.scss ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".auth-form {\n  padding: 1rem 2rem; }\n  .auth-form__form {\n    width: 250px; }\n  .auth-form label {\n    font-size: 12px; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./styles/main.scss":
 /*!*********************************************************************************************!*\
   !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./styles/main.scss ***!
@@ -47775,7 +47884,7 @@ exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/li
 
 
 // module
-exports.push([module.i, "body {\n  margin: 0; }\n", ""]);
+exports.push([module.i, "/*\n  @import 'base/module';\n  - contains global styles, such as resets, typography, colors, etc.\n\n  @import 'components/module';\n  - contains each self-contained component in its own .scss partial\n\n  @import 'layout/module';\n  - contains styling for larger layout components; e.g. nav, header, footer, etc.\n\n  @import 'pages/module';\n  - contains page-specific styling, if necessary\n\n  @import 'themes/module';\n  - contains styling for different themes\n\n  @import 'utils/module';\n  - contains global mixins, functions, helper selectors, etc.\n\n  @import 'vendors/module';\n  - contains 3rd-party styles, mixins, etc.\n*/\nbody {\n  margin: 0; }\n", ""]);
 
 // exports
 
