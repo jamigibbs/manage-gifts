@@ -9,22 +9,26 @@ import { logout } from '../actions'
 import { withStyles } from '@material-ui/core/styles'
 import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
 
-const styles = {
+const styles = theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   grow: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   button: {
     fontWeight: 100
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1
   }
-};
+})
 
 const Navbar = ({handleClick, isLoggedIn, classes}) => (
   <div className={classes.root}>
 
-  <AppBar position="static" className="nav-main">
+  <div className="nav-main">
+  <AppBar position="relative" className={classes.appBar}>
   <Toolbar>
     <Typography variant="h6" color="inherit" className={classes.grow}>
       <Link to="/">Gift Manager</Link>
@@ -54,6 +58,7 @@ const Navbar = ({handleClick, isLoggedIn, classes}) => (
     </nav>
     </Toolbar>
     </AppBar>
+    </div>
   </div>
 )
 

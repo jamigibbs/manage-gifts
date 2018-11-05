@@ -9,6 +9,7 @@ import store from './store'
 import App from './app'
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import CssBaseline from '@material-ui/core/CssBaseline'
 import { blue } from '@material-ui/core/colors/'
 
 const theme = createMuiTheme({
@@ -25,6 +26,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <MuiThemeProvider theme={theme}>
+        <CssBaseline />
         <App />
       </MuiThemeProvider>
     </Router>

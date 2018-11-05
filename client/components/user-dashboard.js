@@ -1,38 +1,48 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+
+import { withStyles } from '@material-ui/core/styles'
+import { Typography } from '@material-ui/core'
+
 import ReceiverAdd from './receiver-add'
 import ReceiversList from './receivers-list'
+import Sidebar from './sidebar'
 
-/**
- * COMPONENT
- */
+const styles = theme => ({
+  root: {
+    display: 'flex',
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing.unit * 3,
+  }
+})
+
 export const UserDashboard = props => {
-  const {email} = props
+  const {email, classes} = props
 
   return (
-    <div>
-      <h2>Welcome, {email}</h2>
-      <ReceiverAdd listId={1} auth={email} />
-      <ReceiversList listId={1} auth={email} />
+    <div className={classes.root}>
+      <Sidebar />
+      <main className={classes.content}>
+        <Typography variant="h4" align="center">Welcome, {email}</Typography>
+        <ReceiverAdd listId={1} auth={email} />
+        <ReceiversList listId={1} auth={email} />
+      </main>
     </div>
   )
 }
 
-/**
- * CONTAINER
- */
 const mapState = state => {
   return {
     email: state.user.email
   }
 }
 
-export default connect(mapState)(UserDashboard)
-
-/**
- * PROP TYPES
- */
 UserDashboard.propTypes = {
-  email: PropTypes.string
+  email: PropTypes.string,
+  classes: PropTypes.object.isRequired
 }
+
+export default connect(mapState, null)(withStyles(styles)(UserDashboard))
