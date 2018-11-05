@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addReceiver } from '../actions'
 
-class ReceiverAdd extends Component {
+export class ReceiverAdd extends Component {
   constructor(props){
     super()
     this.state = {
