@@ -770,6 +770,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+__webpack_require__(/*! ./navbar.scss */ "./client/components/navbar.scss");
+
 var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
@@ -792,6 +794,9 @@ var styles = {
   },
   grow: {
     flexGrow: 1
+  },
+  button: {
+    fontWeight: 100
   }
 };
 
@@ -802,26 +807,35 @@ var Navbar = function Navbar(_ref) {
   return _react.default.createElement("div", {
     className: classes.root
   }, _react.default.createElement(_core.AppBar, {
-    position: "static"
+    position: "static",
+    className: "nav-main"
   }, _react.default.createElement(_core.Toolbar, null, _react.default.createElement(_core.Typography, {
     variant: "h6",
     color: "inherit",
     className: classes.grow
-  }, "Gift Manager"), _react.default.createElement("nav", null, isLoggedIn ? _react.default.createElement("div", null, _react.default.createElement(_core.Button, {
-    color: "inherit"
   }, _react.default.createElement(_reactRouterDom.Link, {
-    to: "/dashboard"
+    to: "/"
+  }, "Gift Manager")), _react.default.createElement("nav", null, isLoggedIn ? _react.default.createElement("div", null, _react.default.createElement(_core.Button, {
+    color: "inherit",
+    className: classes.button
+  }, _react.default.createElement(_reactRouterDom.NavLink, {
+    to: "/dashboard",
+    activeClassName: "nav-main__active"
   }, "Dashboard")), _react.default.createElement(_core.Button, {
     onClick: handleClick,
     color: "inherit"
   }, "Logout")) : _react.default.createElement("div", null, _react.default.createElement(_core.Button, {
-    color: "inherit"
-  }, _react.default.createElement(_reactRouterDom.Link, {
-    to: "/login"
+    color: "inherit",
+    className: classes.button
+  }, _react.default.createElement(_reactRouterDom.NavLink, {
+    to: "/login",
+    activeClassName: "nav-main__active"
   }, "Login")), _react.default.createElement(_core.Button, {
-    color: "inherit"
-  }, _react.default.createElement(_reactRouterDom.Link, {
-    to: "/signup"
+    color: "inherit",
+    className: classes.button
+  }, _react.default.createElement(_reactRouterDom.NavLink, {
+    to: "/signup",
+    activeClassName: "nav-main__active"
   }, "Sign Up")))))));
 };
 /**
@@ -843,7 +857,7 @@ var mapDispatch = function mapDispatch(dispatch) {
   };
 };
 
-var _default = (0, _reactRedux.connect)(mapState, mapDispatch)((0, _styles.withStyles)(styles)(Navbar));
+var _default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapState, mapDispatch)((0, _styles.withStyles)(styles)(Navbar)));
 /**
  * PROP TYPES
  */
@@ -855,6 +869,36 @@ Navbar.propTypes = {
   isLoggedIn: _propTypes.default.bool.isRequired,
   classes: _propTypes.default.object.isRequired
 };
+
+/***/ }),
+
+/***/ "./client/components/navbar.scss":
+/*!***************************************!*\
+  !*** ./client/components/navbar.scss ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../node_modules/css-loader!../../node_modules/sass-loader/lib/loader.js!./navbar.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./client/components/navbar.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
 
 /***/ }),
 
@@ -47866,6 +47910,25 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 // module
 exports.push([module.i, ".auth-form {\n  padding: 1rem 2rem; }\n  .auth-form__form {\n    width: 250px; }\n  .auth-form label {\n    font-size: 12px; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./client/components/navbar.scss":
+/*!**********************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./client/components/navbar.scss ***!
+  \**********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".nav-main a {\n  text-decoration: none; }\n  .nav-main a:visited {\n    color: white; }\n\n.nav-main__active {\n  font-weight: bold; }\n", ""]);
 
 // exports
 

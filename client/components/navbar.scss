@@ -1,0 +1,11 @@
+.nav-main {
+  a {
+    text-decoration: none;
+    &:visited {
+      color: white;
+    }
+  }
+  &__active {
+    font-weight: bold;
+  }
+}
