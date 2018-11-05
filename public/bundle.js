@@ -549,7 +549,7 @@ var styles = function styles(theme) {
       marginBottom: '20px'
     },
     googleButton: {
-      marginTop: '10px',
+      marginTop: '20px',
       marginBottom: '20px'
     },
     title: {
@@ -615,7 +615,9 @@ var AuthForm = function AuthForm(props) {
     variant: "body2",
     color: "error",
     align: "center"
-  }, error.response.data))), _react.default.createElement("hr", null), _react.default.createElement(_core.Button, {
+  }, error.response.data))), _react.default.createElement(_core.Divider, {
+    light: true
+  }), _react.default.createElement(_core.Button, {
     href: "/auth/google",
     variant: "contained",
     color: "primary",

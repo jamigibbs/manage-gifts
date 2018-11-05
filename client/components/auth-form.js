@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import { auth } from '../actions'
 
 import { withStyles } from '@material-ui/core/styles'
-import { Grid, Paper, TextField, Button, Typography } from '@material-ui/core'
+import { Grid, Paper, TextField, Button, Typography, Divider } from '@material-ui/core'
 
 const styles = theme => ({
   submitButton: {
@@ -14,7 +14,7 @@ const styles = theme => ({
     marginBottom: '20px'
   },
   googleButton: {
-    marginTop: '10px',
+    marginTop: '20px',
     marginBottom: '20px',
   },
   title: {
@@ -98,7 +98,7 @@ const AuthForm = props => {
 
       </form>
 
-      <hr />
+      <Divider light />
 
       {/* <a href="/auth/google">{displayName} with Google</a> */}
 
