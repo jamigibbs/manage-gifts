@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getAllReceivers } from '../actions'
- 
+
 class ReceiversList extends Component {
   constructor(props){
     super()
   }
-  
+
   componentDidMount(){
     const { listId, auth } = this.props
     this.props.getAllReceivers(listId, auth)
@@ -14,6 +14,13 @@ class ReceiversList extends Component {
 
   render(){
     const { receivers } = this.props
+
+    if (!receivers) {
+      return 'Add a receiver'
+    } else if (receivers.length === 0) {
+      return 'Loading...'
+    }
+
     return (
       <div>
         <h3>Receivers List</h3>
