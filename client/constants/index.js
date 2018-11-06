@@ -9,3 +9,9 @@ export const REMOVE_USER = 'REMOVE_USER'
  */
 export const ADD_RECEIVER = 'ADD_RECEIVER'
 export const GET_ALL_RECEIVERS = 'GET_ALL_RECEIVERS'
+
+
+/**
+ * LIST ACTION TYPES
+ */
+export const GET_CURRENT_LIST_ID = 'GET_CURRENT_LIST_ID'

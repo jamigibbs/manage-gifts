@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
+
+import { getCurrentListId } from '../actions'
 
 import { withStyles } from '@material-ui/core/styles'
 import { Typography } from '@material-ui/core'
@@ -19,24 +21,44 @@ const styles = theme => ({
   }
 })
 
-export const UserDashboard = props => {
-  const {email, classes} = props
+export class UserDashboard extends Component {
+  constructor(){
+    super()
+  }
+  
+  componentDidMount(){
+    this.props.getCurrentListId()
+  }
 
-  return (
-    <div className={classes.root}>
-      <Sidebar />
-      <main className={classes.content}>
-        <Typography variant="h4" align="center">Welcome, {email}</Typography>
-        <ReceiverAdd listId={1} auth={email} />
-        <ReceiversList listId={1} auth={email} />
-      </main>
-    </div>
-  )
+  render(){
+    const {email, classes, currentListId} = this.props
+    if(!currentListId) return 'Loading...'
+    return (
+      <div className={classes.root}>
+        <Sidebar />
+        <main className={classes.content}>
+          <Typography variant="h4" align="center">Welcome, {email}</Typography>
+          <ReceiverAdd listId={currentListId} auth={email} />
+          <ReceiversList listId={currentListId} auth={email} />
+        </main>
+      </div>
+    ) 
+  }
 }
 
 const mapState = state => {
+  console.log(state)
   return {
-    email: state.user.email
+    email: state.user.email,
+    currentListId: state.list.currentId
+  }
+}
+
+const mapProps = dispatch => {
+  return {
+    getCurrentListId: () => {
+      dispatch(getCurrentListId())
+    }
   }
 }
 
@@ -45,4 +67,4 @@ UserDashboard.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default connect(mapState, null)(withStyles(styles)(UserDashboard))
+export default connect(mapState, mapProps)(withStyles(styles)(UserDashboard))

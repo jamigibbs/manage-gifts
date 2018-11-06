@@ -129,10 +129,48 @@ Object.defineProperty(exports, "getAllReceivers", {
     return _receiverActions.getAllReceivers;
   }
 });
+Object.defineProperty(exports, "getCurrentListId", {
+  enumerable: true,
+  get: function get() {
+    return _listActions.getCurrentListId;
+  }
+});
 
 var _userActions = __webpack_require__(/*! ./user-actions */ "./client/actions/user-actions.js");
 
 var _receiverActions = __webpack_require__(/*! ./receiver-actions */ "./client/actions/receiver-actions.js");
+
+var _listActions = __webpack_require__(/*! ./list-actions */ "./client/actions/list-actions.js");
+
+/***/ }),
+
+/***/ "./client/actions/list-actions.js":
+/*!****************************************!*\
+  !*** ./client/actions/list-actions.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getCurrentListId = void 0;
+
+var _constants = __webpack_require__(/*! ../constants */ "./client/constants/index.js");
+
+/**
+ * ACTION CREATORS
+ */
+var getCurrentListId = function getCurrentListId() {
+  return {
+    type: _constants.GET_CURRENT_LIST_ID
+  };
+};
+
+exports.getCurrentListId = getCurrentListId;
 
 /***/ }),
 
@@ -924,7 +962,7 @@ if(false) {}
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.default = exports.ReceiverAdd = void 0;
 
 var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
@@ -1018,6 +1056,8 @@ function (_Component) {
 
   return ReceiverAdd;
 }(_react.Component);
+
+exports.ReceiverAdd = ReceiverAdd;
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
@@ -1235,11 +1275,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = exports.UserDashboard = void 0;
 
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
 
 var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
 
 var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
 
@@ -1253,6 +1295,26 @@ var _sidebar = _interopRequireDefault(__webpack_require__(/*! ./sidebar */ "./cl
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 var styles = function styles(theme) {
   return {
     root: {
@@ -1265,30 +1327,65 @@ var styles = function styles(theme) {
   };
 };
 
-var UserDashboard = function UserDashboard(props) {
-  var email = props.email,
-      classes = props.classes;
-  return _react.default.createElement("div", {
-    className: classes.root
-  }, _react.default.createElement(_sidebar.default, null), _react.default.createElement("main", {
-    className: classes.content
-  }, _react.default.createElement(_core.Typography, {
-    variant: "h4",
-    align: "center"
-  }, "Welcome, ", email), _react.default.createElement(_receiverAdd.default, {
-    listId: 1,
-    auth: email
-  }), _react.default.createElement(_receiversList.default, {
-    listId: 1,
-    auth: email
-  })));
-};
+var UserDashboard =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(UserDashboard, _Component);
+
+  function UserDashboard() {
+    _classCallCheck(this, UserDashboard);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(UserDashboard).call(this));
+  }
+
+  _createClass(UserDashboard, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.getCurrentListId();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          email = _this$props.email,
+          classes = _this$props.classes,
+          currentListId = _this$props.currentListId;
+      if (!currentListId) return 'Loading...';
+      return _react.default.createElement("div", {
+        className: classes.root
+      }, _react.default.createElement(_sidebar.default, null), _react.default.createElement("main", {
+        className: classes.content
+      }, _react.default.createElement(_core.Typography, {
+        variant: "h4",
+        align: "center"
+      }, "Welcome, ", email), _react.default.createElement(_receiverAdd.default, {
+        listId: currentListId,
+        auth: email
+      }), _react.default.createElement(_receiversList.default, {
+        listId: currentListId,
+        auth: email
+      })));
+    }
+  }]);
+
+  return UserDashboard;
+}(_react.Component);
 
 exports.UserDashboard = UserDashboard;
 
 var mapState = function mapState(state) {
+  console.log(state);
   return {
-    email: state.user.email
+    email: state.user.email,
+    currentListId: state.list.currentId
+  };
+};
+
+var mapProps = function mapProps(dispatch) {
+  return {
+    getCurrentListId: function getCurrentListId() {
+      dispatch((0, _actions.getCurrentListId)());
+    }
   };
 };
 
@@ -1297,7 +1394,7 @@ UserDashboard.propTypes = {
   classes: _propTypes.default.object.isRequired
 };
 
-var _default = (0, _reactRedux.connect)(mapState, null)((0, _styles.withStyles)(styles)(UserDashboard));
+var _default = (0, _reactRedux.connect)(mapState, mapProps)((0, _styles.withStyles)(styles)(UserDashboard));
 
 exports.default = _default;
 
@@ -1316,7 +1413,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.GET_ALL_RECEIVERS = exports.ADD_RECEIVER = exports.REMOVE_USER = exports.GET_USER = void 0;
+exports.GET_CURRENT_LIST_ID = exports.GET_ALL_RECEIVERS = exports.ADD_RECEIVER = exports.REMOVE_USER = exports.GET_USER = void 0;
 
 /**
  * USER ACTION TYPES
@@ -1332,7 +1429,13 @@ exports.REMOVE_USER = REMOVE_USER;
 var ADD_RECEIVER = 'ADD_RECEIVER';
 exports.ADD_RECEIVER = ADD_RECEIVER;
 var GET_ALL_RECEIVERS = 'GET_ALL_RECEIVERS';
+/**
+ * LIST ACTION TYPES
+ */
+
 exports.GET_ALL_RECEIVERS = GET_ALL_RECEIVERS;
+var GET_CURRENT_LIST_ID = 'GET_CURRENT_LIST_ID';
+exports.GET_CURRENT_LIST_ID = GET_CURRENT_LIST_ID;
 
 /***/ }),
 
@@ -1442,12 +1545,56 @@ Object.defineProperty(exports, "receivers", {
     return _receiverReducer.default;
   }
 });
+Object.defineProperty(exports, "list", {
+  enumerable: true,
+  get: function get() {
+    return _listReducer.default;
+  }
+});
 
 var _userReducer = _interopRequireDefault(__webpack_require__(/*! ./user-reducer */ "./client/reducers/user-reducer.js"));
 
 var _receiverReducer = _interopRequireDefault(__webpack_require__(/*! ./receiver-reducer */ "./client/reducers/receiver-reducer.js"));
 
+var _listReducer = _interopRequireDefault(__webpack_require__(/*! ./list-reducer */ "./client/reducers/list-reducer.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+
+/***/ "./client/reducers/list-reducer.js":
+/*!*****************************************!*\
+  !*** ./client/reducers/list-reducer.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _constants = __webpack_require__(/*! ../constants */ "./client/constants/index.js");
+
+var list = {
+  currentId: 1
+};
+
+function _default() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : list;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _constants.GET_CURRENT_LIST_ID:
+      return list.currentId;
+
+    default:
+      return state;
+  }
+}
 
 /***/ }),
 
@@ -1704,7 +1851,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var reducer = (0, _redux.combineReducers)({
   user: _reducers.user,
-  receivers: _reducers.receivers
+  receivers: _reducers.receivers,
+  list: _reducers.list
 });
 var middleware = (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.applyMiddleware)(_reduxThunk.default, (0, _reduxLogger.default)({
   collapsed: true
