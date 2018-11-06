@@ -13,8 +13,13 @@ const userAuth = function(req, res, next) {
 router.post('/', userAuth, async (req, res, next) => {
   const { name, listId } = req.body.receiver
   try {
-    const receiver = await Receiver.create({name, listId})
-    res.json(receiver)
+    if (!name || !listId) {
+      res.status(400).send('Please enter receiver info')
+      next()
+    } else {
+      const receiver = await Receiver.create({name, listId})
+      res.json(receiver)
+    }
   } catch (err) { next(err) }
 })
 
@@ -27,7 +32,9 @@ router.get('/all/', userAuth, async (req, res, next) => {
         listId
       }
     })
-    res.json(receivers)
+
+    receivers.length === 0 ? res.send(null) : res.json(receivers)
+
   } catch (err) { next(err) }
 })
 
