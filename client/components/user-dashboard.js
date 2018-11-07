@@ -10,6 +10,7 @@ import { Typography } from '@material-ui/core'
 import ReceiverAdd from './receiver-add'
 import ReceiversList from './receivers-list'
 import Sidebar from './sidebar'
+import ListSelect from './list-select'
 
 const styles = theme => ({
   root: {
@@ -25,29 +26,33 @@ export class UserDashboard extends Component {
   constructor(){
     super()
   }
-  
+
   componentDidMount(){
     this.props.getCurrentListId()
   }
 
+  displayReceiverList = (listId, user) => {
+    return <ReceiversList listId={listId} auth={user} />
+  }
+
   render(){
     const {email, classes, currentListId} = this.props
-    if(!currentListId) return 'Loading...'
     return (
       <div className={classes.root}>
         <Sidebar />
         <main className={classes.content}>
           <Typography variant="h4" align="center">Welcome, {email}</Typography>
+
           <ReceiverAdd listId={currentListId} auth={email} />
-          <ReceiversList listId={currentListId} auth={email} />
+
+          { currentListId ? this.displayReceiverList(currentListId, email) : <ListSelect /> }
         </main>
       </div>
-    ) 
+    )
   }
 }
 
 const mapState = state => {
-  console.log(state)
   return {
     email: state.user.email,
     currentListId: state.list.currentId

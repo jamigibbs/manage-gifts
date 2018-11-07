@@ -795,6 +795,169 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /***/ }),
 
+/***/ "./client/components/list-select.js":
+/*!******************************************!*\
+  !*** ./client/components/list-select.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.ListSelect = void 0;
+
+__webpack_require__(/*! ./list-select.scss */ "./client/components/list-select.scss");
+
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _reactDom = _interopRequireDefault(__webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js"));
+
+var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+
+var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var styles = function styles(theme) {
+  return {
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap'
+    },
+    formControl: {
+      minWidth: 150
+    }
+  };
+};
+
+var ListSelect =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(ListSelect, _Component);
+
+  function ListSelect() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    _classCallCheck(this, ListSelect);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ListSelect)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+      name: 'None'
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleChange", function (event) {
+      _this.setState(_defineProperty({}, event.target.name, event.target.value));
+    });
+
+    return _this;
+  }
+
+  _createClass(ListSelect, [{
+    key: "render",
+    value: function render() {
+      var classes = this.props.classes;
+      return _react.default.createElement("div", {
+        className: "list-select-form"
+      }, _react.default.createElement("form", {
+        className: classes.root,
+        autoComplete: "off"
+      }, _react.default.createElement(_core.FormControl, {
+        className: classes.formControl
+      }, _react.default.createElement(_core.InputLabel, {
+        htmlFor: "name-helper"
+      }, "List Name"), _react.default.createElement(_core.Select, {
+        value: this.state.name,
+        onChange: this.handleChange,
+        input: _react.default.createElement(_core.Input, {
+          name: "name",
+          id: "name-helper"
+        })
+      }, _react.default.createElement(_core.MenuItem, {
+        value: "None"
+      }, _react.default.createElement("em", null, "None")), _react.default.createElement(_core.MenuItem, {
+        value: 10
+      }, "Ten"), _react.default.createElement(_core.MenuItem, {
+        value: 20
+      }, "Twenty"), _react.default.createElement(_core.MenuItem, {
+        value: 30
+      }, "Thirty")))));
+    }
+  }]);
+
+  return ListSelect;
+}(_react.Component);
+
+exports.ListSelect = ListSelect;
+
+var _default = (0, _styles.withStyles)(styles)(ListSelect);
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./client/components/list-select.scss":
+/*!********************************************!*\
+  !*** ./client/components/list-select.scss ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../node_modules/css-loader!../../node_modules/sass-loader/lib/loader.js!./list-select.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./client/components/list-select.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./client/components/navbar.js":
 /*!*************************************!*\
   !*** ./client/components/navbar.js ***!
@@ -1293,6 +1456,8 @@ var _receiversList = _interopRequireDefault(__webpack_require__(/*! ./receivers-
 
 var _sidebar = _interopRequireDefault(__webpack_require__(/*! ./sidebar */ "./client/components/sidebar.js"));
 
+var _listSelect = _interopRequireDefault(__webpack_require__(/*! ./list-select */ "./client/components/list-select.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
@@ -1307,13 +1472,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var styles = function styles(theme) {
   return {
@@ -1333,9 +1500,20 @@ function (_Component) {
   _inherits(UserDashboard, _Component);
 
   function UserDashboard() {
+    var _this;
+
     _classCallCheck(this, UserDashboard);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(UserDashboard).call(this));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(UserDashboard).call(this));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "displayReceiverList", function (listId, user) {
+      return _react.default.createElement(_receiversList.default, {
+        listId: listId,
+        auth: user
+      });
+    });
+
+    return _this;
   }
 
   _createClass(UserDashboard, [{
@@ -1350,7 +1528,6 @@ function (_Component) {
           email = _this$props.email,
           classes = _this$props.classes,
           currentListId = _this$props.currentListId;
-      if (!currentListId) return 'Loading...';
       return _react.default.createElement("div", {
         className: classes.root
       }, _react.default.createElement(_sidebar.default, null), _react.default.createElement("main", {
@@ -1361,10 +1538,7 @@ function (_Component) {
       }, "Welcome, ", email), _react.default.createElement(_receiverAdd.default, {
         listId: currentListId,
         auth: email
-      }), _react.default.createElement(_receiversList.default, {
-        listId: currentListId,
-        auth: email
-      })));
+      }), currentListId ? this.displayReceiverList(currentListId, email) : _react.default.createElement(_listSelect.default, null)));
     }
   }]);
 
@@ -1374,7 +1548,6 @@ function (_Component) {
 exports.UserDashboard = UserDashboard;
 
 var mapState = function mapState(state) {
-  console.log(state);
   return {
     email: state.user.email,
     currentListId: state.list.currentId
@@ -1579,8 +1752,12 @@ exports.default = _default;
 
 var _constants = __webpack_require__(/*! ../constants */ "./client/constants/index.js");
 
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var list = {
-  currentId: 1
+  currentId: null
 };
 
 function _default() {
@@ -1589,7 +1766,7 @@ function _default() {
 
   switch (action.type) {
     case _constants.GET_CURRENT_LIST_ID:
-      return list.currentId;
+      return _objectSpread({}, state);
 
     default:
       return state;
@@ -48544,6 +48721,25 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 // module
 exports.push([module.i, ".auth-form {\n  padding: 1rem 2rem; }\n  .auth-form__form {\n    width: 250px; }\n  .auth-form label {\n    font-size: 12px; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./client/components/list-select.scss":
+/*!***************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./client/components/list-select.scss ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".list-select-form {\n  margin-top: 20px; }\n", ""]);
 
 // exports
 
