@@ -10,9 +10,9 @@ const gotAllListReceivers = (receivers) => ({type: GET_ALL_LIST_RECEIVERS, recei
 /**
  * THUNK CREATORS
  */
-export const addReceiver = (receiver, auth) => async dispatch => {
+export const addReceiver = (name, listId) => async dispatch => {
   try {
-    const { data } = await axios.post('/api/receiver', {receiver, auth})
+    const { data } = await axios.post('/api/receiver', {name, listId})
     dispatch(addedReceiver(data))
   } catch (err) {
     console.error(err)

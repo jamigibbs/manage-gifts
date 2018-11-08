@@ -18,7 +18,7 @@ const styles = theme => ({
 export class ListSelect extends Component {
 
   state = {
-    name: 'None'
+    id: 0
   }
 
   handleChange = event => {
@@ -34,11 +34,11 @@ export class ListSelect extends Component {
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="name-helper">List Name</InputLabel>
             <Select
-              value={this.state.name}
+              value={this.state.id}
               onChange={this.handleChange}
-              input={<Input name="name" id="name-helper" />}
+              input={<Input name="id" id="name-helper" />}
             >
-              <MenuItem value="None"><em>None</em></MenuItem>
+              <MenuItem value={0}><em>None</em></MenuItem>
               <MenuItem value={1}>One</MenuItem>
               <MenuItem value={2}>Two</MenuItem>
             </Select>

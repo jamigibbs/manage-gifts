@@ -8,8 +8,8 @@ class ReceiversList extends Component {
   }
 
   componentDidMount(){
-    const { listId, auth } = this.props
-    this.props.getAllListReceivers(listId, auth)
+    const { listId } = this.props
+    this.props.getAllListReceivers(listId)
   }
 
   render(){
@@ -37,8 +37,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getAllListReceivers: (listId, auth) => {
-      dispatch(getAllListReceivers(listId, auth))
+    getAllListReceivers: (listId) => {
+      dispatch(getAllListReceivers(listId))
     }
   }
 }

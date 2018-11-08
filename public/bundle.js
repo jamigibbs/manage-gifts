@@ -167,10 +167,6 @@ exports.updateCurrentListId = exports.updatedCurrentListId = exports.getCurrentL
 
 var _constants = __webpack_require__(/*! ../constants */ "./client/constants/index.js");
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 /**
  * ACTION CREATORS
  */
@@ -192,35 +188,13 @@ var updatedCurrentListId = function updatedCurrentListId(id) {
 exports.updatedCurrentListId = updatedCurrentListId;
 
 var updateCurrentListId = function updateCurrentListId(id) {
-  return (
-    /*#__PURE__*/
-    function () {
-      var _ref = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(dispatch) {
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                try {
-                  dispatch(updatedCurrentListId(id));
-                } catch (err) {
-                  console.error(err);
-                }
-
-              case 1:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      return function (_x) {
-        return _ref.apply(this, arguments);
-      };
-    }()
-  );
+  return function (dispatch) {
+    try {
+      dispatch(updatedCurrentListId(id));
+    } catch (err) {
+      console.error(err);
+    }
+  };
 };
 
 exports.updateCurrentListId = updateCurrentListId;
@@ -273,7 +247,7 @@ var gotAllListReceivers = function gotAllListReceivers(receivers) {
  */
 
 
-var addReceiver = function addReceiver(receiver, auth) {
+var addReceiver = function addReceiver(name, listId) {
   return (
     /*#__PURE__*/
     function () {
@@ -289,8 +263,8 @@ var addReceiver = function addReceiver(receiver, auth) {
                 _context.prev = 0;
                 _context.next = 3;
                 return _axios.default.post('/api/receiver', {
-                  receiver: receiver,
-                  auth: auth
+                  name: name,
+                  listId: listId
                 });
 
               case 3:
@@ -962,7 +936,7 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ListSelect)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      name: 'None'
+      id: 0
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleChange", function (event) {
@@ -988,14 +962,14 @@ function (_Component) {
       }, _react.default.createElement(_core.InputLabel, {
         htmlFor: "name-helper"
       }, "List Name"), _react.default.createElement(_core.Select, {
-        value: this.state.name,
+        value: this.state.id,
         onChange: this.handleChange,
         input: _react.default.createElement(_core.Input, {
-          name: "name",
+          name: "id",
           id: "name-helper"
         })
       }, _react.default.createElement(_core.MenuItem, {
-        value: "None"
+        value: 0
       }, _react.default.createElement("em", null, "None")), _react.default.createElement(_core.MenuItem, {
         value: 1
       }, "One"), _react.default.createElement(_core.MenuItem, {
@@ -1238,8 +1212,7 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ReceiverAdd).call(this));
     _this.state = {
-      name: '',
-      listId: props.listId
+      name: ''
     };
     return _this;
   }
@@ -1253,7 +1226,7 @@ function (_Component) {
     key: "onFormSubmit",
     value: function onFormSubmit(event) {
       event.preventDefault();
-      this.props.addReceiver(this.state, this.props.auth);
+      this.props.addReceiver(this.state.name, this.props.currentListId);
       this.resetFormState();
     }
   }, {
@@ -1295,14 +1268,15 @@ exports.ReceiverAdd = ReceiverAdd;
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    receivers: state.receivers
+    receivers: state.receivers,
+    currentListId: state.list.currentId
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    addReceiver: function addReceiver(receiver, auth) {
-      dispatch((0, _actions.addReceiver)(receiver, auth));
+    addReceiver: function addReceiver(receiver, listId) {
+      dispatch((0, _actions.addReceiver)(receiver, listId));
     }
   };
 };
@@ -1368,17 +1342,15 @@ function (_Component) {
   _createClass(ReceiversList, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this$props = this.props,
-          listId = _this$props.listId,
-          auth = _this$props.auth;
-      this.props.getAllListReceivers(listId, auth);
+      var listId = this.props.listId;
+      this.props.getAllListReceivers(listId);
     }
   }, {
     key: "render",
     value: function render() {
-      var _this$props2 = this.props,
-          receivers = _this$props2.receivers,
-          listId = _this$props2.listId;
+      var _this$props = this.props,
+          receivers = _this$props.receivers,
+          listId = _this$props.listId;
       return _react.default.createElement("div", null, _react.default.createElement("h3", null, "List ", listId, " Receivers"), _react.default.createElement("ul", null, receivers.length && receivers.map(function (receiver) {
         return _react.default.createElement("li", {
           key: receiver.id
@@ -1398,8 +1370,8 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    getAllListReceivers: function getAllListReceivers(listId, auth) {
-      dispatch((0, _actions.getAllListReceivers)(listId, auth));
+    getAllListReceivers: function getAllListReceivers(listId) {
+      dispatch((0, _actions.getAllListReceivers)(listId));
     }
   };
 };
@@ -1596,12 +1568,10 @@ function (_Component) {
         variant: "h4",
         align: "center"
       }, "Welcome, ", email), _react.default.createElement(_receiverAdd.default, {
-        listId: currentListId,
-        auth: email
-      }), _react.default.createElement(_listSelect.default, null), currentListId && _react.default.createElement(_receiversList.default, {
-        listId: currentListId,
-        auth: email
-      })));
+        listId: currentListId
+      }), _react.default.createElement(_listSelect.default, null), currentListId > 0 ? _react.default.createElement(_receiversList.default, {
+        listId: currentListId
+      }) : _react.default.createElement("p", null, "Select or create a list")));
     }
   }]);
 
@@ -1627,7 +1597,8 @@ var mapProps = function mapProps(dispatch) {
 
 UserDashboard.propTypes = {
   email: _propTypes.default.string,
-  classes: _propTypes.default.object.isRequired
+  classes: _propTypes.default.object.isRequired,
+  currentListId: _propTypes.default.number
 };
 
 var _default = (0, _reactRedux.connect)(mapState, mapProps)((0, _styles.withStyles)(styles)(UserDashboard));
@@ -1822,7 +1793,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var list = {
-  currentId: 1
+  currentId: 0
 };
 
 function _default() {

@@ -6,8 +6,7 @@ export class ReceiverAdd extends Component {
   constructor(props){
     super()
     this.state = {
-      name: '',
-      listId: props.listId
+      name: ''
     }
   }
 
@@ -19,7 +18,7 @@ export class ReceiverAdd extends Component {
 
   onFormSubmit(event) {
     event.preventDefault()
-    this.props.addReceiver(this.state, this.props.auth)
+    this.props.addReceiver(this.state.name, this.props.currentListId)
     this.resetFormState()
   }
 
@@ -49,14 +48,15 @@ export class ReceiverAdd extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    receivers: state.receivers
+    receivers: state.receivers,
+    currentListId: state.list.currentId
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addReceiver: (receiver, auth) => {
-      dispatch(addReceiver(receiver, auth))
+    addReceiver: (receiver, listId) => {
+      dispatch(addReceiver(receiver, listId))
     }
   }
 }

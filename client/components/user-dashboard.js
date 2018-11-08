@@ -39,12 +39,14 @@ export class UserDashboard extends Component {
         <main className={classes.content}>
           <Typography variant="h4" align="center">Welcome, {email}</Typography>
 
-          <ReceiverAdd listId={currentListId} auth={email} />
+          <ReceiverAdd listId={currentListId} />
 
           <ListSelect />
-
-          { currentListId && <ReceiversList listId={currentListId} auth={email} /> }
-
+          
+          { currentListId > 0 ?
+            <ReceiversList listId={currentListId} /> :
+            <p>Select or create a list</p>
+          }
         </main>
       </div>
     )
@@ -68,7 +70,8 @@ const mapProps = dispatch => {
 
 UserDashboard.propTypes = {
   email: PropTypes.string,
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  currentListId: PropTypes.number
 }
 
 export default connect(mapState, mapProps)(withStyles(styles)(UserDashboard))
