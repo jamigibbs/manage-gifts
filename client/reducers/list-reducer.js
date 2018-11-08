@@ -1,7 +1,7 @@
 import { GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID } from '../constants'
 
 const list = {
-  currentId: 1
+  currentId: 0
 }
 
 export default function(state = list, action) {

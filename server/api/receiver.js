@@ -1,17 +1,18 @@
 const router = require('express').Router()
 const { Receiver } = require('../db/models')
+const passport = require('passport')
 
 const userAuth = function(req, res, next) {
-  if (req.body.auth === req.user.email || req.query.auth === req.user.email ) {
-    next()
-  } else {
-    res.status(401).send('Unauthorized user')
+  if (req.isAuthenticated()) {
+    return next()
   }
+  res.status(401).send('Unauthorized user')
 }
 
 // POST /api/receiver
 router.post('/', userAuth, async (req, res, next) => {
-  const { name, listId } = req.body.receiver
+  console.log(req.body)
+  const { name, listId } = req.body
   try {
     if (!name || !listId) {
       res.status(400).send('Please enter receiver info')
