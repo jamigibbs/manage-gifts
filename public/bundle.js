@@ -800,6 +800,34 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./client/components/home.js":
+/*!***********************************!*\
+  !*** ./client/components/home.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Home = function Home() {
+  return _react.default.createElement("div", null, _react.default.createElement("h3", null, "Home"));
+};
+
+var _default = Home;
+exports.default = _default;
+
+/***/ }),
+
 /***/ "./client/components/index.js":
 /*!************************************!*\
   !*** ./client/components/index.js ***!
@@ -825,6 +853,12 @@ Object.defineProperty(exports, "UserDashboard", {
     return _userDashboard.default;
   }
 });
+Object.defineProperty(exports, "Home", {
+  enumerable: true,
+  get: function get() {
+    return _home.default;
+  }
+});
 Object.defineProperty(exports, "Login", {
   enumerable: true,
   get: function get() {
@@ -841,6 +875,8 @@ Object.defineProperty(exports, "Signup", {
 var _navbar = _interopRequireDefault(__webpack_require__(/*! ./navbar */ "./client/components/navbar.js"));
 
 var _userDashboard = _interopRequireDefault(__webpack_require__(/*! ./user-dashboard */ "./client/components/user-dashboard.js"));
+
+var _home = _interopRequireDefault(__webpack_require__(/*! ./home */ "./client/components/home.js"));
 
 var _authForm = __webpack_require__(/*! ./auth-form */ "./client/components/auth-form.js");
 
@@ -1956,9 +1992,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-/**
- * COMPONENT
- */
 var Routes =
 /*#__PURE__*/
 function (_Component) {
@@ -1980,6 +2013,10 @@ function (_Component) {
     value: function render() {
       var isLoggedIn = this.props.isLoggedIn;
       return _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
+        exact: true,
+        path: "/",
+        component: _components.Home
+      }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/login",
         component: _components.Login
       }), _react.default.createElement(_reactRouterDom.Route, {
@@ -1988,18 +2025,12 @@ function (_Component) {
       }), isLoggedIn && _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
         path: "/dashboard",
         component: _components.UserDashboard
-      })), _react.default.createElement(_reactRouterDom.Route, {
-        component: _components.Login
-      }));
+      })));
     }
   }]);
 
   return Routes;
 }(_react.Component);
-/**
- * CONTAINER
- */
-
 
 var mapState = function mapState(state) {
   return {
@@ -2020,10 +2051,6 @@ var mapDispatch = function mapDispatch(dispatch) {
 
 
 var _default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapState, mapDispatch)(Routes));
-/**
- * PROP TYPES
- */
-
 
 exports.default = _default;
 Routes.propTypes = {
