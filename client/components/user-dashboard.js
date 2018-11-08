@@ -31,10 +31,6 @@ export class UserDashboard extends Component {
     this.props.getCurrentListId()
   }
 
-  displayReceiverList = (listId, user) => {
-    return <ReceiversList listId={listId} auth={user} />
-  }
-
   render(){
     const {email, classes, currentListId} = this.props
     return (
@@ -45,7 +41,10 @@ export class UserDashboard extends Component {
 
           <ReceiverAdd listId={currentListId} auth={email} />
 
-          { currentListId ? this.displayReceiverList(currentListId, email) : <ListSelect /> }
+          <ListSelect />
+
+          { currentListId && <ReceiversList listId={currentListId} auth={email} /> }
+
         </main>
       </div>
     )

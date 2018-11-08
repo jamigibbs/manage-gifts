@@ -1,7 +1,8 @@
 import './list-select.scss'
 
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
+import { connect } from 'react-redux'
+import { updateCurrentListId } from '../actions'
 
 import { withStyles } from '@material-ui/core/styles'
 import { Select, FormControl, InputLabel, MenuItem, Input } from '@material-ui/core'
@@ -23,7 +24,8 @@ export class ListSelect extends Component {
   }
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ [event.target.name]: event.target.value })
+    this.props.updateCurrentListId(event.target.value)
   }
 
   render() {
@@ -39,9 +41,8 @@ export class ListSelect extends Component {
               input={<Input name="name" id="name-helper" />}
             >
               <MenuItem value="None"><em>None</em></MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value={1}>One</MenuItem>
+              <MenuItem value={2}>Two</MenuItem>
             </Select>
           </FormControl>
         </form>
@@ -50,4 +51,18 @@ export class ListSelect extends Component {
   }
 }
 
-export default withStyles(styles)(ListSelect)
+const mapStateToProps = (state) => {
+  return {
+    currentListId: state.list.currentId
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateCurrentListId: (listId) => {
+      dispatch(updateCurrentListId(listId))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ListSelect))

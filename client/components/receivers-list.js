@@ -1,22 +1,22 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getAllReceivers } from '../actions'
- 
+import { getAllListReceivers } from '../actions'
+
 class ReceiversList extends Component {
   constructor(props){
     super()
   }
-  
+
   componentDidMount(){
     const { listId, auth } = this.props
-    this.props.getAllReceivers(listId, auth)
+    this.props.getAllListReceivers(listId, auth)
   }
 
   render(){
-    const { receivers } = this.props
+    const { receivers, listId } = this.props
     return (
       <div>
-        <h3>Receivers List</h3>
+        <h3>List {listId} Receivers</h3>
         <ul>
           { receivers.length &&
             receivers.map(function(receiver){
@@ -31,14 +31,14 @@ class ReceiversList extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    receivers: state.receivers.all
+    receivers: state.receivers.allFromList
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getAllReceivers: (listId, auth) => {
-      dispatch(getAllReceivers(listId, auth))
+    getAllListReceivers: (listId, auth) => {
+      dispatch(getAllListReceivers(listId, auth))
     }
   }
 }
