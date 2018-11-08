@@ -1,15 +1,15 @@
-import { ADD_RECEIVER, GET_ALL_RECEIVERS } from '../constants'
+import { ADD_RECEIVER, GET_ALL_LIST_RECEIVERS } from '../constants'
 
 const receivers = {
-  all: []
+  allFromList: []
 }
 
 export default function(state = receivers, action) {
   switch (action.type) {
     case ADD_RECEIVER:
-      return {...state, all: [...state.all, action.receiver]}
-    case GET_ALL_RECEIVERS:
-      return {...state, all: action.receivers}
+      return {...state, allFromList: [...state.allFromList, action.receiver]}
+    case GET_ALL_LIST_RECEIVERS:
+      return {...state, allFromList: action.receivers}
     default:
       return state
   }

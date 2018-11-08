@@ -1,4 +1,4 @@
-import { GET_CURRENT_LIST_ID } from '../constants'
+import { GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID } from '../constants'
 
 const list = {
   currentId: 1
@@ -6,8 +6,10 @@ const list = {
 
 export default function(state = list, action) {
   switch (action.type) {
+    case UPDATE_CURRENT_LIST_ID:
+      return {...state, currentId: action.id}
     case GET_CURRENT_LIST_ID:
-      return list.currentId
+      return state
     default:
       return state
   }
