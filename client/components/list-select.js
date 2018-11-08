@@ -1,5 +1,3 @@
-import './list-select.scss'
-
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { updateCurrentListId } from '../actions'
