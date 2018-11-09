@@ -369,7 +369,7 @@ var addReceiver = function addReceiver(name, listId) {
 
 exports.addReceiver = addReceiver;
 
-var getAllListReceivers = function getAllListReceivers(listId, auth) {
+var getAllListReceivers = function getAllListReceivers(listId) {
   return (
     /*#__PURE__*/
     function () {
@@ -386,8 +386,7 @@ var getAllListReceivers = function getAllListReceivers(listId, auth) {
                 _context2.next = 3;
                 return _axios.default.get('/api/receiver/all', {
                   params: {
-                    listId: listId,
-                    auth: auth
+                    listId: listId
                   }
                 });
 
@@ -1404,32 +1403,44 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var ReceiversList =
 /*#__PURE__*/
 function (_Component) {
   _inherits(ReceiversList, _Component);
 
-  function ReceiversList(props) {
+  function ReceiversList() {
+    var _getPrototypeOf2;
+
+    var _this;
+
     _classCallCheck(this, ReceiversList);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(ReceiversList).call(this));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ReceiversList)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentDidUpdate", function (prevProps) {
+      if (_this.props.listId !== prevProps.listId) {
+        _this.props.getAllListReceivers(_this.props.listId);
+      }
+    });
+
+    return _this;
   }
 
   _createClass(ReceiversList, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var listId = this.props.listId;
-      this.props.getAllListReceivers(listId);
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
@@ -1448,7 +1459,8 @@ function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    receivers: state.receivers.allFromList
+    receivers: state.receivers.allFromList,
+    listId: state.list.currentId
   };
 };
 
@@ -1653,9 +1665,7 @@ function (_Component) {
         align: "center"
       }, "Welcome, ", email), _react.default.createElement(_receiverAdd.default, {
         listId: currentListId
-      }), _react.default.createElement(_listSelect.default, null), currentListId > 0 ? _react.default.createElement(_receiversList.default, {
-        listId: currentListId
-      }) : _react.default.createElement("p", null, "Select or create a list")));
+      }), _react.default.createElement(_listSelect.default, null), currentListId > 0 ? _react.default.createElement(_receiversList.default, null) : _react.default.createElement("p", null, "Select or create a list")));
     }
   }]);
 

@@ -18,7 +18,7 @@
     {"name": "Michael Scott", "listId": 1},
     {"name": "Jim Halpert", "listId": 2},
     {"name": "Angela Martin", "listId": 1},
-    {"name": "Dwight Schrute", "listId": 2}
+    {"name": "Dwight Schrute", "listId": 3}
   ],
   "gift": [
     {"status": "Purchased", "itemId": 1, "receiverId": 1},

@@ -3,13 +3,11 @@ import { connect } from 'react-redux'
 import { getAllListReceivers } from '../actions'
 
 class ReceiversList extends Component {
-  constructor(props){
-    super()
-  }
 
-  componentDidMount(){
-    const { listId } = this.props
-    this.props.getAllListReceivers(listId)
+  componentDidUpdate = (prevProps) => {
+    if (this.props.listId !== prevProps.listId) {
+      this.props.getAllListReceivers(this.props.listId)
+    }
   }
 
   render(){
@@ -31,7 +29,8 @@ class ReceiversList extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    receivers: state.receivers.allFromList
+    receivers: state.receivers.allFromList,
+    listId: state.list.currentId
   }
 }
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { updateCurrentListId, getListsForuser } from '../actions'
+import { updateCurrentListId, getListsForuser, getAllListReceivers } from '../actions'
 
 import { withStyles } from '@material-ui/core/styles'
 import { Select, FormControl, InputLabel, MenuItem, Input } from '@material-ui/core'
