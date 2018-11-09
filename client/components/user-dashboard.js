@@ -45,7 +45,9 @@ export class UserDashboard extends Component {
         <main className={classes.content}>
           <Typography variant="h4" align="center">Welcome, {email}</Typography>
 
-          <ReceiverAdd listId={currentListId} />
+          { currentListId > 0 &&
+            <ReceiverAdd listId={currentListId} />
+          }
 
           <ListSelect />
 

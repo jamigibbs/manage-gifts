@@ -33,19 +33,15 @@ export class ReceiverAdd extends Component {
     const { currentListId } = this.props
     return(
       <div>
-        { currentListId > 0 &&
-          <div>
-            <h3>Add new receiver</h3>
-            <form
-              onChange={(event) => this.onFormChange(event)}
-              onSubmit={(event) => this.onFormSubmit(event)}
-            >
-              <label htmlFor="name">Receiver Name</label>
-              <input type="text" name="name" value={name} />
-              <button type="submit">Add Receiver</button>
-            </form>
-          </div>
-        }
+        <h3>Add new receiver</h3>
+        <form
+          onChange={(event) => this.onFormChange(event)}
+          onSubmit={(event) => this.onFormSubmit(event)}
+        >
+          <label htmlFor="name">Receiver Name</label>
+          <input type="text" name="name" value={name} />
+          <button type="submit">Add Receiver</button>
+        </form>
       </div>
     )
   }

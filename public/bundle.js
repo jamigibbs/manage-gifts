@@ -1326,7 +1326,7 @@ function (_Component) {
 
       var name = this.state.name;
       var currentListId = this.props.currentListId;
-      return _react.default.createElement("div", null, currentListId > 0 && _react.default.createElement("div", null, _react.default.createElement("h3", null, "Add new receiver"), _react.default.createElement("form", {
+      return _react.default.createElement("div", null, _react.default.createElement("h3", null, "Add new receiver"), _react.default.createElement("form", {
         onChange: function onChange(event) {
           return _this2.onFormChange(event);
         },
@@ -1341,7 +1341,7 @@ function (_Component) {
         value: name
       }), _react.default.createElement("button", {
         type: "submit"
-      }, "Add Receiver"))));
+      }, "Add Receiver")));
     }
   }]);
 
@@ -1680,7 +1680,7 @@ function (_Component) {
       }, _react.default.createElement(_core.Typography, {
         variant: "h4",
         align: "center"
-      }, "Welcome, ", email), _react.default.createElement(_receiverAdd.default, {
+      }, "Welcome, ", email), currentListId > 0 && _react.default.createElement(_receiverAdd.default, {
         listId: currentListId
       }), _react.default.createElement(_listSelect.default, null), currentListId > 0 ? _react.default.createElement(_receiversList.default, null) : _react.default.createElement("p", null, "Select or create a list")));
     }
