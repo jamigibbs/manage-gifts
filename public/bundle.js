@@ -141,6 +141,12 @@ Object.defineProperty(exports, "updateCurrentListId", {
     return _listActions.updateCurrentListId;
   }
 });
+Object.defineProperty(exports, "getListsForuser", {
+  enumerable: true,
+  get: function get() {
+    return _listActions.getListsForuser;
+  }
+});
 
 var _userActions = __webpack_require__(/*! ./user-actions */ "./client/actions/user-actions.js");
 
@@ -163,9 +169,17 @@ var _listActions = __webpack_require__(/*! ./list-actions */ "./client/actions/l
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.updateCurrentListId = exports.updatedCurrentListId = exports.getCurrentListId = void 0;
+exports.getListsForuser = exports.updateCurrentListId = exports.gotListsForUser = exports.updatedCurrentListId = exports.getCurrentListId = void 0;
+
+var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
 var _constants = __webpack_require__(/*! ../constants */ "./client/constants/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 /**
  * ACTION CREATORS
@@ -187,6 +201,15 @@ var updatedCurrentListId = function updatedCurrentListId(id) {
 
 exports.updatedCurrentListId = updatedCurrentListId;
 
+var gotListsForUser = function gotListsForUser(userLists) {
+  return {
+    type: _constants.GET_LISTS_FOR_USER,
+    userLists: userLists
+  };
+};
+
+exports.gotListsForUser = gotListsForUser;
+
 var updateCurrentListId = function updateCurrentListId(id) {
   return function (dispatch) {
     try {
@@ -198,6 +221,56 @@ var updateCurrentListId = function updateCurrentListId(id) {
 };
 
 exports.updateCurrentListId = updateCurrentListId;
+
+var getListsForuser = function getListsForuser(userId) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(dispatch) {
+        var _ref2, data;
+
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return _axios.default.get('/api/list/all', {
+                  params: {
+                    userId: userId
+                  }
+                });
+
+              case 3:
+                _ref2 = _context.sent;
+                data = _ref2.data;
+                dispatch(gotListsForUser(data));
+                _context.next = 11;
+                break;
+
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](0);
+                console.error(_context.t0);
+
+              case 11:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[0, 8]]);
+      }));
+
+      return function (_x) {
+        return _ref.apply(this, arguments);
+      };
+    }()
+  );
+};
+
+exports.getListsForuser = getListsForuser;
 
 /***/ }),
 
@@ -939,6 +1012,10 @@ function (_Component) {
       id: 0
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentDidMount", function () {
+      _this.props.getListsForuser(_this.props.userId);
+    });
+
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleChange", function (event) {
       _this.setState(_defineProperty({}, event.target.name, event.target.value));
 
@@ -951,7 +1028,9 @@ function (_Component) {
   _createClass(ListSelect, [{
     key: "render",
     value: function render() {
-      var classes = this.props.classes;
+      var _this$props = this.props,
+          classes = _this$props.classes,
+          userLists = _this$props.userLists;
       return _react.default.createElement("div", {
         className: "list-select-form"
       }, _react.default.createElement("form", {
@@ -970,11 +1049,12 @@ function (_Component) {
         })
       }, _react.default.createElement(_core.MenuItem, {
         value: 0
-      }, _react.default.createElement("em", null, "None")), _react.default.createElement(_core.MenuItem, {
-        value: 1
-      }, "One"), _react.default.createElement(_core.MenuItem, {
-        value: 2
-      }, "Two")))));
+      }, _react.default.createElement("em", null, "None")), userLists.map(function (list) {
+        return _react.default.createElement(_core.MenuItem, {
+          key: list.id,
+          value: list.id
+        }, list.name);
+      })))));
     }
   }]);
 
@@ -985,7 +1065,8 @@ exports.ListSelect = ListSelect;
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    currentListId: state.list.currentId
+    userLists: state.list.userLists,
+    userId: state.user.id
   };
 };
 
@@ -993,6 +1074,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     updateCurrentListId: function updateCurrentListId(listId) {
       dispatch((0, _actions.updateCurrentListId)(listId));
+    },
+    getListsForuser: function getListsForuser(userId) {
+      dispatch((0, _actions.getListsForuser)(userId));
     }
   };
 };
@@ -1620,7 +1704,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UPDATE_CURRENT_LIST_ID = exports.GET_CURRENT_LIST_ID = exports.GET_ALL_LIST_RECEIVERS = exports.ADD_RECEIVER = exports.REMOVE_USER = exports.GET_USER = void 0;
+exports.GET_LISTS_FOR_USER = exports.UPDATE_CURRENT_LIST_ID = exports.GET_CURRENT_LIST_ID = exports.GET_ALL_LIST_RECEIVERS = exports.ADD_RECEIVER = exports.REMOVE_USER = exports.GET_USER = void 0;
 
 /**
  * USER ACTION TYPES
@@ -1645,6 +1729,8 @@ var GET_CURRENT_LIST_ID = 'GET_CURRENT_LIST_ID';
 exports.GET_CURRENT_LIST_ID = GET_CURRENT_LIST_ID;
 var UPDATE_CURRENT_LIST_ID = 'UPDATE_CURRENT_LIST_ID';
 exports.UPDATE_CURRENT_LIST_ID = UPDATE_CURRENT_LIST_ID;
+var GET_LISTS_FOR_USER = 'GET_LISTS_FOR_USER';
+exports.GET_LISTS_FOR_USER = GET_LISTS_FOR_USER;
 
 /***/ }),
 
@@ -1793,7 +1879,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var list = {
-  currentId: 0
+  currentId: 0,
+  userLists: []
 };
 
 function _default() {
@@ -1808,6 +1895,11 @@ function _default() {
 
     case _constants.GET_CURRENT_LIST_ID:
       return state;
+
+    case _constants.GET_LISTS_FOR_USER:
+      return _objectSpread({}, state, {
+        userLists: action.userLists
+      });
 
     default:
       return state;

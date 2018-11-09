@@ -5,7 +5,8 @@
   ],
   "list": [
     {"name": "Christmas", "userId": 1},
-    {"name": "Christmas", "userId": 2}
+    {"name": "Christmas", "userId": 2},
+    {"name": "Thanksgiving", "userId": 1}
   ],
   "item": [
     {"url": "http://store.apple.com/macbook"},
