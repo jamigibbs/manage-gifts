@@ -42,9 +42,9 @@ export class UserDashboard extends Component {
           <ReceiverAdd listId={currentListId} />
 
           <ListSelect />
-          
+
           { currentListId > 0 ?
-            <ReceiversList listId={currentListId} /> :
+            <ReceiversList /> :
             <p>Select or create a list</p>
           }
         </main>

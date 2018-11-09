@@ -19,12 +19,11 @@ export const addReceiver = (name, listId) => async dispatch => {
   }
 }
 
-export const getAllListReceivers = (listId, auth) => async dispatch => {
+export const getAllListReceivers = (listId) => async dispatch => {
   try {
     const { data } = await axios.get('/api/receiver/all', {
       params: {
-        listId,
-        auth
+        listId
       }
     })
     dispatch(gotAllListReceivers(data))

@@ -141,6 +141,12 @@ Object.defineProperty(exports, "updateCurrentListId", {
     return _listActions.updateCurrentListId;
   }
 });
+Object.defineProperty(exports, "getListsForuser", {
+  enumerable: true,
+  get: function get() {
+    return _listActions.getListsForuser;
+  }
+});
 
 var _userActions = __webpack_require__(/*! ./user-actions */ "./client/actions/user-actions.js");
 
@@ -163,9 +169,17 @@ var _listActions = __webpack_require__(/*! ./list-actions */ "./client/actions/l
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.updateCurrentListId = exports.updatedCurrentListId = exports.getCurrentListId = void 0;
+exports.getListsForuser = exports.updateCurrentListId = exports.gotListsForUser = exports.updatedCurrentListId = exports.getCurrentListId = void 0;
+
+var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
 var _constants = __webpack_require__(/*! ../constants */ "./client/constants/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 /**
  * ACTION CREATORS
@@ -187,6 +201,15 @@ var updatedCurrentListId = function updatedCurrentListId(id) {
 
 exports.updatedCurrentListId = updatedCurrentListId;
 
+var gotListsForUser = function gotListsForUser(userLists) {
+  return {
+    type: _constants.GET_LISTS_FOR_USER,
+    userLists: userLists
+  };
+};
+
+exports.gotListsForUser = gotListsForUser;
+
 var updateCurrentListId = function updateCurrentListId(id) {
   return function (dispatch) {
     try {
@@ -198,6 +221,56 @@ var updateCurrentListId = function updateCurrentListId(id) {
 };
 
 exports.updateCurrentListId = updateCurrentListId;
+
+var getListsForuser = function getListsForuser(userId) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(dispatch) {
+        var _ref2, data;
+
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return _axios.default.get('/api/list/all', {
+                  params: {
+                    userId: userId
+                  }
+                });
+
+              case 3:
+                _ref2 = _context.sent;
+                data = _ref2.data;
+                dispatch(gotListsForUser(data));
+                _context.next = 11;
+                break;
+
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](0);
+                console.error(_context.t0);
+
+              case 11:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[0, 8]]);
+      }));
+
+      return function (_x) {
+        return _ref.apply(this, arguments);
+      };
+    }()
+  );
+};
+
+exports.getListsForuser = getListsForuser;
 
 /***/ }),
 
@@ -296,7 +369,7 @@ var addReceiver = function addReceiver(name, listId) {
 
 exports.addReceiver = addReceiver;
 
-var getAllListReceivers = function getAllListReceivers(listId, auth) {
+var getAllListReceivers = function getAllListReceivers(listId) {
   return (
     /*#__PURE__*/
     function () {
@@ -313,8 +386,7 @@ var getAllListReceivers = function getAllListReceivers(listId, auth) {
                 _context2.next = 3;
                 return _axios.default.get('/api/receiver/all', {
                   params: {
-                    listId: listId,
-                    auth: auth
+                    listId: listId
                   }
                 });
 
@@ -939,6 +1011,10 @@ function (_Component) {
       id: 0
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentDidMount", function () {
+      _this.props.getListsForuser(_this.props.userId);
+    });
+
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleChange", function (event) {
       _this.setState(_defineProperty({}, event.target.name, event.target.value));
 
@@ -951,7 +1027,9 @@ function (_Component) {
   _createClass(ListSelect, [{
     key: "render",
     value: function render() {
-      var classes = this.props.classes;
+      var _this$props = this.props,
+          classes = _this$props.classes,
+          userLists = _this$props.userLists;
       return _react.default.createElement("div", {
         className: "list-select-form"
       }, _react.default.createElement("form", {
@@ -970,11 +1048,12 @@ function (_Component) {
         })
       }, _react.default.createElement(_core.MenuItem, {
         value: 0
-      }, _react.default.createElement("em", null, "None")), _react.default.createElement(_core.MenuItem, {
-        value: 1
-      }, "One"), _react.default.createElement(_core.MenuItem, {
-        value: 2
-      }, "Two")))));
+      }, _react.default.createElement("em", null, "None")), userLists.map(function (list) {
+        return _react.default.createElement(_core.MenuItem, {
+          key: list.id,
+          value: list.id
+        }, list.name);
+      })))));
     }
   }]);
 
@@ -985,7 +1064,8 @@ exports.ListSelect = ListSelect;
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    currentListId: state.list.currentId
+    userLists: state.list.userLists,
+    userId: state.user.id
   };
 };
 
@@ -993,6 +1073,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     updateCurrentListId: function updateCurrentListId(listId) {
       dispatch((0, _actions.updateCurrentListId)(listId));
+    },
+    getListsForuser: function getListsForuser(userId) {
+      dispatch((0, _actions.getListsForuser)(userId));
     }
   };
 };
@@ -1320,32 +1403,48 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var ReceiversList =
 /*#__PURE__*/
 function (_Component) {
   _inherits(ReceiversList, _Component);
 
-  function ReceiversList(props) {
+  function ReceiversList() {
+    var _getPrototypeOf2;
+
+    var _this;
+
     _classCallCheck(this, ReceiversList);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(ReceiversList).call(this));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ReceiversList)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentDidMount", function () {
+      _this.props.getAllListReceivers(_this.props.listId);
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentDidUpdate", function (prevProps) {
+      if (_this.props.listId !== prevProps.listId) {
+        _this.props.getAllListReceivers(_this.props.listId);
+      }
+    });
+
+    return _this;
   }
 
   _createClass(ReceiversList, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var listId = this.props.listId;
-      this.props.getAllListReceivers(listId);
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
@@ -1364,7 +1463,8 @@ function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    receivers: state.receivers.allFromList
+    receivers: state.receivers.allFromList,
+    listId: state.list.currentId
   };
 };
 
@@ -1569,9 +1669,7 @@ function (_Component) {
         align: "center"
       }, "Welcome, ", email), _react.default.createElement(_receiverAdd.default, {
         listId: currentListId
-      }), _react.default.createElement(_listSelect.default, null), currentListId > 0 ? _react.default.createElement(_receiversList.default, {
-        listId: currentListId
-      }) : _react.default.createElement("p", null, "Select or create a list")));
+      }), _react.default.createElement(_listSelect.default, null), currentListId > 0 ? _react.default.createElement(_receiversList.default, null) : _react.default.createElement("p", null, "Select or create a list")));
     }
   }]);
 
@@ -1620,7 +1718,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UPDATE_CURRENT_LIST_ID = exports.GET_CURRENT_LIST_ID = exports.GET_ALL_LIST_RECEIVERS = exports.ADD_RECEIVER = exports.REMOVE_USER = exports.GET_USER = void 0;
+exports.GET_LISTS_FOR_USER = exports.UPDATE_CURRENT_LIST_ID = exports.GET_CURRENT_LIST_ID = exports.GET_ALL_LIST_RECEIVERS = exports.ADD_RECEIVER = exports.REMOVE_USER = exports.GET_USER = void 0;
 
 /**
  * USER ACTION TYPES
@@ -1645,6 +1743,8 @@ var GET_CURRENT_LIST_ID = 'GET_CURRENT_LIST_ID';
 exports.GET_CURRENT_LIST_ID = GET_CURRENT_LIST_ID;
 var UPDATE_CURRENT_LIST_ID = 'UPDATE_CURRENT_LIST_ID';
 exports.UPDATE_CURRENT_LIST_ID = UPDATE_CURRENT_LIST_ID;
+var GET_LISTS_FOR_USER = 'GET_LISTS_FOR_USER';
+exports.GET_LISTS_FOR_USER = GET_LISTS_FOR_USER;
 
 /***/ }),
 
@@ -1793,7 +1893,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var list = {
-  currentId: 0
+  currentId: 0,
+  userLists: []
 };
 
 function _default() {
@@ -1808,6 +1909,11 @@ function _default() {
 
     case _constants.GET_CURRENT_LIST_ID:
       return state;
+
+    case _constants.GET_LISTS_FOR_USER:
+      return _objectSpread({}, state, {
+        userLists: action.userLists
+      });
 
     default:
       return state;

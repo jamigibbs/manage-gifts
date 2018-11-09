@@ -5,7 +5,8 @@
   ],
   "list": [
     {"name": "Christmas", "userId": 1},
-    {"name": "Christmas", "userId": 2}
+    {"name": "Christmas", "userId": 2},
+    {"name": "Thanksgiving", "userId": 1}
   ],
   "item": [
     {"url": "http://store.apple.com/macbook"},
@@ -17,7 +18,7 @@
     {"name": "Michael Scott", "listId": 1},
     {"name": "Jim Halpert", "listId": 2},
     {"name": "Angela Martin", "listId": 1},
-    {"name": "Dwight Schrute", "listId": 2}
+    {"name": "Dwight Schrute", "listId": 3}
   ],
   "gift": [
     {"status": "Purchased", "itemId": 1, "receiverId": 1},

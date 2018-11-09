@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { updateCurrentListId } from '../actions'
+import { updateCurrentListId, getListsForuser, getAllListReceivers } from '../actions'
 
 import { withStyles } from '@material-ui/core/styles'
 import { Select, FormControl, InputLabel, MenuItem, Input } from '@material-ui/core'
@@ -21,13 +21,17 @@ export class ListSelect extends Component {
     id: 0
   }
 
+  componentDidMount = () => {
+    this.props.getListsForuser(this.props.userId)
+  }
+
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value })
     this.props.updateCurrentListId(event.target.value)
   }
 
   render() {
-    const { classes } = this.props
+    const { classes, userLists } = this.props
     return (
       <div className="list-select-form">
         <form className={classes.root} autoComplete="off">
@@ -39,8 +43,11 @@ export class ListSelect extends Component {
               input={<Input name="id" id="name-helper" />}
             >
               <MenuItem value={0}><em>None</em></MenuItem>
-              <MenuItem value={1}>One</MenuItem>
-              <MenuItem value={2}>Two</MenuItem>
+              {
+                userLists.map((list) => {
+                  return <MenuItem key={list.id} value={list.id}>{list.name}</MenuItem>
+                })
+              }
             </Select>
           </FormControl>
         </form>
@@ -51,7 +58,8 @@ export class ListSelect extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentListId: state.list.currentId
+    userLists: state.list.userLists,
+    userId: state.user.id
   }
 }
 
@@ -59,6 +67,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     updateCurrentListId: (listId) => {
       dispatch(updateCurrentListId(listId))
+    },
+    getListsForuser: (userId) => {
+      dispatch(getListsForuser(userId))
     }
   }
 }

@@ -1,6 +1,5 @@
 const router = require('express').Router()
 const { Receiver } = require('../db/models')
-const passport = require('passport')
 
 const userAuth = function(req, res, next) {
   if (req.isAuthenticated()) {
