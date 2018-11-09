@@ -31,6 +31,12 @@ export class UserDashboard extends Component {
     this.props.getCurrentListId()
   }
 
+  componentDidUpdate = (prevProps) => {
+    if (this.props.currentListId !== prevProps.currentListId) {
+      this.props.getCurrentListId()
+    }
+  }
+
   render(){
     const {email, classes, currentListId} = this.props
     return (
@@ -39,7 +45,9 @@ export class UserDashboard extends Component {
         <main className={classes.content}>
           <Typography variant="h4" align="center">Welcome, {email}</Typography>
 
-          <ReceiverAdd listId={currentListId} />
+          { currentListId > 0 &&
+            <ReceiverAdd listId={currentListId} />
+          }
 
           <ListSelect />
 

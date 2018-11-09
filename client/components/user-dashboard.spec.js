@@ -27,7 +27,11 @@ describe('UserDashboard', () => {
 
   beforeEach(() => {
     const getCurrentListId = () => { return 1 }
-    userDashboard = shallow(<UserDashboard email="cody@email.com" classes={classes} getCurrentListId={getCurrentListId}/>)
+    userDashboard = shallow(<UserDashboard
+      email="cody@email.com"
+      classes={classes}
+      getCurrentListId={getCurrentListId}
+      currentListId={1} />)
   })
 
   it('renders the <ReceiverAdd /> component', () => {
