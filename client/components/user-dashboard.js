@@ -31,6 +31,12 @@ export class UserDashboard extends Component {
     this.props.getCurrentListId()
   }
 
+  componentDidUpdate = (prevProps) => {
+    if (this.props.currentListId !== prevProps.currentListId) {
+      this.props.getCurrentListId()
+    }
+  }
+
   render(){
     const {email, classes, currentListId} = this.props
     return (
