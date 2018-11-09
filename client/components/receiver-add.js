@@ -30,7 +30,6 @@ export class ReceiverAdd extends Component {
 
   render(){
     const { name } = this.state
-    const { currentListId } = this.props
     return(
       <div>
         <h3>Add new receiver</h3>

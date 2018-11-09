@@ -1325,7 +1325,6 @@ function (_Component) {
       var _this2 = this;
 
       var name = this.state.name;
-      var currentListId = this.props.currentListId;
       return _react.default.createElement("div", null, _react.default.createElement("h3", null, "Add new receiver"), _react.default.createElement("form", {
         onChange: function onChange(event) {
           return _this2.onFormChange(event);
