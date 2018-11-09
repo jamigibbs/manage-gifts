@@ -4,6 +4,10 @@ import { getAllListReceivers } from '../actions'
 
 class ReceiversList extends Component {
 
+  componentDidMount = () => {
+    this.props.getAllListReceivers(this.props.listId)
+  }
+
   componentDidUpdate = (prevProps) => {
     if (this.props.listId !== prevProps.listId) {
       this.props.getAllListReceivers(this.props.listId)

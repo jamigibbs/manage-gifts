@@ -32,7 +32,6 @@ export class ListSelect extends Component {
 
   render() {
     const { classes, userLists } = this.props
-
     return (
       <div className="list-select-form">
         <form className={classes.root} autoComplete="off">
