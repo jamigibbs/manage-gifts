@@ -8,6 +8,13 @@ const userAuth = function(req, res, next) {
   res.status(401).send('Unauthorized user')
 }
 
+// GET /api/list/auth
+router.get('/auth/', userAuth, (req, res, next) => {
+  try {
+    res.status(200)
+  } catch(err) { next(err) }
+})
+
 // GET /api/list/all
 router.get('/all/', userAuth, async (req, res, next) => {
   const { userId } = req.query
