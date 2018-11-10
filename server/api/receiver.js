@@ -37,4 +37,18 @@ router.get('/all/', userAuth, async (req, res, next) => {
   } catch (err) { next(err) }
 })
 
+// DELETE /api/receiver
+router.delete('/', userAuth, async (req, res, next) => {
+  const { listId, receiverId } = req.body
+  try {
+    await Receiver.destroy({
+      where: {
+        listId,
+        id: receiverId
+      }
+    })
+    res.json({ listId, receiverId })
+  } catch (err) { next(err) }
+})
+
 module.exports = router
