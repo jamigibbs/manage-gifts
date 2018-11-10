@@ -129,6 +129,12 @@ Object.defineProperty(exports, "getAllListReceivers", {
     return _receiverActions.getAllListReceivers;
   }
 });
+Object.defineProperty(exports, "removeReceiverFromList", {
+  enumerable: true,
+  get: function get() {
+    return _receiverActions.removeReceiverFromList;
+  }
+});
 Object.defineProperty(exports, "getCurrentListId", {
   enumerable: true,
   get: function get() {
@@ -348,7 +354,7 @@ exports.addNewList = addNewList;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getAllListReceivers = exports.addReceiver = void 0;
+exports.removeReceiverFromList = exports.getAllListReceivers = exports.addReceiver = void 0;
 
 var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
@@ -360,9 +366,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-/**
- * ACTION CREATORS
- */
 var addedReceiver = function addedReceiver(receiver) {
   return {
     type: _constants.ADD_RECEIVER,
@@ -376,10 +379,13 @@ var gotAllListReceivers = function gotAllListReceivers(receivers) {
     receivers: receivers
   };
 };
-/**
- * THUNK CREATORS
- */
 
+var removedReceiverFromList = function removedReceiverFromList(receiver) {
+  return {
+    type: _constants.REMOVE_RECEIVER_FROM_LIST,
+    receiver: receiver
+  };
+};
 
 var addReceiver = function addReceiver(name, listId) {
   return (
@@ -479,6 +485,57 @@ var getAllListReceivers = function getAllListReceivers(listId) {
 };
 
 exports.getAllListReceivers = getAllListReceivers;
+
+var removeReceiverFromList = function removeReceiverFromList(listId, receiverId) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref5 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee3(dispatch) {
+        var _ref6, data;
+
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                _context3.next = 3;
+                return _axios.default.delete('/api/receiver', {
+                  data: {
+                    listId: listId,
+                    receiverId: receiverId
+                  }
+                });
+
+              case 3:
+                _ref6 = _context3.sent;
+                data = _ref6.data;
+                dispatch(removedReceiverFromList(data));
+                _context3.next = 11;
+                break;
+
+              case 8:
+                _context3.prev = 8;
+                _context3.t0 = _context3["catch"](0);
+                console.error(_context3.t0);
+
+              case 11:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this, [[0, 8]]);
+      }));
+
+      return function (_x3) {
+        return _ref5.apply(this, arguments);
+      };
+    }()
+  );
+};
+
+exports.removeReceiverFromList = removeReceiverFromList;
 
 /***/ }),
 
@@ -1603,6 +1660,107 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./client/components/receiver-actions.js":
+/*!***********************************************!*\
+  !*** ./client/components/receiver-actions.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
+
+var _core = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var ReceiverActions =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(ReceiverActions, _Component);
+
+  function ReceiverActions() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    _classCallCheck(this, ReceiverActions);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ReceiverActions)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleRemove", function () {
+      var _this$props = _this.props,
+          listId = _this$props.listId,
+          receiverId = _this$props.receiverId;
+
+      _this.props.removeReceiverFromList(listId, receiverId);
+    });
+
+    return _this;
+  }
+
+  _createClass(ReceiverActions, [{
+    key: "render",
+    value: function render() {
+      return _react.default.createElement("div", null, _react.default.createElement(_core.Button, {
+        color: "secondary",
+        onClick: this.handleRemove
+      }, "Remove"));
+    }
+  }]);
+
+  return ReceiverActions;
+}(_react.Component);
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    removeReceiverFromList: function removeReceiverFromList(listId, receiverId) {
+      dispatch((0, _actions.removeReceiverFromList)(listId, receiverId));
+    }
+  };
+};
+
+var _default = (0, _reactRedux.connect)(null, mapDispatchToProps)(ReceiverActions);
+
+exports.default = _default;
+
+/***/ }),
+
 /***/ "./client/components/receiver-add.js":
 /*!*******************************************!*\
   !*** ./client/components/receiver-add.js ***!
@@ -1752,7 +1910,15 @@ var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_mo
 
 var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
+var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+
 var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
+
+var _receiverActions = _interopRequireDefault(__webpack_require__(/*! ./receiver-actions */ "./client/components/receiver-actions.js"));
+
+var _core = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -1775,6 +1941,19 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var styles = function styles(theme) {
+  return {
+    root: {
+      width: '100%',
+      marginTop: theme.spacing.unit * 3,
+      overflowX: 'auto'
+    },
+    table: {
+      minWidth: 700
+    }
+  };
+};
 
 var ReceiversList =
 /*#__PURE__*/
@@ -1812,12 +1991,29 @@ function (_Component) {
     value: function render() {
       var _this$props = this.props,
           receivers = _this$props.receivers,
-          listId = _this$props.listId;
-      return _react.default.createElement("div", null, _react.default.createElement("h3", null, "List ", listId, " Receivers"), _react.default.createElement("ul", null, receivers.length && receivers.map(function (receiver) {
-        return _react.default.createElement("li", {
+          listId = _this$props.listId,
+          classes = _this$props.classes;
+      return _react.default.createElement("div", null, _react.default.createElement(_core.Typography, {
+        variant: "subtitle1"
+      }, "List ", listId, " Receivers"), _react.default.createElement(_core.Paper, {
+        className: classes.root
+      }, _react.default.createElement(_core.Table, {
+        className: classes.table
+      }, _react.default.createElement(_core.TableHead, null, _react.default.createElement(_core.TableRow, null, _react.default.createElement(_core.TableCell, null, "Receiver Name"), _react.default.createElement(_core.TableCell, {
+        numeric: true
+      }, "Assigned Gifts"), _react.default.createElement(_core.TableCell, null, "Actions"))), _react.default.createElement(_core.TableBody, null, receivers && receivers.map(function (receiver) {
+        return _react.default.createElement(_core.TableRow, {
           key: receiver.id
-        }, receiver.name);
-      })));
+        }, _react.default.createElement(_core.TableCell, {
+          component: "th",
+          scope: "row"
+        }, receiver.name), _react.default.createElement(_core.TableCell, {
+          numeric: true
+        }, "3"), _react.default.createElement(_core.TableCell, null, _react.default.createElement(_receiverActions.default, {
+          receiverId: receiver.id,
+          listId: listId
+        })));
+      })))));
     }
   }]);
 
@@ -1839,7 +2035,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ReceiversList);
+var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)((0, _styles.withStyles)(styles)(ReceiversList));
 
 exports.default = _default;
 
@@ -2095,7 +2291,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ADD_NEW_LIST = exports.GET_LISTS_FOR_USER = exports.UPDATE_CURRENT_LIST_ID = exports.GET_CURRENT_LIST_ID = exports.GET_ALL_LIST_RECEIVERS = exports.ADD_RECEIVER = exports.REMOVE_USER = exports.GET_USER = void 0;
+exports.ADD_NEW_LIST = exports.GET_LISTS_FOR_USER = exports.UPDATE_CURRENT_LIST_ID = exports.GET_CURRENT_LIST_ID = exports.REMOVE_RECEIVER_FROM_LIST = exports.GET_ALL_LIST_RECEIVERS = exports.ADD_RECEIVER = exports.REMOVE_USER = exports.GET_USER = void 0;
 
 /**
  * USER ACTION TYPES
@@ -2111,11 +2307,13 @@ exports.REMOVE_USER = REMOVE_USER;
 var ADD_RECEIVER = 'ADD_RECEIVER';
 exports.ADD_RECEIVER = ADD_RECEIVER;
 var GET_ALL_LIST_RECEIVERS = 'GET_ALL_LIST_RECEIVERS';
+exports.GET_ALL_LIST_RECEIVERS = GET_ALL_LIST_RECEIVERS;
+var REMOVE_RECEIVER_FROM_LIST = 'REMOVE_RECEIVER_FROM_LIST';
 /**
  * LIST ACTION TYPES
  */
 
-exports.GET_ALL_LIST_RECEIVERS = GET_ALL_LIST_RECEIVERS;
+exports.REMOVE_RECEIVER_FROM_LIST = REMOVE_RECEIVER_FROM_LIST;
 var GET_CURRENT_LIST_ID = 'GET_CURRENT_LIST_ID';
 exports.GET_CURRENT_LIST_ID = GET_CURRENT_LIST_ID;
 var UPDATE_CURRENT_LIST_ID = 'UPDATE_CURRENT_LIST_ID';
@@ -2356,6 +2554,13 @@ function _default() {
     case _constants.ADD_RECEIVER:
       return _objectSpread({}, state, {
         allFromList: _toConsumableArray(state.allFromList).concat([action.receiver])
+      });
+
+    case _constants.REMOVE_RECEIVER_FROM_LIST:
+      return _objectSpread({}, state, {
+        allFromList: state.allFromList.filter(function (receiver) {
+          return receiver.id !== action.receiver.receiverId;
+        })
       });
 
     case _constants.GET_ALL_LIST_RECEIVERS:
