@@ -1,56 +1,48 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { updateCurrentListId, getListsForuser, getAllListReceivers } from '../actions'
 
-import { withStyles } from '@material-ui/core/styles'
-import { Select, FormControl, InputLabel, MenuItem, Input } from '@material-ui/core'
+import { updateCurrentListId, getListsForuser } from '../actions'
+import ListSelectDialog from './list-select-dialog'
 
-const styles = theme => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  formControl: {
-    minWidth: 150,
-  }
-})
+import { Button, Typography } from '@material-ui/core'
 
-export class ListSelect extends Component {
-
+class ListSelect extends Component {
   state = {
-    id: 0
+    open: false,
+    selectedList: 'None',
+    listId: null
   }
 
   componentDidMount = () => {
     this.props.getListsForuser(this.props.userId)
   }
 
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value })
-    this.props.updateCurrentListId(event.target.value)
+  handleClickOpen = () => {
+    this.setState({
+      open: true
+    })
+  }
+
+  handleClose = (name, id) => {
+    this.setState({ selectedList: name, listId: id, open: false })
+    this.props.updateCurrentListId(id)
   }
 
   render() {
-    const { classes, userLists } = this.props
     return (
-      <div className="list-select-form">
-        <form className={classes.root} autoComplete="off">
-          <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="name-helper">List Name</InputLabel>
-            <Select
-              value={this.state.id}
-              onChange={this.handleChange}
-              input={<Input name="id" id="name-helper" />}
-            >
-              <MenuItem value={0}><em>None</em></MenuItem>
-              {
-                userLists.map((list) => {
-                  return <MenuItem key={list.id} value={list.id}>{list.name}</MenuItem>
-                })
-              }
-            </Select>
-          </FormControl>
-        </form>
+      <div>
+        <Button variant="contained" onClick={this.handleClickOpen}>Select List</Button>
+        <ListSelectDialog
+          selectedList={this.state.selectedList}
+          open={this.state.open}
+          onClose={this.handleClose}
+          lists={this.props.userLists}
+        />
+        <br />
+        <Typography variant="h6">
+          { this.state.listId && 'List ID ' + this.props.currentId }
+        </Typography>
       </div>
     )
   }
@@ -59,6 +51,7 @@ export class ListSelect extends Component {
 const mapStateToProps = (state) => {
   return {
     userLists: state.list.userLists,
+    currentId: state.list.currentId,
     userId: state.user.id
   }
 }
@@ -74,4 +67,9 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ListSelect))
+ListSelectDialog.propTypes = {
+  userLists: PropTypes.array,
+  userId: PropTypes.number
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListSelect)

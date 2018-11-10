@@ -1159,10 +1159,10 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ "./client/components/list-select.js":
-/*!******************************************!*\
-  !*** ./client/components/list-select.js ***!
-  \******************************************/
+/***/ "./client/components/list-select-dialog.js":
+/*!*************************************************!*\
+  !*** ./client/components/list-select-dialog.js ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1172,17 +1172,21 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.ListSelect = void 0;
+exports.default = void 0;
 
 var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
-var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
+var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
 
 var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
 
 var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+
+var _Person = _interopRequireDefault(__webpack_require__(/*! @material-ui/icons/Person */ "./node_modules/@material-ui/icons/Person.js"));
+
+var _colors = __webpack_require__(/*! @material-ui/core/colors */ "./node_modules/@material-ui/core/colors/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -1206,17 +1210,147 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var styles = function styles(theme) {
-  return {
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap'
-    },
-    formControl: {
-      minWidth: 150
-    }
-  };
+var styles = {
+  avatar: {
+    backgroundColor: _colors.blue[100],
+    color: _colors.blue[600]
+  }
 };
+
+var ListSelectDialog =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(ListSelectDialog, _Component);
+
+  function ListSelectDialog() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    _classCallCheck(this, ListSelectDialog);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ListSelectDialog)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+      prevId: null
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleClose", function () {
+      _this.props.onClose(_this.props.selectedList, _this.state.prevId);
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleListItemClick", function (name, listId) {
+      _this.setState({
+        prevId: listId
+      });
+
+      _this.props.onClose(name, listId);
+    });
+
+    return _this;
+  }
+
+  _createClass(ListSelectDialog, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var _this$props = this.props,
+          classes = _this$props.classes,
+          lists = _this$props.lists,
+          open = _this$props.open;
+      return _react.default.createElement(_core.Dialog, {
+        onClose: this.handleClose,
+        "aria-labelledby": "list-select-title",
+        open: open
+      }, _react.default.createElement(_core.DialogTitle, {
+        id: "list-select-title"
+      }, "Select List"), _react.default.createElement("div", null, _react.default.createElement(_core.List, null, lists.map(function (list) {
+        return _react.default.createElement(_core.ListItem, {
+          button: true,
+          onClick: function onClick() {
+            return _this2.handleListItemClick(list.name, list.id);
+          },
+          key: list.id
+        }, _react.default.createElement(_core.ListItemAvatar, null, _react.default.createElement(_core.Avatar, {
+          className: classes.avatar
+        }, _react.default.createElement(_Person.default, null))), _react.default.createElement(_core.ListItemText, {
+          primary: list.name
+        }));
+      }))));
+    }
+  }]);
+
+  return ListSelectDialog;
+}(_react.Component);
+
+ListSelectDialog.propTypes = {
+  classes: _propTypes.default.object,
+  onClose: _propTypes.default.func.isRequired,
+  lists: _propTypes.default.array,
+  selectedList: _propTypes.default.string
+};
+
+var _default = (0, _styles.withStyles)(styles)(ListSelectDialog);
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./client/components/list-select.js":
+/*!******************************************!*\
+  !*** ./client/components/list-select.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
+
+var _listSelectDialog = _interopRequireDefault(__webpack_require__(/*! ./list-select-dialog */ "./client/components/list-select-dialog.js"));
+
+var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var ListSelect =
 /*#__PURE__*/
@@ -1237,17 +1371,29 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ListSelect)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      id: 0
+      open: false,
+      selectedList: 'None',
+      listId: null
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentDidMount", function () {
       _this.props.getListsForuser(_this.props.userId);
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleChange", function (event) {
-      _this.setState(_defineProperty({}, event.target.name, event.target.value));
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleClickOpen", function () {
+      _this.setState({
+        open: true
+      });
+    });
 
-      _this.props.updateCurrentListId(event.target.value);
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleClose", function (name, id) {
+      _this.setState({
+        selectedList: name,
+        listId: id,
+        open: false
+      });
+
+      _this.props.updateCurrentListId(id);
     });
 
     return _this;
@@ -1256,44 +1402,27 @@ function (_Component) {
   _createClass(ListSelect, [{
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          classes = _this$props.classes,
-          userLists = _this$props.userLists;
-      return _react.default.createElement("div", {
-        className: "list-select-form"
-      }, _react.default.createElement("form", {
-        className: classes.root,
-        autoComplete: "off"
-      }, _react.default.createElement(_core.FormControl, {
-        className: classes.formControl
-      }, _react.default.createElement(_core.InputLabel, {
-        htmlFor: "name-helper"
-      }, "List Name"), _react.default.createElement(_core.Select, {
-        value: this.state.id,
-        onChange: this.handleChange,
-        input: _react.default.createElement(_core.Input, {
-          name: "id",
-          id: "name-helper"
-        })
-      }, _react.default.createElement(_core.MenuItem, {
-        value: 0
-      }, _react.default.createElement("em", null, "None")), userLists.map(function (list) {
-        return _react.default.createElement(_core.MenuItem, {
-          key: list.id,
-          value: list.id
-        }, list.name);
-      })))));
+      return _react.default.createElement("div", null, _react.default.createElement(_core.Button, {
+        variant: "contained",
+        onClick: this.handleClickOpen
+      }, "Select List"), _react.default.createElement(_listSelectDialog.default, {
+        selectedList: this.state.selectedList,
+        open: this.state.open,
+        onClose: this.handleClose,
+        lists: this.props.userLists
+      }), _react.default.createElement("br", null), _react.default.createElement(_core.Typography, {
+        variant: "h6"
+      }, this.state.listId && 'List ID ' + this.props.currentId));
     }
   }]);
 
   return ListSelect;
 }(_react.Component);
 
-exports.ListSelect = ListSelect;
-
 var mapStateToProps = function mapStateToProps(state) {
   return {
     userLists: state.list.userLists,
+    currentId: state.list.currentId,
     userId: state.user.id
   };
 };
@@ -1309,7 +1438,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)((0, _styles.withStyles)(styles)(ListSelect));
+_listSelectDialog.default.propTypes = {
+  userLists: _propTypes.default.array,
+  userId: _propTypes.default.number
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ListSelect);
 
 exports.default = _default;
 
@@ -1910,9 +2044,9 @@ function (_Component) {
       }, _react.default.createElement(_core.Typography, {
         variant: "h4",
         align: "center"
-      }, "Welcome, ", email), _react.default.createElement(_listAdd.default, null), currentListId > 0 && _react.default.createElement(_receiverAdd.default, {
+      }, "Welcome, ", email), _react.default.createElement(_listAdd.default, null), _react.default.createElement(_listSelect.default, null), currentListId && _react.default.createElement(_receiverAdd.default, {
         listId: currentListId
-      }), _react.default.createElement(_listSelect.default, null), currentListId > 0 ? _react.default.createElement(_receiversList.default, null) : _react.default.createElement("p", null, "Select or create a list")));
+      }), currentListId > 0 ? _react.default.createElement(_receiversList.default, null) : _react.default.createElement("p", null, "Select or create a list")));
     }
   }]);
 
@@ -2146,7 +2280,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var list = {
-  currentId: 0,
+  currentId: null,
   userLists: []
 };
 
@@ -47040,6 +47174,38 @@ var _default = (0, _createSvgIcon.default)(_react.default.createElement(_react.d
   fill: "none",
   d: "M0 0h24v24H0V0z"
 })), 'MoveToInbox');
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/icons/Person.js":
+/*!***************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Person.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@material-ui/icons/node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)(_react.default.createElement(_react.default.Fragment, null, _react.default.createElement("path", {
+  d: "M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+}), _react.default.createElement("path", {
+  fill: "none",
+  d: "M0 0h24v24H0z"
+})), 'Person');
 
 exports.default = _default;
 

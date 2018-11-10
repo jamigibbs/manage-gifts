@@ -48,11 +48,11 @@ export class UserDashboard extends Component {
 
           <ListAdd />
 
-          { currentListId > 0 &&
+          <ListSelect />
+
+          { currentListId &&
             <ReceiverAdd listId={currentListId} />
           }
-
-          <ListSelect />
 
           { currentListId > 0 ?
             <ReceiversList /> :
