@@ -1,7 +1,7 @@
 import { GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID, GET_LISTS_FOR_USER, ADD_NEW_LIST } from '../constants'
 
 const list = {
-  currentId: 0,
+  currentId: null,
   userLists: []
 }
 
