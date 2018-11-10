@@ -147,6 +147,12 @@ Object.defineProperty(exports, "getListsForuser", {
     return _listActions.getListsForuser;
   }
 });
+Object.defineProperty(exports, "addNewList", {
+  enumerable: true,
+  get: function get() {
+    return _listActions.addNewList;
+  }
+});
 
 var _userActions = __webpack_require__(/*! ./user-actions */ "./client/actions/user-actions.js");
 
@@ -169,7 +175,7 @@ var _listActions = __webpack_require__(/*! ./list-actions */ "./client/actions/l
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getListsForuser = exports.updateCurrentListId = exports.gotListsForUser = exports.updatedCurrentListId = exports.getCurrentListId = void 0;
+exports.addNewList = exports.getListsForuser = exports.updateCurrentListId = exports.addedNewList = exports.gotListsForUser = exports.updatedCurrentListId = exports.getCurrentListId = void 0;
 
 var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
@@ -181,9 +187,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-/**
- * ACTION CREATORS
- */
 var getCurrentListId = function getCurrentListId() {
   return {
     type: _constants.GET_CURRENT_LIST_ID
@@ -209,6 +212,15 @@ var gotListsForUser = function gotListsForUser(userLists) {
 };
 
 exports.gotListsForUser = gotListsForUser;
+
+var addedNewList = function addedNewList(newList) {
+  return {
+    type: _constants.ADD_NEW_LIST,
+    newList: newList
+  };
+};
+
+exports.addedNewList = addedNewList;
 
 var updateCurrentListId = function updateCurrentListId(id) {
   return function (dispatch) {
@@ -271,6 +283,55 @@ var getListsForuser = function getListsForuser(userId) {
 };
 
 exports.getListsForuser = getListsForuser;
+
+var addNewList = function addNewList(name, userId) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref3 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2(dispatch) {
+        var _ref4, data;
+
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return _axios.default.post('/api/list/add', {
+                  name: name,
+                  userId: userId
+                });
+
+              case 3:
+                _ref4 = _context2.sent;
+                data = _ref4.data;
+                dispatch(addedNewList(data));
+                _context2.next = 11;
+                break;
+
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](0);
+                console.error(_context2.t0);
+
+              case 11:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[0, 8]]);
+      }));
+
+      return function (_x2) {
+        return _ref3.apply(this, arguments);
+      };
+    }()
+  );
+};
+
+exports.addNewList = addNewList;
 
 /***/ }),
 
@@ -927,6 +988,174 @@ var _home = _interopRequireDefault(__webpack_require__(/*! ./home */ "./client/c
 var _authForm = __webpack_require__(/*! ./auth-form */ "./client/components/auth-form.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+
+/***/ "./client/components/list-add.js":
+/*!***************************************!*\
+  !*** ./client/components/list-add.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.ListAdd = void 0;
+
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
+
+var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+
+var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var styles = function styles(theme) {
+  return {
+    root: {
+      marginBottom: '20px'
+    }
+  };
+};
+
+var ListAdd =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(ListAdd, _Component);
+
+  function ListAdd() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    _classCallCheck(this, ListAdd);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ListAdd)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+      open: false,
+      name: ''
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleClickOpen", function () {
+      _this.setState({
+        open: true
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleClose", function () {
+      _this.setState({
+        open: false
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleChange", function (name) {
+      return function (event) {
+        _this.setState(_defineProperty({}, name, event.target.value));
+      };
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleSubmit", function () {
+      _this.handleClose();
+
+      _this.props.addNewList(_this.state.name, _this.props.userId);
+
+      _this.setState({
+        name: ''
+      });
+    });
+
+    return _this;
+  }
+
+  _createClass(ListAdd, [{
+    key: "render",
+    value: function render() {
+      var classes = this.props.classes;
+      return _react.default.createElement("div", {
+        className: classes.root
+      }, _react.default.createElement(_core.Button, {
+        variant: "contained",
+        onClick: this.handleClickOpen
+      }, "Add New List"), _react.default.createElement(_core.Dialog, {
+        open: this.state.open,
+        onClose: this.handleClose,
+        "aria-labelledby": "add-new-list-form-title"
+      }, _react.default.createElement(_core.DialogTitle, {
+        id: "add-new-list-form-title"
+      }, "Add New List"), _react.default.createElement(_core.DialogContent, null, _react.default.createElement(_core.DialogContentText, null, "Enter the name of the list you'd like to add"), _react.default.createElement(_core.TextField, {
+        onChange: this.handleChange('name'),
+        value: this.state.name,
+        autoFocus: true,
+        margin: "dense",
+        id: "name",
+        label: "List Name",
+        type: "text",
+        fullWidth: true
+      })), _react.default.createElement(_core.DialogActions, null, _react.default.createElement(_core.Button, {
+        onClick: this.handleClose,
+        color: "primary"
+      }, "Cancel"), _react.default.createElement(_core.Button, {
+        onClick: this.handleSubmit,
+        color: "primary"
+      }, "Submit"))));
+    }
+  }]);
+
+  return ListAdd;
+}(_react.Component);
+
+exports.ListAdd = ListAdd;
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    userId: state.user.id
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    addNewList: function addNewList(name, userId) {
+      dispatch((0, _actions.addNewList)(name, userId));
+    }
+  };
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)((0, _styles.withStyles)(styles)(ListAdd));
+
+exports.default = _default;
 
 /***/ }),
 
@@ -1603,6 +1832,8 @@ var _sidebar = _interopRequireDefault(__webpack_require__(/*! ./sidebar */ "./cl
 
 var _listSelect = _interopRequireDefault(__webpack_require__(/*! ./list-select */ "./client/components/list-select.js"));
 
+var _listAdd = _interopRequireDefault(__webpack_require__(/*! ./list-add */ "./client/components/list-add.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
@@ -1679,7 +1910,7 @@ function (_Component) {
       }, _react.default.createElement(_core.Typography, {
         variant: "h4",
         align: "center"
-      }, "Welcome, ", email), currentListId > 0 && _react.default.createElement(_receiverAdd.default, {
+      }, "Welcome, ", email), _react.default.createElement(_listAdd.default, null), currentListId > 0 && _react.default.createElement(_receiverAdd.default, {
         listId: currentListId
       }), _react.default.createElement(_listSelect.default, null), currentListId > 0 ? _react.default.createElement(_receiversList.default, null) : _react.default.createElement("p", null, "Select or create a list")));
     }
@@ -1730,7 +1961,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.GET_LISTS_FOR_USER = exports.UPDATE_CURRENT_LIST_ID = exports.GET_CURRENT_LIST_ID = exports.GET_ALL_LIST_RECEIVERS = exports.ADD_RECEIVER = exports.REMOVE_USER = exports.GET_USER = void 0;
+exports.ADD_NEW_LIST = exports.GET_LISTS_FOR_USER = exports.UPDATE_CURRENT_LIST_ID = exports.GET_CURRENT_LIST_ID = exports.GET_ALL_LIST_RECEIVERS = exports.ADD_RECEIVER = exports.REMOVE_USER = exports.GET_USER = void 0;
 
 /**
  * USER ACTION TYPES
@@ -1757,6 +1988,8 @@ var UPDATE_CURRENT_LIST_ID = 'UPDATE_CURRENT_LIST_ID';
 exports.UPDATE_CURRENT_LIST_ID = UPDATE_CURRENT_LIST_ID;
 var GET_LISTS_FOR_USER = 'GET_LISTS_FOR_USER';
 exports.GET_LISTS_FOR_USER = GET_LISTS_FOR_USER;
+var ADD_NEW_LIST = 'ADD_NEW_LIST';
+exports.ADD_NEW_LIST = ADD_NEW_LIST;
 
 /***/ }),
 
@@ -1900,6 +2133,14 @@ exports.default = _default;
 
 var _constants = __webpack_require__(/*! ../constants */ "./client/constants/index.js");
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1914,6 +2155,12 @@ function _default() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
+    case _constants.ADD_NEW_LIST:
+      return _objectSpread({}, state, {
+        currentId: action.newList.id,
+        userLists: _toConsumableArray(state.userLists).concat([action.newList])
+      });
+
     case _constants.UPDATE_CURRENT_LIST_ID:
       return _objectSpread({}, state, {
         currentId: action.id

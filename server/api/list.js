@@ -19,8 +19,17 @@ router.get('/all/', userAuth, async (req, res, next) => {
     })
 
     res.json(lists)
-
   } catch (err) { next(err) }
+})
+
+// POST /api/list/add
+router.post('/add', userAuth, async(req, res, next) => {
+  const { name, userId } = req.body
+  try {
+    const list = await List.create({ name, userId })
+
+    res.json(list)
+  } catch(err) { next(err) }
 })
 
 module.exports = router
