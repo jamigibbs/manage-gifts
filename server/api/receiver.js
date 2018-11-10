@@ -10,7 +10,6 @@ const userAuth = function(req, res, next) {
 
 // POST /api/receiver
 router.post('/', userAuth, async (req, res, next) => {
-  console.log(req.body)
   const { name, listId } = req.body
   try {
     if (!name || !listId) {

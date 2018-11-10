@@ -9,6 +9,7 @@ import ReceiverAdd from './receiver-add'
 import ReceiverList from './receiver-add'
 import Sidebar from './receiver-add'
 import ListSelect from './list-select'
+import ListAdd from './list-add'
 
 const adapter = new Adapter()
 enzyme.configure({adapter})
@@ -32,6 +33,10 @@ describe('UserDashboard', () => {
       classes={classes}
       getCurrentListId={getCurrentListId}
       currentListId={1} />)
+  })
+
+  it('renders the <ListAdd /> component', () => {
+    expect(userDashboard.find(ListAdd)).to.have.lengthOf(1)
   })
 
   it('renders the <ReceiverAdd /> component', () => {

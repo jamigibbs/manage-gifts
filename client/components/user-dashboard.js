@@ -11,6 +11,7 @@ import ReceiverAdd from './receiver-add'
 import ReceiversList from './receivers-list'
 import Sidebar from './sidebar'
 import ListSelect from './list-select'
+import ListAdd from './list-add'
 
 const styles = theme => ({
   root: {
@@ -44,6 +45,8 @@ export class UserDashboard extends Component {
         <Sidebar />
         <main className={classes.content}>
           <Typography variant="h4" align="center">Welcome, {email}</Typography>
+
+          <ListAdd />
 
           { currentListId > 0 &&
             <ReceiverAdd listId={currentListId} />
