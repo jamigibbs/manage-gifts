@@ -1652,6 +1652,8 @@ var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ ".
 
 var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
+var _history = _interopRequireDefault(__webpack_require__(/*! ../history */ "./client/history.js"));
+
 var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
 
 var _listSelectDialog = _interopRequireDefault(__webpack_require__(/*! ./list-select-dialog */ "./client/components/list-select-dialog.js"));
@@ -1724,6 +1726,8 @@ function (_Component) {
       });
 
       _this.props.updateCurrentListId(id);
+
+      _history.default.push("/dashboard/list/".concat(id));
     });
 
     return _this;
@@ -1742,7 +1746,7 @@ function (_Component) {
         lists: this.props.userLists
       }), _react.default.createElement("br", null), _react.default.createElement(_core.Typography, {
         variant: "h6"
-      }, this.state.listId && 'List ID ' + this.props.currentId));
+      }, this.props.currentId && 'List ID ' + this.props.currentId));
     }
   }]);
 
@@ -2191,6 +2195,8 @@ var _receiverActions = _interopRequireDefault(__webpack_require__(/*! ./receiver
 
 var _listDelete = _interopRequireDefault(__webpack_require__(/*! ./list-delete */ "./client/components/list-delete.js"));
 
+var _receiverAdd = _interopRequireDefault(__webpack_require__(/*! ./receiver-add */ "./client/components/receiver-add.js"));
+
 var _core = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -2249,12 +2255,20 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ReceiversList)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentDidMount", function () {
-      _this.props.getAllListReceivers(_this.props.listId);
+      var listId = _this.props.match.params.listId;
+
+      _this.props.getAllListReceivers(parseInt(listId));
+
+      _this.props.updateCurrentListId(parseInt(listId));
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentDidUpdate", function (prevProps) {
-      if (_this.props.listId !== prevProps.listId) {
-        _this.props.getAllListReceivers(_this.props.listId);
+      var listId = _this.props.match.params.listId;
+
+      if (listId !== prevProps.match.params.listId) {
+        _this.props.getAllListReceivers(parseInt(listId));
+
+        _this.props.updateCurrentListId(parseInt(listId));
       }
     });
 
@@ -2266,9 +2280,12 @@ function (_Component) {
     value: function render() {
       var _this$props = this.props,
           receivers = _this$props.receivers,
-          listId = _this$props.listId,
-          classes = _this$props.classes;
-      return _react.default.createElement("div", null, _react.default.createElement(_core.Typography, {
+          classes = _this$props.classes,
+          match = _this$props.match;
+      var listId = match.params.listId;
+      return _react.default.createElement("div", null, _react.default.createElement(_receiverAdd.default, {
+        listId: listId
+      }), _react.default.createElement(_core.Typography, {
         variant: "subtitle1"
       }, "List ", listId, " Receivers"), _react.default.createElement(_core.Paper, {
         className: classes.root
@@ -2301,8 +2318,7 @@ function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    receivers: state.receivers.allFromList,
-    listId: state.list.currentId
+    receivers: state.receivers.allFromList
   };
 };
 
@@ -2310,6 +2326,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     getAllListReceivers: function getAllListReceivers(listId) {
       dispatch((0, _actions.getAllListReceivers)(listId));
+    },
+    updateCurrentListId: function updateCurrentListId(listId) {
+      dispatch((0, _actions.updateCurrentListId)(listId));
     }
   };
 };
@@ -2427,13 +2446,13 @@ var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ ".
 
 var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
 var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
 
 var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
 
 var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
-
-var _receiverAdd = _interopRequireDefault(__webpack_require__(/*! ./receiver-add */ "./client/components/receiver-add.js"));
 
 var _receiversList = _interopRequireDefault(__webpack_require__(/*! ./receivers-list */ "./client/components/receivers-list.js"));
 
@@ -2497,6 +2516,13 @@ function (_Component) {
       }
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentWillReceiveProps", function (newProps) {
+      // Re-setting active list state when on root /dashboard view
+      if (newProps.location.pathname === _this.props.match.path) {
+        _this.props.updateCurrentListId(null);
+      }
+    });
+
     return _this;
   }
 
@@ -2511,7 +2537,8 @@ function (_Component) {
       var _this$props = this.props,
           email = _this$props.email,
           classes = _this$props.classes,
-          currentListId = _this$props.currentListId;
+          currentListId = _this$props.currentListId,
+          match = _this$props.match;
       return _react.default.createElement("div", {
         className: classes.root
       }, _react.default.createElement(_sidebar.default, null), _react.default.createElement("main", {
@@ -2519,9 +2546,13 @@ function (_Component) {
       }, _react.default.createElement(_core.Typography, {
         variant: "h4",
         align: "center"
-      }, "Welcome, ", email), _react.default.createElement(_listAdd.default, null), _react.default.createElement(_listSelect.default, null), currentListId && _react.default.createElement(_receiverAdd.default, {
-        listId: currentListId
-      }), currentListId > 0 ? _react.default.createElement(_receiversList.default, null) : _react.default.createElement("p", null, "Select or create a list")));
+      }, "Welcome, ", email), _react.default.createElement(_listAdd.default, null), _react.default.createElement(_listSelect.default, null), _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
+        exact: true,
+        path: "".concat(match.path, "/list/:listId"),
+        render: function render(props) {
+          return _react.default.createElement(_receiversList.default, props);
+        }
+      }))));
     }
   }]);
 
@@ -2541,6 +2572,9 @@ var mapProps = function mapProps(dispatch) {
   return {
     getCurrentListId: function getCurrentListId() {
       dispatch((0, _actions.getCurrentListId)());
+    },
+    updateCurrentListId: function updateCurrentListId(listId) {
+      dispatch((0, _actions.updateCurrentListId)(listId));
     }
   };
 };
@@ -2780,7 +2814,7 @@ function _default() {
 
     case _constants.DELETE_LIST:
       return _objectSpread({}, state, {
-        currentId: 0,
+        currentId: null,
         userLists: state.userLists.filter(function (list) {
           return list.id !== action.list.listId;
         })

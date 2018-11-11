@@ -17,7 +17,7 @@ export default function(state = list, action) {
     case ADD_NEW_LIST:
       return {...state, currentId: action.newList.id, userLists: [...state.userLists, action.newList]}
     case DELETE_LIST:
-      return {...state, currentId: 0, userLists: state.userLists.filter((list) => {
+      return {...state, currentId: null, userLists: state.userLists.filter((list) => {
         return list.id !== action.list.listId
       })}
     case UPDATE_CURRENT_LIST_ID:
