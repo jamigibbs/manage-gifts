@@ -1,4 +1,8 @@
-import { ADD_RECEIVER, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST } from '../constants'
+import {
+  ADD_RECEIVER,
+  GET_ALL_LIST_RECEIVERS,
+  REMOVE_RECEIVER_FROM_LIST,
+  REMOVE_ALL_LIST_RECEIVERS } from '../constants'
 
 const receivers = {
   allFromList: []
@@ -12,6 +16,8 @@ export default function(state = receivers, action) {
       return {...state, allFromList: state.allFromList.filter((receiver) => {
         return receiver.id !== action.receiver.receiverId
       })}
+    case REMOVE_ALL_LIST_RECEIVERS:
+      return {...state, allFromList: [] }
     case GET_ALL_LIST_RECEIVERS:
       return {...state, allFromList: action.receivers}
     default:

@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { List } = require('../db/models')
+const { List, Receiver } = require('../db/models')
 
 const userAuth = function(req, res, next) {
   if (req.isAuthenticated()) {
@@ -31,5 +31,29 @@ router.post('/add', userAuth, async(req, res, next) => {
     res.json(list)
   } catch(err) { next(err) }
 })
+
+// DELETE /api/list
+router.delete('/', userAuth, async (req, res, next) => {
+  const { listId, userId } = req.body
+  try {
+    // remove users - match listId
+    await Receiver.destroy({
+      where: {
+        listId
+      }
+    })
+
+    // remove list - match Listid & userId
+    await List.destroy({
+      where: {
+        id: listId,
+        userId
+      }
+    })
+
+    res.json({ listId, userId })
+  } catch (err) { next(err) }
+})
+
 
 module.exports = router

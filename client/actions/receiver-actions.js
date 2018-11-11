@@ -1,9 +1,11 @@
 import axios from 'axios'
-import { ADD_RECEIVER, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST } from '../constants'
+import { ADD_RECEIVER, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST, REMOVE_ALL_LIST_RECEIVERS } from '../constants'
 
 const addedReceiver = (receiver) => ({type: ADD_RECEIVER, receiver})
 
 const gotAllListReceivers = (receivers) => ({type: GET_ALL_LIST_RECEIVERS, receivers})
+
+export const removedAllListReceivers = () => ({type: REMOVE_ALL_LIST_RECEIVERS})
 
 const removedReceiverFromList = (receiver) => {
   return {
