@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
-import { getAllListReceivers } from '../actions'
+import { getAllListReceivers, updateCurrentListId } from '../actions'
 import ReceiverActions from './receiver-actions'
 import ListDelete from './list-delete'
+import ReceiverAdd from './receiver-add'
 
 import { Typography, Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@material-ui/core/'
 
@@ -21,19 +22,27 @@ const styles = theme => ({
 class ReceiversList extends Component {
 
   componentDidMount = () => {
-    this.props.getAllListReceivers(this.props.listId)
+    const listId = this.props.match.params.listId
+    this.props.getAllListReceivers(parseInt(listId))
+    this.props.updateCurrentListId(parseInt(listId))
   }
 
   componentDidUpdate = (prevProps) => {
-    if (this.props.listId !== prevProps.listId) {
-      this.props.getAllListReceivers(this.props.listId)
+    const listId = this.props.match.params.listId
+    if (listId !== prevProps.match.params.listId) {
+      this.props.getAllListReceivers(parseInt(listId))
+      this.props.updateCurrentListId(parseInt(listId))
     }
   }
 
   render(){
-    const { receivers, listId, classes } = this.props
+    const { receivers, classes, match } = this.props
+    const { listId } = match.params
     return (
       <div>
+
+        <ReceiverAdd listId={listId} />
+
         <Typography variant="subtitle1" >List {listId} Receivers</Typography>
         <Paper className={classes.root}>
           <Table className={classes.table}>
@@ -73,8 +82,7 @@ class ReceiversList extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    receivers: state.receivers.allFromList,
-    listId: state.list.currentId
+    receivers: state.receivers.allFromList
   }
 }
 
@@ -82,6 +90,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getAllListReceivers: (listId) => {
       dispatch(getAllListReceivers(listId))
+    },
+    updateCurrentListId: (listId) => {
+      dispatch(updateCurrentListId(listId))
     }
   }
 }

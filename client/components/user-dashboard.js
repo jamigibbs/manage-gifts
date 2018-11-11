@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import {withRouter, Route, Switch} from 'react-router-dom'
 
-import { getCurrentListId } from '../actions'
+import { getCurrentListId, updateCurrentListId } from '../actions'
 
 import { withStyles } from '@material-ui/core/styles'
 import { Typography } from '@material-ui/core'
 
-import ReceiverAdd from './receiver-add'
 import ReceiversList from './receivers-list'
 import Sidebar from './sidebar'
 import ListSelect from './list-select'
@@ -38,8 +38,15 @@ export class UserDashboard extends Component {
     }
   }
 
+  componentWillReceiveProps = (newProps) => {
+    // Re-setting active list state when on root /dashboard view
+    if (newProps.location.pathname === this.props.match.path) {
+      this.props.updateCurrentListId(null)
+    }
+  }
+
   render(){
-    const {email, classes, currentListId} = this.props
+    const {email, classes, currentListId, match} = this.props
     return (
       <div className={classes.root}>
         <Sidebar />
@@ -50,14 +57,13 @@ export class UserDashboard extends Component {
 
           <ListSelect />
 
-          { currentListId &&
-            <ReceiverAdd listId={currentListId} />
-          }
+          <Switch>
+            <Route
+              exact path={`${match.path}/list/:listId`}
+              render={(props) => <ReceiversList {...props} /> }
+            />
+          </Switch>
 
-          { currentListId > 0 ?
-            <ReceiversList /> :
-            <p>Select or create a list</p>
-          }
         </main>
       </div>
     )
@@ -75,6 +81,9 @@ const mapProps = dispatch => {
   return {
     getCurrentListId: () => {
       dispatch(getCurrentListId())
+    },
+    updateCurrentListId: (listId) => {
+      dispatch(updateCurrentListId(listId))
     }
   }
 }

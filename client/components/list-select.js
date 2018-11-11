@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import history from '../history'
 
 import { updateCurrentListId, getListsForuser } from '../actions'
 import ListSelectDialog from './list-select-dialog'
@@ -27,6 +28,8 @@ class ListSelect extends Component {
   handleClose = (name, id) => {
     this.setState({ selectedList: name, listId: id, open: false })
     this.props.updateCurrentListId(id)
+
+    history.push(`/dashboard/list/${id}`)
   }
 
   render() {
@@ -41,7 +44,7 @@ class ListSelect extends Component {
         />
         <br />
         <Typography variant="h6">
-          { this.state.listId && 'List ID ' + this.props.currentId }
+          { this.props.currentId && 'List ID ' + this.props.currentId }
         </Typography>
       </div>
     )
