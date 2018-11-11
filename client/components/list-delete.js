@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { deleteList } from '../actions'
+import { deleteList, updatePreviousListId } from '../actions'
 
 import { withStyles } from '@material-ui/core/styles'
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
 
 const styles = theme => ({
   button: {
@@ -29,6 +29,7 @@ export class ListDelete extends Component {
     this.handleClose()
     const { listId, userId } = this.props
     this.props.deleteList(listId, userId)
+    this.props.updatePreviousListId(null)
   }
 
   render(){
@@ -78,6 +79,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     deleteList: (listId, userId) => {
       dispatch(deleteList(listId, userId))
+    },
+    updatePreviousListId: (id) => {
+      dispatch(updatePreviousListId(id))
     }
   }
 }

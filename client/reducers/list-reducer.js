@@ -3,10 +3,12 @@ import {
   UPDATE_CURRENT_LIST_ID,
   GET_LISTS_FOR_USER,
   ADD_NEW_LIST,
-  DELETE_LIST } from '../constants'
+  DELETE_LIST,
+  UPDATE_PREVIOUS_LIST_ID } from '../constants'
 
 const list = {
   currentId: null,
+  prevId: null,
   userLists: []
 }
 
@@ -20,6 +22,8 @@ export default function(state = list, action) {
       })}
     case UPDATE_CURRENT_LIST_ID:
       return {...state, currentId: action.id}
+    case UPDATE_PREVIOUS_LIST_ID:
+      return {...state, prevId: action.id}
     case GET_CURRENT_LIST_ID:
       return state
     case GET_LISTS_FOR_USER:

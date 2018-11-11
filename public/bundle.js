@@ -147,6 +147,12 @@ Object.defineProperty(exports, "updateCurrentListId", {
     return _listActions.updateCurrentListId;
   }
 });
+Object.defineProperty(exports, "updatePreviousListId", {
+  enumerable: true,
+  get: function get() {
+    return _listActions.updatePreviousListId;
+  }
+});
 Object.defineProperty(exports, "getListsForuser", {
   enumerable: true,
   get: function get() {
@@ -187,7 +193,7 @@ var _listActions = __webpack_require__(/*! ./list-actions */ "./client/actions/l
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteList = exports.addNewList = exports.getListsForuser = exports.updateCurrentListId = exports.deletedList = exports.addedNewList = exports.gotListsForUser = exports.updatedCurrentListId = exports.getCurrentListId = void 0;
+exports.deleteList = exports.addNewList = exports.getListsForuser = exports.updatePreviousListId = exports.updateCurrentListId = exports.deletedList = exports.addedNewList = exports.gotListsForUser = exports.updatedPreviousListId = exports.updatedCurrentListId = exports.getCurrentListId = void 0;
 
 var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
@@ -217,6 +223,15 @@ var updatedCurrentListId = function updatedCurrentListId(id) {
 };
 
 exports.updatedCurrentListId = updatedCurrentListId;
+
+var updatedPreviousListId = function updatedPreviousListId(id) {
+  return {
+    type: _constants.UPDATE_PREVIOUS_LIST_ID,
+    id: id
+  };
+};
+
+exports.updatedPreviousListId = updatedPreviousListId;
 
 var gotListsForUser = function gotListsForUser(userLists) {
   return {
@@ -256,6 +271,18 @@ var updateCurrentListId = function updateCurrentListId(id) {
 };
 
 exports.updateCurrentListId = updateCurrentListId;
+
+var updatePreviousListId = function updatePreviousListId(id) {
+  return function (dispatch) {
+    try {
+      dispatch(updatedPreviousListId(id));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+};
+
+exports.updatePreviousListId = updatePreviousListId;
 
 var getListsForuser = function getListsForuser(userId) {
   return (
@@ -1390,6 +1417,8 @@ function (_Component) {
           userId = _this$props.userId;
 
       _this.props.deleteList(listId, userId);
+
+      _this.props.updatePreviousListId(null);
     });
 
     return _this;
@@ -1435,6 +1464,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     deleteList: function deleteList(listId, userId) {
       dispatch((0, _actions.deleteList)(listId, userId));
+    },
+    updatePreviousListId: function updatePreviousListId(id) {
+      dispatch((0, _actions.updatePreviousListId)(id));
     }
   };
 };
@@ -1462,7 +1494,11 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
 var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
+
+var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
 
 var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
 
@@ -1521,18 +1557,12 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ListSelectDialog)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      prevId: null
-    });
-
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleClose", function () {
-      _this.props.onClose(_this.props.selectedList, _this.state.prevId);
+      _this.props.onClose(_this.props.selectedList, _this.props.prevId);
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleListItemClick", function (name, listId) {
-      _this.setState({
-        prevId: listId
-      });
+      _this.props.updatePreviousListId(listId);
 
       _this.props.onClose(name, listId);
     });
@@ -1581,7 +1611,21 @@ ListSelectDialog.propTypes = {
   selectedList: _propTypes.default.string
 };
 
-var _default = (0, _styles.withStyles)(styles)(ListSelectDialog);
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    prevId: state.list.prevId
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    updatePreviousListId: function updatePreviousListId(id) {
+      dispatch((0, _actions.updatePreviousListId)(id));
+    }
+  };
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)((0, _styles.withStyles)(styles)(ListSelectDialog));
 
 exports.default = _default;
 
@@ -2526,7 +2570,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.DELETE_LIST = exports.ADD_NEW_LIST = exports.GET_LISTS_FOR_USER = exports.UPDATE_CURRENT_LIST_ID = exports.GET_CURRENT_LIST_ID = exports.REMOVE_ALL_LIST_RECEIVERS = exports.REMOVE_RECEIVER_FROM_LIST = exports.GET_ALL_LIST_RECEIVERS = exports.ADD_RECEIVER = exports.REMOVE_USER = exports.GET_USER = void 0;
+exports.DELETE_LIST = exports.ADD_NEW_LIST = exports.GET_LISTS_FOR_USER = exports.UPDATE_PREVIOUS_LIST_ID = exports.UPDATE_CURRENT_LIST_ID = exports.GET_CURRENT_LIST_ID = exports.REMOVE_ALL_LIST_RECEIVERS = exports.REMOVE_RECEIVER_FROM_LIST = exports.GET_ALL_LIST_RECEIVERS = exports.ADD_RECEIVER = exports.REMOVE_USER = exports.GET_USER = void 0;
 
 /**
  * USER ACTION TYPES
@@ -2555,6 +2599,8 @@ var GET_CURRENT_LIST_ID = 'GET_CURRENT_LIST_ID';
 exports.GET_CURRENT_LIST_ID = GET_CURRENT_LIST_ID;
 var UPDATE_CURRENT_LIST_ID = 'UPDATE_CURRENT_LIST_ID';
 exports.UPDATE_CURRENT_LIST_ID = UPDATE_CURRENT_LIST_ID;
+var UPDATE_PREVIOUS_LIST_ID = 'UPDATE_PREVIOUS_LIST_ID';
+exports.UPDATE_PREVIOUS_LIST_ID = UPDATE_PREVIOUS_LIST_ID;
 var GET_LISTS_FOR_USER = 'GET_LISTS_FOR_USER';
 exports.GET_LISTS_FOR_USER = GET_LISTS_FOR_USER;
 var ADD_NEW_LIST = 'ADD_NEW_LIST';
@@ -2717,6 +2763,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var list = {
   currentId: null,
+  prevId: null,
   userLists: []
 };
 
@@ -2742,6 +2789,11 @@ function _default() {
     case _constants.UPDATE_CURRENT_LIST_ID:
       return _objectSpread({}, state, {
         currentId: action.id
+      });
+
+    case _constants.UPDATE_PREVIOUS_LIST_ID:
+      return _objectSpread({}, state, {
+        prevId: action.id
       });
 
     case _constants.GET_CURRENT_LIST_ID:

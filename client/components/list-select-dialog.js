@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+
+import { updatePreviousListId } from '../actions'
 
 import { withStyles } from '@material-ui/core/styles'
 import { Avatar, List, ListItem, ListItemAvatar, ListItemText, DialogTitle, Dialog } from '@material-ui/core'
@@ -15,16 +18,12 @@ const styles = {
 
 class ListSelectDialog extends Component {
 
-  state = {
-    prevId: null
-  }
-
   handleClose = () => {
-    this.props.onClose(this.props.selectedList, this.state.prevId)
+    this.props.onClose(this.props.selectedList, this.props.prevId)
   }
 
   handleListItemClick = (name, listId) => {
-    this.setState({ prevId: listId })
+    this.props.updatePreviousListId(listId)
     this.props.onClose(name, listId)
   }
 
@@ -68,4 +67,18 @@ ListSelectDialog.propTypes = {
   selectedList: PropTypes.string
 }
 
-export default withStyles(styles)(ListSelectDialog)
+const mapStateToProps = (state) => {
+  return {
+    prevId: state.list.prevId
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updatePreviousListId: (id) => {
+      dispatch(updatePreviousListId(id))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ListSelectDialog))

@@ -4,12 +4,14 @@ import {
   UPDATE_CURRENT_LIST_ID,
   GET_LISTS_FOR_USER,
   ADD_NEW_LIST,
-  DELETE_LIST } from '../constants'
+  DELETE_LIST,
+  UPDATE_PREVIOUS_LIST_ID } from '../constants'
 
 import { removedAllListReceivers } from './receiver-actions'
 
 export const getCurrentListId = () => ({type: GET_CURRENT_LIST_ID})
 export const updatedCurrentListId = (id) => ({type: UPDATE_CURRENT_LIST_ID, id})
+export const updatedPreviousListId = (id) => ({type: UPDATE_PREVIOUS_LIST_ID, id})
 export const gotListsForUser = (userLists) => ({type: GET_LISTS_FOR_USER, userLists})
 export const addedNewList = (newList) => ({type: ADD_NEW_LIST, newList})
 export const deletedList = (list) => ({type: DELETE_LIST, list})
@@ -17,6 +19,14 @@ export const deletedList = (list) => ({type: DELETE_LIST, list})
 export const updateCurrentListId = (id) => dispatch => {
   try {
     dispatch(updatedCurrentListId(id))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const updatePreviousListId = (id) => dispatch => {
+  try {
+    dispatch(updatedPreviousListId(id))
   } catch (err) {
     console.error(err)
   }

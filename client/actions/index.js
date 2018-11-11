@@ -9,6 +9,7 @@ export {
 export {
   getCurrentListId,
   updateCurrentListId,
+  updatePreviousListId,
   getListsForuser,
   addNewList,
   deleteList } from './list-actions'
