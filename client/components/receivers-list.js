@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import { getAllListReceivers } from '../actions'
 import ReceiverActions from './receiver-actions'
+import ListDelete from './list-delete'
 
 import { Typography, Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@material-ui/core/'
 
@@ -41,6 +42,7 @@ class ReceiversList extends Component {
                   <TableCell>Receiver Name</TableCell>
                   <TableCell numeric>Assigned Gifts</TableCell>
                   <TableCell>Actions</TableCell>
+                  <TableCell numeric><ListDelete listId={listId} /></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -56,6 +58,7 @@ class ReceiversList extends Component {
                             listId={listId}
                           />
                         </TableCell>
+                        <TableCell></TableCell>
                       </TableRow>
                     )
                   })

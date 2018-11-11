@@ -147,6 +147,12 @@ Object.defineProperty(exports, "updateCurrentListId", {
     return _listActions.updateCurrentListId;
   }
 });
+Object.defineProperty(exports, "updatePreviousListId", {
+  enumerable: true,
+  get: function get() {
+    return _listActions.updatePreviousListId;
+  }
+});
 Object.defineProperty(exports, "getListsForuser", {
   enumerable: true,
   get: function get() {
@@ -157,6 +163,12 @@ Object.defineProperty(exports, "addNewList", {
   enumerable: true,
   get: function get() {
     return _listActions.addNewList;
+  }
+});
+Object.defineProperty(exports, "deleteList", {
+  enumerable: true,
+  get: function get() {
+    return _listActions.deleteList;
   }
 });
 
@@ -181,11 +193,13 @@ var _listActions = __webpack_require__(/*! ./list-actions */ "./client/actions/l
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.addNewList = exports.getListsForuser = exports.updateCurrentListId = exports.addedNewList = exports.gotListsForUser = exports.updatedCurrentListId = exports.getCurrentListId = void 0;
+exports.deleteList = exports.addNewList = exports.getListsForuser = exports.updatePreviousListId = exports.updateCurrentListId = exports.deletedList = exports.addedNewList = exports.gotListsForUser = exports.updatedPreviousListId = exports.updatedCurrentListId = exports.getCurrentListId = void 0;
 
 var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
 var _constants = __webpack_require__(/*! ../constants */ "./client/constants/index.js");
+
+var _receiverActions = __webpack_require__(/*! ./receiver-actions */ "./client/actions/receiver-actions.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -210,6 +224,15 @@ var updatedCurrentListId = function updatedCurrentListId(id) {
 
 exports.updatedCurrentListId = updatedCurrentListId;
 
+var updatedPreviousListId = function updatedPreviousListId(id) {
+  return {
+    type: _constants.UPDATE_PREVIOUS_LIST_ID,
+    id: id
+  };
+};
+
+exports.updatedPreviousListId = updatedPreviousListId;
+
 var gotListsForUser = function gotListsForUser(userLists) {
   return {
     type: _constants.GET_LISTS_FOR_USER,
@@ -228,6 +251,15 @@ var addedNewList = function addedNewList(newList) {
 
 exports.addedNewList = addedNewList;
 
+var deletedList = function deletedList(list) {
+  return {
+    type: _constants.DELETE_LIST,
+    list: list
+  };
+};
+
+exports.deletedList = deletedList;
+
 var updateCurrentListId = function updateCurrentListId(id) {
   return function (dispatch) {
     try {
@@ -239,6 +271,18 @@ var updateCurrentListId = function updateCurrentListId(id) {
 };
 
 exports.updateCurrentListId = updateCurrentListId;
+
+var updatePreviousListId = function updatePreviousListId(id) {
+  return function (dispatch) {
+    try {
+      dispatch(updatedPreviousListId(id));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+};
+
+exports.updatePreviousListId = updatePreviousListId;
 
 var getListsForuser = function getListsForuser(userId) {
   return (
@@ -339,6 +383,58 @@ var addNewList = function addNewList(name, userId) {
 
 exports.addNewList = addNewList;
 
+var deleteList = function deleteList(listId, userId) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref5 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee3(dispatch) {
+        var _ref6, data;
+
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                _context3.next = 3;
+                return _axios.default.delete('/api/list', {
+                  data: {
+                    listId: listId,
+                    userId: userId
+                  }
+                });
+
+              case 3:
+                _ref6 = _context3.sent;
+                data = _ref6.data;
+                dispatch((0, _receiverActions.removedAllListReceivers)());
+                dispatch(deletedList(data));
+                _context3.next = 12;
+                break;
+
+              case 9:
+                _context3.prev = 9;
+                _context3.t0 = _context3["catch"](0);
+                console.error(_context3.t0);
+
+              case 12:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this, [[0, 9]]);
+      }));
+
+      return function (_x3) {
+        return _ref5.apply(this, arguments);
+      };
+    }()
+  );
+};
+
+exports.deleteList = deleteList;
+
 /***/ }),
 
 /***/ "./client/actions/receiver-actions.js":
@@ -354,7 +450,7 @@ exports.addNewList = addNewList;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.removeReceiverFromList = exports.getAllListReceivers = exports.addReceiver = void 0;
+exports.removeReceiverFromList = exports.getAllListReceivers = exports.addReceiver = exports.removedAllListReceivers = void 0;
 
 var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
@@ -379,6 +475,14 @@ var gotAllListReceivers = function gotAllListReceivers(receivers) {
     receivers: receivers
   };
 };
+
+var removedAllListReceivers = function removedAllListReceivers() {
+  return {
+    type: _constants.REMOVE_ALL_LIST_RECEIVERS
+  };
+};
+
+exports.removedAllListReceivers = removedAllListReceivers;
 
 var removedReceiverFromList = function removedReceiverFromList(receiver) {
   return {
@@ -1216,6 +1320,163 @@ exports.default = _default;
 
 /***/ }),
 
+/***/ "./client/components/list-delete.js":
+/*!******************************************!*\
+  !*** ./client/components/list-delete.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.ListDelete = void 0;
+
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
+
+var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+
+var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var styles = function styles(theme) {
+  return {
+    button: {
+      margin: theme.spacing.unit
+    }
+  };
+};
+
+var ListDelete =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(ListDelete, _Component);
+
+  function ListDelete() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    _classCallCheck(this, ListDelete);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ListDelete)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+      open: false
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleClickOpen", function () {
+      _this.setState({
+        open: true
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleClose", function () {
+      _this.setState({
+        open: false
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleDelete", function () {
+      _this.handleClose();
+
+      var _this$props = _this.props,
+          listId = _this$props.listId,
+          userId = _this$props.userId;
+
+      _this.props.deleteList(listId, userId);
+
+      _this.props.updatePreviousListId(null);
+    });
+
+    return _this;
+  }
+
+  _createClass(ListDelete, [{
+    key: "render",
+    value: function render() {
+      var classes = this.props.classes;
+      return _react.default.createElement("div", null, _react.default.createElement(_core.Button, {
+        className: classes.button,
+        color: "secondary",
+        onClick: this.handleClickOpen
+      }, "Delete List"), _react.default.createElement(_core.Dialog, {
+        open: this.state.open,
+        onClose: this.handleClose,
+        "aria-labelledby": "delete-list",
+        "aria-describedby": "delete-list"
+      }, _react.default.createElement(_core.DialogTitle, {
+        id: "delete-list-title"
+      }, "Warning: Deleting List Data"), _react.default.createElement(_core.DialogContent, null, _react.default.createElement(_core.DialogContentText, null, "When you delete a list, all added receivers and their associated gifts will be removed too. Are you sure?")), _react.default.createElement(_core.DialogActions, null, _react.default.createElement(_core.Button, {
+        color: "primary",
+        onClick: this.handleClose
+      }, "Cancel"), _react.default.createElement(_core.Button, {
+        color: "secondary",
+        onClick: this.handleDelete
+      }, "Confirm"))));
+    }
+  }]);
+
+  return ListDelete;
+}(_react.Component);
+
+exports.ListDelete = ListDelete;
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    userId: state.user.id
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    deleteList: function deleteList(listId, userId) {
+      dispatch((0, _actions.deleteList)(listId, userId));
+    },
+    updatePreviousListId: function updatePreviousListId(id) {
+      dispatch((0, _actions.updatePreviousListId)(id));
+    }
+  };
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)((0, _styles.withStyles)(styles)(ListDelete));
+
+exports.default = _default;
+
+/***/ }),
+
 /***/ "./client/components/list-select-dialog.js":
 /*!*************************************************!*\
   !*** ./client/components/list-select-dialog.js ***!
@@ -1233,7 +1494,11 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
 var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
+
+var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
 
 var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
 
@@ -1292,18 +1557,12 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ListSelectDialog)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      prevId: null
-    });
-
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleClose", function () {
-      _this.props.onClose(_this.props.selectedList, _this.state.prevId);
+      _this.props.onClose(_this.props.selectedList, _this.props.prevId);
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleListItemClick", function (name, listId) {
-      _this.setState({
-        prevId: listId
-      });
+      _this.props.updatePreviousListId(listId);
 
       _this.props.onClose(name, listId);
     });
@@ -1352,7 +1611,21 @@ ListSelectDialog.propTypes = {
   selectedList: _propTypes.default.string
 };
 
-var _default = (0, _styles.withStyles)(styles)(ListSelectDialog);
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    prevId: state.list.prevId
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    updatePreviousListId: function updatePreviousListId(id) {
+      dispatch((0, _actions.updatePreviousListId)(id));
+    }
+  };
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)((0, _styles.withStyles)(styles)(ListSelectDialog));
 
 exports.default = _default;
 
@@ -1916,6 +2189,8 @@ var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js"
 
 var _receiverActions = _interopRequireDefault(__webpack_require__(/*! ./receiver-actions */ "./client/components/receiver-actions.js"));
 
+var _listDelete = _interopRequireDefault(__webpack_require__(/*! ./list-delete */ "./client/components/list-delete.js"));
+
 var _core = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -2001,7 +2276,11 @@ function (_Component) {
         className: classes.table
       }, _react.default.createElement(_core.TableHead, null, _react.default.createElement(_core.TableRow, null, _react.default.createElement(_core.TableCell, null, "Receiver Name"), _react.default.createElement(_core.TableCell, {
         numeric: true
-      }, "Assigned Gifts"), _react.default.createElement(_core.TableCell, null, "Actions"))), _react.default.createElement(_core.TableBody, null, receivers && receivers.map(function (receiver) {
+      }, "Assigned Gifts"), _react.default.createElement(_core.TableCell, null, "Actions"), _react.default.createElement(_core.TableCell, {
+        numeric: true
+      }, _react.default.createElement(_listDelete.default, {
+        listId: listId
+      })))), _react.default.createElement(_core.TableBody, null, receivers && receivers.map(function (receiver) {
         return _react.default.createElement(_core.TableRow, {
           key: receiver.id
         }, _react.default.createElement(_core.TableCell, {
@@ -2012,7 +2291,7 @@ function (_Component) {
         }, "3"), _react.default.createElement(_core.TableCell, null, _react.default.createElement(_receiverActions.default, {
           receiverId: receiver.id,
           listId: listId
-        })));
+        })), _react.default.createElement(_core.TableCell, null));
       })))));
     }
   }]);
@@ -2291,7 +2570,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ADD_NEW_LIST = exports.GET_LISTS_FOR_USER = exports.UPDATE_CURRENT_LIST_ID = exports.GET_CURRENT_LIST_ID = exports.REMOVE_RECEIVER_FROM_LIST = exports.GET_ALL_LIST_RECEIVERS = exports.ADD_RECEIVER = exports.REMOVE_USER = exports.GET_USER = void 0;
+exports.DELETE_LIST = exports.ADD_NEW_LIST = exports.GET_LISTS_FOR_USER = exports.UPDATE_PREVIOUS_LIST_ID = exports.UPDATE_CURRENT_LIST_ID = exports.GET_CURRENT_LIST_ID = exports.REMOVE_ALL_LIST_RECEIVERS = exports.REMOVE_RECEIVER_FROM_LIST = exports.GET_ALL_LIST_RECEIVERS = exports.ADD_RECEIVER = exports.REMOVE_USER = exports.GET_USER = void 0;
 
 /**
  * USER ACTION TYPES
@@ -2309,19 +2588,25 @@ exports.ADD_RECEIVER = ADD_RECEIVER;
 var GET_ALL_LIST_RECEIVERS = 'GET_ALL_LIST_RECEIVERS';
 exports.GET_ALL_LIST_RECEIVERS = GET_ALL_LIST_RECEIVERS;
 var REMOVE_RECEIVER_FROM_LIST = 'REMOVE_RECEIVER_FROM_LIST';
+exports.REMOVE_RECEIVER_FROM_LIST = REMOVE_RECEIVER_FROM_LIST;
+var REMOVE_ALL_LIST_RECEIVERS = 'REMOVE_ALL_LIST_RECEIVERS';
 /**
  * LIST ACTION TYPES
  */
 
-exports.REMOVE_RECEIVER_FROM_LIST = REMOVE_RECEIVER_FROM_LIST;
+exports.REMOVE_ALL_LIST_RECEIVERS = REMOVE_ALL_LIST_RECEIVERS;
 var GET_CURRENT_LIST_ID = 'GET_CURRENT_LIST_ID';
 exports.GET_CURRENT_LIST_ID = GET_CURRENT_LIST_ID;
 var UPDATE_CURRENT_LIST_ID = 'UPDATE_CURRENT_LIST_ID';
 exports.UPDATE_CURRENT_LIST_ID = UPDATE_CURRENT_LIST_ID;
+var UPDATE_PREVIOUS_LIST_ID = 'UPDATE_PREVIOUS_LIST_ID';
+exports.UPDATE_PREVIOUS_LIST_ID = UPDATE_PREVIOUS_LIST_ID;
 var GET_LISTS_FOR_USER = 'GET_LISTS_FOR_USER';
 exports.GET_LISTS_FOR_USER = GET_LISTS_FOR_USER;
 var ADD_NEW_LIST = 'ADD_NEW_LIST';
 exports.ADD_NEW_LIST = ADD_NEW_LIST;
+var DELETE_LIST = 'DELETE_LIST';
+exports.DELETE_LIST = DELETE_LIST;
 
 /***/ }),
 
@@ -2388,8 +2673,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var theme = (0, _styles.createMuiTheme)({
   palette: {
-    primary: _colors.blue,
-    secondary: _colors.blue
+    primary: _colors.blue
   },
   typography: {
     useNextVariants: true
@@ -2479,6 +2763,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var list = {
   currentId: null,
+  prevId: null,
   userLists: []
 };
 
@@ -2493,9 +2778,22 @@ function _default() {
         userLists: _toConsumableArray(state.userLists).concat([action.newList])
       });
 
+    case _constants.DELETE_LIST:
+      return _objectSpread({}, state, {
+        currentId: 0,
+        userLists: state.userLists.filter(function (list) {
+          return list.id !== action.list.listId;
+        })
+      });
+
     case _constants.UPDATE_CURRENT_LIST_ID:
       return _objectSpread({}, state, {
         currentId: action.id
+      });
+
+    case _constants.UPDATE_PREVIOUS_LIST_ID:
+      return _objectSpread({}, state, {
+        prevId: action.id
       });
 
     case _constants.GET_CURRENT_LIST_ID:
@@ -2561,6 +2859,11 @@ function _default() {
         allFromList: state.allFromList.filter(function (receiver) {
           return receiver.id !== action.receiver.receiverId;
         })
+      });
+
+    case _constants.REMOVE_ALL_LIST_RECEIVERS:
+      return _objectSpread({}, state, {
+        allFromList: []
       });
 
     case _constants.GET_ALL_LIST_RECEIVERS:
