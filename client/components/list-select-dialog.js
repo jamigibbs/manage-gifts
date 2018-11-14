@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { Link, Route } from 'react-router-dom'
 
 import { updatePreviousListId } from '../actions'
 
@@ -8,6 +9,8 @@ import { withStyles } from '@material-ui/core/styles'
 import { Avatar, List, ListItem, ListItemAvatar, ListItemText, DialogTitle, Dialog } from '@material-ui/core'
 import PersonIcon from '@material-ui/icons/Person'
 import { blue } from '@material-ui/core/colors'
+
+import ReceiversList from './receivers-list'
 
 const styles = {
   avatar: {
@@ -40,18 +43,19 @@ class ListSelectDialog extends Component {
         <div>
           <List>
             {lists.map(list => (
-              <ListItem
-                button
-                onClick={() => this.handleListItemClick(list.name, list.id)}
-                key={list.id}
-              >
-                <ListItemAvatar>
-                  <Avatar className={classes.avatar}>
-                    <PersonIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={list.name} />
-              </ListItem>
+              <Link key={list.id} to={`/dashboard/list/${list.id}`}>
+                <ListItem
+                  button
+                  onClick={() => this.handleListItemClick(list.name, list.id)}
+                >
+                  <ListItemAvatar>
+                    <Avatar className={classes.avatar}>
+                      <PersonIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary={list.name} />
+                </ListItem>
+              </Link>
             ))}
           </List>
         </div>

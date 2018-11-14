@@ -46,7 +46,7 @@ export class UserDashboard extends Component {
   }
 
   render(){
-    const {email, classes, currentListId, match} = this.props
+    const {email, classes, match} = this.props
     return (
       <div className={classes.root}>
         <Sidebar />

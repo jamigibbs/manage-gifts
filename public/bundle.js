@@ -1498,6 +1498,8 @@ var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-r
 
 var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
 
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
 var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
 
 var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
@@ -1507,6 +1509,8 @@ var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@materi
 var _Person = _interopRequireDefault(__webpack_require__(/*! @material-ui/icons/Person */ "./node_modules/@material-ui/icons/Person.js"));
 
 var _colors = __webpack_require__(/*! @material-ui/core/colors */ "./node_modules/@material-ui/core/colors/index.js");
+
+var _receiversList = _interopRequireDefault(__webpack_require__(/*! ./receivers-list */ "./client/components/receivers-list.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1586,17 +1590,19 @@ function (_Component) {
       }, _react.default.createElement(_core.DialogTitle, {
         id: "list-select-title"
       }, "Select List"), _react.default.createElement("div", null, _react.default.createElement(_core.List, null, lists.map(function (list) {
-        return _react.default.createElement(_core.ListItem, {
+        return _react.default.createElement(_reactRouterDom.Link, {
+          key: list.id,
+          to: "/dashboard/list/".concat(list.id)
+        }, _react.default.createElement(_core.ListItem, {
           button: true,
           onClick: function onClick() {
             return _this2.handleListItemClick(list.name, list.id);
-          },
-          key: list.id
+          }
         }, _react.default.createElement(_core.ListItemAvatar, null, _react.default.createElement(_core.Avatar, {
           className: classes.avatar
         }, _react.default.createElement(_Person.default, null))), _react.default.createElement(_core.ListItemText, {
           primary: list.name
-        }));
+        })));
       }))));
     }
   }]);
@@ -1726,8 +1732,6 @@ function (_Component) {
       });
 
       _this.props.updateCurrentListId(id);
-
-      _history.default.push("/dashboard/list/".concat(id));
     });
 
     return _this;
@@ -2537,7 +2541,6 @@ function (_Component) {
       var _this$props = this.props,
           email = _this$props.email,
           classes = _this$props.classes,
-          currentListId = _this$props.currentListId,
           match = _this$props.match;
       return _react.default.createElement("div", {
         className: classes.root
