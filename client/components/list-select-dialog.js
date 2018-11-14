@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Link, Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { updatePreviousListId } from '../actions'
+import { strToLowercaseDashed } from '../utilities'
 
 import { withStyles } from '@material-ui/core/styles'
 import { Avatar, List, ListItem, ListItemAvatar, ListItemText, DialogTitle, Dialog } from '@material-ui/core'
@@ -32,7 +33,6 @@ class ListSelectDialog extends Component {
 
   render() {
     const { classes, lists, open } = this.props
-
     return (
       <Dialog
         onClose={this.handleClose}
@@ -43,7 +43,7 @@ class ListSelectDialog extends Component {
         <div>
           <List>
             {lists.map(list => (
-              <Link key={list.id} to={`/dashboard/list/${list.id}`}>
+              <Link key={list.id} to={`/list/${strToLowercaseDashed(list.name)}/${list.id}`} >
                 <ListItem
                   button
                   onClick={() => this.handleListItemClick(list.name, list.id)}
@@ -73,7 +73,9 @@ ListSelectDialog.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    prevId: state.list.prevId
+    prevId: state.list.prevId,
+    userLists: state.list.userLists,
+    currentId: state.list.currentId
   }
 }
 

@@ -855,6 +855,8 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
 var _components = __webpack_require__(/*! ./components */ "./client/components/index.js");
 
 var _routes = _interopRequireDefault(__webpack_require__(/*! ./routes */ "./client/routes.js"));
@@ -865,7 +867,8 @@ var App = function App() {
   return _react.default.createElement("div", null, _react.default.createElement(_components.Navbar, null), _react.default.createElement(_routes.default, null));
 };
 
-var _default = App;
+var _default = (0, _reactRouterDom.withRouter)(App);
+
 exports.default = _default;
 
 /***/ }),
@@ -1502,6 +1505,8 @@ var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_module
 
 var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
 
+var _utilities = __webpack_require__(/*! ../utilities */ "./client/utilities/index.js");
+
 var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
 
 var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
@@ -1592,7 +1597,7 @@ function (_Component) {
       }, "Select List"), _react.default.createElement("div", null, _react.default.createElement(_core.List, null, lists.map(function (list) {
         return _react.default.createElement(_reactRouterDom.Link, {
           key: list.id,
-          to: "/dashboard/list/".concat(list.id)
+          to: "/list/".concat((0, _utilities.strToLowercaseDashed)(list.name), "/").concat(list.id)
         }, _react.default.createElement(_core.ListItem, {
           button: true,
           onClick: function onClick() {
@@ -1619,7 +1624,9 @@ ListSelectDialog.propTypes = {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    prevId: state.list.prevId
+    prevId: state.list.prevId,
+    userLists: state.list.userLists,
+    currentId: state.list.currentId
   };
 };
 
@@ -2172,6 +2179,70 @@ exports.default = _default;
 
 /***/ }),
 
+/***/ "./client/components/receiver-details.js":
+/*!***********************************************!*\
+  !*** ./client/components/receiver-details.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var ReceiverDetails =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(ReceiverDetails, _Component);
+
+  function ReceiverDetails() {
+    _classCallCheck(this, ReceiverDetails);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(ReceiverDetails).apply(this, arguments));
+  }
+
+  _createClass(ReceiverDetails, [{
+    key: "render",
+    value: function render() {
+      var receiverId = this.props.match.params.receiverId;
+      return _react.default.createElement("div", null, _react.default.createElement("p", null, "Receiver #", receiverId, " Details"));
+    }
+  }]);
+
+  return ReceiverDetails;
+}(_react.Component);
+
+var _default = ReceiverDetails;
+exports.default = _default;
+
+/***/ }),
+
 /***/ "./client/components/receivers-list.js":
 /*!*********************************************!*\
   !*** ./client/components/receivers-list.js ***!
@@ -2191,9 +2262,13 @@ var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_mo
 
 var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
 var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
 
 var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
+
+var _utilities = __webpack_require__(/*! ../utilities */ "./client/utilities/index.js");
 
 var _receiverActions = _interopRequireDefault(__webpack_require__(/*! ./receiver-actions */ "./client/components/receiver-actions.js"));
 
@@ -2307,7 +2382,9 @@ function (_Component) {
         }, _react.default.createElement(_core.TableCell, {
           component: "th",
           scope: "row"
-        }, receiver.name), _react.default.createElement(_core.TableCell, {
+        }, _react.default.createElement(_reactRouterDom.Link, {
+          to: "/receiver/".concat((0, _utilities.strToLowercaseDashed)(receiver.name), "/").concat(receiver.id)
+        }, receiver.name)), _react.default.createElement(_core.TableCell, {
           numeric: true
         }, "3"), _react.default.createElement(_core.TableCell, null, _react.default.createElement(_receiverActions.default, {
           receiverId: receiver.id,
@@ -2460,6 +2537,8 @@ var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@materi
 
 var _receiversList = _interopRequireDefault(__webpack_require__(/*! ./receivers-list */ "./client/components/receivers-list.js"));
 
+var _receiverDetails = _interopRequireDefault(__webpack_require__(/*! ./receiver-details */ "./client/components/receiver-details.js"));
+
 var _sidebar = _interopRequireDefault(__webpack_require__(/*! ./sidebar */ "./client/components/sidebar.js"));
 
 var _listSelect = _interopRequireDefault(__webpack_require__(/*! ./list-select */ "./client/components/list-select.js"));
@@ -2540,8 +2619,7 @@ function (_Component) {
     value: function render() {
       var _this$props = this.props,
           email = _this$props.email,
-          classes = _this$props.classes,
-          match = _this$props.match;
+          classes = _this$props.classes;
       return _react.default.createElement("div", {
         className: classes.root
       }, _react.default.createElement(_sidebar.default, null), _react.default.createElement("main", {
@@ -2551,9 +2629,15 @@ function (_Component) {
         align: "center"
       }, "Welcome, ", email), _react.default.createElement(_listAdd.default, null), _react.default.createElement(_listSelect.default, null), _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
-        path: "".concat(match.path, "/list/:listId"),
+        path: '/list/:listName/:listId',
         render: function render(props) {
           return _react.default.createElement(_receiversList.default, props);
+        }
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        exact: true,
+        path: '/receiver/:receiverName/:receiverId',
+        render: function render(props) {
+          return _react.default.createElement(_receiverDetails.default, props);
         }
       }))));
     }
@@ -3038,7 +3122,16 @@ function (_Component) {
         path: "/signup",
         component: _components.Signup
       }), isLoggedIn && _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
+        exact: true,
         path: "/dashboard",
+        component: _components.UserDashboard
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        exact: true,
+        path: "/list/:listName/:listId",
+        component: _components.UserDashboard
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        exact: true,
+        path: "/receiver/:receiverName/:receiverId",
         component: _components.UserDashboard
       })));
     }
@@ -3113,6 +3206,29 @@ var middleware = (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.app
 var store = (0, _redux.createStore)(reducer, middleware);
 var _default = store;
 exports.default = _default;
+
+/***/ }),
+
+/***/ "./client/utilities/index.js":
+/*!***********************************!*\
+  !*** ./client/utilities/index.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.strToLowercaseDashed = void 0;
+
+var strToLowercaseDashed = function strToLowercaseDashed(str) {
+  return str.replace(/\s+/g, '-').toLowerCase();
+};
+
+exports.strToLowercaseDashed = strToLowercaseDashed;
 
 /***/ }),
 
