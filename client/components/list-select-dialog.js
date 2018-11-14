@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Link, Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { updatePreviousListId } from '../actions'
+import { strToLowercaseDashed } from '../utilities'
 
 import { withStyles } from '@material-ui/core/styles'
 import { Avatar, List, ListItem, ListItemAvatar, ListItemText, DialogTitle, Dialog } from '@material-ui/core'
@@ -27,10 +28,6 @@ class ListSelectDialog extends Component {
     this.props.updatePreviousListId(listId)
     this.props.onClose(name, listId)
   }
-  
-  strToLowercaseDashed = (str) => {
-    return str.replace(/\s+/g, '-').toLowerCase()
-  }
 
   render() {
     const { classes, lists, open } = this.props
@@ -44,7 +41,7 @@ class ListSelectDialog extends Component {
         <div>
           <List>
             {lists.map(list => (
-              <Link key={list.id} to={`/list/${this.strToLowercaseDashed(list.name)}/${list.id}`} >
+              <Link key={list.id} to={`/list/${strToLowercaseDashed(list.name)}/${list.id}`} >
                 <ListItem
                   button
                   onClick={() => this.handleListItemClick(list.name, list.id)}

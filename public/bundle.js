@@ -1505,6 +1505,8 @@ var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_module
 
 var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
 
+var _utilities = __webpack_require__(/*! ../utilities */ "./client/utilities/index.js");
+
 var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
 
 var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
@@ -1572,10 +1574,6 @@ function (_Component) {
       _this.props.onClose(name, listId);
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "strToLowercaseDashed", function (str) {
-      return str.replace(/\s+/g, '-').toLowerCase();
-    });
-
     return _this;
   }
 
@@ -1597,7 +1595,7 @@ function (_Component) {
       }, "Select List"), _react.default.createElement("div", null, _react.default.createElement(_core.List, null, lists.map(function (list) {
         return _react.default.createElement(_reactRouterDom.Link, {
           key: list.id,
-          to: "/list/".concat(_this2.strToLowercaseDashed(list.name), "/").concat(list.id)
+          to: "/list/".concat((0, _utilities.strToLowercaseDashed)(list.name), "/").concat(list.id)
         }, _react.default.createElement(_core.ListItem, {
           button: true,
           onClick: function onClick() {
@@ -3125,6 +3123,29 @@ var middleware = (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.app
 var store = (0, _redux.createStore)(reducer, middleware);
 var _default = store;
 exports.default = _default;
+
+/***/ }),
+
+/***/ "./client/utilities/index.js":
+/*!***********************************!*\
+  !*** ./client/utilities/index.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.strToLowercaseDashed = void 0;
+
+var strToLowercaseDashed = function strToLowercaseDashed(str) {
+  return str.replace(/\s+/g, '-').toLowerCase();
+};
+
+exports.strToLowercaseDashed = strToLowercaseDashed;
 
 /***/ }),
 

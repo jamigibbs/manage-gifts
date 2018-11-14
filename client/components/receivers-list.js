@@ -22,13 +22,13 @@ const styles = theme => ({
 class ReceiversList extends Component {
 
   componentDidMount = () => {
-    const listId = this.props.match.params.listId
+    const { listId } = this.props.match.params
     this.props.getAllListReceivers(parseInt(listId))
     this.props.updateCurrentListId(parseInt(listId))
   }
 
   componentDidUpdate = (prevProps) => {
-    const listId = this.props.match.params.listId
+    const { listId } = this.props.match.params
     if (listId !== prevProps.match.params.listId) {
       this.props.getAllListReceivers(parseInt(listId))
       this.props.updateCurrentListId(parseInt(listId))
