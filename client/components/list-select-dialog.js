@@ -10,8 +10,6 @@ import { Avatar, List, ListItem, ListItemAvatar, ListItemText, DialogTitle, Dial
 import PersonIcon from '@material-ui/icons/Person'
 import { blue } from '@material-ui/core/colors'
 
-import ReceiversList from './receivers-list'
-
 const styles = {
   avatar: {
     backgroundColor: blue[100],
@@ -29,10 +27,13 @@ class ListSelectDialog extends Component {
     this.props.updatePreviousListId(listId)
     this.props.onClose(name, listId)
   }
+  
+  strToLowercaseDashed = (str) => {
+    return str.replace(/\s+/g, '-').toLowerCase()
+  }
 
   render() {
     const { classes, lists, open } = this.props
-
     return (
       <Dialog
         onClose={this.handleClose}
@@ -43,7 +44,7 @@ class ListSelectDialog extends Component {
         <div>
           <List>
             {lists.map(list => (
-              <Link key={list.id} to={`/dashboard/list/${list.id}`}>
+              <Link key={list.id} to={`/list/${this.strToLowercaseDashed(list.name)}/${list.id}`} >
                 <ListItem
                   button
                   onClick={() => this.handleListItemClick(list.name, list.id)}
@@ -73,7 +74,9 @@ ListSelectDialog.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    prevId: state.list.prevId
+    prevId: state.list.prevId,
+    userLists: state.list.userLists,
+    currentId: state.list.currentId
   }
 }
 

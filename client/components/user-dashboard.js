@@ -59,7 +59,7 @@ export class UserDashboard extends Component {
 
           <Switch>
             <Route
-              exact path={`${match.path}/list/:listId`}
+              exact path={'/list/:listName/:listId'}
               render={(props) => <ReceiversList {...props} /> }
             />
           </Switch>

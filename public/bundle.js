@@ -855,6 +855,8 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
 var _components = __webpack_require__(/*! ./components */ "./client/components/index.js");
 
 var _routes = _interopRequireDefault(__webpack_require__(/*! ./routes */ "./client/routes.js"));
@@ -865,7 +867,8 @@ var App = function App() {
   return _react.default.createElement("div", null, _react.default.createElement(_components.Navbar, null), _react.default.createElement(_routes.default, null));
 };
 
-var _default = App;
+var _default = (0, _reactRouterDom.withRouter)(App);
+
 exports.default = _default;
 
 /***/ }),
@@ -1510,8 +1513,6 @@ var _Person = _interopRequireDefault(__webpack_require__(/*! @material-ui/icons/
 
 var _colors = __webpack_require__(/*! @material-ui/core/colors */ "./node_modules/@material-ui/core/colors/index.js");
 
-var _receiversList = _interopRequireDefault(__webpack_require__(/*! ./receivers-list */ "./client/components/receivers-list.js"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
@@ -1571,6 +1572,10 @@ function (_Component) {
       _this.props.onClose(name, listId);
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "strToLowercaseDashed", function (str) {
+      return str.replace(/\s+/g, '-').toLowerCase();
+    });
+
     return _this;
   }
 
@@ -1592,7 +1597,7 @@ function (_Component) {
       }, "Select List"), _react.default.createElement("div", null, _react.default.createElement(_core.List, null, lists.map(function (list) {
         return _react.default.createElement(_reactRouterDom.Link, {
           key: list.id,
-          to: "/dashboard/list/".concat(list.id)
+          to: "/list/".concat(_this2.strToLowercaseDashed(list.name), "/").concat(list.id)
         }, _react.default.createElement(_core.ListItem, {
           button: true,
           onClick: function onClick() {
@@ -1619,7 +1624,9 @@ ListSelectDialog.propTypes = {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    prevId: state.list.prevId
+    prevId: state.list.prevId,
+    userLists: state.list.userLists,
+    currentId: state.list.currentId
   };
 };
 
@@ -2551,7 +2558,7 @@ function (_Component) {
         align: "center"
       }, "Welcome, ", email), _react.default.createElement(_listAdd.default, null), _react.default.createElement(_listSelect.default, null), _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
-        path: "".concat(match.path, "/list/:listId"),
+        path: '/list/:listName/:listId',
         render: function render(props) {
           return _react.default.createElement(_receiversList.default, props);
         }
@@ -3038,7 +3045,12 @@ function (_Component) {
         path: "/signup",
         component: _components.Signup
       }), isLoggedIn && _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
+        exact: true,
         path: "/dashboard",
+        component: _components.UserDashboard
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        exact: true,
+        path: "/list/:listName/:listId",
         component: _components.UserDashboard
       })));
     }
