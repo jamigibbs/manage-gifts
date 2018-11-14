@@ -2229,7 +2229,6 @@ function (_Component) {
     key: "render",
     value: function render() {
       var receiverId = this.props.match.params.receiverId;
-      console.log(this.props);
       return _react.default.createElement("div", null, _react.default.createElement("p", null, "Receiver #", receiverId, " Details"));
     }
   }]);
