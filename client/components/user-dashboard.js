@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import {withRouter, Route, Switch} from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import { getCurrentListId, updateCurrentListId } from '../actions'
 
@@ -9,6 +9,7 @@ import { withStyles } from '@material-ui/core/styles'
 import { Typography } from '@material-ui/core'
 
 import ReceiversList from './receivers-list'
+import ReceiverDetails from './receiver-details'
 import Sidebar from './sidebar'
 import ListSelect from './list-select'
 import ListAdd from './list-add'
@@ -46,7 +47,7 @@ export class UserDashboard extends Component {
   }
 
   render(){
-    const {email, classes, match} = this.props
+    const { email, classes } = this.props
     return (
       <div className={classes.root}>
         <Sidebar />
@@ -61,6 +62,10 @@ export class UserDashboard extends Component {
             <Route
               exact path={'/list/:listName/:listId'}
               render={(props) => <ReceiversList {...props} /> }
+            />
+            <Route
+              exact path={'/receiver/:receiverName/:receiverId'}
+              render={(props) => <ReceiverDetails {...props} /> }
             />
           </Switch>
 

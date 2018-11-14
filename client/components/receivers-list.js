@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
 import { getAllListReceivers, updateCurrentListId } from '../actions'
+import { strToLowercaseDashed } from '../utilities'
 import ReceiverActions from './receiver-actions'
 import ListDelete from './list-delete'
 import ReceiverAdd from './receiver-add'
@@ -59,7 +61,11 @@ class ReceiversList extends Component {
                   receivers.map((receiver) => {
                     return (
                       <TableRow key={receiver.id}>
-                        <TableCell component="th" scope="row">{receiver.name}</TableCell>
+                        <TableCell component="th" scope="row">
+                          <Link to={`/receiver/${strToLowercaseDashed(receiver.name)}/${receiver.id}`}>
+                            {receiver.name}
+                          </Link>
+                        </TableCell>
                         <TableCell numeric>3</TableCell>
                         <TableCell>
                           <ReceiverActions
