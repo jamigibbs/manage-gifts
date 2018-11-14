@@ -28,8 +28,6 @@ class ListSelect extends Component {
   handleClose = (name, id) => {
     this.setState({ selectedList: name, listId: id, open: false })
     this.props.updateCurrentListId(id)
-
-    history.push(`/dashboard/list/${id}`)
   }
 
   render() {
