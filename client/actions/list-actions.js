@@ -8,7 +8,6 @@ import {
   UPDATE_PREVIOUS_LIST_ID } from '../constants'
 
 import { removedAllListReceivers } from './receiver-actions'
-import { debug } from 'util';
 
 export const getCurrentListId = () => ({type: GET_CURRENT_LIST_ID})
 export const updatedCurrentListId = (id) => ({type: UPDATE_CURRENT_LIST_ID, id})
