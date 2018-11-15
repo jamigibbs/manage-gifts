@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { deleteList, updatePreviousListId } from '../actions'
+import history from '../history'
 
 import { withStyles } from '@material-ui/core/styles'
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
@@ -26,10 +27,11 @@ export class ListDelete extends Component {
   }
 
   handleDelete = () => {
-    this.handleClose()
     const { listId, userId } = this.props
     this.props.deleteList(listId, userId)
     this.props.updatePreviousListId(null)
+    this.handleClose()
+    history.push('/dashboard')
   }
 
   render(){

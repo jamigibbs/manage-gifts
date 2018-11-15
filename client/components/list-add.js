@@ -1,11 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addNewList } from '../actions'
-import history from '../history'
-import { strToLowercaseDashed } from '../utilities'
-
-import { getCurrentListId } from '../actions'
-
 import { withStyles } from '@material-ui/core/styles'
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
 
@@ -39,24 +34,12 @@ export class ListAdd extends Component {
   handleSubmit = () => {
     this.props.addNewList(this.state.name, this.props.userId)
     this.handleClose()
-  }
-  
-  componentWillUnmount = () => {
-    console.log(this.props)
-    // console.log('this.props', this.props.userLists.length)
-    // console.log('prevProps', prevProps.userLists.length)
     
-    // if (prevProps.userLists.length > this.props.userLists.length) {
-    //   history.push(`/dashboard/list/${strToLowercaseDashed(this.state.name)}/${this.props.currentId}`)
-    // }
+    this.setState({ name: '' })
   }
 
   render(){
     const { classes } = this.props
-    
-    // if (currentId !== prevId) { 
-    //   history.push(`/dashboard/list/${strToLowercaseDashed(this.state.name)}/${currentId}`)
-    // }
     
     return (
       <div className={classes.root}>
@@ -96,24 +79,12 @@ export class ListAdd extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    // userId: state.user.id,
-     currentId: state.list.currentId,
-     userLists: state.list.userLists
-    //prevId: state.list.prevId
-  }
-}
-
 const mapDispatchToProps = (dispatch) => {
   return {
     addNewList: (name, userId) => {
       dispatch(addNewList(name, userId))
-    },
-    // getCurrentListId: () => {
-    //   dispatch(getCurrentListId())
-    // }
+    }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ListAdd))
+export default connect(null, mapDispatchToProps)(withStyles(styles)(ListAdd))

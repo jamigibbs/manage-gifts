@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import history from '../history'
 
 import { updateCurrentListId, getListsForuser } from '../actions'
 import ListSelectDialog from './list-select-dialog'

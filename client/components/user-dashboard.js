@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
 
-import { getCurrentListId, updateCurrentListId } from '../actions'
+import { updateCurrentListId } from '../actions'
 
 import { withStyles } from '@material-ui/core/styles'
 import { Typography } from '@material-ui/core'
@@ -29,16 +29,6 @@ export class UserDashboard extends Component {
     super()
   }
 
-  componentDidMount(){
-    //this.props.getCurrentListId()
-  }
-
-  componentDidUpdate = (prevProps) => {
-    if (this.props.currentListId !== prevProps.currentListId) {
-      //this.props.getCurrentListId()
-    }
-  }
-
   componentWillReceiveProps = (newProps) => {
     // Re-setting active list state when on root /dashboard view
     if (newProps.location.pathname === this.props.match.path) {
@@ -47,7 +37,7 @@ export class UserDashboard extends Component {
   }
 
   render(){
-    const { email, classes, userLists } = this.props
+    const { email, classes } = this.props
     return (
       <div className={classes.root}>
         <Sidebar />
@@ -77,16 +67,12 @@ export class UserDashboard extends Component {
 
 const mapState = state => {
   return {
-    email: state.user.email,
-    currentListId: state.list.currentId
+    email: state.user.email
   }
 }
 
 const mapProps = dispatch => {
   return {
-    getCurrentListId: () => {
-      dispatch(getCurrentListId())
-    },
     updateCurrentListId: (listId) => {
       dispatch(updateCurrentListId(listId))
     }

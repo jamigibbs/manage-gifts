@@ -197,6 +197,10 @@ exports.deleteList = exports.addNewList = exports.getListsForuser = exports.upda
 
 var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
+var _history = _interopRequireDefault(__webpack_require__(/*! ../history */ "./client/history.js"));
+
+var _utilities = __webpack_require__(/*! ../utilities */ "./client/utilities/index.js");
+
 var _constants = __webpack_require__(/*! ../constants */ "./client/constants/index.js");
 
 var _receiverActions = __webpack_require__(/*! ./receiver-actions */ "./client/actions/receiver-actions.js");
@@ -358,20 +362,23 @@ var addNewList = function addNewList(name, userId) {
                 _ref4 = _context2.sent;
                 data = _ref4.data;
                 dispatch(addedNewList(data));
-                _context2.next = 11;
+
+                _history.default.push("/dashboard/list/".concat((0, _utilities.strToLowercaseDashed)(data.name), "/").concat(data.id));
+
+                _context2.next = 12;
                 break;
 
-              case 8:
-                _context2.prev = 8;
+              case 9:
+                _context2.prev = 9;
                 _context2.t0 = _context2["catch"](0);
                 console.error(_context2.t0);
 
-              case 11:
+              case 12:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[0, 8]]);
+        }, _callee2, this, [[0, 9]]);
       }));
 
       return function (_x2) {
@@ -1176,15 +1183,9 @@ var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-r
 
 var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
 
-var _history = _interopRequireDefault(__webpack_require__(/*! ../history */ "./client/history.js"));
-
-var _utilities = __webpack_require__(/*! ../utilities */ "./client/utilities/index.js");
-
 var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
 
 var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -1261,14 +1262,10 @@ function (_Component) {
       _this.props.addNewList(_this.state.name, _this.props.userId);
 
       _this.handleClose();
-    });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentWillUnmount", function () {
-      console.log(_this.props); // console.log('this.props', this.props.userLists.length)
-      // console.log('prevProps', prevProps.userLists.length)
-      // if (prevProps.userLists.length > this.props.userLists.length) {
-      //   history.push(`/dashboard/list/${strToLowercaseDashed(this.state.name)}/${this.props.currentId}`)
-      // }
+      _this.setState({
+        name: ''
+      });
     });
 
     return _this;
@@ -1277,10 +1274,7 @@ function (_Component) {
   _createClass(ListAdd, [{
     key: "render",
     value: function render() {
-      var classes = this.props.classes; // if (currentId !== prevId) { 
-      //   history.push(`/dashboard/list/${strToLowercaseDashed(this.state.name)}/${currentId}`)
-      // }
-
+      var classes = this.props.classes;
       return _react.default.createElement("div", {
         className: classes.root
       }, _react.default.createElement(_core.Button, {
@@ -1316,27 +1310,15 @@ function (_Component) {
 
 exports.ListAdd = ListAdd;
 
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    // userId: state.user.id,
-    currentId: state.list.currentId,
-    userLists: state.list.userLists //prevId: state.list.prevId
-
-  };
-};
-
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     addNewList: function addNewList(name, userId) {
       dispatch((0, _actions.addNewList)(name, userId));
-    } // getCurrentListId: () => {
-    //   dispatch(getCurrentListId())
-    // }
-
+    }
   };
 };
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)((0, _styles.withStyles)(styles)(ListAdd));
+var _default = (0, _reactRedux.connect)(null, mapDispatchToProps)((0, _styles.withStyles)(styles)(ListAdd));
 
 exports.default = _default;
 
@@ -1363,9 +1345,13 @@ var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-r
 
 var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
 
+var _history = _interopRequireDefault(__webpack_require__(/*! ../history */ "./client/history.js"));
+
 var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
 
 var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -1432,8 +1418,6 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleDelete", function () {
-      _this.handleClose();
-
       var _this$props = _this.props,
           listId = _this$props.listId,
           userId = _this$props.userId;
@@ -1441,6 +1425,10 @@ function (_Component) {
       _this.props.deleteList(listId, userId);
 
       _this.props.updatePreviousListId(null);
+
+      _this.handleClose();
+
+      _history.default.push('/dashboard');
     });
 
     return _this;
@@ -1683,8 +1671,6 @@ var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_mo
 var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
 
 var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
-var _history = _interopRequireDefault(__webpack_require__(/*! ../history */ "./client/history.js"));
 
 var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
 
@@ -2612,11 +2598,6 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(UserDashboard).call(this));
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentDidUpdate", function (prevProps) {
-      if (_this.props.currentListId !== prevProps.currentListId) {//this.props.getCurrentListId()
-      }
-    });
-
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentWillReceiveProps", function (newProps) {
       // Re-setting active list state when on root /dashboard view
       if (newProps.location.pathname === _this.props.match.path) {
@@ -2628,16 +2609,11 @@ function (_Component) {
   }
 
   _createClass(UserDashboard, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {//this.props.getCurrentListId()
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
           email = _this$props.email,
-          classes = _this$props.classes,
-          userLists = _this$props.userLists;
+          classes = _this$props.classes;
       return _react.default.createElement("div", {
         className: classes.root
       }, _react.default.createElement(_sidebar.default, null), _react.default.createElement("main", {
@@ -2668,16 +2644,12 @@ exports.UserDashboard = UserDashboard;
 
 var mapState = function mapState(state) {
   return {
-    email: state.user.email,
-    currentListId: state.list.currentId
+    email: state.user.email
   };
 };
 
 var mapProps = function mapProps(dispatch) {
   return {
-    getCurrentListId: function getCurrentListId() {
-      dispatch((0, _actions.getCurrentListId)());
-    },
     updateCurrentListId: function updateCurrentListId(listId) {
       dispatch((0, _actions.updateCurrentListId)(listId));
     }

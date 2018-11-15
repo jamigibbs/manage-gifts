@@ -32,7 +32,7 @@ router.get('/all/', userAuth, async (req, res, next) => {
       }
     })
 
-    receivers.length === 0 ? res.send(null) : res.json(receivers)
+    receivers.length === 0 ? res.send([]) : res.json(receivers)
 
   } catch (err) { next(err) }
 })
