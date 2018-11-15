@@ -49,8 +49,13 @@ router.delete('/', userAuth, async (req, res, next) => {
         userId
       }
     })
+    
+    const deletedList = {
+      listId: parseInt(listId),
+      userId
+    }
 
-    res.json({ listId, userId })
+    res.json(deletedList)
   } catch (err) { next(err) }
 })
 

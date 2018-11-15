@@ -62,7 +62,7 @@ class ReceiversList extends Component {
                     return (
                       <TableRow key={receiver.id}>
                         <TableCell component="th" scope="row">
-                          <Link to={`/receiver/${strToLowercaseDashed(receiver.name)}/${receiver.id}`}>
+                          <Link to={`/dashboard/receiver/${strToLowercaseDashed(receiver.name)}/${receiver.id}`}>
                             {receiver.name}
                           </Link>
                         </TableCell>

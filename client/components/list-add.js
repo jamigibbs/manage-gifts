@@ -1,11 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addNewList } from '../actions'
-import history from '../history'
-import { strToLowercaseDashed } from '../utilities'
-
-import { getCurrentListId } from '../actions'
-
 import { withStyles } from '@material-ui/core/styles'
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
 
@@ -39,14 +34,12 @@ export class ListAdd extends Component {
   handleSubmit = () => {
     this.props.addNewList(this.state.name, this.props.userId)
     this.handleClose()
+    
+    this.setState({ name: '' })
   }
 
   render(){
-    const { classes, currentId } = this.props
-    
-    if (currentId) { 
-      history.push(`/list/${strToLowercaseDashed(this.state.name)}/${currentId}`)
-    }
+    const { classes } = this.props
     
     return (
       <div className={classes.root}>
@@ -86,22 +79,12 @@ export class ListAdd extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    userId: state.user.id,
-    currentId: state.list.currentId
-  }
-}
-
 const mapDispatchToProps = (dispatch) => {
   return {
     addNewList: (name, userId) => {
       dispatch(addNewList(name, userId))
-    },
-    // getCurrentListId: () => {
-    //   dispatch(getCurrentListId())
-    // }
+    }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ListAdd))
+export default connect(null, mapDispatchToProps)(withStyles(styles)(ListAdd))

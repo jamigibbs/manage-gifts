@@ -1,4 +1,6 @@
 import axios from 'axios'
+import history from '../history'
+import { strToLowercaseDashed } from '../utilities'
 import {
   GET_CURRENT_LIST_ID,
   UPDATE_CURRENT_LIST_ID,
@@ -49,6 +51,7 @@ export const addNewList = (name, userId) => async dispatch => {
   try {
     const { data } = await axios.post('/api/list/add', { name, userId })
     dispatch(addedNewList(data))
+    history.push(`/dashboard/list/${strToLowercaseDashed(data.name)}/${data.id}`)
   } catch (err) {
     console.error(err)
   }

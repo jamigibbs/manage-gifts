@@ -22,9 +22,7 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route exact path="/dashboard" component={UserDashboard} />
-            <Route exact path="/list/:listName/:listId" component={UserDashboard} />
-            <Route exact path="/receiver/:receiverName/:receiverId" component={UserDashboard} />
+            <Route path="/dashboard" component={UserDashboard} />
           </Switch>
         )}
         {/* Displays our Home component as a fallback */}
