@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addNewList } from '../actions'
+import history from '../history'
+import { strToLowercaseDashed } from '../utilities'
+
+import { getCurrentListId } from '../actions'
 
 import { withStyles } from '@material-ui/core/styles'
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
@@ -32,13 +36,14 @@ export class ListAdd extends Component {
     })
   }
 
-  handleSubmit = () => {
-    this.handleClose()
+  handleSubmit = async () => {
     this.props.addNewList(this.state.name, this.props.userId)
+    console.log(this.props)
 
-    this.setState({
-      name: ''
-    })
+    // const listId = await this.props.getCurrentListId()
+    //this.handleClose()
+    //console.log(this.props)
+    //history.push(`/list/${strToLowercaseDashed(this.state.name)}/${this.props.currentId}`)
   }
 
   render(){
@@ -84,7 +89,8 @@ export class ListAdd extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    userId: state.user.id
+    userId: state.user.id,
+    currentId: state.list.currentId
   }
 }
 
@@ -92,7 +98,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addNewList: (name, userId) => {
       dispatch(addNewList(name, userId))
-    }
+    },
+    // getCurrentListId: () => {
+    //   dispatch(getCurrentListId())
+    // }
   }
 }
 

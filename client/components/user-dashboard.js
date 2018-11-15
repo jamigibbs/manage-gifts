@@ -41,9 +41,9 @@ export class UserDashboard extends Component {
 
   componentWillReceiveProps = (newProps) => {
     // Re-setting active list state when on root /dashboard view
-    if (newProps.location.pathname === this.props.match.path) {
-      this.props.updateCurrentListId(null)
-    }
+    // if (newProps.location.pathname === this.props.match.path) {
+    //   this.props.updateCurrentListId(null)
+    // }
   }
 
   render(){
