@@ -43,7 +43,7 @@ class ListSelectDialog extends Component {
         <div>
           <List>
             {lists.map(list => (
-              <Link key={list.id} to={`/list/${strToLowercaseDashed(list.name)}/${list.id}`} >
+              <Link key={list.id} to={`/dashboard/list/${strToLowercaseDashed(list.name)}/${list.id}`} >
                 <ListItem
                   button
                   onClick={() => this.handleListItemClick(list.name, list.id)}

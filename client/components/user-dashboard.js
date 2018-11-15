@@ -30,29 +30,29 @@ export class UserDashboard extends Component {
   }
 
   componentDidMount(){
-    this.props.getCurrentListId()
+    //this.props.getCurrentListId()
   }
 
   componentDidUpdate = (prevProps) => {
     if (this.props.currentListId !== prevProps.currentListId) {
-      this.props.getCurrentListId()
+      //this.props.getCurrentListId()
     }
   }
 
   componentWillReceiveProps = (newProps) => {
     // Re-setting active list state when on root /dashboard view
-    // if (newProps.location.pathname === this.props.match.path) {
-    //   this.props.updateCurrentListId(null)
-    // }
+    if (newProps.location.pathname === this.props.match.path) {
+      this.props.updateCurrentListId(null)
+    }
   }
 
   render(){
-    const { email, classes } = this.props
+    const { email, classes, userLists } = this.props
     return (
       <div className={classes.root}>
         <Sidebar />
         <main className={classes.content}>
-          <Typography variant="h4" align="center">Welcome, {email}</Typography>
+          <Typography variant="h6" align="center">Welcome, {email}</Typography>
 
           <ListAdd />
 
@@ -60,11 +60,11 @@ export class UserDashboard extends Component {
 
           <Switch>
             <Route
-              exact path={'/list/:listName/:listId'}
+              exact path={'/dashboard/list/:listName/:listId'}
               render={(props) => <ReceiversList {...props} /> }
             />
             <Route
-              exact path={'/receiver/:receiverName/:receiverId'}
+              exact path={'/dashboard/receiver/:receiverName/:receiverId'}
               render={(props) => <ReceiverDetails {...props} /> }
             />
           </Switch>

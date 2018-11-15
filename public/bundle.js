@@ -1263,19 +1263,23 @@ function (_Component) {
       _this.handleClose();
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentWillUnmount", function () {
+      console.log(_this.props); // console.log('this.props', this.props.userLists.length)
+      // console.log('prevProps', prevProps.userLists.length)
+      // if (prevProps.userLists.length > this.props.userLists.length) {
+      //   history.push(`/dashboard/list/${strToLowercaseDashed(this.state.name)}/${this.props.currentId}`)
+      // }
+    });
+
     return _this;
   }
 
   _createClass(ListAdd, [{
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          classes = _this$props.classes,
-          currentId = _this$props.currentId;
-
-      if (currentId) {
-        _history.default.push("/list/".concat((0, _utilities.strToLowercaseDashed)(this.state.name), "/").concat(currentId));
-      }
+      var classes = this.props.classes; // if (currentId !== prevId) { 
+      //   history.push(`/dashboard/list/${strToLowercaseDashed(this.state.name)}/${currentId}`)
+      // }
 
       return _react.default.createElement("div", {
         className: classes.root
@@ -1314,8 +1318,10 @@ exports.ListAdd = ListAdd;
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    userId: state.user.id,
-    currentId: state.list.currentId
+    // userId: state.user.id,
+    currentId: state.list.currentId,
+    userLists: state.list.userLists //prevId: state.list.prevId
+
   };
 };
 
@@ -1610,7 +1616,7 @@ function (_Component) {
       }, "Select List"), _react.default.createElement("div", null, _react.default.createElement(_core.List, null, lists.map(function (list) {
         return _react.default.createElement(_reactRouterDom.Link, {
           key: list.id,
-          to: "/list/".concat((0, _utilities.strToLowercaseDashed)(list.name), "/").concat(list.id)
+          to: "/dashboard/list/".concat((0, _utilities.strToLowercaseDashed)(list.name), "/").concat(list.id)
         }, _react.default.createElement(_core.ListItem, {
           button: true,
           onClick: function onClick() {
@@ -2396,7 +2402,7 @@ function (_Component) {
           component: "th",
           scope: "row"
         }, _react.default.createElement(_reactRouterDom.Link, {
-          to: "/receiver/".concat((0, _utilities.strToLowercaseDashed)(receiver.name), "/").concat(receiver.id)
+          to: "/dashboard/receiver/".concat((0, _utilities.strToLowercaseDashed)(receiver.name), "/").concat(receiver.id)
         }, receiver.name)), _react.default.createElement(_core.TableCell, {
           numeric: true
         }, "3"), _react.default.createElement(_core.TableCell, null, _react.default.createElement(_receiverActions.default, {
@@ -2607,15 +2613,15 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(UserDashboard).call(this));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentDidUpdate", function (prevProps) {
-      if (_this.props.currentListId !== prevProps.currentListId) {
-        _this.props.getCurrentListId();
+      if (_this.props.currentListId !== prevProps.currentListId) {//this.props.getCurrentListId()
       }
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentWillReceiveProps", function (newProps) {// Re-setting active list state when on root /dashboard view
-      // if (newProps.location.pathname === this.props.match.path) {
-      //   this.props.updateCurrentListId(null)
-      // }
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentWillReceiveProps", function (newProps) {
+      // Re-setting active list state when on root /dashboard view
+      if (newProps.location.pathname === _this.props.match.path) {
+        _this.props.updateCurrentListId(null);
+      }
     });
 
     return _this;
@@ -2623,31 +2629,31 @@ function (_Component) {
 
   _createClass(UserDashboard, [{
     key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.getCurrentListId();
+    value: function componentDidMount() {//this.props.getCurrentListId()
     }
   }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
           email = _this$props.email,
-          classes = _this$props.classes;
+          classes = _this$props.classes,
+          userLists = _this$props.userLists;
       return _react.default.createElement("div", {
         className: classes.root
       }, _react.default.createElement(_sidebar.default, null), _react.default.createElement("main", {
         className: classes.content
       }, _react.default.createElement(_core.Typography, {
-        variant: "h4",
+        variant: "h6",
         align: "center"
       }, "Welcome, ", email), _react.default.createElement(_listAdd.default, null), _react.default.createElement(_listSelect.default, null), _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
-        path: '/list/:listName/:listId',
+        path: '/dashboard/list/:listName/:listId',
         render: function render(props) {
           return _react.default.createElement(_receiversList.default, props);
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
-        path: '/receiver/:receiverName/:receiverId',
+        path: '/dashboard/receiver/:receiverName/:receiverId',
         render: function render(props) {
           return _react.default.createElement(_receiverDetails.default, props);
         }
@@ -3134,16 +3140,7 @@ function (_Component) {
         path: "/signup",
         component: _components.Signup
       }), isLoggedIn && _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
-        exact: true,
         path: "/dashboard",
-        component: _components.UserDashboard
-      }), _react.default.createElement(_reactRouterDom.Route, {
-        exact: true,
-        path: "/list/:listName/:listId",
-        component: _components.UserDashboard
-      }), _react.default.createElement(_reactRouterDom.Route, {
-        exact: true,
-        path: "/receiver/:receiverName/:receiverId",
         component: _components.UserDashboard
       })));
     }
