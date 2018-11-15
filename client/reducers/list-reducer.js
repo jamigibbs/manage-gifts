@@ -15,6 +15,7 @@ const list = {
 export default function(state = list, action) {
   switch (action.type) {
     case ADD_NEW_LIST:
+      debugger
       return {...state, currentId: action.newList.id, userLists: [...state.userLists, action.newList]}
     case DELETE_LIST:
       return {...state, currentId: null, userLists: state.userLists.filter((list) => {

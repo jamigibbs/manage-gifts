@@ -36,19 +36,18 @@ export class ListAdd extends Component {
     })
   }
 
-  handleSubmit = async () => {
+  handleSubmit = () => {
     this.props.addNewList(this.state.name, this.props.userId)
-    console.log(this.props)
-
-    // const listId = await this.props.getCurrentListId()
-    //this.handleClose()
-    //console.log(this.props)
-    //history.push(`/list/${strToLowercaseDashed(this.state.name)}/${this.props.currentId}`)
+    this.handleClose()
   }
 
   render(){
-    const { classes } = this.props
-
+    const { classes, currentId } = this.props
+    
+    if (currentId) { 
+      history.push(`/list/${strToLowercaseDashed(this.state.name)}/${currentId}`)
+    }
+    
     return (
       <div className={classes.root}>
         <Button variant="contained" onClick={this.handleClickOpen}>Add New List</Button>
