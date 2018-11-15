@@ -1176,9 +1176,15 @@ var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-r
 
 var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
 
+var _history = _interopRequireDefault(__webpack_require__(/*! ../history */ "./client/history.js"));
+
+var _utilities = __webpack_require__(/*! ../utilities */ "./client/utilities/index.js");
+
 var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
 
 var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -1252,13 +1258,9 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleSubmit", function () {
-      _this.handleClose();
-
       _this.props.addNewList(_this.state.name, _this.props.userId);
 
-      _this.setState({
-        name: ''
-      });
+      _this.handleClose();
     });
 
     return _this;
@@ -1267,7 +1269,14 @@ function (_Component) {
   _createClass(ListAdd, [{
     key: "render",
     value: function render() {
-      var classes = this.props.classes;
+      var _this$props = this.props,
+          classes = _this$props.classes,
+          currentId = _this$props.currentId;
+
+      if (currentId) {
+        _history.default.push("/list/".concat((0, _utilities.strToLowercaseDashed)(this.state.name), "/").concat(currentId));
+      }
+
       return _react.default.createElement("div", {
         className: classes.root
       }, _react.default.createElement(_core.Button, {
@@ -1305,7 +1314,8 @@ exports.ListAdd = ListAdd;
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    userId: state.user.id
+    userId: state.user.id,
+    currentId: state.list.currentId
   };
 };
 
@@ -1313,7 +1323,10 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     addNewList: function addNewList(name, userId) {
       dispatch((0, _actions.addNewList)(name, userId));
-    }
+    } // getCurrentListId: () => {
+    //   dispatch(getCurrentListId())
+    // }
+
   };
 };
 
@@ -1514,6 +1527,8 @@ var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@materi
 var _Person = _interopRequireDefault(__webpack_require__(/*! @material-ui/icons/Person */ "./node_modules/@material-ui/icons/Person.js"));
 
 var _colors = __webpack_require__(/*! @material-ui/core/colors */ "./node_modules/@material-ui/core/colors/index.js");
+
+var _receiversList = _interopRequireDefault(__webpack_require__(/*! ./receivers-list */ "./client/components/receivers-list.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2597,11 +2612,10 @@ function (_Component) {
       }
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentWillReceiveProps", function (newProps) {
-      // Re-setting active list state when on root /dashboard view
-      if (newProps.location.pathname === _this.props.match.path) {
-        _this.props.updateCurrentListId(null);
-      }
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentWillReceiveProps", function (newProps) {// Re-setting active list state when on root /dashboard view
+      // if (newProps.location.pathname === this.props.match.path) {
+      //   this.props.updateCurrentListId(null)
+      // }
     });
 
     return _this;

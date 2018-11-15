@@ -11,6 +11,8 @@ import { Avatar, List, ListItem, ListItemAvatar, ListItemText, DialogTitle, Dial
 import PersonIcon from '@material-ui/icons/Person'
 import { blue } from '@material-ui/core/colors'
 
+import ReceiversList from './receivers-list'
+
 const styles = {
   avatar: {
     backgroundColor: blue[100],

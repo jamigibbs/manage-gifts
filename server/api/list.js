@@ -23,11 +23,10 @@ router.get('/all/', userAuth, async (req, res, next) => {
 })
 
 // POST /api/list/add
-router.post('/add', userAuth, async(req, res, next) => {
+router.post('/add', userAuth, async (req, res, next) => {
   const { name, userId } = req.body
   try {
     const list = await List.create({ name, userId })
-
     res.json(list)
   } catch(err) { next(err) }
 })
