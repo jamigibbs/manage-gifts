@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Receiver } = require('../db/models')
+const { Receiver, Gift, Item } = require('../db/models')
 
 const userAuth = function(req, res, next) {
   if (req.isAuthenticated()) {
@@ -48,6 +48,21 @@ router.delete('/', userAuth, async (req, res, next) => {
       }
     })
     res.json({ listId, receiverId })
+  } catch (err) { next(err) }
+})
+
+// GET /api/receiver/gifts
+router.get('/gifts/', userAuth, async (req, res, next) => {
+  const { receiverId } = req.query
+  try {
+    const gifts = await Gift.findAll({
+      where: {
+        receiverId
+      },
+      include: [{model: Item}]
+    })
+
+    res.json(gifts)
   } catch (err) { next(err) }
 })
 

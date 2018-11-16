@@ -135,6 +135,12 @@ Object.defineProperty(exports, "removeReceiverFromList", {
     return _receiverActions.removeReceiverFromList;
   }
 });
+Object.defineProperty(exports, "getAllReceiverGifts", {
+  enumerable: true,
+  get: function get() {
+    return _receiverActions.getAllReceiverGifts;
+  }
+});
 Object.defineProperty(exports, "getCurrentListId", {
   enumerable: true,
   get: function get() {
@@ -457,7 +463,7 @@ exports.deleteList = deleteList;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.removeReceiverFromList = exports.getAllListReceivers = exports.addReceiver = exports.removedAllListReceivers = void 0;
+exports.getAllReceiverGifts = exports.removeReceiverFromList = exports.getAllListReceivers = exports.addReceiver = exports.removedAllListReceivers = void 0;
 
 var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
@@ -490,6 +496,13 @@ var removedAllListReceivers = function removedAllListReceivers() {
 };
 
 exports.removedAllListReceivers = removedAllListReceivers;
+
+var gotAllReceiverGifts = function gotAllReceiverGifts(gifts) {
+  return {
+    type: _constants.GET_ALL_RECEIVER_GIFTS,
+    gifts: gifts
+  };
+};
 
 var removedReceiverFromList = function removedReceiverFromList(receiver) {
   return {
@@ -647,6 +660,56 @@ var removeReceiverFromList = function removeReceiverFromList(listId, receiverId)
 };
 
 exports.removeReceiverFromList = removeReceiverFromList;
+
+var getAllReceiverGifts = function getAllReceiverGifts(receiverId) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref7 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee4(dispatch) {
+        var _ref8, data;
+
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                _context4.next = 3;
+                return _axios.default.get('/api/receiver/gifts', {
+                  params: {
+                    receiverId: receiverId
+                  }
+                });
+
+              case 3:
+                _ref8 = _context4.sent;
+                data = _ref8.data;
+                dispatch(gotAllReceiverGifts(data));
+                _context4.next = 11;
+                break;
+
+              case 8:
+                _context4.prev = 8;
+                _context4.t0 = _context4["catch"](0);
+                console.error(_context4.t0);
+
+              case 11:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this, [[0, 8]]);
+      }));
+
+      return function (_x4) {
+        return _ref7.apply(this, arguments);
+      };
+    }()
+  );
+};
+
+exports.getAllReceiverGifts = getAllReceiverGifts;
 
 /***/ }),
 
@@ -2201,6 +2264,10 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var _receiverGiftsList = _interopRequireDefault(__webpack_require__(/*! ./receiver-gifts-list */ "./client/components/receiver-gifts-list.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -2236,7 +2303,9 @@ function (_Component) {
     key: "render",
     value: function render() {
       var receiverId = this.props.match.params.receiverId;
-      return _react.default.createElement("div", null, _react.default.createElement("p", null, "Receiver #", receiverId, " Details"));
+      return _react.default.createElement("div", null, _react.default.createElement("p", null, "Receiver #", receiverId, " Details"), _react.default.createElement(_receiverGiftsList.default, {
+        receiverId: receiverId
+      }));
     }
   }]);
 
@@ -2244,6 +2313,208 @@ function (_Component) {
 }(_react.Component);
 
 var _default = ReceiverDetails;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./client/components/receiver-gift-add.js":
+/*!************************************************!*\
+  !*** ./client/components/receiver-gift-add.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var ReceiverGiftAdd =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(ReceiverGiftAdd, _Component);
+
+  function ReceiverGiftAdd() {
+    _classCallCheck(this, ReceiverGiftAdd);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(ReceiverGiftAdd).apply(this, arguments));
+  }
+
+  _createClass(ReceiverGiftAdd, [{
+    key: "render",
+    value: function render() {
+      return _react.default.createElement(_core.Button, {
+        color: "primary"
+      }, "Add Gift");
+    }
+  }]);
+
+  return ReceiverGiftAdd;
+}(_react.Component);
+
+var _default = ReceiverGiftAdd;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./client/components/receiver-gifts-list.js":
+/*!**************************************************!*\
+  !*** ./client/components/receiver-gifts-list.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+
+var _utilities = __webpack_require__(/*! ../utilities */ "./client/utilities/index.js");
+
+var _receiverGiftAdd = _interopRequireDefault(__webpack_require__(/*! ./receiver-gift-add */ "./client/components/receiver-gift-add.js"));
+
+var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
+
+var _core = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var styles = function styles(theme) {
+  return {
+    root: {
+      width: '100%',
+      marginTop: theme.spacing.unit * 3,
+      overflowX: 'auto'
+    },
+    table: {
+      minWidth: 700
+    }
+  };
+};
+
+var ReceiverGiftsList =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(ReceiverGiftsList, _Component);
+
+  function ReceiverGiftsList() {
+    _classCallCheck(this, ReceiverGiftsList);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(ReceiverGiftsList).apply(this, arguments));
+  }
+
+  _createClass(ReceiverGiftsList, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.getAllReceiverGifts(this.props.receiverId);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var classes = this.props.classes;
+      return _react.default.createElement(_core.Paper, {
+        className: classes.root
+      }, _react.default.createElement(_core.Table, {
+        className: classes.table
+      }, _react.default.createElement(_core.TableHead, null, _react.default.createElement(_core.TableRow, null, _react.default.createElement(_core.TableCell, null, "Image"), _react.default.createElement(_core.TableCell, null, "Name"), _react.default.createElement(_core.TableCell, {
+        numeric: true
+      }, "Status"), _react.default.createElement(_core.TableCell, {
+        numeric: true
+      }, _react.default.createElement(_receiverGiftAdd.default, null)))), _react.default.createElement(_core.TableBody, null, this.props.gifts.map(function (gift) {
+        return _react.default.createElement(_core.TableRow, {
+          key: gift.id
+        }, _react.default.createElement(_core.TableCell, null, _react.default.createElement("img", {
+          src: gift.item.image,
+          width: "50"
+        })), _react.default.createElement(_core.TableCell, {
+          component: "th",
+          scope: "row"
+        }, _react.default.createElement("a", {
+          href: gift.item.url,
+          target: "_blank",
+          rel: "noopener"
+        }, gift.item.name)), _react.default.createElement(_core.TableCell, {
+          numeric: true
+        }, gift.status), _react.default.createElement(_core.TableCell, null));
+      }))));
+    }
+  }]);
+
+  return ReceiverGiftsList;
+}(_react.Component);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    gifts: state.receivers.gifts
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    getAllReceiverGifts: function getAllReceiverGifts(receiverId) {
+      dispatch((0, _actions.getAllReceiverGifts)(receiverId));
+    }
+  };
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)((0, _styles.withStyles)(styles)(ReceiverGiftsList));
+
 exports.default = _default;
 
 /***/ }),
@@ -2681,7 +2952,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.DELETE_LIST = exports.ADD_NEW_LIST = exports.GET_LISTS_FOR_USER = exports.UPDATE_PREVIOUS_LIST_ID = exports.UPDATE_CURRENT_LIST_ID = exports.GET_CURRENT_LIST_ID = exports.REMOVE_ALL_LIST_RECEIVERS = exports.REMOVE_RECEIVER_FROM_LIST = exports.GET_ALL_LIST_RECEIVERS = exports.ADD_RECEIVER = exports.REMOVE_USER = exports.GET_USER = void 0;
+exports.DELETE_LIST = exports.ADD_NEW_LIST = exports.GET_LISTS_FOR_USER = exports.UPDATE_PREVIOUS_LIST_ID = exports.UPDATE_CURRENT_LIST_ID = exports.GET_CURRENT_LIST_ID = exports.GET_ALL_RECEIVER_GIFTS = exports.REMOVE_ALL_LIST_RECEIVERS = exports.REMOVE_RECEIVER_FROM_LIST = exports.GET_ALL_LIST_RECEIVERS = exports.ADD_RECEIVER = exports.REMOVE_USER = exports.GET_USER = void 0;
 
 /**
  * USER ACTION TYPES
@@ -2701,11 +2972,13 @@ exports.GET_ALL_LIST_RECEIVERS = GET_ALL_LIST_RECEIVERS;
 var REMOVE_RECEIVER_FROM_LIST = 'REMOVE_RECEIVER_FROM_LIST';
 exports.REMOVE_RECEIVER_FROM_LIST = REMOVE_RECEIVER_FROM_LIST;
 var REMOVE_ALL_LIST_RECEIVERS = 'REMOVE_ALL_LIST_RECEIVERS';
+exports.REMOVE_ALL_LIST_RECEIVERS = REMOVE_ALL_LIST_RECEIVERS;
+var GET_ALL_RECEIVER_GIFTS = 'GET_ALL_RECEIVER_GIFTS';
 /**
  * LIST ACTION TYPES
  */
 
-exports.REMOVE_ALL_LIST_RECEIVERS = REMOVE_ALL_LIST_RECEIVERS;
+exports.GET_ALL_RECEIVER_GIFTS = GET_ALL_RECEIVER_GIFTS;
 var GET_CURRENT_LIST_ID = 'GET_CURRENT_LIST_ID';
 exports.GET_CURRENT_LIST_ID = GET_CURRENT_LIST_ID;
 var UPDATE_CURRENT_LIST_ID = 'UPDATE_CURRENT_LIST_ID';
@@ -2952,7 +3225,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var receivers = {
-  allFromList: []
+  allFromList: [],
+  gifts: []
 };
 
 function _default() {
@@ -2980,6 +3254,11 @@ function _default() {
     case _constants.GET_ALL_LIST_RECEIVERS:
       return _objectSpread({}, state, {
         allFromList: action.receivers
+      });
+
+    case _constants.GET_ALL_RECEIVER_GIFTS:
+      return _objectSpread({}, state, {
+        gifts: action.gifts
       });
 
     default:
@@ -3203,13 +3482,23 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.strToLowercaseDashed = void 0;
+exports.centsToUSD = exports.strToLowercaseDashed = void 0;
 
 var strToLowercaseDashed = function strToLowercaseDashed(str) {
   return str.replace(/\s+/g, '-').toLowerCase();
 };
 
 exports.strToLowercaseDashed = strToLowercaseDashed;
+
+var centsToUSD = function centsToUSD(num) {
+  var dollars = num / 100;
+  return dollars.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD"
+  });
+};
+
+exports.centsToUSD = centsToUSD;
 
 /***/ }),
 
