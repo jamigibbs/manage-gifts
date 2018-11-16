@@ -9,10 +9,10 @@
     {"name": "Thanksgiving", "userId": 1}
   ],
   "item": [
-    {"url": "http://store.apple.com/macbook"},
-    {"url": "https://www.amazon.com/All-new-Echo-Dot-3rd-Gen/dp/B0792R1RSN/ref=redir_mobile_desktop?_encoding=UTF8&ref_=ods_gw_ha_dt_dc_092318"},
-    {"url": "https://www.jcrew.com/p/J3272"},
-    {"url": "https://www.crateandbarrel.com/french-kitchen-marble-paper-towel-holder"}
+    {"url": "http://store.apple.com/macbook", "name": "Macbook Pro", "image": "http://via.placeholder.com/50" },
+    {"url": "https://www.amazon.com/All-new-Echo-Dot-3rd-Gen/dp/B0792R1RSN/ref=redir_mobile_desktop?_encoding=UTF8&ref_=ods_gw_ha_dt_dc_092318", "name": "Echo Dot", "image": "http://via.placeholder.com/50"},
+    {"url": "https://www.jcrew.com/p/J3272", "name": "Winter Jacket", "image": "http://via.placeholder.com/50"},
+    {"url": "https://www.crateandbarrel.com/french-kitchen-marble-paper-towel-holder", "name": "Paper Towel Holder", "image": "http://via.placeholder.com/50"}
   ],
   "receiver": [
     {"name": "Michael Scott", "listId": 1},
