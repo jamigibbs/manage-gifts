@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import { centsToUSD } from '../utilities'
 import ReceiverGiftAdd from './receiver-gift-add'
-import { Select, FormControl, Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@material-ui/core/'
-
-import faker from 'faker'
+import { getAllReceiverGifts } from '../actions'
+import { Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@material-ui/core/'
 
 const styles = theme => ({
   root: {
@@ -15,36 +15,12 @@ const styles = theme => ({
   table: {
     minWidth: 700,
   },
-});
+})
 
 class ReceiverGiftsList extends Component {
-  constructor(props){
-    super()
-    this.state = {
-      gifts: []
-    }
-  }
 
   componentDidMount(){
-    this.generateGifts(10)
-  }
-
-  generateGifts = (count) => {
-    const gifts = []
-
-    for(var i = 1; i <= count; i++){
-      gifts.push({
-        id: i,
-        link: faker.internet.url(),
-        name: faker.commerce.productName(),
-        price: faker.commerce.price(),
-        status: 'Not Purchased'
-      })
-    }
-
-    this.setState({
-      gifts
-    })
+    this.props.getAllReceiverGifts(this.props.receiverId)
   }
 
   render(){
@@ -54,24 +30,24 @@ class ReceiverGiftsList extends Component {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
+            <TableCell>Image</TableCell>
             <TableCell>Name</TableCell>
-            <TableCell numeric>Price</TableCell>
             <TableCell numeric>Status</TableCell>
             <TableCell numeric><ReceiverGiftAdd /></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {this.state.gifts.map(gift => {
+          {this.props.gifts.map(gift => {
             return (
               <TableRow key={gift.id}>
+                <TableCell><img src={gift.item.image} width="50" /></TableCell>
                 <TableCell component="th" scope="row">
-                  <a href={gift.link} target="_blank"  rel="noopener">{gift.name}</a>
+                  <a href={gift.item.url} target="_blank"  rel="noopener">{gift.item.name}</a>
                 </TableCell>
-                <TableCell numeric>{`${centsToUSD(gift.price)}`}</TableCell>
                 <TableCell numeric>{gift.status}</TableCell>
                 <TableCell></TableCell>
               </TableRow>
-            );
+            )
           })}
         </TableBody>
       </Table>
@@ -80,4 +56,18 @@ class ReceiverGiftsList extends Component {
   }
 }
 
-export default withStyles(styles)(ReceiverGiftsList)
+const mapStateToProps = (state) => {
+  return {
+    gifts: state.receivers.gifts
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getAllReceiverGifts: (receiverId) => {
+      dispatch(getAllReceiverGifts(receiverId))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ReceiverGiftsList))

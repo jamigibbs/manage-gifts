@@ -9,7 +9,7 @@ import {
 const addedReceiver = (receiver) => ({type: ADD_RECEIVER, receiver})
 const gotAllListReceivers = (receivers) => ({type: GET_ALL_LIST_RECEIVERS, receivers})
 export const removedAllListReceivers = () => ({type: REMOVE_ALL_LIST_RECEIVERS})
-const gotAllReceiverGifts = (gifts) => {{type: GET_ALL_RECEIVER_GIFTS, gifts}}
+const gotAllReceiverGifts = (gifts) => ({type: GET_ALL_RECEIVER_GIFTS, gifts})
 
 const removedReceiverFromList = (receiver) => {
   return {
@@ -56,9 +56,12 @@ export const removeReceiverFromList = (listId, receiverId) => async dispatch => 
 
 export const getAllReceiverGifts = (receiverId) => async dispatch => {
   try {
-    const gifts = generateDemoGifts(5)
-
-    dispatch(gotAllReceiverGifts(gifts))
+    const { data } = await axios.get('/api/receiver/gifts', {
+      params: {
+        receiverId
+      }
+    })
+    dispatch(gotAllReceiverGifts(data))
   } catch(err) {
     console.error(err)
   }

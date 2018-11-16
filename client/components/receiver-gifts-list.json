@@ -1,0 +1,34 @@
+[
+  {
+      "id": 2,
+      "status": "Purchased",
+      "createdAt": "2018-11-16T22:31:32.587Z",
+      "updatedAt": "2018-11-16T22:31:32.587Z",
+      "itemId": 1,
+      "receiverId": 1,
+      "item": {
+          "id": 1,
+          "url": "http://store.apple.com/macbook",
+          "name": "Macbook Pro",
+          "image": "http://via.placeholder.com/50",
+          "createdAt": "2018-11-16T22:31:32.554Z",
+          "updatedAt": "2018-11-16T22:31:32.554Z"
+      }
+  },
+  {
+      "id": 1,
+      "status": "Pending",
+      "createdAt": "2018-11-16T22:31:32.589Z",
+      "updatedAt": "2018-11-16T22:31:32.589Z",
+      "itemId": 2,
+      "receiverId": 1,
+      "item": {
+          "id": 2,
+          "url": "https://www.amazon.com/All-new-Echo-Dot-3rd-Gen/dp/B0792R1RSN/ref=redir_mobile_desktop?_encoding=UTF8&ref_=ods_gw_ha_dt_dc_092318",
+          "name": "Echo Dot",
+          "image": "http://via.placeholder.com/50",
+          "createdAt": "2018-11-16T22:31:32.555Z",
+          "updatedAt": "2018-11-16T22:31:32.555Z"
+      }
+  }
+]

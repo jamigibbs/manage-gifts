@@ -7,7 +7,7 @@ class ReceiverDetails extends Component {
     return(
       <div>
         <p>Receiver #{receiverId} Details</p>
-        <ReceiverGiftsList />
+        <ReceiverGiftsList receiverId={receiverId} />
       </div>
     )
   }
