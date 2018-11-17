@@ -2223,7 +2223,8 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleClose", function () {
       _this.setState({
-        open: false
+        open: false,
+        url: ''
       });
     });
 
@@ -2237,10 +2238,6 @@ function (_Component) {
       _this.props.addGiftToReceiver(_this.state.url, _this.props.receiverId);
 
       _this.handleClose();
-
-      _this.setState({
-        link: ''
-      });
     });
 
     return _this;

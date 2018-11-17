@@ -18,7 +18,6 @@ router.post('/add', userAuth, async (req, res, next) => {
   let data = {}
 
   try {
-
     if ( isDomain(url, 'amazon.com') ) {
       url = removeLinkParams(url)
     }
@@ -42,7 +41,6 @@ router.post('/add', userAuth, async (req, res, next) => {
 
     } else {
       const giftMetaData = await metadata(url)
-
       const item = await Item.create({
         url,
         image: giftMetaData.image,

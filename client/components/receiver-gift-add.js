@@ -16,7 +16,7 @@ export class ReceiverGiftAdd extends Component {
   }
 
   handleClose = () => {
-    this.setState({ open: false })
+    this.setState({ open: false, url: '' })
   }
 
   handleChange = name => event => {
@@ -28,7 +28,6 @@ export class ReceiverGiftAdd extends Component {
   handleSubmit = () => {
     this.props.addGiftToReceiver(this.state.url, this.props.receiverId)
     this.handleClose()
-    this.setState({ link: '' })
   }
 
   render(){
