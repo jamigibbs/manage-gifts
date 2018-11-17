@@ -1,5 +1,5 @@
 const assert = require('assert')
-import { strToLowercaseDashed, centsToUSD } from './index'
+import { strToLowercaseDashed, centsToUSD, removeLinkParams, isDomain } from './index'
 
 describe('Utility Functions', function(){
   describe('strToLowercaseDashed()', function() {
@@ -34,6 +34,29 @@ describe('Utility Functions', function(){
     })
     it('should convert a very long, random number', function() {
       assert.equal(centsToUSD(87894786578438904382), '$878,947,865,784,389,000.00')
+    })
+  })
+
+  describe('removeLinkParams', function() {
+    const shortUrl = 'https://www.amazon.com/dp/example?first=12345'
+    const longUrl = 'https://www.amazon.com/dp/example?first=123&second=567&third=890'
+
+    it('should remove single parameter', function() {
+      assert.equal(removeLinkParams(shortUrl), 'https://www.amazon.com/dp/example')
+    })
+    it('should remove multi parameter', function() {
+      assert.equal(removeLinkParams(longUrl), 'https://www.amazon.com/dp/example')
+    })
+  })
+
+  describe('isDomain', function(){
+    it('should correctly identify the link as true', function(){
+      assert.equal(isDomain('https://amazon.com/example/link/?test=param', 'amazon.com'), true)
+    })
+  })
+  describe('isDomain', function(){
+    it('should correctly identify the link as false', function(){
+      assert.equal(isDomain('https://amazon.com/example/link/?test=param', 'google.com'), false)
     })
   })
 })

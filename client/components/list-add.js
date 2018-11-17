@@ -34,13 +34,13 @@ export class ListAdd extends Component {
   handleSubmit = () => {
     this.props.addNewList(this.state.name, this.props.userId)
     this.handleClose()
-    
+
     this.setState({ name: '' })
   }
 
   render(){
     const { classes } = this.props
-    
+
     return (
       <div className={classes.root}>
         <Button variant="contained" onClick={this.handleClickOpen}>Add New List</Button>
