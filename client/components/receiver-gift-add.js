@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { } from '../actions'
+import { addGiftToReceiver } from '../actions'
 import { withStyles } from '@material-ui/core/styles'
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
 
@@ -8,11 +8,7 @@ export class ReceiverGiftAdd extends Component {
 
   state = {
     open: false,
-    link: ''
-  }
-
-  componentDidMount = () => {
-
+    url: ''
   }
 
   handleClickOpen = () => {
@@ -30,7 +26,7 @@ export class ReceiverGiftAdd extends Component {
   }
 
   handleSubmit = () => {
-    //this.props.addNewList(this.state.name, this.props.userId)
+    this.props.addGiftToReceiver(this.state.url, this.props.receiverId)
     this.handleClose()
     this.setState({ link: '' })
   }
@@ -51,7 +47,7 @@ export class ReceiverGiftAdd extends Component {
               Paste the link of the gift idea you'd like to add
             </DialogContentText>
             <TextField
-              onChange={this.handleChange('link')}
+              onChange={this.handleChange('url')}
               value={this.state.name}
               autoFocus
               margin="dense"
@@ -75,4 +71,12 @@ export class ReceiverGiftAdd extends Component {
   }
 }
 
-export default connect(null, null)(ReceiverGiftAdd)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addGiftToReceiver: (url, receiverId) => {
+      dispatch(addGiftToReceiver(url, receiverId))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(ReceiverGiftAdd)

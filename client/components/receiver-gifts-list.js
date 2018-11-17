@@ -24,7 +24,7 @@ class ReceiverGiftsList extends Component {
   }
 
   render(){
-    const { classes } = this.props
+    const { classes, receiverId } = this.props
     return (
       <Paper className={classes.root}>
       <Table className={classes.table}>
@@ -33,7 +33,7 @@ class ReceiverGiftsList extends Component {
             <TableCell>Image</TableCell>
             <TableCell>Name</TableCell>
             <TableCell numeric>Status</TableCell>
-            <TableCell numeric><ReceiverGiftAdd /></TableCell>
+            <TableCell numeric><ReceiverGiftAdd receiverId={receiverId} /></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

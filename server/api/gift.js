@@ -11,10 +11,11 @@ const userAuth = function(req, res, next) {
 }
 
 // GET /api/gift/add
-router.post('/add', async (req, res, next) => {
-  let url = decodeURIComponent(req.query.url)
-  const receiverId = req.query.receiverId
+router.post('/add', userAuth, async (req, res, next) => {
+  let url = decodeURIComponent(req.body.url)
+  const receiverId = req.body.receiverId
   let addedGift = {}
+  let data = {}
 
   try {
 
@@ -29,32 +30,38 @@ router.post('/add', async (req, res, next) => {
 
     if (foundItem) {
       // update the gifts table with item id
-      await Gift.create({
+      addedGift = await Gift.create({
         status: 'Pending',
         itemId: foundItem.id,
         receiverId
       })
 
-      res.json(foundItem)
+      // send back correctly formed data
+      data = addedGift.dataValues
+      data.item = foundItem.dataValues
+
     } else {
       const giftMetaData = await metadata(url)
 
-      addedGift = await Item.create({
+      const item = await Item.create({
         url,
         image: giftMetaData.image,
         name: giftMetaData.title
       })
 
       // update the gifts table with item id
-      await Gift.create({
+      addedGift = await Gift.create({
         status: 'Pending',
-        itemId: addedGift.id,
+        itemId: item.id,
         receiverId
       })
 
-      res.json(addedGift)
+      // send back correctly formed data
+      data = addedGift.dataValues
+      data.item = item.dataValues
     }
 
+    res.json(data)
   } catch (err) { next(err) }
 })
 

@@ -6,7 +6,8 @@ export {
   addReceiver,
   getAllListReceivers,
   removeReceiverFromList,
-  getAllReceiverGifts } from './receiver-actions'
+  getAllReceiverGifts,
+  addGiftToReceiver } from './receiver-actions'
 export {
   getCurrentListId,
   updateCurrentListId,

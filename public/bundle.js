@@ -90,7 +90,7 @@
 /*!*********************************!*\
   !*** ./client/actions/index.js ***!
   \*********************************/
-/*! exports provided: me, auth, logout, addReceiver, getAllListReceivers, removeReceiverFromList, getAllReceiverGifts, getCurrentListId, updateCurrentListId, updatePreviousListId, getListsForuser, addNewList, deleteList */
+/*! exports provided: me, auth, logout, addReceiver, getAllListReceivers, removeReceiverFromList, getAllReceiverGifts, addGiftToReceiver, getCurrentListId, updateCurrentListId, updatePreviousListId, getListsForuser, addNewList, deleteList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -110,6 +110,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "removeReceiverFromList", function() { return _receiver_actions__WEBPACK_IMPORTED_MODULE_1__["removeReceiverFromList"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getAllReceiverGifts", function() { return _receiver_actions__WEBPACK_IMPORTED_MODULE_1__["getAllReceiverGifts"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "addGiftToReceiver", function() { return _receiver_actions__WEBPACK_IMPORTED_MODULE_1__["addGiftToReceiver"]; });
 
 /* harmony import */ var _list_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./list-actions */ "./client/actions/list-actions.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getCurrentListId", function() { return _list_actions__WEBPACK_IMPORTED_MODULE_2__["getCurrentListId"]; });
@@ -369,7 +371,7 @@ var deleteList = function deleteList(listId, userId) {
 /*!********************************************!*\
   !*** ./client/actions/receiver-actions.js ***!
   \********************************************/
-/*! exports provided: removedAllListReceivers, addReceiver, getAllListReceivers, removeReceiverFromList, getAllReceiverGifts */
+/*! exports provided: removedAllListReceivers, addReceiver, getAllListReceivers, removeReceiverFromList, getAllReceiverGifts, addGiftToReceiver */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -379,6 +381,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllListReceivers", function() { return getAllListReceivers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeReceiverFromList", function() { return removeReceiverFromList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllReceiverGifts", function() { return getAllReceiverGifts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addGiftToReceiver", function() { return addGiftToReceiver; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants */ "./client/constants/index.js");
@@ -413,6 +416,13 @@ var gotAllReceiverGifts = function gotAllReceiverGifts(gifts) {
   return {
     type: _constants__WEBPACK_IMPORTED_MODULE_1__["GET_ALL_RECEIVER_GIFTS"],
     gifts: gifts
+  };
+};
+
+var addedGiftToReceiver = function addedGiftToReceiver(gift) {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_1__["ADD_GIFT_TO_RECEIVER"],
+    gift: gift
   };
 };
 
@@ -607,6 +617,52 @@ var getAllReceiverGifts = function getAllReceiverGifts(receiverId) {
 
       return function (_x4) {
         return _ref7.apply(this, arguments);
+      };
+    }()
+  );
+};
+var addGiftToReceiver = function addGiftToReceiver(url, receiverId) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref9 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee5(dispatch) {
+        var _ref10, data;
+
+        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.prev = 0;
+                _context5.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/gift/add', {
+                  url: url,
+                  receiverId: receiverId
+                });
+
+              case 3:
+                _ref10 = _context5.sent;
+                data = _ref10.data;
+                dispatch(addedGiftToReceiver(data));
+                _context5.next = 11;
+                break;
+
+              case 8:
+                _context5.prev = 8;
+                _context5.t0 = _context5["catch"](0);
+                console.error(_context5.t0);
+
+              case 11:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this, [[0, 8]]);
+      }));
+
+      return function (_x5) {
+        return _ref9.apply(this, arguments);
       };
     }()
   );
@@ -2156,10 +2212,8 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
       open: false,
-      link: ''
+      url: ''
     });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentDidMount", function () {});
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleClickOpen", function () {
       _this.setState({
@@ -2180,7 +2234,8 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleSubmit", function () {
-      //this.props.addNewList(this.state.name, this.props.userId)
+      _this.props.addGiftToReceiver(_this.state.url, _this.props.receiverId);
+
       _this.handleClose();
 
       _this.setState({
@@ -2204,7 +2259,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["DialogTitle"], {
         id: "add-new-gift-form-title"
       }, "Paste Link to Gift Idea"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["DialogContentText"], null, "Paste the link of the gift idea you'd like to add"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["TextField"], {
-        onChange: this.handleChange('link'),
+        onChange: this.handleChange('url'),
         value: this.state.name,
         autoFocus: true,
         margin: "dense",
@@ -2224,7 +2279,16 @@ function (_Component) {
 
   return ReceiverGiftAdd;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(null, null)(ReceiverGiftAdd));
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    addGiftToReceiver: function addGiftToReceiver(url, receiverId) {
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["addGiftToReceiver"])(url, receiverId));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(null, mapDispatchToProps)(ReceiverGiftAdd));
 
 /***/ }),
 
@@ -2305,7 +2369,9 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var classes = this.props.classes;
+      var _this$props = this.props,
+          classes = _this$props.classes,
+          receiverId = _this$props.receiverId;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["Paper"], {
         className: classes.root
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["Table"], {
@@ -2314,7 +2380,9 @@ function (_Component) {
         numeric: true
       }, "Status"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
         numeric: true
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_gift_add__WEBPACK_IMPORTED_MODULE_4__["default"], null)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableBody"], null, this.props.gifts.map(function (gift) {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_gift_add__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        receiverId: receiverId
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableBody"], null, this.props.gifts.map(function (gift) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableRow"], {
           key: gift.id
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -2755,7 +2823,7 @@ UserDashboard.propTypes = {
 /*!***********************************!*\
   !*** ./client/constants/index.js ***!
   \***********************************/
-/*! exports provided: GET_USER, REMOVE_USER, ADD_RECEIVER, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID, UPDATE_PREVIOUS_LIST_ID, GET_LISTS_FOR_USER, ADD_NEW_LIST, DELETE_LIST */
+/*! exports provided: GET_USER, REMOVE_USER, ADD_RECEIVER, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS, ADD_GIFT_TO_RECEIVER, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID, UPDATE_PREVIOUS_LIST_ID, GET_LISTS_FOR_USER, ADD_NEW_LIST, DELETE_LIST */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2767,6 +2835,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_RECEIVER_FROM_LIST", function() { return REMOVE_RECEIVER_FROM_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_ALL_LIST_RECEIVERS", function() { return REMOVE_ALL_LIST_RECEIVERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_RECEIVER_GIFTS", function() { return GET_ALL_RECEIVER_GIFTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_GIFT_TO_RECEIVER", function() { return ADD_GIFT_TO_RECEIVER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_CURRENT_LIST_ID", function() { return GET_CURRENT_LIST_ID; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_CURRENT_LIST_ID", function() { return UPDATE_CURRENT_LIST_ID; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_PREVIOUS_LIST_ID", function() { return UPDATE_PREVIOUS_LIST_ID; });
@@ -2787,6 +2856,7 @@ var GET_ALL_LIST_RECEIVERS = 'GET_ALL_LIST_RECEIVERS';
 var REMOVE_RECEIVER_FROM_LIST = 'REMOVE_RECEIVER_FROM_LIST';
 var REMOVE_ALL_LIST_RECEIVERS = 'REMOVE_ALL_LIST_RECEIVERS';
 var GET_ALL_RECEIVER_GIFTS = 'GET_ALL_RECEIVER_GIFTS';
+var ADD_GIFT_TO_RECEIVER = 'ADD_GIFT_TO_RECEIVER';
 /**
  * LIST ACTION TYPES
  */
@@ -3028,6 +3098,11 @@ var receivers = {
     case _constants__WEBPACK_IMPORTED_MODULE_0__["GET_ALL_RECEIVER_GIFTS"]:
       return _objectSpread({}, state, {
         gifts: action.gifts
+      });
+
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["ADD_GIFT_TO_RECEIVER"]:
+      return _objectSpread({}, state, {
+        gifts: _toConsumableArray(state.gifts).concat([action.gift])
       });
 
     default:
