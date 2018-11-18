@@ -561,19 +561,20 @@ var getAllListReceivers = function getAllListReceivers(listId) {
                 _ref4 = _context2.sent;
                 data = _ref4.data;
                 dispatch(gotAllListReceivers(data));
-                return _context2.abrupt("return", data);
+                _context2.next = 11;
+                break;
 
-              case 9:
-                _context2.prev = 9;
+              case 8:
+                _context2.prev = 8;
                 _context2.t0 = _context2["catch"](0);
                 console.error(_context2.t0);
 
-              case 12:
+              case 11:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[0, 9]]);
+        }, _callee2, this, [[0, 8]]);
       }));
 
       return function (_x2) {
@@ -1487,6 +1488,36 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./client/components/list-name.js":
+/*!****************************************!*\
+  !*** ./client/components/list-name.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var ListName = function ListName(_ref) {
+  var userLists = _ref.userLists,
+      listId = _ref.listId;
+
+  var getListName = function getListName(id) {
+    return userLists.find(function (list) {
+      return list.id === id;
+    }).name;
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, getListName(listId));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ListName);
+
+/***/ }),
+
 /***/ "./client/components/list-select-dialog.js":
 /*!*************************************************!*\
   !*** ./client/components/list-select-dialog.js ***!
@@ -1661,7 +1692,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
 /* harmony import */ var _list_select_dialog__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./list-select-dialog */ "./client/components/list-select-dialog.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+/* harmony import */ var _list_name__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./list-name */ "./client/components/list-name.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1681,6 +1713,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1739,17 +1772,23 @@ function (_Component) {
   _createClass(ListSelect, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Button"], {
+      var _this$props = this.props,
+          userLists = _this$props.userLists,
+          currentId = _this$props.currentId;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
         variant: "contained",
         onClick: this.handleClickOpen
       }, "Select List"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_list_select_dialog__WEBPACK_IMPORTED_MODULE_4__["default"], {
         selectedList: this.state.selectedList,
         open: this.state.open,
         onClose: this.handleClose,
-        lists: this.props.userLists
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Typography"], {
+        lists: userLists
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Typography"], {
         variant: "h6"
-      }, this.props.currentId && 'List ID ' + this.props.currentId));
+      }, currentId && userLists.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_list_name__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        listId: currentId,
+        userLists: userLists
+      })));
     }
   }]);
 
@@ -2500,7 +2539,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _receiver_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./receiver-actions */ "./client/components/receiver-actions.js");
 /* harmony import */ var _list_delete__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./list-delete */ "./client/components/list-delete.js");
 /* harmony import */ var _receiver_add__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./receiver-add */ "./client/components/receiver-add.js");
-/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
+/* harmony import */ var _list_name__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./list-name */ "./client/components/list-name.js");
+/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2520,6 +2560,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -2616,8 +2657,8 @@ function (_Component) {
           receivers = _this$props.receivers,
           classes = _this$props.classes,
           match = _this$props.match,
-          gifts = _this$props.gifts;
-      var listId = match.params.listId;
+          userLists = _this$props.userLists;
+      var listId = parseInt(match.params.listId);
 
       if (!receivers || !receivers.length) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading content...");
@@ -2625,32 +2666,35 @@ function (_Component) {
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_add__WEBPACK_IMPORTED_MODULE_8__["default"], {
         listId: listId
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["Typography"], {
+      }), userLists && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["Typography"], {
         variant: "subtitle1"
-      }, "List ", listId, " Receivers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["Paper"], {
+      }, "Receivers ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_list_name__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        listId: listId,
+        userLists: userLists
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["Paper"], {
         className: classes.root
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["Table"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["Table"], {
         className: classes.table
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableHead"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableRow"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], null, "Receiver Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableHead"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableRow"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], null, "Receiver Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], {
         numeric: true
-      }, "Assigned Gifts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], null, "Actions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], {
+      }, "Assigned Gifts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], null, "Actions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], {
         numeric: true
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_list_delete__WEBPACK_IMPORTED_MODULE_7__["default"], {
         listId: listId
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableBody"], null, receivers && receivers.map(function (receiver) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableRow"], {
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableBody"], null, receivers && receivers.map(function (receiver) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableRow"], {
           key: receiver.id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], {
           component: "th",
           scope: "row"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
           to: "/dashboard/receiver/".concat(Object(_utilities__WEBPACK_IMPORTED_MODULE_5__["strToLowercaseDashed"])(receiver.name), "/").concat(receiver.id)
-        }, receiver.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], {
+        }, receiver.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], {
           numeric: true
-        }, _this2.receiverGiftCount(receiver.id)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_actions__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        }, _this2.receiverGiftCount(receiver.id)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_actions__WEBPACK_IMPORTED_MODULE_6__["default"], {
           receiverId: receiver.id,
           listId: listId
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], null));
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], null));
       })))));
     }
   }]);
@@ -2661,7 +2705,8 @@ function (_Component) {
 var mapStateToProps = function mapStateToProps(state) {
   return {
     receivers: state.receivers.allFromList,
-    gifts: state.list.gifts
+    gifts: state.list.gifts,
+    userLists: state.list.userLists
   };
 };
 

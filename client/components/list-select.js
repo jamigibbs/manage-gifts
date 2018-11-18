@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import { updateCurrentListId, getListsForuser } from '../actions'
 import ListSelectDialog from './list-select-dialog'
+import ListName from './list-name'
 
 import { Button, Typography } from '@material-ui/core'
 
@@ -30,6 +31,7 @@ class ListSelect extends Component {
   }
 
   render() {
+    const { userLists, currentId } = this.props
     return (
       <div>
         <Button variant="contained" onClick={this.handleClickOpen}>Select List</Button>
@@ -37,11 +39,13 @@ class ListSelect extends Component {
           selectedList={this.state.selectedList}
           open={this.state.open}
           onClose={this.handleClose}
-          lists={this.props.userLists}
+          lists={userLists}
         />
         <br />
         <Typography variant="h6">
-          { this.props.currentId && 'List ID ' + this.props.currentId }
+          { currentId && userLists.length &&
+            <ListName listId={currentId} userLists={userLists} />
+          }
         </Typography>
       </div>
     )
