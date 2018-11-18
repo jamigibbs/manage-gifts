@@ -7,6 +7,7 @@ import { strToLowercaseDashed } from '../utilities'
 import ReceiverActions from './receiver-actions'
 import ListDelete from './list-delete'
 import ReceiverAdd from './receiver-add'
+import ListName from './list-name'
 
 import { Typography, Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@material-ui/core/'
 
@@ -60,8 +61,8 @@ class ReceiversList extends Component {
   }
 
   render(){
-    const { receivers, classes, match, gifts } = this.props
-    const { listId } = match.params
+    const { receivers, classes, match, userLists } = this.props
+    const listId = parseInt(match.params.listId)
 
     if (!receivers || !receivers.length ) {
       return (
@@ -76,7 +77,12 @@ class ReceiversList extends Component {
 
         <ReceiverAdd listId={listId} />
 
-        <Typography variant="subtitle1" >List {listId} Receivers</Typography>
+        { userLists &&
+          <Typography variant="subtitle1">
+            Receivers <ListName listId={listId} userLists={userLists} />
+          </Typography>
+        }
+
         <Paper className={classes.root}>
           <Table className={classes.table}>
             <TableHead>
@@ -122,7 +128,8 @@ class ReceiversList extends Component {
 const mapStateToProps = (state) => {
   return {
     receivers: state.receivers.allFromList,
-    gifts: state.list.gifts
+    gifts: state.list.gifts,
+    userLists: state.list.userLists
   }
 }
 
