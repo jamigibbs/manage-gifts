@@ -29,16 +29,18 @@ class ReceiversList extends Component {
     this.props.updateCurrentListId(parseInt(listId))
   }
 
+  componentWillReceiveProps = (nextProps) => {
+    if (this.props.receivers !== nextProps.receivers) {
+      const receiverIds = this.receiverIdsArray(nextProps.receivers)
+      this.props.getAllGiftsForList(receiverIds)
+    }
+  }
+
   componentDidUpdate = (prevProps) => {
     const { listId } = this.props.match.params
     if (listId !== prevProps.match.params.listId) {
       this.props.getAllListReceivers(parseInt(listId))
       this.props.updateCurrentListId(parseInt(listId))
-    }
-
-    if (this.props.receivers !== prevProps.receivers) {
-      const receiverIds = this.receiverIdsArray(this.props.receivers)
-      this.props.getAllGiftsForList(receiverIds)
     }
   }
 
@@ -52,7 +54,7 @@ class ReceiversList extends Component {
 
   receiverGiftCount = (receiverId) => {
     return this.props.gifts.reduce((acc, gift) => {
-      if (gift.id === receiverId) acc++
+      if (gift.receiverId === receiverId) acc++
       return acc
     }, 0)
   }
@@ -60,6 +62,14 @@ class ReceiversList extends Component {
   render(){
     const { receivers, classes, match, gifts } = this.props
     const { listId } = match.params
+
+    if (!receivers || !receivers.length ) {
+      return (
+        <div>
+          Loading content...
+        </div>
+      )
+    }
 
     return (
       <div>
@@ -88,9 +98,7 @@ class ReceiversList extends Component {
                           </Link>
                         </TableCell>
                         <TableCell numeric>
-                        { !this.state.loading &&
-                          this.receiverGiftCount(receiver.id)
-                        }
+                        { this.receiverGiftCount(receiver.id) }
                         </TableCell>
                         <TableCell>
                           <ReceiverActions

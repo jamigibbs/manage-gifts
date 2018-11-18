@@ -561,20 +561,19 @@ var getAllListReceivers = function getAllListReceivers(listId) {
                 _ref4 = _context2.sent;
                 data = _ref4.data;
                 dispatch(gotAllListReceivers(data));
-                _context2.next = 11;
-                break;
+                return _context2.abrupt("return", data);
 
-              case 8:
-                _context2.prev = 8;
+              case 9:
+                _context2.prev = 9;
                 _context2.t0 = _context2["catch"](0);
                 console.error(_context2.t0);
 
-              case 11:
+              case 12:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[0, 8]]);
+        }, _callee2, this, [[0, 9]]);
       }));
 
       return function (_x2) {
@@ -2572,6 +2571,14 @@ function (_Component) {
       _this.props.updateCurrentListId(parseInt(listId));
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentWillReceiveProps", function (nextProps) {
+      if (_this.props.receivers !== nextProps.receivers) {
+        var receiverIds = _this.receiverIdsArray(nextProps.receivers);
+
+        _this.props.getAllGiftsForList(receiverIds);
+      }
+    });
+
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentDidUpdate", function (prevProps) {
       var listId = _this.props.match.params.listId;
 
@@ -2579,12 +2586,6 @@ function (_Component) {
         _this.props.getAllListReceivers(parseInt(listId));
 
         _this.props.updateCurrentListId(parseInt(listId));
-      }
-
-      if (_this.props.receivers !== prevProps.receivers) {
-        var receiverIds = _this.receiverIdsArray(_this.props.receivers);
-
-        _this.props.getAllGiftsForList(receiverIds);
       }
     });
 
@@ -2598,7 +2599,7 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "receiverGiftCount", function (receiverId) {
       return _this.props.gifts.reduce(function (acc, gift) {
-        if (gift.id === receiverId) acc++;
+        if (gift.receiverId === receiverId) acc++;
         return acc;
       }, 0);
     });
@@ -2617,6 +2618,11 @@ function (_Component) {
           match = _this$props.match,
           gifts = _this$props.gifts;
       var listId = match.params.listId;
+
+      if (!receivers || !receivers.length) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading content...");
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_add__WEBPACK_IMPORTED_MODULE_8__["default"], {
         listId: listId
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["Typography"], {
@@ -2641,7 +2647,7 @@ function (_Component) {
           to: "/dashboard/receiver/".concat(Object(_utilities__WEBPACK_IMPORTED_MODULE_5__["strToLowercaseDashed"])(receiver.name), "/").concat(receiver.id)
         }, receiver.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], {
           numeric: true
-        }, !_this2.state.loading && _this2.receiverGiftCount(receiver.id)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_actions__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        }, _this2.receiverGiftCount(receiver.id)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_actions__WEBPACK_IMPORTED_MODULE_6__["default"], {
           receiverId: receiver.id,
           listId: listId
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], null));

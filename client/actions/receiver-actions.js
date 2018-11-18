@@ -37,6 +37,7 @@ export const getAllListReceivers = (listId) => async dispatch => {
       }
     })
     dispatch(gotAllListReceivers(data))
+    return data
   } catch (err) {
     console.error(err)
   }
