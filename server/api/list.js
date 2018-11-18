@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { List, Receiver } = require('../db/models')
+const { List, Receiver, Gift, Item } = require('../db/models')
 
 const userAuth = function(req, res, next) {
   if (req.isAuthenticated()) {
@@ -49,7 +49,7 @@ router.delete('/', userAuth, async (req, res, next) => {
         userId
       }
     })
-    
+
     const deletedList = {
       listId: parseInt(listId),
       userId
@@ -59,5 +59,18 @@ router.delete('/', userAuth, async (req, res, next) => {
   } catch (err) { next(err) }
 })
 
+// GET /api/list/gifts
+router.get('/gifts', userAuth, async (req, res, next) => {
+  const receiverIds = JSON.parse(req.query.receiverIds)
+  try {
+    const gifts = await Gift.findAll({
+      where: {
+        receiverId: receiverIds
+      }
+    })
+
+    res.json(gifts)
+  } catch (err) { next(err) }
+})
 
 module.exports = router

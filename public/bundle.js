@@ -90,7 +90,7 @@
 /*!*********************************!*\
   !*** ./client/actions/index.js ***!
   \*********************************/
-/*! exports provided: me, auth, logout, addReceiver, getAllListReceivers, removeReceiverFromList, getAllReceiverGifts, addGiftToReceiver, getCurrentListId, updateCurrentListId, updatePreviousListId, getListsForuser, addNewList, deleteList */
+/*! exports provided: me, auth, logout, addReceiver, getAllListReceivers, removeReceiverFromList, getAllReceiverGifts, addGiftToReceiver, getCurrentListId, updateCurrentListId, updatePreviousListId, getListsForuser, addNewList, deleteList, getAllGiftsForList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -126,6 +126,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "deleteList", function() { return _list_actions__WEBPACK_IMPORTED_MODULE_2__["deleteList"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getAllGiftsForList", function() { return _list_actions__WEBPACK_IMPORTED_MODULE_2__["getAllGiftsForList"]; });
+
 
 
 
@@ -136,7 +138,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************!*\
   !*** ./client/actions/list-actions.js ***!
   \****************************************/
-/*! exports provided: getCurrentListId, updatedCurrentListId, updatedPreviousListId, gotListsForUser, addedNewList, deletedList, updateCurrentListId, updatePreviousListId, getListsForuser, addNewList, deleteList */
+/*! exports provided: getCurrentListId, updatedCurrentListId, updatedPreviousListId, gotListsForUser, addedNewList, deletedList, gotAllGiftsForList, updateCurrentListId, updatePreviousListId, getListsForuser, addNewList, deleteList, getAllGiftsForList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -147,11 +149,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gotListsForUser", function() { return gotListsForUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addedNewList", function() { return addedNewList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deletedList", function() { return deletedList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gotAllGiftsForList", function() { return gotAllGiftsForList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateCurrentListId", function() { return updateCurrentListId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updatePreviousListId", function() { return updatePreviousListId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getListsForuser", function() { return getListsForuser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewList", function() { return addNewList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteList", function() { return deleteList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllGiftsForList", function() { return getAllGiftsForList; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _history__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../history */ "./client/history.js");
@@ -201,6 +205,12 @@ var deletedList = function deletedList(list) {
   return {
     type: _constants__WEBPACK_IMPORTED_MODULE_3__["DELETE_LIST"],
     list: list
+  };
+};
+var gotAllGiftsForList = function gotAllGiftsForList(gifts) {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_3__["GET_ALL_GIFTS_FOR_LIST"],
+    gifts: gifts
   };
 };
 var updateCurrentListId = function updateCurrentListId(id) {
@@ -364,6 +374,53 @@ var deleteList = function deleteList(listId, userId) {
     }()
   );
 };
+var getAllGiftsForList = function getAllGiftsForList(receiverIds) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref7 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee4(dispatch) {
+        var _ref8, data;
+
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                _context4.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/list/gifts', {
+                  params: {
+                    receiverIds: JSON.stringify(receiverIds)
+                  }
+                });
+
+              case 3:
+                _ref8 = _context4.sent;
+                data = _ref8.data;
+                dispatch(gotAllGiftsForList(data));
+                _context4.next = 11;
+                break;
+
+              case 8:
+                _context4.prev = 8;
+                _context4.t0 = _context4["catch"](0);
+                console.error(_context4.t0);
+
+              case 11:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this, [[0, 8]]);
+      }));
+
+      return function (_x4) {
+        return _ref7.apply(this, arguments);
+      };
+    }()
+  );
+};
 
 /***/ }),
 
@@ -504,20 +561,19 @@ var getAllListReceivers = function getAllListReceivers(listId) {
                 _ref4 = _context2.sent;
                 data = _ref4.data;
                 dispatch(gotAllListReceivers(data));
-                _context2.next = 11;
-                break;
+                return _context2.abrupt("return", data);
 
-              case 8:
-                _context2.prev = 8;
+              case 9:
+                _context2.prev = 9;
                 _context2.t0 = _context2["catch"](0);
                 console.error(_context2.t0);
 
-              case 11:
+              case 12:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[0, 8]]);
+        }, _callee2, this, [[0, 9]]);
       }));
 
       return function (_x2) {
@@ -1985,8 +2041,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -1995,13 +2049,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
@@ -2017,6 +2073,13 @@ function (_Component) {
     _classCallCheck(this, ReceiverAdd);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ReceiverAdd).call(this));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onFormChange", function (name) {
+      return function (event) {
+        _this.setState(_defineProperty({}, name, event.target.value));
+      };
+    });
+
     _this.state = {
       name: ''
     };
@@ -2024,11 +2087,6 @@ function (_Component) {
   }
 
   _createClass(ReceiverAdd, [{
-    key: "onFormChange",
-    value: function onFormChange(event) {
-      this.setState(_defineProperty({}, event.target.name, event.target.value));
-    }
-  }, {
     key: "onFormSubmit",
     value: function onFormSubmit(event) {
       event.preventDefault();
@@ -2060,7 +2118,8 @@ function (_Component) {
       }, "Receiver Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         name: "name",
-        value: name
+        value: name,
+        onChange: this.onFormChange('name')
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit"
       }, "Add Receiver")));
@@ -2512,6 +2571,14 @@ function (_Component) {
       _this.props.updateCurrentListId(parseInt(listId));
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentWillReceiveProps", function (nextProps) {
+      if (_this.props.receivers !== nextProps.receivers) {
+        var receiverIds = _this.receiverIdsArray(nextProps.receivers);
+
+        _this.props.getAllGiftsForList(receiverIds);
+      }
+    });
+
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentDidUpdate", function (prevProps) {
       var listId = _this.props.match.params.listId;
 
@@ -2522,17 +2589,40 @@ function (_Component) {
       }
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "receiverIdsArray", function (receivers) {
+      if (receivers) {
+        return receivers.map(function (receiver) {
+          return parseInt(receiver.id);
+        });
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "receiverGiftCount", function (receiverId) {
+      return _this.props.gifts.reduce(function (acc, gift) {
+        if (gift.receiverId === receiverId) acc++;
+        return acc;
+      }, 0);
+    });
+
     return _this;
   }
 
   _createClass(ReceiversList, [{
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var _this$props = this.props,
           receivers = _this$props.receivers,
           classes = _this$props.classes,
-          match = _this$props.match;
+          match = _this$props.match,
+          gifts = _this$props.gifts;
       var listId = match.params.listId;
+
+      if (!receivers || !receivers.length) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading content...");
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_add__WEBPACK_IMPORTED_MODULE_8__["default"], {
         listId: listId
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["Typography"], {
@@ -2557,7 +2647,7 @@ function (_Component) {
           to: "/dashboard/receiver/".concat(Object(_utilities__WEBPACK_IMPORTED_MODULE_5__["strToLowercaseDashed"])(receiver.name), "/").concat(receiver.id)
         }, receiver.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], {
           numeric: true
-        }, "3"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_actions__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        }, _this2.receiverGiftCount(receiver.id)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_actions__WEBPACK_IMPORTED_MODULE_6__["default"], {
           receiverId: receiver.id,
           listId: listId
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], null));
@@ -2570,7 +2660,8 @@ function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    receivers: state.receivers.allFromList
+    receivers: state.receivers.allFromList,
+    gifts: state.list.gifts
   };
 };
 
@@ -2581,6 +2672,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     updateCurrentListId: function updateCurrentListId(listId) {
       dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["updateCurrentListId"])(listId));
+    },
+    getAllGiftsForList: function getAllGiftsForList(receiverIds) {
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["getAllGiftsForList"])(receiverIds));
     }
   };
 };
@@ -2820,7 +2914,7 @@ UserDashboard.propTypes = {
 /*!***********************************!*\
   !*** ./client/constants/index.js ***!
   \***********************************/
-/*! exports provided: GET_USER, REMOVE_USER, ADD_RECEIVER, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS, ADD_GIFT_TO_RECEIVER, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID, UPDATE_PREVIOUS_LIST_ID, GET_LISTS_FOR_USER, ADD_NEW_LIST, DELETE_LIST */
+/*! exports provided: GET_USER, REMOVE_USER, ADD_RECEIVER, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS, ADD_GIFT_TO_RECEIVER, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID, UPDATE_PREVIOUS_LIST_ID, GET_LISTS_FOR_USER, ADD_NEW_LIST, DELETE_LIST, GET_ALL_GIFTS_FOR_LIST */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2839,6 +2933,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_LISTS_FOR_USER", function() { return GET_LISTS_FOR_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_NEW_LIST", function() { return ADD_NEW_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_LIST", function() { return DELETE_LIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_GIFTS_FOR_LIST", function() { return GET_ALL_GIFTS_FOR_LIST; });
 /**
  * USER ACTION TYPES
  */
@@ -2864,6 +2959,7 @@ var UPDATE_PREVIOUS_LIST_ID = 'UPDATE_PREVIOUS_LIST_ID';
 var GET_LISTS_FOR_USER = 'GET_LISTS_FOR_USER';
 var ADD_NEW_LIST = 'ADD_NEW_LIST';
 var DELETE_LIST = 'DELETE_LIST';
+var GET_ALL_GIFTS_FOR_LIST = 'GET_ALL_GIFTS_FOR_LIST';
 
 /***/ }),
 
@@ -2992,7 +3088,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var list = {
   currentId: null,
   prevId: null,
-  userLists: []
+  userLists: [],
+  gifts: []
 };
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : list;
@@ -3029,6 +3126,11 @@ var list = {
     case _constants__WEBPACK_IMPORTED_MODULE_0__["GET_LISTS_FOR_USER"]:
       return _objectSpread({}, state, {
         userLists: action.userLists
+      });
+
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["GET_ALL_GIFTS_FOR_LIST"]:
+      return _objectSpread({}, state, {
+        gifts: action.gifts
       });
 
     default:
