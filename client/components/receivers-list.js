@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
-import { getAllListReceivers, updateCurrentListId } from '../actions'
+import { getAllListReceivers, updateCurrentListId, getAllGiftsForList } from '../actions'
 import { strToLowercaseDashed } from '../utilities'
 import ReceiverActions from './receiver-actions'
 import ListDelete from './list-delete'
@@ -35,11 +35,32 @@ class ReceiversList extends Component {
       this.props.getAllListReceivers(parseInt(listId))
       this.props.updateCurrentListId(parseInt(listId))
     }
+
+    if (this.props.receivers !== prevProps.receivers) {
+      const receiverIds = this.receiverIdsArray(this.props.receivers)
+      this.props.getAllGiftsForList(receiverIds)
+    }
+  }
+
+  receiverIdsArray = (receivers) => {
+    if (receivers) {
+      return receivers.map((receiver) => {
+        return parseInt(receiver.id)
+      })
+    }
+  }
+
+  receiverGiftCount = (receiverId) => {
+    return this.props.gifts.reduce((acc, gift) => {
+      if (gift.id === receiverId) acc++
+      return acc
+    }, 0)
   }
 
   render(){
-    const { receivers, classes, match } = this.props
+    const { receivers, classes, match, gifts } = this.props
     const { listId } = match.params
+
     return (
       <div>
 
@@ -66,7 +87,11 @@ class ReceiversList extends Component {
                             {receiver.name}
                           </Link>
                         </TableCell>
-                        <TableCell numeric>3</TableCell>
+                        <TableCell numeric>
+                        { !this.state.loading &&
+                          this.receiverGiftCount(receiver.id)
+                        }
+                        </TableCell>
                         <TableCell>
                           <ReceiverActions
                             receiverId={receiver.id}
@@ -88,7 +113,8 @@ class ReceiversList extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    receivers: state.receivers.allFromList
+    receivers: state.receivers.allFromList,
+    gifts: state.list.gifts
   }
 }
 
@@ -99,6 +125,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     updateCurrentListId: (listId) => {
       dispatch(updateCurrentListId(listId))
+    },
+    getAllGiftsForList: (receiverIds) => {
+      dispatch(getAllGiftsForList(receiverIds))
     }
   }
 }

@@ -10,9 +10,9 @@ export class ReceiverAdd extends Component {
     }
   }
 
-  onFormChange(event) {
+  onFormChange = name => event => {
     this.setState({
-      [event.target.name]: event.target.value
+      [name]: event.target.value
     })
   }
 
@@ -38,7 +38,7 @@ export class ReceiverAdd extends Component {
           onSubmit={(event) => this.onFormSubmit(event)}
         >
           <label htmlFor="name">Receiver Name</label>
-          <input type="text" name="name" value={name} />
+          <input type="text" name="name" value={name} onChange={this.onFormChange('name')}/>
           <button type="submit">Add Receiver</button>
         </form>
       </div>
