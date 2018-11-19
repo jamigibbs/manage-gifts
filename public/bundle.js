@@ -3104,8 +3104,10 @@ function (_Component) {
           gifts = _this$props.gifts;
       var listId = parseInt(match.params.listId);
 
-      if (!receivers || !receivers.length) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading content...");
+      if (receivers.length === 0) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_add__WEBPACK_IMPORTED_MODULE_7__["default"], {
+          listId: listId
+        });
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_add__WEBPACK_IMPORTED_MODULE_7__["default"], {

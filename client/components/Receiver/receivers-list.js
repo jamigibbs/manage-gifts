@@ -57,11 +57,9 @@ class ReceiversList extends Component {
     const { receivers, classes, match, userLists, gifts } = this.props
     const listId = parseInt(match.params.listId)
 
-    if (!receivers || !receivers.length ) {
+    if (receivers.length === 0 ) {
       return (
-        <div>
-          Loading content...
-        </div>
+        <ReceiverAdd listId={listId} />
       )
     }
 
