@@ -40,6 +40,7 @@ export class ListAdd extends Component {
 
   render(){
     const { classes } = this.props
+  
 
     return (
       <div className={classes.root}>
@@ -79,6 +80,12 @@ export class ListAdd extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    userId: state.user.id
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     addNewList: (name, userId) => {
@@ -87,4 +94,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(ListAdd))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ListAdd))
