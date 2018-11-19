@@ -4,6 +4,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { auth } from '../actions'
+import { Navbar } from './Header'
 
 import { withStyles } from '@material-ui/core/styles'
 import { Grid, Paper, TextField, Button, Typography, Divider } from '@material-ui/core'
@@ -27,87 +28,91 @@ const AuthForm = props => {
   const { name, displayName, handleSubmit, error, classes } = props
 
   return (
-    <Grid
-      container
-      direction="column"
-      justify="center"
-      alignItems="center"
-    >
-
-      <Typography
-        variant="h5"
-        color="default"
-        align="center"
-        className={classes.title}
+    <div>
+      <Navbar />
+      
+      <Grid
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
       >
-        {displayName}
-      </Typography>
 
-      <Paper elevation={1} square={true} className="auth-form">
-
-      <form className="auth-form__form" onSubmit={handleSubmit} name={name}>
-
-        <Grid
-          container
-          direction="column"
-          justify="center"
-          alignItems="center"
-        >
-
-        <TextField
-          id="outlined-email-input"
-          label="Email"
-          type="email"
-          name="email"
-          autoComplete="email"
-          margin="normal"
-          required={true}
-          fullWidth={true}
-        />
-
-        <TextField
-          id="outlined-password-input"
-          label="Password"
-          type="password"
-          name="password"
-          margin="normal"
-          required={true}
-          fullWidth={true}
-        />
-        <Button
-          variant="outlined"
-          color="primary"
-          type="submit"
-          fullWidth={true}
-          className={classes.submitButton}
+        <Typography
+          variant="h5"
+          color="default"
+          align="center"
+          className={classes.title}
         >
           {displayName}
+        </Typography>
+
+        <Paper elevation={1} square={true} className="auth-form">
+
+        <form className="auth-form__form" onSubmit={handleSubmit} name={name}>
+
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+          >
+
+          <TextField
+            id="outlined-email-input"
+            label="Email"
+            type="email"
+            name="email"
+            autoComplete="email"
+            margin="normal"
+            required={true}
+            fullWidth={true}
+          />
+
+          <TextField
+            id="outlined-password-input"
+            label="Password"
+            type="password"
+            name="password"
+            margin="normal"
+            required={true}
+            fullWidth={true}
+          />
+          <Button
+            variant="outlined"
+            color="primary"
+            type="submit"
+            fullWidth={true}
+            className={classes.submitButton}
+          >
+            {displayName}
+          </Button>
+
+          {error && error.response &&
+            <Typography
+              variant="body2"
+              color="error"
+              align="center"
+            >
+              {error.response.data}
+            </Typography>
+          }
+
+          </Grid>
+
+        </form>
+
+        <Divider light />
+
+        {/* <a href="/auth/google">{displayName} with Google</a> */}
+
+        <Button href="/auth/google" variant="contained" color="primary" fullWidth={true} className={classes.googleButton}>
+          {displayName} with Google
         </Button>
 
-        {error && error.response &&
-          <Typography
-            variant="body2"
-            color="error"
-            align="center"
-          >
-            {error.response.data}
-          </Typography>
-        }
-
-        </Grid>
-
-      </form>
-
-      <Divider light />
-
-      {/* <a href="/auth/google">{displayName} with Google</a> */}
-
-      <Button href="/auth/google" variant="contained" color="primary" fullWidth={true} className={classes.googleButton}>
-        {displayName} with Google
-      </Button>
-
-      </Paper>
-    </Grid>
+        </Paper>
+      </Grid>
+    </div>
   )
 }
 
