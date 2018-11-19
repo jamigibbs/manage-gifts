@@ -90,7 +90,7 @@
 /*!*********************************!*\
   !*** ./client/actions/index.js ***!
   \*********************************/
-/*! exports provided: me, auth, logout, addReceiver, getAllListReceivers, removeReceiverFromList, getAllReceiverGifts, addGiftToReceiver, getReceiver, removeGiftFromReceiver, getCurrentListId, updateCurrentListId, updatePreviousListId, getListsForuser, addNewList, deleteList, getAllGiftsForList */
+/*! exports provided: me, auth, logout, addReceiver, getAllListReceivers, removeReceiverFromList, getAllReceiverGifts, addGiftToReceiver, getReceiver, removeGiftFromReceiver, toggleGiftStatus, getCurrentListId, updateCurrentListId, updatePreviousListId, getListsForuser, addNewList, deleteList, getAllGiftsForList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116,6 +116,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getReceiver", function() { return _receiver_actions__WEBPACK_IMPORTED_MODULE_1__["getReceiver"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "removeGiftFromReceiver", function() { return _receiver_actions__WEBPACK_IMPORTED_MODULE_1__["removeGiftFromReceiver"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "toggleGiftStatus", function() { return _receiver_actions__WEBPACK_IMPORTED_MODULE_1__["toggleGiftStatus"]; });
 
 /* harmony import */ var _list_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./list-actions */ "./client/actions/list-actions.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getCurrentListId", function() { return _list_actions__WEBPACK_IMPORTED_MODULE_2__["getCurrentListId"]; });
@@ -432,7 +434,7 @@ var getAllGiftsForList = function getAllGiftsForList(receiverIds) {
 /*!********************************************!*\
   !*** ./client/actions/receiver-actions.js ***!
   \********************************************/
-/*! exports provided: removedAllListReceivers, addReceiver, getAllListReceivers, removeReceiverFromList, getAllReceiverGifts, addGiftToReceiver, getReceiver, removeGiftFromReceiver */
+/*! exports provided: removedAllListReceivers, addReceiver, getAllListReceivers, removeReceiverFromList, getAllReceiverGifts, addGiftToReceiver, getReceiver, removeGiftFromReceiver, toggleGiftStatus */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -445,6 +447,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addGiftToReceiver", function() { return addGiftToReceiver; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getReceiver", function() { return getReceiver; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeGiftFromReceiver", function() { return removeGiftFromReceiver; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleGiftStatus", function() { return toggleGiftStatus; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants */ "./client/constants/index.js");
@@ -500,6 +503,13 @@ var removedGiftFromReceiver = function removedGiftFromReceiver(id) {
   return {
     type: _constants__WEBPACK_IMPORTED_MODULE_1__["REMOVE_GIFT_FROM_RECEIVER"],
     id: id
+  };
+};
+
+var toggledGiftStatus = function toggledGiftStatus(gift) {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_1__["TOGGLE_GIFT_STATUS"],
+    gift: gift
   };
 };
 
@@ -834,6 +844,51 @@ var removeGiftFromReceiver = function removeGiftFromReceiver(id) {
 
       return function (_x7) {
         return _ref13.apply(this, arguments);
+      };
+    }()
+  );
+};
+var toggleGiftStatus = function toggleGiftStatus(gift) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref15 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee8(dispatch) {
+        var _ref16, data;
+
+        return regeneratorRuntime.wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                _context8.prev = 0;
+                _context8.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/receiver/gift/status', {
+                  gift: gift
+                });
+
+              case 3:
+                _ref16 = _context8.sent;
+                data = _ref16.data;
+                dispatch(toggledGiftStatus(data));
+                _context8.next = 11;
+                break;
+
+              case 8:
+                _context8.prev = 8;
+                _context8.t0 = _context8["catch"](0);
+                console.error(_context8.t0);
+
+              case 11:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8, this, [[0, 8]]);
+      }));
+
+      return function (_x8) {
+        return _ref15.apply(this, arguments);
       };
     }()
   );
@@ -1926,7 +1981,7 @@ _list_select_dialog__WEBPACK_IMPORTED_MODULE_4__["default"].propTypes = {
 /*!*********************************************!*\
   !*** ./client/components/Receiver/index.js ***!
   \*********************************************/
-/*! exports provided: ReceiverActions, ReceiverAdd, ReceiverDetails, ReceiverGiftAdd, ReceiverGiftDelete, ReceiverGiftsList, ReceiverName, ReceiversList */
+/*! exports provided: ReceiverActions, ReceiverAdd, ReceiverDetails, ReceiverGiftAdd, ReceiverGiftDelete, ReceiverGiftsList, ReceiverName, ReceiversList, ReceiverGiftToggle */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1954,6 +2009,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _receivers_list__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./receivers-list */ "./client/components/Receiver/receivers-list.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ReceiversList", function() { return _receivers_list__WEBPACK_IMPORTED_MODULE_7__["default"]; });
+
+/* harmony import */ var _receiver_gift_toggle__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./receiver-gift-toggle */ "./client/components/Receiver/receiver-gift-toggle.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ReceiverGiftToggle", function() { return _receiver_gift_toggle__WEBPACK_IMPORTED_MODULE_8__["default"]; });
+
 
 
 
@@ -2517,6 +2576,100 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./client/components/Receiver/receiver-gift-toggle.js":
+/*!************************************************************!*\
+  !*** ./client/components/Receiver/receiver-gift-toggle.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+var ReceiveGiftToggle =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(ReceiveGiftToggle, _Component);
+
+  function ReceiveGiftToggle() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    _classCallCheck(this, ReceiveGiftToggle);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ReceiveGiftToggle)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleChange", function (name) {
+      return function (event) {
+        _this.props.toggleGiftStatus(_this.props.gift);
+      };
+    });
+
+    return _this;
+  }
+
+  _createClass(ReceiveGiftToggle, [{
+    key: "render",
+    value: function render() {
+      var gift = this.props.gift;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_2__["Checkbox"], {
+        checked: gift.purchased,
+        onChange: this.handleChange(),
+        value: "checkedB",
+        color: "default"
+      }));
+    }
+  }]);
+
+  return ReceiveGiftToggle;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    toggleGiftStatus: function toggleGiftStatus(gift) {
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["toggleGiftStatus"])(gift));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(null, mapDispatchToProps)(ReceiveGiftToggle));
+
+/***/ }),
+
 /***/ "./client/components/Receiver/receiver-gifts-list.js":
 /*!***********************************************************!*\
   !*** ./client/components/Receiver/receiver-gifts-list.js ***!
@@ -2531,10 +2684,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _receiver_gift_add__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./receiver-gift-add */ "./client/components/Receiver/receiver-gift-add.js");
-/* harmony import */ var _receiver_gift_delete__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./receiver-gift-delete */ "./client/components/Receiver/receiver-gift-delete.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
-/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
+/* harmony import */ var _Receiver__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Receiver */ "./client/components/Receiver/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
+/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2552,7 +2704,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -2596,39 +2747,37 @@ function (_Component) {
       var _this$props = this.props,
           classes = _this$props.classes,
           receiverId = _this$props.receiverId;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["Paper"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["Paper"], {
         className: classes.root
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["Table"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["Table"], {
         className: classes.table
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableHead"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableRow"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], null, "Image"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableHead"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableRow"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableCell"], null, "Purchased"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableCell"], null, "Image"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableCell"], null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableCell"], {
         numeric: true
-      }, "Status"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
+      }, "Actions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableCell"], {
         numeric: true
-      }, "Actions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
-        numeric: true
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_gift_add__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_3__["ReceiverGiftAdd"], {
         receiverId: receiverId
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableBody"], null, this.props.gifts.map(function (gift) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableRow"], {
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableBody"], null, this.props.gifts.map(function (gift) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableRow"], {
           key: gift.id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_3__["ReceiverGiftToggle"], {
+          gift: gift
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: gift.item.image,
           width: "50"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableCell"], {
           component: "th",
           scope: "row"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           href: gift.item.url,
           target: "_blank",
           rel: "noopener"
-        }, gift.item.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
+        }, gift.item.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableCell"], {
           numeric: true
-        }, gift.status), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
-          numeric: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_gift_delete__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_3__["ReceiverGiftDelete"], {
           itemId: gift.id,
           receiverId: receiverId
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], null));
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableCell"], null));
       }))));
     }
   }]);
@@ -2645,7 +2794,7 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     getAllReceiverGifts: function getAllReceiverGifts(receiverId) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_5__["getAllReceiverGifts"])(receiverId));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["getAllReceiverGifts"])(receiverId));
     }
   };
 };
@@ -3421,7 +3570,7 @@ UserDashboard.propTypes = {
 /*!***********************************!*\
   !*** ./client/constants/index.js ***!
   \***********************************/
-/*! exports provided: GET_USER, REMOVE_USER, ADD_RECEIVER, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS, ADD_GIFT_TO_RECEIVER, REMOVE_GIFT_FROM_RECEIVER, GET_RECEIVER_NAME, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID, UPDATE_PREVIOUS_LIST_ID, GET_LISTS_FOR_USER, ADD_NEW_LIST, DELETE_LIST, GET_ALL_GIFTS_FOR_LIST */
+/*! exports provided: GET_USER, REMOVE_USER, ADD_RECEIVER, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS, ADD_GIFT_TO_RECEIVER, REMOVE_GIFT_FROM_RECEIVER, GET_RECEIVER_NAME, TOGGLE_GIFT_STATUS, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID, UPDATE_PREVIOUS_LIST_ID, GET_LISTS_FOR_USER, ADD_NEW_LIST, DELETE_LIST, GET_ALL_GIFTS_FOR_LIST */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3436,6 +3585,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_GIFT_TO_RECEIVER", function() { return ADD_GIFT_TO_RECEIVER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_GIFT_FROM_RECEIVER", function() { return REMOVE_GIFT_FROM_RECEIVER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_RECEIVER_NAME", function() { return GET_RECEIVER_NAME; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOGGLE_GIFT_STATUS", function() { return TOGGLE_GIFT_STATUS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_CURRENT_LIST_ID", function() { return GET_CURRENT_LIST_ID; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_CURRENT_LIST_ID", function() { return UPDATE_CURRENT_LIST_ID; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_PREVIOUS_LIST_ID", function() { return UPDATE_PREVIOUS_LIST_ID; });
@@ -3460,6 +3610,7 @@ var GET_ALL_RECEIVER_GIFTS = 'GET_ALL_RECEIVER_GIFTS';
 var ADD_GIFT_TO_RECEIVER = 'ADD_GIFT_TO_RECEIVER';
 var REMOVE_GIFT_FROM_RECEIVER = 'REMOVE_GIFT_FROM_RECEIVER';
 var GET_RECEIVER_NAME = 'GET_RECEIVER_NAME';
+var TOGGLE_GIFT_STATUS = 'TOGGLE_GIFT_STATUS';
 /**
  * LIST ACTION TYPES
  */
@@ -3725,6 +3876,19 @@ var receivers = {
       return _objectSpread({}, state, {
         gifts: state.gifts.filter(function (gift) {
           return gift.id !== action.id;
+        })
+      });
+
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_GIFT_STATUS"]:
+      return _objectSpread({}, state, {
+        gifts: state.gifts.map(function (gift) {
+          if (gift.id === action.gift.id) {
+            return Object.assign({}, gift, {
+              purchased: !action.gift.purchased
+            });
+          }
+
+          return gift;
         })
       });
 

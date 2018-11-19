@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
-import ReceiverGiftAdd from './receiver-gift-add'
-import ReceiverGiftDelete from './receiver-gift-delete'
+import { ReceiverGiftAdd, ReceiverGiftDelete, ReceiverGiftToggle } from '../Receiver'
 import { getAllReceiverGifts } from '../../actions'
-import { Table, TableBody, TableCell, TableHead, TableRow, Paper, Button } from '@material-ui/core/'
+import { Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@material-ui/core/'
 
 const styles = theme => ({
   root: {
@@ -14,7 +13,7 @@ const styles = theme => ({
   },
   table: {
     minWidth: 700,
-  },
+  }
 })
 
 class ReceiverGiftsList extends Component {
@@ -30,9 +29,9 @@ class ReceiverGiftsList extends Component {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
+            <TableCell>Purchased</TableCell>
             <TableCell>Image</TableCell>
             <TableCell>Name</TableCell>
-            <TableCell numeric>Status</TableCell>
             <TableCell numeric>Actions</TableCell>
             <TableCell numeric><ReceiverGiftAdd receiverId={receiverId} /></TableCell>
           </TableRow>
@@ -41,11 +40,11 @@ class ReceiverGiftsList extends Component {
           {this.props.gifts.map(gift => {
             return (
               <TableRow key={gift.id}>
+                <TableCell><ReceiverGiftToggle gift={gift}/></TableCell>
                 <TableCell><img src={gift.item.image} width="50" /></TableCell>
                 <TableCell component="th" scope="row">
                   <a href={gift.item.url} target="_blank"  rel="noopener">{gift.item.name}</a>
                 </TableCell>
-                <TableCell numeric>{gift.status}</TableCell>
                 <TableCell numeric>
                   <ReceiverGiftDelete itemId={gift.id} receiverId={receiverId} />
                 </TableCell>

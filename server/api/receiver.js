@@ -82,8 +82,22 @@ router.delete('/gift', userAuth, async (req, res, next) => {
     const gift = await Gift.destroy({
       where: { id }
     })
-    console.log(gift)
     res.json(gift)
+  } catch (err) { next(err) }
+})
+
+// POST /api/receiver/gift/status
+router.post('/gift/status', userAuth, async (req, res, next) => {
+  let { id, purchased } = req.body.gift
+  //Toggle boolean
+  purchased = !purchased
+  try {
+    await Gift.update({ purchased }, { where: { id } })
+    const data = {
+      id: req.body.gift.id, 
+      purchased: req.body.gift.purchased
+    }
+    res.json(data)
   } catch (err) { next(err) }
 })
 
