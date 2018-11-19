@@ -11,8 +11,8 @@ import { Typography } from '@material-ui/core'
 import ReceiversList from './receivers-list'
 import ReceiverDetails from './receiver-details'
 import Sidebar from './sidebar'
-import ListSelect from './list-select'
-import ListAdd from './list-add'
+
+import { ListAdd, ListSelect } from './List'
 
 const styles = theme => ({
   root: {

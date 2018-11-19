@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { deleteList, updatePreviousListId } from '../actions'
-import history from '../history'
+import { deleteList, updatePreviousListId } from '../../actions'
+import history from '../../history'
 
 import { withStyles } from '@material-ui/core/styles'
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'

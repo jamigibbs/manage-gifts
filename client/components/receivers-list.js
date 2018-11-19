@@ -5,9 +5,8 @@ import { withStyles } from '@material-ui/core/styles'
 import { getAllListReceivers, updateCurrentListId, getAllGiftsForList } from '../actions'
 import { strToLowercaseDashed } from '../utilities'
 import ReceiverActions from './receiver-actions'
-import ListDelete from './list-delete'
 import ReceiverAdd from './receiver-add'
-import ListName from './list-name'
+import { ListDelete, ListName } from './List'
 
 import { Typography, Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@material-ui/core/'
 

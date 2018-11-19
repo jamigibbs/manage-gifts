@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { addNewList } from '../actions'
+import { addNewList } from '../../actions'
 import { withStyles } from '@material-ui/core/styles'
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
 

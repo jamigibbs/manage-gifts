@@ -3,15 +3,13 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-import { updatePreviousListId } from '../actions'
-import { strToLowercaseDashed } from '../utilities'
+import { updatePreviousListId } from '../../actions'
+import { strToLowercaseDashed } from '../../utilities'
 
 import { withStyles } from '@material-ui/core/styles'
 import { Avatar, List, ListItem, ListItemAvatar, ListItemText, DialogTitle, Dialog } from '@material-ui/core'
 import PersonIcon from '@material-ui/icons/Person'
 import { blue } from '@material-ui/core/colors'
-
-import ReceiversList from './receivers-list'
 
 const styles = {
   avatar: {
