@@ -9,7 +9,8 @@ export {
   getAllReceiverGifts,
   addGiftToReceiver,
   getReceiver,
-  removeGiftFromReceiver } from './receiver-actions'
+  removeGiftFromReceiver,
+  toggleGiftStatus } from './receiver-actions'
 export {
   getCurrentListId,
   updateCurrentListId,

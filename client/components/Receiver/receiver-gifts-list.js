@@ -29,10 +29,9 @@ class ReceiverGiftsList extends Component {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <TableCell>Complete</TableCell>
+            <TableCell>Purchased</TableCell>
             <TableCell>Image</TableCell>
             <TableCell>Name</TableCell>
-            <TableCell numeric>Status</TableCell>
             <TableCell numeric>Actions</TableCell>
             <TableCell numeric><ReceiverGiftAdd receiverId={receiverId} /></TableCell>
           </TableRow>
@@ -41,12 +40,11 @@ class ReceiverGiftsList extends Component {
           {this.props.gifts.map(gift => {
             return (
               <TableRow key={gift.id}>
-                <TableCell><ReceiverGiftToggle /></TableCell>
+                <TableCell><ReceiverGiftToggle gift={gift}/></TableCell>
                 <TableCell><img src={gift.item.image} width="50" /></TableCell>
                 <TableCell component="th" scope="row">
                   <a href={gift.item.url} target="_blank"  rel="noopener">{gift.item.name}</a>
                 </TableCell>
-                <TableCell numeric>{gift.status}</TableCell>
                 <TableCell numeric>
                   <ReceiverGiftDelete itemId={gift.id} receiverId={receiverId} />
                 </TableCell>
