@@ -96,12 +96,7 @@ router.post('/gift/status', userAuth, async (req, res, next) => {
     
     if (updated[0] === 0) throw Error('No rows updated')
     
-    const data = {
-      id: req.body.gift.id, 
-      purchased: req.body.gift.purchased
-    }
-    
-    res.json(data)
+    res.json({ id, purchased })
   } catch (err) { next(err) }
 })
 

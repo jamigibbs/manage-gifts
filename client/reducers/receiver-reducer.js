@@ -41,7 +41,7 @@ export default function(state = receivers, action) {
       return {...state, gifts: state.gifts.map((gift) => {
         if (gift.id === action.gift.id) {
           return Object.assign({}, gift, {
-            purchased: !action.gift.purchased
+            purchased: action.gift.purchased
           })
         }
         return gift

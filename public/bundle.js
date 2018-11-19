@@ -3884,7 +3884,7 @@ var receivers = {
         gifts: state.gifts.map(function (gift) {
           if (gift.id === action.gift.id) {
             return Object.assign({}, gift, {
-              purchased: !action.gift.purchased
+              purchased: action.gift.purchased
             });
           }
 
