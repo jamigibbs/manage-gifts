@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
-import { centsToUSD } from '../utilities'
 import ReceiverGiftAdd from './receiver-gift-add'
 import ReceiverGiftDelete from './receiver-gift-delete'
-import { getAllReceiverGifts } from '../actions'
+import { getAllReceiverGifts } from '../../actions'
 import { Table, TableBody, TableCell, TableHead, TableRow, Paper, Button } from '@material-ui/core/'
 
 const styles = theme => ({

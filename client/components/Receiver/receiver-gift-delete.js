@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core/'
 import ReceiverName from './receiver-name'
-import { removeGiftFromReceiver } from '../actions'
+import { removeGiftFromReceiver } from '../../actions'
 
 class ReceiverGiftDelete extends Component {
   state = {

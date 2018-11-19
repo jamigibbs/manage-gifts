@@ -2,14 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
-
 import { updateCurrentListId } from '../actions'
-
 import { withStyles } from '@material-ui/core/styles'
 import { Typography } from '@material-ui/core'
+import { ReceiversList, ReceiverDetails } from './Receiver'
 
-import ReceiversList from './receivers-list'
-import ReceiverDetails from './receiver-details'
 import Sidebar from './sidebar'
 
 import { ListAdd, ListSelect } from './List'

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getReceiver } from '../actions'
+import { getReceiver } from '../../actions'
 
 
 class ReceiverName extends Component {
