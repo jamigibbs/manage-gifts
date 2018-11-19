@@ -93,7 +93,11 @@ router.post('/gift/status', userAuth, async (req, res, next) => {
   purchased = !purchased
   try {
     await Gift.update({ purchased }, { where: { id } })
-    res.json(req.body.gift)
+    const data = {
+      id: req.body.gift.id, 
+      purchased: req.body.gift.purchased
+    }
+    res.json(data)
   } catch (err) { next(err) }
 })
 
