@@ -7,6 +7,7 @@ import { strToLowercaseDashed } from '../../utilities'
 import ReceiverActions from './receiver-actions'
 import ReceiverAdd from './receiver-add'
 import { ListDelete, ListName } from '../List'
+import { GiftCount, GiftPurchaseCount } from '../Receiver'
 
 import { Typography, Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@material-ui/core/'
 
@@ -52,15 +53,8 @@ class ReceiversList extends Component {
     }
   }
 
-  receiverGiftCount = (receiverId) => {
-    return this.props.gifts.reduce((acc, gift) => {
-      if (gift.receiverId === receiverId) acc++
-      return acc
-    }, 0)
-  }
-
   render(){
-    const { receivers, classes, match, userLists } = this.props
+    const { receivers, classes, match, userLists, gifts } = this.props
     const listId = parseInt(match.params.listId)
 
     if (!receivers || !receivers.length ) {
@@ -88,6 +82,7 @@ class ReceiversList extends Component {
                 <TableRow>
                   <TableCell>Receiver Name</TableCell>
                   <TableCell numeric>Assigned Gifts</TableCell>
+                  <TableCell numeric>Purchased Gifts</TableCell>
                   <TableCell>Actions</TableCell>
                   <TableCell numeric><ListDelete listId={listId} /></TableCell>
                 </TableRow>
@@ -103,7 +98,10 @@ class ReceiversList extends Component {
                           </Link>
                         </TableCell>
                         <TableCell numeric>
-                        { this.receiverGiftCount(receiver.id) }
+                          <GiftCount receiverId={receiver.id} gifts={gifts} />
+                        </TableCell>
+                        <TableCell numeric>
+                          <GiftPurchaseCount receiverId={receiver.id} gifts={gifts} />
                         </TableCell>
                         <TableCell>
                           <ReceiverActions
