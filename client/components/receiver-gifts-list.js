@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import { centsToUSD } from '../utilities'
 import ReceiverGiftAdd from './receiver-gift-add'
+import ReceiverGiftDelete from './receiver-gift-delete'
 import { getAllReceiverGifts } from '../actions'
-import { Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@material-ui/core/'
+import { Table, TableBody, TableCell, TableHead, TableRow, Paper, Button } from '@material-ui/core/'
 
 const styles = theme => ({
   root: {
@@ -33,6 +34,7 @@ class ReceiverGiftsList extends Component {
             <TableCell>Image</TableCell>
             <TableCell>Name</TableCell>
             <TableCell numeric>Status</TableCell>
+            <TableCell numeric>Actions</TableCell>
             <TableCell numeric><ReceiverGiftAdd receiverId={receiverId} /></TableCell>
           </TableRow>
         </TableHead>
@@ -45,6 +47,9 @@ class ReceiverGiftsList extends Component {
                   <a href={gift.item.url} target="_blank"  rel="noopener">{gift.item.name}</a>
                 </TableCell>
                 <TableCell numeric>{gift.status}</TableCell>
+                <TableCell numeric>
+                  <ReceiverGiftDelete itemId={gift.id} receiverId={receiverId} />
+                </TableCell>
                 <TableCell></TableCell>
               </TableRow>
             )

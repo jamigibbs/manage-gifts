@@ -5,7 +5,8 @@ import {
   REMOVE_ALL_LIST_RECEIVERS,
   GET_ALL_RECEIVER_GIFTS,
   ADD_GIFT_TO_RECEIVER,
-  GET_RECEIVER_NAME } from '../constants'
+  GET_RECEIVER_NAME,
+  REMOVE_GIFT_FROM_RECEIVER } from '../constants'
 
 const receivers = {
   allFromList: [],
@@ -31,6 +32,10 @@ export default function(state = receivers, action) {
       return {...state, gifts: [...state.gifts, action.gift]}
     case GET_RECEIVER_NAME:
       return {...state, currentReceiver: action.receiver}
+    case REMOVE_GIFT_FROM_RECEIVER:
+      return {...state, gifts: state.gifts.filter((gift) => {
+        return gift.id !== action.id
+      })}
     default:
       return state
   }
