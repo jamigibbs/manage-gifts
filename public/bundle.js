@@ -1977,11 +1977,73 @@ _list_select_dialog__WEBPACK_IMPORTED_MODULE_4__["default"].propTypes = {
 
 /***/ }),
 
+/***/ "./client/components/Receiver/gift-count.js":
+/*!**************************************************!*\
+  !*** ./client/components/Receiver/gift-count.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var GiftCount = function GiftCount(_ref) {
+  var receiverId = _ref.receiverId,
+      gifts = _ref.gifts;
+
+  var receiverGiftCount = function receiverGiftCount(receiverId) {
+    return gifts.reduce(function (acc, gift) {
+      if (gift.receiverId === receiverId) acc++;
+      return acc;
+    }, 0);
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, receiverGiftCount(receiverId));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (GiftCount);
+
+/***/ }),
+
+/***/ "./client/components/Receiver/gift-purchase-count.js":
+/*!***********************************************************!*\
+  !*** ./client/components/Receiver/gift-purchase-count.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var GiftPurchaseCount = function GiftPurchaseCount(_ref) {
+  var receiverId = _ref.receiverId,
+      gifts = _ref.gifts;
+
+  var purchasedCount = function purchasedCount(receiverId) {
+    return gifts.reduce(function (acc, gift) {
+      if (gift.purchased && receiverId == gift.receiverId) acc++;
+      return acc;
+    }, 0);
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, purchasedCount(receiverId));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (GiftPurchaseCount);
+
+/***/ }),
+
 /***/ "./client/components/Receiver/index.js":
 /*!*********************************************!*\
   !*** ./client/components/Receiver/index.js ***!
   \*********************************************/
-/*! exports provided: ReceiverActions, ReceiverAdd, ReceiverDetails, ReceiverGiftAdd, ReceiverGiftDelete, ReceiverGiftsList, ReceiverName, ReceiversList, ReceiverGiftToggle */
+/*! exports provided: ReceiverActions, ReceiverAdd, ReceiverDetails, ReceiverGiftAdd, ReceiverGiftDelete, ReceiverGiftsList, ReceiverName, ReceiversList, ReceiverGiftToggle, GiftCount, GiftPurchaseCount */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2012,6 +2074,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _receiver_gift_toggle__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./receiver-gift-toggle */ "./client/components/Receiver/receiver-gift-toggle.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ReceiverGiftToggle", function() { return _receiver_gift_toggle__WEBPACK_IMPORTED_MODULE_8__["default"]; });
+
+/* harmony import */ var _gift_count__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./gift-count */ "./client/components/Receiver/gift-count.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GiftCount", function() { return _gift_count__WEBPACK_IMPORTED_MODULE_11__["default"]; });
+
+/* harmony import */ var _gift_purchase_count__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./gift-purchase-count */ "./client/components/Receiver/gift-purchase-count.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GiftPurchaseCount", function() { return _gift_purchase_count__WEBPACK_IMPORTED_MODULE_10__["default"]; });
+
+
 
 
 
@@ -2915,7 +2985,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _receiver_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./receiver-actions */ "./client/components/Receiver/receiver-actions.js");
 /* harmony import */ var _receiver_add__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./receiver-add */ "./client/components/Receiver/receiver-add.js");
 /* harmony import */ var _List__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../List */ "./client/components/List/index.js");
-/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
+/* harmony import */ var _Receiver__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../Receiver */ "./client/components/Receiver/index.js");
+/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2935,6 +3006,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -3012,26 +3084,18 @@ function (_Component) {
       }
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "receiverGiftCount", function (receiverId) {
-      return _this.props.gifts.reduce(function (acc, gift) {
-        if (gift.receiverId === receiverId) acc++;
-        return acc;
-      }, 0);
-    });
-
     return _this;
   }
 
   _createClass(ReceiversList, [{
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       var _this$props = this.props,
           receivers = _this$props.receivers,
           classes = _this$props.classes,
           match = _this$props.match,
-          userLists = _this$props.userLists;
+          userLists = _this$props.userLists,
+          gifts = _this$props.gifts;
       var listId = parseInt(match.params.listId);
 
       if (!receivers || !receivers.length) {
@@ -3040,35 +3104,45 @@ function (_Component) {
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_add__WEBPACK_IMPORTED_MODULE_7__["default"], {
         listId: listId
-      }), userLists && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["Typography"], {
+      }), userLists && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["Typography"], {
         variant: "subtitle1"
       }, "Receivers ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_List__WEBPACK_IMPORTED_MODULE_8__["ListName"], {
         listId: listId,
         userLists: userLists
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["Paper"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["Paper"], {
         className: classes.root
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["Table"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["Table"], {
         className: classes.table
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableHead"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableRow"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], null, "Receiver Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableHead"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableRow"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], null, "Receiver Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], {
         numeric: true
-      }, "Assigned Gifts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], null, "Actions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], {
+      }, "Assigned Gifts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], {
+        numeric: true
+      }, "Purchased Gifts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], null, "Actions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], {
         numeric: true
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_List__WEBPACK_IMPORTED_MODULE_8__["ListDelete"], {
         listId: listId
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableBody"], null, receivers && receivers.map(function (receiver) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableRow"], {
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableBody"], null, receivers && receivers.map(function (receiver) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableRow"], {
           key: receiver.id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], {
           component: "th",
           scope: "row"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
           to: "/dashboard/receiver/".concat(Object(_utilities__WEBPACK_IMPORTED_MODULE_5__["strToLowercaseDashed"])(receiver.name), "/").concat(receiver.id)
-        }, receiver.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], {
+        }, receiver.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], {
           numeric: true
-        }, _this2.receiverGiftCount(receiver.id)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_actions__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_9__["GiftCount"], {
+          receiverId: receiver.id,
+          gifts: gifts
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], {
+          numeric: true
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_9__["GiftPurchaseCount"], {
+          receiverId: receiver.id,
+          gifts: gifts
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_actions__WEBPACK_IMPORTED_MODULE_6__["default"], {
           receiverId: receiver.id,
           listId: listId
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], null));
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], null));
       })))));
     }
   }]);
