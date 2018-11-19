@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { addGiftToReceiver } from '../actions'
-import { withStyles } from '@material-ui/core/styles'
+import { addGiftToReceiver } from '../../actions'
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
 
 export class ReceiverGiftAdd extends Component {

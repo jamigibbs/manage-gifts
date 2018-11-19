@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { removeReceiverFromList } from '../actions'
+import { removeReceiverFromList } from '../../actions'
 import { Button } from '@material-ui/core/'
 
 class ReceiverActions extends Component {

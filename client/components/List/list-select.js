@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { updateCurrentListId, getListsForuser } from '../actions'
+import { updateCurrentListId, getListsForuser } from '../../actions'
 import ListSelectDialog from './list-select-dialog'
 import ListName from './list-name'
 

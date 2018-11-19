@@ -1,4 +1,4 @@
-export {default as Navbar} from './navbar'
+export { Navbar } from './Header'
 export {default as UserDashboard} from './user-dashboard'
-export {default as Home} from './home'
-export {Login, Signup} from './auth-form'
+export { Home } from './Home'
+export { Login, Signup } from './auth-form'
