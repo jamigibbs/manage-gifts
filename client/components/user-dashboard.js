@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles'
 import { Typography } from '@material-ui/core'
 import { ReceiversList, ReceiverDetails } from './Receiver'
 
-import Sidebar from './sidebar'
+import { Sidebar } from './Sidebar'
 
 import { ListAdd, ListSelect } from './List'
 

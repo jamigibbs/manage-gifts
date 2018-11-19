@@ -5,9 +5,7 @@ import { expect } from 'chai'
 import enzyme, {shallow} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import { UserDashboard } from './user-dashboard'
-import ReceiverList from './receiver-add'
-import Sidebar from './receiver-add'
-
+import { ReceiverList, Sidebar } from './Receiver'
 import { ListAdd, ListSelect } from './List'
 
 const adapter = new Adapter()

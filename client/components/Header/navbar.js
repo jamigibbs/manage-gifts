@@ -4,7 +4,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import { Link, NavLink, withRouter } from 'react-router-dom'
-import { logout } from '../actions'
+import { logout } from '../../actions'
 
 import { withStyles } from '@material-ui/core/styles'
 import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
