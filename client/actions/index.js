@@ -8,7 +8,8 @@ export {
   removeReceiverFromList,
   getAllReceiverGifts,
   addGiftToReceiver,
-  getReceiver } from './receiver-actions'
+  getReceiver,
+  removeGiftFromReceiver } from './receiver-actions'
 export {
   getCurrentListId,
   updateCurrentListId,
