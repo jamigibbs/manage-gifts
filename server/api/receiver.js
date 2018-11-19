@@ -92,11 +92,15 @@ router.post('/gift/status', userAuth, async (req, res, next) => {
   //Toggle boolean
   purchased = !purchased
   try {
-    await Gift.update({ purchased }, { where: { id } })
+    const updated = await Gift.update({ purchased }, { where: { id } })
+    
+    if (updated[0] === 0) throw Error('No rows updated')
+    
     const data = {
       id: req.body.gift.id, 
       purchased: req.body.gift.purchased
     }
+    
     res.json(data)
   } catch (err) { next(err) }
 })
