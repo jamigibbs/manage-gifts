@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { removeReceiverFromList } from '../../actions'
 import { Button } from '@material-ui/core/'
@@ -17,6 +18,12 @@ class ReceiverActions extends Component {
       </div>
     )
   }
+}
+
+ReceiverActions.propTypes = {
+  listId: PropTypes.number,
+  receiverId: PropTypes.number,
+  removeReceiverFromList: PropTypes.func
 }
 
 const mapDispatchToProps = (dispatch) => {

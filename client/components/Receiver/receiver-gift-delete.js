@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core/'
 import ReceiverName from './receiver-name'
@@ -52,6 +53,11 @@ class ReceiverGiftDelete extends Component {
       </div>
     )
   }
+}
+
+ReceiverGiftDelete.propTypes = {
+  removeGiftFromReceiver: PropTypes.func,
+  receiverId: PropTypes.number
 }
 
 const mapDispatchToProps = (dispatch) => {

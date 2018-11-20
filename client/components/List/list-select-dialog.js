@@ -66,7 +66,12 @@ ListSelectDialog.propTypes = {
   classes: PropTypes.object,
   onClose: PropTypes.func.isRequired,
   lists: PropTypes.array,
-  selectedList: PropTypes.string
+  selectedList: PropTypes.string,
+  updatePreviousListId: PropTypes.func,
+  prevId: PropTypes.number,
+  currentId: PropTypes.number,
+  userLists: PropTypes.arrayOf(PropTypes.object),
+  open: PropTypes.bool
 }
 
 const mapStateToProps = (state) => {

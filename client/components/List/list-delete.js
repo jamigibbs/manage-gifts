@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { deleteList, updatePreviousListId } from '../../actions'
 import history from '../../history'
@@ -86,6 +87,12 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(updatePreviousListId(id))
     }
   }
+}
+ListDelete.propTypes = {
+  deleteList: PropTypes.func,
+  updatePreviousListId: PropTypes.func,
+  userId: PropTypes.number,
+  classes: PropTypes.object
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ListDelete))

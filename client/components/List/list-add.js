@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { addNewList } from '../../actions'
 import { withStyles } from '@material-ui/core/styles'
@@ -40,7 +41,7 @@ export class ListAdd extends Component {
 
   render(){
     const { classes } = this.props
-  
+
 
     return (
       <div className={classes.root}>
@@ -92,6 +93,12 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(addNewList(name, userId))
     }
   }
+}
+
+ListAdd.propTypes = {
+  addNewList: PropTypes.func,
+  userId: PropTypes.number,
+  classes: PropTypes.object
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ListAdd))
