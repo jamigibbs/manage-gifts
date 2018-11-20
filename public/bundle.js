@@ -1350,11 +1350,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ListAdd", function() { return ListAdd; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1374,6 +1376,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1449,16 +1452,16 @@ function (_Component) {
       var classes = this.props.classes;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: classes.root
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["Button"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Button"], {
         variant: "contained",
         onClick: this.handleClickOpen
-      }, "Add New List"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["Dialog"], {
+      }, "Add New List"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Dialog"], {
         open: this.state.open,
         onClose: this.handleClose,
         "aria-labelledby": "add-new-list-form-title"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["DialogTitle"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["DialogTitle"], {
         id: "add-new-list-form-title"
-      }, "Add New List"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["DialogContentText"], null, "Enter the name of the list you'd like to add"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["TextField"], {
+      }, "Add New List"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["DialogContentText"], null, "Enter the name of the list you'd like to add"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["TextField"], {
         onChange: this.handleChange('name'),
         value: this.state.name,
         autoFocus: true,
@@ -1467,10 +1470,10 @@ function (_Component) {
         label: "List Name",
         type: "text",
         fullWidth: true
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["DialogActions"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["Button"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["DialogActions"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Button"], {
         onClick: this.handleClose,
         color: "primary"
-      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["Button"], {
+      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Button"], {
         onClick: this.handleSubmit,
         color: "primary"
       }, "Submit"))));
@@ -1489,12 +1492,17 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     addNewList: function addNewList(name, userId) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["addNewList"])(name, userId));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["addNewList"])(name, userId));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["withStyles"])(styles)(ListAdd)));
+ListAdd.propTypes = {
+  addNewList: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  userId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
+};
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__["withStyles"])(styles)(ListAdd)));
 
 /***/ }),
 
@@ -1510,12 +1518,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ListDelete", function() { return ListDelete; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
-/* harmony import */ var _history__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../history */ "./client/history.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
+/* harmony import */ var _history__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../history */ "./client/history.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1535,6 +1545,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1596,7 +1607,7 @@ function (_Component) {
 
       _this.handleClose();
 
-      _history__WEBPACK_IMPORTED_MODULE_3__["default"].push('/dashboard');
+      _history__WEBPACK_IMPORTED_MODULE_4__["default"].push('/dashboard');
     });
 
     return _this;
@@ -1606,21 +1617,21 @@ function (_Component) {
     key: "render",
     value: function render() {
       var classes = this.props.classes;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Button"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
         className: classes.button,
         color: "secondary",
         onClick: this.handleClickOpen
-      }, "Delete List"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Dialog"], {
+      }, "Delete List"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Dialog"], {
         open: this.state.open,
         onClose: this.handleClose,
         "aria-labelledby": "delete-list",
         "aria-describedby": "delete-list"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["DialogTitle"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["DialogTitle"], {
         id: "delete-list-title"
-      }, "Warning: Deleting List Data"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["DialogContentText"], null, "When you delete a list, all added receivers and their associated gifts will be removed too. Are you sure?")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["DialogActions"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Button"], {
+      }, "Warning: Deleting List Data"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["DialogContentText"], null, "When you delete a list, all added receivers and their associated gifts will be removed too. Are you sure?")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["DialogActions"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
         color: "primary",
         onClick: this.handleClose
-      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Button"], {
+      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
         color: "secondary",
         onClick: this.handleDelete
       }, "Confirm"))));
@@ -1639,15 +1650,21 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     deleteList: function deleteList(listId, userId) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["deleteList"])(listId, userId));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["deleteList"])(listId, userId));
     },
     updatePreviousListId: function updatePreviousListId(id) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["updatePreviousListId"])(id));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["updatePreviousListId"])(id));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__["withStyles"])(styles)(ListDelete)));
+ListDelete.propTypes = {
+  deleteList: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  updatePreviousListId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  userId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
+};
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["withStyles"])(styles)(ListDelete)));
 
 /***/ }),
 
@@ -1662,6 +1679,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
 
 
 var ListName = function ListName(_ref) {
@@ -1677,6 +1697,10 @@ var ListName = function ListName(_ref) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, getListName(listId));
 };
 
+ListName.propTypes = {
+  userLists: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object),
+  listId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number
+};
 /* harmony default export */ __webpack_exports__["default"] = (ListName);
 
 /***/ }),
@@ -1814,7 +1838,12 @@ ListSelectDialog.propTypes = {
   classes: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object,
   onClose: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired,
   lists: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.array,
-  selectedList: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string
+  selectedList: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  updatePreviousListId: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+  prevId: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number,
+  currentId: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number,
+  userLists: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object),
+  open: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool
 };
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -1977,7 +2006,10 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 _list_select_dialog__WEBPACK_IMPORTED_MODULE_4__["default"].propTypes = {
   userLists: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array,
-  userId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number
+  currentId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  userId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  updateCurrentListId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  getListsForuser: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
 };
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ListSelect));
 
@@ -1994,6 +2026,9 @@ _list_select_dialog__WEBPACK_IMPORTED_MODULE_4__["default"].propTypes = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
 
 
 var GiftCount = function GiftCount(_ref) {
@@ -2010,6 +2045,10 @@ var GiftCount = function GiftCount(_ref) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, receiverGiftCount(receiverId));
 };
 
+GiftCount.propTypes = {
+  receiverId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  gifts: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object)
+};
 /* harmony default export */ __webpack_exports__["default"] = (GiftCount);
 
 /***/ }),
@@ -2025,6 +2064,9 @@ var GiftCount = function GiftCount(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
 
 
 var GiftPurchaseCount = function GiftPurchaseCount(_ref) {
@@ -2041,6 +2083,10 @@ var GiftPurchaseCount = function GiftPurchaseCount(_ref) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, purchasedCount(receiverId));
 };
 
+GiftPurchaseCount.propTypes = {
+  receiverId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  gifts: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object)
+};
 /* harmony default export */ __webpack_exports__["default"] = (GiftPurchaseCount);
 
 /***/ }),
@@ -2112,9 +2158,11 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
-/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
+/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2134,6 +2182,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -2172,7 +2221,7 @@ function (_Component) {
   _createClass(ReceiverActions, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Button"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_4__["Button"], {
         color: "secondary",
         onClick: this.handleRemove
       }, "Remove"));
@@ -2182,15 +2231,21 @@ function (_Component) {
   return ReceiverActions;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
+ReceiverActions.propTypes = {
+  listId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  receiverId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  removeReceiverFromList: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+};
+
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     removeReceiverFromList: function removeReceiverFromList(listId, receiverId) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["removeReceiverFromList"])(listId, receiverId));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["removeReceiverFromList"])(listId, receiverId));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(null, mapDispatchToProps)(ReceiverActions));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, mapDispatchToProps)(ReceiverActions));
 
 /***/ }),
 
@@ -2206,8 +2261,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReceiverAdd", function() { return ReceiverAdd; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2227,6 +2284,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -2297,10 +2355,13 @@ function (_Component) {
 
   return ReceiverAdd;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+ReceiverAdd.propTypes = {
+  currentListId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  addReceiver: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+};
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    receivers: state.receivers,
     currentListId: state.list.currentId
   };
 };
@@ -2308,12 +2369,12 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     addReceiver: function addReceiver(receiver, listId) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["addReceiver"])(receiver, listId));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["addReceiver"])(receiver, listId));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(ReceiverAdd));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ReceiverAdd));
 
 /***/ }),
 
@@ -2398,9 +2459,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReceiverGiftAdd", function() { return ReceiverGiftAdd; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2420,6 +2483,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -2479,16 +2543,16 @@ function (_Component) {
   _createClass(ReceiverGiftAdd, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["Button"], {
         color: "primary",
         onClick: this.handleClickOpen
-      }, "Add Gift Idea"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Dialog"], {
+      }, "Add Gift Idea"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["Dialog"], {
         open: this.state.open,
         onClose: this.handleClose,
         "aria-labelledby": "add-new-gift-form-title"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["DialogTitle"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["DialogTitle"], {
         id: "add-new-gift-form-title"
-      }, "Paste Link to Gift Idea"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["DialogContentText"], null, "Paste the link of the gift idea you'd like to add"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["TextField"], {
+      }, "Paste Link to Gift Idea"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["DialogContentText"], null, "Paste the link of the gift idea you'd like to add"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["TextField"], {
         onChange: this.handleChange('url'),
         value: this.state.name,
         autoFocus: true,
@@ -2497,10 +2561,10 @@ function (_Component) {
         label: "Gift Link",
         type: "text",
         fullWidth: true
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["DialogActions"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["DialogActions"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["Button"], {
         onClick: this.handleClose,
         color: "primary"
-      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["Button"], {
         onClick: this.handleSubmit,
         color: "primary"
       }, "Add"))));
@@ -2509,16 +2573,19 @@ function (_Component) {
 
   return ReceiverGiftAdd;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+ReceiverGiftAdd.propTypes = {
+  addGiftToReceiver: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+};
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     addGiftToReceiver: function addGiftToReceiver(url, receiverId) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["addGiftToReceiver"])(url, receiverId));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["addGiftToReceiver"])(url, receiverId));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(null, mapDispatchToProps)(ReceiverGiftAdd));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, mapDispatchToProps)(ReceiverGiftAdd));
 
 /***/ }),
 
@@ -2533,10 +2600,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
-/* harmony import */ var _receiver_name__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./receiver-name */ "./client/components/Receiver/receiver-name.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
+/* harmony import */ var _receiver_name__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./receiver-name */ "./client/components/Receiver/receiver-name.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2556,6 +2625,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -2612,24 +2682,24 @@ function (_Component) {
     key: "render",
     value: function render() {
       var receiverId = this.props.receiverId;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_2__["Button"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Button"], {
         color: "primary",
         onClick: this.handleClickOpen
-      }, "Remove"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_2__["Dialog"], {
+      }, "Remove"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Dialog"], {
         open: this.state.open,
         onClose: this.handleClose,
         "aria-labelledby": "receiver-gift-delete",
         "aria-describedby": "receiver-gift-delete-dialog"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_2__["DialogTitle"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["DialogTitle"], {
         id: "receiver-gift-delete"
-      }, "Are you sure you want to delete this gift idea?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_2__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_2__["DialogContentText"], {
+      }, "Are you sure you want to delete this gift idea?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["DialogContentText"], {
         id: "receiver-gift-delete-dialog"
-      }, "Confirm to remove this gift from ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_name__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }, "Confirm to remove this gift from ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_name__WEBPACK_IMPORTED_MODULE_4__["default"], {
         id: receiverId
-      }), "'s gift list.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_2__["DialogActions"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_2__["Button"], {
+      }), "'s gift list.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["DialogActions"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Button"], {
         onClick: this.handleClose,
         color: "primary"
-      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_2__["Button"], {
+      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Button"], {
         onClick: this.handleRemove,
         color: "primary",
         autoFocus: true
@@ -2640,15 +2710,20 @@ function (_Component) {
   return ReceiverGiftDelete;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
+ReceiverGiftDelete.propTypes = {
+  removeGiftFromReceiver: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  receiverId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number
+};
+
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     removeGiftFromReceiver: function removeGiftFromReceiver(itemId) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["removeGiftFromReceiver"])(itemId));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_5__["removeGiftFromReceiver"])(itemId));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(null, mapDispatchToProps)(ReceiverGiftDelete));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, mapDispatchToProps)(ReceiverGiftDelete));
 
 /***/ }),
 
@@ -2663,9 +2738,11 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2685,6 +2762,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -2722,7 +2800,7 @@ function (_Component) {
     key: "render",
     value: function render() {
       var gift = this.props.gift;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_2__["Checkbox"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Checkbox"], {
         checked: gift.purchased,
         onChange: this.handleChange(),
         value: "checkedB",
@@ -2734,15 +2812,20 @@ function (_Component) {
   return ReceiveGiftToggle;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
+ReceiveGiftToggle.propTypes = {
+  gift: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
+  toggleGiftStatus: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+};
+
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     toggleGiftStatus: function toggleGiftStatus(gift) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["toggleGiftStatus"])(gift));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["toggleGiftStatus"])(gift));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(null, mapDispatchToProps)(ReceiveGiftToggle));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, mapDispatchToProps)(ReceiveGiftToggle));
 
 /***/ }),
 
@@ -2757,12 +2840,14 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Receiver__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Receiver */ "./client/components/Receiver/index.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
-/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _Receiver__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Receiver */ "./client/components/Receiver/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
+/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2780,6 +2865,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -2823,43 +2909,49 @@ function (_Component) {
       var _this$props = this.props,
           classes = _this$props.classes,
           receiverId = _this$props.receiverId;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["Paper"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["Paper"], {
         className: classes.root
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["Table"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["Table"], {
         className: classes.table
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableHead"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableRow"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableCell"], null, "Purchased"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableCell"], null, "Image"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableCell"], null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableCell"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableHead"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableRow"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], null, "Purchased"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], null, "Image"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
         numeric: true
-      }, "Actions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableCell"], {
+      }, "Actions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
         numeric: true
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_3__["ReceiverGiftAdd"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_4__["ReceiverGiftAdd"], {
         receiverId: receiverId
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableBody"], null, this.props.gifts.map(function (gift) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableRow"], {
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableBody"], null, this.props.gifts.map(function (gift) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableRow"], {
           key: gift.id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_3__["ReceiverGiftToggle"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_4__["ReceiverGiftToggle"], {
           gift: gift
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: gift.item.image,
           width: "50"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableCell"], {
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
           component: "th",
           scope: "row"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           href: gift.item.url,
           target: "_blank",
           rel: "noopener"
-        }, gift.item.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableCell"], {
+        }, gift.item.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
           numeric: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_3__["ReceiverGiftDelete"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_4__["ReceiverGiftDelete"], {
           itemId: gift.id,
           receiverId: receiverId
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["TableCell"], null));
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], null));
       }))));
     }
   }]);
 
   return ReceiverGiftsList;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+ReceiverGiftsList.propTypes = {
+  gifts: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object),
+  classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
+  receiverId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number
+};
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
@@ -2870,12 +2962,12 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     getAllReceiverGifts: function getAllReceiverGifts(receiverId) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["getAllReceiverGifts"])(receiverId));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_5__["getAllReceiverGifts"])(receiverId));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["withStyles"])(styles)(ReceiverGiftsList)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["withStyles"])(styles)(ReceiverGiftsList)));
 
 /***/ }),
 
@@ -2890,8 +2982,10 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2911,6 +3005,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -2952,6 +3047,11 @@ function (_Component) {
   return ReceiverName;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
+ReceiverName.propTypes = {
+  currentReceiver: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
+  getReceiver: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+};
+
 var mapStateToProps = function mapStateToProps(state) {
   return {
     currentReceiver: state.receivers.currentReceiver
@@ -2961,12 +3061,12 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     getReceiver: function getReceiver(id) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getReceiver"])(id));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["getReceiver"])(id));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(ReceiverName));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ReceiverName));
 
 /***/ }),
 
@@ -2981,18 +3081,20 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
-/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utilities */ "./client/utilities/index.js");
-/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_utilities__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _receiver_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./receiver-actions */ "./client/components/Receiver/receiver-actions.js");
-/* harmony import */ var _receiver_add__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./receiver-add */ "./client/components/Receiver/receiver-add.js");
-/* harmony import */ var _List__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../List */ "./client/components/List/index.js");
-/* harmony import */ var _Receiver__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../Receiver */ "./client/components/Receiver/index.js");
-/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utilities */ "./client/utilities/index.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_utilities__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _receiver_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./receiver-actions */ "./client/components/Receiver/receiver-actions.js");
+/* harmony import */ var _receiver_add__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./receiver-add */ "./client/components/Receiver/receiver-add.js");
+/* harmony import */ var _List__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../List */ "./client/components/List/index.js");
+/* harmony import */ var _Receiver__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../Receiver */ "./client/components/Receiver/index.js");
+/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3012,6 +3114,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -3105,58 +3208,69 @@ function (_Component) {
       var listId = parseInt(match.params.listId);
 
       if (receivers.length === 0) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_add__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_add__WEBPACK_IMPORTED_MODULE_8__["default"], {
           listId: listId
         });
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_add__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_add__WEBPACK_IMPORTED_MODULE_8__["default"], {
         listId: listId
-      }), userLists && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["Typography"], {
+      }), userLists && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["Typography"], {
         variant: "subtitle1"
-      }, "Receivers ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_List__WEBPACK_IMPORTED_MODULE_8__["ListName"], {
+      }, "Receivers ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_List__WEBPACK_IMPORTED_MODULE_9__["ListName"], {
         listId: listId,
         userLists: userLists
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["Paper"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["Paper"], {
         className: classes.root
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["Table"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["Table"], {
         className: classes.table
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableHead"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableRow"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], null, "Receiver Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableHead"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableRow"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], null, "Receiver Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], {
         numeric: true
-      }, "Assigned Gifts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], {
+      }, "Assigned Gifts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], {
         numeric: true
-      }, "Purchased Gifts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], null, "Actions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], {
+      }, "Purchased Gifts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], null, "Actions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], {
         numeric: true
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_List__WEBPACK_IMPORTED_MODULE_8__["ListDelete"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_List__WEBPACK_IMPORTED_MODULE_9__["ListDelete"], {
         listId: listId
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableBody"], null, receivers && receivers.map(function (receiver) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableRow"], {
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableBody"], null, receivers && receivers.map(function (receiver) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableRow"], {
           key: receiver.id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], {
           component: "th",
           scope: "row"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-          to: "/dashboard/receiver/".concat(Object(_utilities__WEBPACK_IMPORTED_MODULE_5__["strToLowercaseDashed"])(receiver.name), "/").concat(receiver.id)
-        }, receiver.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+          to: "/dashboard/receiver/".concat(Object(_utilities__WEBPACK_IMPORTED_MODULE_6__["strToLowercaseDashed"])(receiver.name), "/").concat(receiver.id)
+        }, receiver.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], {
           numeric: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_9__["GiftCount"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_10__["GiftCount"], {
           receiverId: receiver.id,
           gifts: gifts
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], {
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], {
           numeric: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_9__["GiftPurchaseCount"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_10__["GiftPurchaseCount"], {
           receiverId: receiver.id,
           gifts: gifts
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_actions__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_actions__WEBPACK_IMPORTED_MODULE_7__["default"], {
           receiverId: receiver.id,
           listId: listId
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_10__["TableCell"], null));
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], null));
       })))));
     }
   }]);
 
   return ReceiversList;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+ReceiversList.propTypes = {
+  receivers: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object),
+  gifts: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object),
+  userLists: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object),
+  getAllListReceivers: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  updateCurrentListId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  getAllGiftsForList: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
+  match: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
+};
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
@@ -3169,18 +3283,18 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     getAllListReceivers: function getAllListReceivers(listId) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["getAllListReceivers"])(listId));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_5__["getAllListReceivers"])(listId));
     },
     updateCurrentListId: function updateCurrentListId(listId) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["updateCurrentListId"])(listId));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_5__["updateCurrentListId"])(listId));
     },
     getAllGiftsForList: function getAllGiftsForList(receiverIds) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["getAllGiftsForList"])(receiverIds));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_5__["getAllGiftsForList"])(receiverIds));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["withStyles"])(styles)(ReceiversList)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__["withStyles"])(styles)(ReceiversList)));
 
 /***/ }),
 
@@ -3244,7 +3358,7 @@ var styles = function styles(theme) {
   };
 };
 
-function ClippedDrawer(props) {
+function Sidebar(props) {
   var classes = props.classes;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: classes.root
@@ -3273,10 +3387,10 @@ function ClippedDrawer(props) {
   }))));
 }
 
-ClippedDrawer.propTypes = {
+Sidebar.propTypes = {
   classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
 };
-/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["withStyles"])(styles)(ClippedDrawer));
+/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["withStyles"])(styles)(Sidebar));
 
 /***/ }),
 
@@ -3434,15 +3548,12 @@ var mapDispatch = function mapDispatch(dispatch) {
 
 var Login = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapLogin, mapDispatch)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6__["withStyles"])(styles)(AuthForm));
 var Signup = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapSignup, mapDispatch)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6__["withStyles"])(styles)(AuthForm));
-/**
- * PROP TYPES
- */
-
 AuthForm.propTypes = {
   name: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string.isRequired,
   displayName: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string.isRequired,
   handleSubmit: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
-  error: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object
+  error: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object,
+  classes: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object
 };
 
 /***/ }),
@@ -3644,7 +3755,7 @@ var mapProps = function mapProps(dispatch) {
 UserDashboard.propTypes = {
   email: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
   classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
-  currentListId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number
+  currentListId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
 };
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapState, mapProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["withStyles"])(styles)(UserDashboard)));
 

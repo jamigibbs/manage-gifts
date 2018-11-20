@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
@@ -118,6 +119,17 @@ class ReceiversList extends Component {
       </div>
     )
   }
+}
+
+ReceiversList.propTypes = {
+  receivers: PropTypes.arrayOf(PropTypes.object),
+  gifts: PropTypes.arrayOf(PropTypes.object),
+  userLists: PropTypes.arrayOf(PropTypes.object),
+  getAllListReceivers: PropTypes.func,
+  updateCurrentListId: PropTypes.func,
+  getAllGiftsForList: PropTypes.func,
+  classes: PropTypes.object,
+  match: PropTypes.object
 }
 
 const mapStateToProps = (state) => {

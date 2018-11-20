@@ -30,7 +30,7 @@ const AuthForm = props => {
   return (
     <div>
       <Navbar />
-      
+
       <Grid
         container
         direction="column"
@@ -154,12 +154,10 @@ const mapDispatch = dispatch => {
 export const Login = connect(mapLogin, mapDispatch)(withStyles(styles)(AuthForm))
 export const Signup = connect(mapSignup, mapDispatch)(withStyles(styles)(AuthForm))
 
-/**
- * PROP TYPES
- */
 AuthForm.propTypes = {
   name: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  error: PropTypes.object
+  error: PropTypes.object,
+  classes: PropTypes.object
 }

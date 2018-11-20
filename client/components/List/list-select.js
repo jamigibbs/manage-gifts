@@ -73,7 +73,10 @@ const mapDispatchToProps = (dispatch) => {
 
 ListSelectDialog.propTypes = {
   userLists: PropTypes.array,
-  userId: PropTypes.number
+  currentId: PropTypes.number,
+  userId: PropTypes.number,
+  updateCurrentListId: PropTypes.func,
+  getListsForuser: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListSelect)

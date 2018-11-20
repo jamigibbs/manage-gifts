@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import { ReceiverGiftAdd, ReceiverGiftDelete, ReceiverGiftToggle } from '../Receiver'
@@ -57,6 +58,12 @@ class ReceiverGiftsList extends Component {
     </Paper>
     )
   }
+}
+
+ReceiverGiftsList.propTypes = {
+  gifts: PropTypes.arrayOf(PropTypes.object),
+  classes: PropTypes.object,
+  receiverId: PropTypes.number
 }
 
 const mapStateToProps = (state) => {

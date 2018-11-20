@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { addReceiver } from '../../actions'
 
@@ -46,9 +47,13 @@ export class ReceiverAdd extends Component {
   }
 }
 
+ReceiverAdd.propTypes = {
+  currentListId: PropTypes.number,
+  addReceiver: PropTypes.func
+}
+
 const mapStateToProps = (state) => {
   return {
-    receivers: state.receivers,
     currentListId: state.list.currentId
   }
 }

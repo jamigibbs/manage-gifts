@@ -23,7 +23,7 @@ const styles = theme => ({
   toolbar: theme.mixins.toolbar,
 })
 
-function ClippedDrawer(props) {
+function Sidebar (props) {
   const { classes } = props;
 
   return (
@@ -58,8 +58,8 @@ function ClippedDrawer(props) {
   )
 }
 
-ClippedDrawer.propTypes = {
+Sidebar.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(ClippedDrawer)
+export default withStyles(styles)(Sidebar)

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { addGiftToReceiver } from '../../actions'
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
@@ -67,6 +68,10 @@ export class ReceiverGiftAdd extends Component {
       </div>
     )
   }
+}
+
+ReceiverGiftAdd.propTypes = {
+  addGiftToReceiver: PropTypes.func
 }
 
 const mapDispatchToProps = (dispatch) => {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getReceiver } from '../../actions'
 
@@ -16,6 +17,11 @@ class ReceiverName extends Component {
     )
   }
 
+}
+
+ReceiverName.propTypes = {
+  currentReceiver: PropTypes.object,
+  getReceiver: PropTypes.func
 }
 
 const mapStateToProps = (state) => {

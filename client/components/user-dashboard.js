@@ -79,7 +79,7 @@ const mapProps = dispatch => {
 UserDashboard.propTypes = {
   email: PropTypes.string,
   classes: PropTypes.object.isRequired,
-  currentListId: PropTypes.number
+  currentListId: PropTypes.func
 }
 
 export default connect(mapState, mapProps)(withStyles(styles)(UserDashboard))
