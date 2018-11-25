@@ -15,11 +15,8 @@ class ListSelect extends Component {
     listId: null
   }
 
-  componentDidMount = () => {
-    this.props.getListsForuser(this.props.userId)
-  }
-
   handleClickOpen = () => {
+    this.props.getListsForuser(this.props.userId)
     this.setState({
       open: true
     })
