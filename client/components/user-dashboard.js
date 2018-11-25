@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import { updateCurrentListId } from '../actions'
 import { withStyles } from '@material-ui/core/styles'
 import { Typography } from '@material-ui/core'
+
 import { ReceiversList, ReceiverDetails } from './Receiver'
-
 import { Sidebar } from './Sidebar'
-
 import { ListAdd, ListSelect } from './List'
 
 const styles = theme => ({
@@ -34,7 +33,8 @@ export class UserDashboard extends Component {
   }
 
   render(){
-    const { email, classes } = this.props
+    const { email, classes, isLoggedIn } = this.props
+
     return (
       <div className={classes.root}>
         <Sidebar />
@@ -64,7 +64,8 @@ export class UserDashboard extends Component {
 
 const mapState = state => {
   return {
-    email: state.user.email
+    email: state.user.email,
+    isLoggedIn: !!state.user.id
   }
 }
 

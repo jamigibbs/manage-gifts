@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles'
-import { Drawer, List, Divider, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core'
+import { connect } from 'react-redux'
+import { Drawer, List, Divider, ListItem, ListItemIcon, ListItemText, Typography, Button } from '@material-ui/core'
 import NotesIcon from '@material-ui/icons/Notes'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import LogoutIcon from '@material-ui/icons/LastPage'
+
+import { logout } from '../../actions'
 
 const drawerWidth = 240
 
@@ -23,7 +26,7 @@ const styles = theme => ({
 })
 
 function Sidebar (props) {
-  const { classes } = props;
+  const { classes, logout } = props
 
   return (
     <div className={classes.root}>
@@ -31,7 +34,7 @@ function Sidebar (props) {
         className={classes.drawer}
         variant="permanent"
         classes={{
-          paper: classes.drawerPaper,
+          paper: classes.drawerPaper
         }}
       >
         <div className={classes.toolbar}>
@@ -51,7 +54,7 @@ function Sidebar (props) {
         <List>
           <ListItem button>
             <ListItemIcon><LogoutIcon /></ListItemIcon>
-            <ListItemText primary="Logout" />
+            <ListItemText primary="Logout" onClick={logout} />
           </ListItem>
         </List>
       </Drawer>
@@ -61,6 +64,15 @@ function Sidebar (props) {
 
 Sidebar.propTypes = {
   classes: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired
 }
 
-export default withStyles(styles)(Sidebar)
+const mapDispatchToProps = dispatch => {
+  return {
+    logout() {
+      dispatch(logout())
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(Sidebar))

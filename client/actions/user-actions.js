@@ -2,15 +2,9 @@ import axios from 'axios'
 import history from '../history'
 import { GET_USER, REMOVE_USER} from '../constants'
 
-/**
- * ACTION CREATORS
- */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
 
-/**
- * THUNK CREATORS
- */
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')

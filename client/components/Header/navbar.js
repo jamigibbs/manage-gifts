@@ -62,9 +62,6 @@ const Navbar = ({handleClick, isLoggedIn, classes}) => (
   </div>
 )
 
-/**
- * CONTAINER
- */
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id
@@ -81,9 +78,6 @@ const mapDispatch = dispatch => {
 
 export default withRouter(connect(mapState, mapDispatch)(withStyles(styles)(Navbar)))
 
-/**
- * PROP TYPES
- */
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,

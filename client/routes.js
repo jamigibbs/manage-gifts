@@ -1,32 +1,38 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Route, Switch} from 'react-router-dom'
+import { withRouter, Route, Switch } from 'react-router-dom'
+import Cookies from 'js-cookie'
 import PropTypes from 'prop-types'
 import { Login, Signup, UserDashboard, Home } from './components'
-import {me} from './actions'
+import PrivateRoute from './routes-private'
+import { me } from './actions'
 
 class Routes extends Component {
+
   componentDidMount() {
     this.props.loadInitialData()
   }
 
-  render() {
-    const {isLoggedIn} = this.props
+  isLoggedInCookie() {
+    return (Cookies.get('mg_iLI') === "true")
+  }
 
+  render() {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        {isLoggedIn && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route path="/dashboard" component={UserDashboard} />
-          </Switch>
-        )}
+        <Switch>
+        <PrivateRoute
+          authed={this.isLoggedInCookie()}
+          path='/dashboard'
+          component={UserDashboard}
+        />
+        </Switch>
         {/* Displays our Home component as a fallback */}
-        {/* <Route component={Home} /> */}
+        <Route component={Home} />
       </Switch>
     )
   }
@@ -34,8 +40,6 @@ class Routes extends Component {
 
 const mapState = state => {
   return {
-    // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
-    // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id
   }
 }
@@ -54,5 +58,5 @@ export default withRouter(connect(mapState, mapDispatch)(Routes))
 
 Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  //isLoggedIn: PropTypes.bool.isRequired
 }
