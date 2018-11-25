@@ -1674,9 +1674,10 @@ var ListName = function ListName(_ref) {
       listId = _ref.listId;
 
   var getListName = function getListName(id) {
-    return userLists.find(function (list) {
+    var list = userLists.find(function (list) {
       return list.id === id;
-    }).name;
+    });
+    return list.name;
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, getListName(listId));
@@ -1865,10 +1866,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
-/* harmony import */ var _list_select_dialog__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./list-select-dialog */ "./client/components/List/list-select-dialog.js");
-/* harmony import */ var _list_name__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./list-name */ "./client/components/List/list-name.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/src/js.cookie.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
+/* harmony import */ var _list_select_dialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./list-select-dialog */ "./client/components/List/list-select-dialog.js");
+/* harmony import */ var _list_name__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./list-name */ "./client/components/List/list-name.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1888,6 +1891,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1921,6 +1925,12 @@ function (_Component) {
       listId: null
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentDidMount", function () {
+      var userId = _this.props.userId ? _this.props.userId : js_cookie__WEBPACK_IMPORTED_MODULE_3___default.a.get('mg_id');
+
+      _this.props.getListsForuser(userId);
+    });
+
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleClickOpen", function () {
       _this.props.getListsForuser(_this.props.userId);
 
@@ -1948,17 +1958,17 @@ function (_Component) {
       var _this$props = this.props,
           userLists = _this$props.userLists,
           currentId = _this$props.currentId;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Button"], {
         variant: "contained",
         onClick: this.handleClickOpen
-      }, "Select List"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_list_select_dialog__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }, "Select List"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_list_select_dialog__WEBPACK_IMPORTED_MODULE_5__["default"], {
         selectedList: this.state.selectedList,
         open: this.state.open,
         onClose: this.handleClose,
         lists: userLists
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Typography"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Typography"], {
         variant: "h6"
-      }, currentId && userLists.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_list_name__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      }, currentId && userLists.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_list_name__WEBPACK_IMPORTED_MODULE_6__["default"], {
         listId: currentId,
         userLists: userLists
       })));
@@ -1979,15 +1989,15 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     updateCurrentListId: function updateCurrentListId(listId) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["updateCurrentListId"])(listId));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["updateCurrentListId"])(listId));
     },
     getListsForuser: function getListsForuser(userId) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["getListsForuser"])(userId));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["getListsForuser"])(userId));
     }
   };
 };
 
-_list_select_dialog__WEBPACK_IMPORTED_MODULE_4__["default"].propTypes = {
+_list_select_dialog__WEBPACK_IMPORTED_MODULE_5__["default"].propTypes = {
   userLists: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array,
   currentId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
   userId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
@@ -3191,16 +3201,18 @@ function (_Component) {
       var listId = parseInt(match.params.listId);
 
       if (receivers.length === 0) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_add__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["Typography"], {
+          variant: "subtitle1"
+        }, "**No Receivers Added Yet**"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_add__WEBPACK_IMPORTED_MODULE_8__["default"], {
           listId: listId
-        });
+        }));
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_add__WEBPACK_IMPORTED_MODULE_8__["default"], {
         listId: listId
-      }), userLists && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["Typography"], {
+      }), userLists.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["Typography"], {
         variant: "subtitle1"
-      }, "Receivers ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_List__WEBPACK_IMPORTED_MODULE_9__["ListName"], {
+      }, "List Name: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_List__WEBPACK_IMPORTED_MODULE_9__["ListName"], {
         listId: listId,
         userLists: userLists
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["Paper"], {
