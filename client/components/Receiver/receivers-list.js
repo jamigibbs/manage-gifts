@@ -72,12 +72,6 @@ class ReceiversList extends Component {
 
         <ReceiverAdd listId={listId} />
 
-        { userLists.length &&
-          <Typography variant="subtitle1">
-            List Name: <ListName listId={listId} userLists={userLists} />
-          </Typography>
-        }
-
         <Paper className={classes.root}>
           <Table className={classes.table}>
             <TableHead>
