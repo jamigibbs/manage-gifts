@@ -44,7 +44,6 @@ function Sidebar (props) {
         <List>
           <ListItem button>
             <ListItemIcon><AddListIcon /></ListItemIcon>
-            {/* <ListItemText primary="Add New List" /> */}
             <ListAdd />
           </ListItem>
           <ListItem button>

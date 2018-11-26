@@ -1676,10 +1676,9 @@ var ListName = function ListName(_ref) {
       listId = _ref.listId;
 
   var getListName = function getListName(id) {
-    var list = userLists.find(function (list) {
+    return userLists.find(function (list) {
       return list.id === id;
-    });
-    return list.name;
+    }).name;
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, getListName(listId));

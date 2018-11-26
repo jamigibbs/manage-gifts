@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 const ListName = ({userLists, listId}) => {
 
   const getListName = (id) => {
-    const list = userLists
+    return userLists
       .find( list => list.id === id )
-    return list.name
+      .name
   }
 
   return (
