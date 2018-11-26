@@ -35,19 +35,17 @@ export class UserDashboard extends Component {
   }
 
   render(){
-    const { email, classes, userLists, currentId } = this.props
+    const { firstName, classes, userLists, currentId } = this.props
 
     return (
       <div className={classes.root}>
         <Sidebar />
         <main className={classes.content}>
 
-        { userLists.length &&
           <DashboardHeader
-            name={email}
+            name={firstName}
             userLists={userLists}
             currentId={currentId} />
-        }
 
           <Switch>
             <Route
@@ -68,7 +66,7 @@ export class UserDashboard extends Component {
 
 const mapState = state => {
   return {
-    email: state.user.email,
+    firstName: state.user.firstName,
     isLoggedIn: !!state.user.id,
     userLists: state.list.userLists,
     currentId: state.list.currentId

@@ -1,7 +1,7 @@
 {
   "user": [
-    {"email": "cody@email.com", "password": "123"},
-    {"email": "murphy@email.com", "password": "123"}
+    {"email": "cody@email.com", "password": "123", "firstName": "Cody", "lastName": "Smith"},
+    {"email": "murphy@email.com", "password": "123", "firstName": "Murphy", "lastName": "Smith"}
   ],
   "list": [
     {"name": "Christmas", "userId": 1},
