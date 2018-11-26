@@ -1489,6 +1489,9 @@ var styles = function styles(theme) {
     },
     listItemText: {
       color: '#C2C6CB'
+    },
+    paper: {
+      borderRadius: 0
     }
   };
 };
@@ -1560,12 +1563,16 @@ function (_Component) {
         primary: "Create New List",
         onClick: this.handleClickOpen
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Dialog"], {
+        classes: {
+          paper: classes.paper
+        },
         open: this.state.open,
         onClose: this.handleClose,
+        fullWidth: true,
         "aria-labelledby": "add-new-list-form-title"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["DialogTitle"], {
         id: "add-new-list-form-title"
-      }, "Create New List"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["DialogContentText"], null, "Enter the name of the list you'd like to add"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["TextField"], {
+      }, "Create New List"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["DialogContentText"], null, "Enter the name of the list you'd like to add. eg. Christmas 2019"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["TextField"], {
         onChange: this.handleChange('name'),
         value: this.state.name,
         autoFocus: true,
@@ -1868,6 +1875,9 @@ var styles = {
   avatar: {
     backgroundColor: _material_ui_core_colors__WEBPACK_IMPORTED_MODULE_9__["blue"][100],
     color: _material_ui_core_colors__WEBPACK_IMPORTED_MODULE_9__["blue"][600]
+  },
+  paper: {
+    borderRadius: 0
   }
 };
 
@@ -1912,6 +1922,10 @@ function (_Component) {
           lists = _this$props.lists,
           open = _this$props.open;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Dialog"], {
+        classes: {
+          paper: classes.paper
+        },
+        fullWidth: true,
         onClose: this.handleClose,
         "aria-labelledby": "list-select-title",
         open: open
