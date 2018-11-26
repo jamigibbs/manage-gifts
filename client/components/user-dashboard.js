@@ -1,22 +1,24 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { updateCurrentListId } from '../actions'
 import { withStyles } from '@material-ui/core/styles'
-import { Typography } from '@material-ui/core'
 
 import { ReceiversList, ReceiverDetails } from './Receiver'
 import { Sidebar } from './Sidebar'
-import { ListAdd, ListSelect } from './List'
+import { DashboardHeader } from './Dashboard'
 
 const styles = theme => ({
   root: {
     display: 'flex',
   },
   content: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3,
+    flexGrow: 1
+  },
+  header: {
+    fontWeight: 'bold',
+    margin: '20px 0 40px 0'
   }
 })
 
@@ -33,13 +35,19 @@ export class UserDashboard extends Component {
   }
 
   render(){
-    const { email, classes, isLoggedIn } = this.props
+    const { email, classes, userLists, currentId } = this.props
 
     return (
       <div className={classes.root}>
         <Sidebar />
         <main className={classes.content}>
-          <Typography variant="h6" align="center">Welcome, {email}</Typography>
+
+        { userLists.length &&
+          <DashboardHeader
+            name={email}
+            userLists={userLists}
+            currentId={currentId} />
+        }
 
           <Switch>
             <Route
@@ -47,7 +55,7 @@ export class UserDashboard extends Component {
               render={(props) => <ReceiversList {...props} /> }
             />
             <Route
-              exact path={'/dashboard/receiver/:receiverName/:receiverId'}
+              exact path={'/dashboard/list/:listId/receiver/:receiverName/:receiverId'}
               render={(props) => <ReceiverDetails {...props} /> }
             />
           </Switch>
@@ -61,7 +69,9 @@ export class UserDashboard extends Component {
 const mapState = state => {
   return {
     email: state.user.email,
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    userLists: state.list.userLists,
+    currentId: state.list.currentId
   }
 }
 

@@ -10,6 +10,12 @@ const styles = theme => ({
     flex: '1 1 auto',
     padding: '0 16px',
     minWidth: 0,
+  },
+  listItemText: {
+    color: '#C2C6CB'
+  },
+  paper: {
+    borderRadius: 0
   }
 })
 
@@ -48,17 +54,20 @@ export class ListAdd extends Component {
     return (
       <div className={classes.root}>
         <ListItemText
-          primary="Add New List"
+          classes={{ primary: classes.listItemText }}
+          primary="Create New List"
           onClick={this.handleClickOpen} />
         <Dialog
+          classes={{ paper: classes.paper }}
           open={this.state.open}
           onClose={this.handleClose}
+          fullWidth={true}
           aria-labelledby="add-new-list-form-title"
         >
-          <DialogTitle id="add-new-list-form-title">Add New List</DialogTitle>
+          <DialogTitle id="add-new-list-form-title">Create New List</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Enter the name of the list you'd like to add
+              Enter the name of the list you'd like to add. eg. Christmas 2019
             </DialogContentText>
             <TextField
               onChange={this.handleChange('name')}

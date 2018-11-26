@@ -14,12 +14,23 @@ import { Typography, Table, TableBody, TableCell, TableHead, TableRow, Paper } f
 
 const styles = theme => ({
   root: {
-    width: '100%',
-    marginTop: theme.spacing.unit * 3,
-    overflowX: 'auto'
+    marginTop: theme.spacing.unit * 2,
+    marginLeft: theme.spacing.unit * 2,
+    borderRadius: 0
   },
   table: {
     minWidth: 700
+  },
+  receiver: {
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline'
+    }
+  },
+  notice: {
+    marginLeft: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit * 2,
+    padding: theme.spacing.unit * 3,
   }
 })
 
@@ -55,28 +66,25 @@ class ReceiversList extends Component {
   }
 
   render(){
-    const { receivers, classes, match, userLists, gifts } = this.props
+    const { receivers, classes, match, gifts } = this.props
     const listId = parseInt(match.params.listId)
 
     if (receivers.length === 0 ) {
       return (
-        <div>
-          <Typography variant="subtitle1">**No Receivers Added Yet**</Typography>
+        <div className={classes.root}>
+          <Paper className={classes.notice}>
+            <Typography variant="h6">Nice work creating a new list!</Typography>
+            <Typography variant="body1">Next you'll want to add names to the list below for the people you're finding gifts.</Typography>
+          </Paper>
           <ReceiverAdd listId={listId} />
         </div>
       )
     }
 
     return (
-      <div>
+      <div className={classes.root}>
 
         <ReceiverAdd listId={listId} />
-
-        { userLists.length &&
-          <Typography variant="subtitle1">
-            List Name: <ListName listId={listId} userLists={userLists} />
-          </Typography>
-        }
 
         <Paper className={classes.root}>
           <Table className={classes.table}>
@@ -95,15 +103,21 @@ class ReceiversList extends Component {
                     return (
                       <TableRow key={receiver.id}>
                         <TableCell component="th" scope="row">
-                          <Link to={`/dashboard/receiver/${strToLowercaseDashed(receiver.name)}/${receiver.id}`}>
-                            {receiver.name}
+                          <Link
+                            className={classes.receiver}
+                            to={`/dashboard/list/${listId}/receiver/${strToLowercaseDashed(receiver.name)}/${receiver.id}`}>
+                            <Typography variant="body1">{receiver.name}</Typography>
                           </Link>
                         </TableCell>
                         <TableCell numeric>
-                          <GiftCount receiverId={receiver.id} gifts={gifts} />
+                          <GiftCount
+                            receiverId={receiver.id}
+                            gifts={gifts} />
                         </TableCell>
                         <TableCell numeric>
-                          <GiftPurchaseCount receiverId={receiver.id} gifts={gifts} />
+                          <GiftPurchaseCount
+                            receiverId={receiver.id}
+                            gifts={gifts} />
                         </TableCell>
                         <TableCell>
                           <ReceiverActions

@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
+import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { addGiftToReceiver } from '../../actions'
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
+
+const styles = theme => ({
+  button: {
+    marginLeft: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit
+  }
+})
 
 export class ReceiverGiftAdd extends Component {
 
@@ -31,12 +39,19 @@ export class ReceiverGiftAdd extends Component {
   }
 
   render(){
-
+    const { classes } = this.props
     return (
       <div>
-        <Button color="primary" onClick={this.handleClickOpen}>Add Gift Idea</Button>
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={this.handleClickOpen}>
+          Add a Gift Idea
+        </Button>
         <Dialog
           open={this.state.open}
+          fullWidth={true}
           onClose={this.handleClose}
           aria-labelledby="add-new-gift-form-title"
         >
@@ -82,4 +97,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(ReceiverGiftAdd)
+export default connect(null, mapDispatchToProps)(withStyles(styles)(ReceiverGiftAdd))

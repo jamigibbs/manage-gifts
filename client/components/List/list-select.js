@@ -12,6 +12,9 @@ const styles = theme => ({
     flex: '1 1 auto',
     padding: '0 16px',
     minWidth: 0,
+  },
+  listItemText: {
+    color: '#C2C6CB'
   }
 })
 
@@ -45,6 +48,7 @@ class ListSelect extends Component {
       <div>
         <div className={classes.listItem}>
           <ListItemText
+            classes={{ primary: classes.listItemText }}
             primary="Select List"
             onClick={this.handleClickOpen}
           />

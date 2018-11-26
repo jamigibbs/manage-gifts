@@ -15,6 +15,9 @@ const styles = {
   avatar: {
     backgroundColor: blue[100],
     color: blue[600]
+  },
+  paper: {
+    borderRadius: 0
   }
 }
 
@@ -33,6 +36,8 @@ class ListSelectDialog extends Component {
     const { classes, lists, open } = this.props
     return (
       <Dialog
+        classes={{ paper: classes.paper }}
+        fullWidth={true}
         onClose={this.handleClose}
         aria-labelledby="list-select-title"
         open={open}
