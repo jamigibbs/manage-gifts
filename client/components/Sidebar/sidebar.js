@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { Drawer, List, Divider, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core'
 import ListSelectIcon from '@material-ui/icons/ListAlt'
 import AddListIcon from '@material-ui/icons/PlaylistAdd'
@@ -26,9 +27,15 @@ const styles = theme => ({
   },
   toolbar: theme.mixins.toolbar,
   logo: {
+    margin: '20px 0 0 25px'
+  },
+  logoLink: {
+    textDecoration: 'none',
     color: 'white',
     fontWeight: 'bold',
-    margin: '20px 0 0 25px'
+    '&:hover': {
+      cursor: 'pointer'
+    }
   },
   icon: {
     color: '#C2C6CB'
@@ -60,16 +67,18 @@ function Sidebar (props) {
         }}
       >
         <div className={classes.toolbar}>
-          <Typography variant="h6" className={classes.logo}>Manage Gifts</Typography>
+          <Typography variant="h6" className={classes.logo}>
+          <Link to="/dashboard" className={classes.logoLink}>Manage Gifts</Link>
+          </Typography>
         </div>
         <List>
           <ListItem button classes={{ button: classes.listItem }}>
-            <ListItemIcon className={classes.icon}><AddListIcon /></ListItemIcon>
-            <ListAdd />
-          </ListItem>
-          <ListItem button classes={{ button: classes.listItem }}>
             <ListItemIcon><ListSelectIcon className={classes.icon}/></ListItemIcon>
             <ListSelect />
+          </ListItem>
+          <ListItem button classes={{ button: classes.listItem }}>
+            <ListItemIcon className={classes.icon}><AddListIcon /></ListItemIcon>
+            <ListAdd />
           </ListItem>
         </List>
         <Divider light={true} classes={{ root: classes.divider }} />
