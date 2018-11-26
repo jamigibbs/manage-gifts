@@ -1,22 +1,20 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { updateCurrentListId } from '../actions'
 import { withStyles } from '@material-ui/core/styles'
-import { Typography } from '@material-ui/core'
 
 import { ReceiversList, ReceiverDetails } from './Receiver'
 import { Sidebar } from './Sidebar'
-import { ListAdd, ListSelect } from './List'
+import { DashboardHeader } from './Dashboard'
 
 const styles = theme => ({
   root: {
     display: 'flex',
   },
   content: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3,
+    flexGrow: 1
   },
   header: {
     fontWeight: 'bold',
@@ -37,18 +35,16 @@ export class UserDashboard extends Component {
   }
 
   render(){
-    const { email, classes, isLoggedIn } = this.props
+    const { email, classes, userLists } = this.props
 
     return (
       <div className={classes.root}>
         <Sidebar />
         <main className={classes.content}>
 
-          <Typography
-            variant="h4"
-            className={classes.header}>
-            Hello, {email}
-          </Typography>
+        { userLists.length &&
+          <DashboardHeader name={email} userLists={userLists} />
+        }
 
           <Switch>
             <Route
@@ -70,7 +66,8 @@ export class UserDashboard extends Component {
 const mapState = state => {
   return {
     email: state.user.email,
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    userLists: state.list.userLists
   }
 }
 
