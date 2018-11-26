@@ -10,7 +10,7 @@ import LogoutIcon from '@material-ui/icons/LastPage'
 import { ListAdd, ListSelect } from '../List'
 import { logout } from '../../actions'
 
-const drawerWidth = 240
+const drawerWidth = 260
 
 const styles = theme => ({
   root: {

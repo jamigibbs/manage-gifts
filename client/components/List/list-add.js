@@ -52,14 +52,14 @@ export class ListAdd extends Component {
       <div className={classes.root}>
         <ListItemText
           classes={{ primary: classes.listItemText }}
-          primary="Add New List"
+          primary="Create New List"
           onClick={this.handleClickOpen} />
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="add-new-list-form-title"
         >
-          <DialogTitle id="add-new-list-form-title">Add New List</DialogTitle>
+          <DialogTitle id="add-new-list-form-title">Create New List</DialogTitle>
           <DialogContent>
             <DialogContentText>
               Enter the name of the list you'd like to add
