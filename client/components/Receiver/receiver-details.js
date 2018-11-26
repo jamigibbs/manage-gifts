@@ -7,10 +7,13 @@ import { Typography } from '@material-ui/core'
 
 const styles = theme => ({
   root: {
-    padding: '15px'
+    marginTop: theme.spacing.unit * 2,
+    marginLeft: theme.spacing.unit * 2,
   },
   header: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginLeft: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit * 2
   }
 })
 
@@ -27,9 +30,9 @@ class ReceiverDetails extends Component {
             >
             Gifts for <ReceiverName id={receiverId} />
           </Typography>
-        </div>
 
-        <ReceiverGiftAdd receiverId={receiverId} />
+          <ReceiverGiftAdd receiverId={receiverId} />
+        </div>
 
         <ReceiverGiftsList receiverId={receiverId} />
       </div>

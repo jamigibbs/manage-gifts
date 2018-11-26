@@ -2609,10 +2609,13 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 var styles = function styles(theme) {
   return {
     root: {
-      padding: '15px'
+      marginTop: theme.spacing.unit * 2,
+      marginLeft: theme.spacing.unit * 2
     },
     header: {
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      marginLeft: theme.spacing.unit * 2,
+      marginBottom: theme.spacing.unit * 2
     }
   };
 };
@@ -2640,9 +2643,9 @@ function (_Component) {
         className: classes.header
       }, "Gifts for ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_name__WEBPACK_IMPORTED_MODULE_4__["default"], {
         id: receiverId
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_gift_add__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_gift_add__WEBPACK_IMPORTED_MODULE_3__["default"], {
         receiverId: receiverId
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_gifts_list__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_gifts_list__WEBPACK_IMPORTED_MODULE_2__["default"], {
         receiverId: receiverId
       }));
     }
@@ -3103,7 +3106,7 @@ var styles = function styles(theme) {
   return {
     root: {
       marginTop: theme.spacing.unit * 2,
-      marginLeft: theme.spacing.unit * 2,
+      marginLeft: theme.spacing.unit * 4,
       borderRadius: 0
     },
     table: {
@@ -3115,6 +3118,12 @@ var styles = function styles(theme) {
       '&:hover': {
         textDecoration: 'underline'
       }
+    },
+    notice: {
+      marginTop: theme.spacing.unit * 2,
+      marginLeft: theme.spacing.unit * 4,
+      marginBottom: theme.spacing.unit * 2,
+      padding: theme.spacing.unit * 3
     }
   };
 };
@@ -3140,14 +3149,26 @@ function (_Component) {
     value: function render() {
       var _this$props = this.props,
           classes = _this$props.classes,
-          receiverId = _this$props.receiverId;
+          receiverId = _this$props.receiverId,
+          gifts = _this$props.gifts;
+
+      if (gifts.length === 0) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["Paper"], {
+          className: classes.notice
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["Typography"], {
+          variant: "h6"
+        }, "Your Gift Receiver Has No Gifts Ideas Yet!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["Typography"], {
+          variant: "body1"
+        }, "When you find gift ideas on the internet, simply click \"Add a Gift Idea\" and paste the link to start keeping track")));
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["Paper"], {
         className: classes.root
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["Table"], {
         className: classes.table
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableHead"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableRow"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], null, "Purchased"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], null, "Image"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
         numeric: true
-      }, "Actions"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableBody"], null, this.props.gifts.map(function (gift) {
+      }, "Actions"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableBody"], null, gifts.map(function (gift) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableRow"], {
           key: gift.id
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_4__["ReceiverGiftToggle"], {
