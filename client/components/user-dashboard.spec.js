@@ -45,8 +45,4 @@ describe('UserDashboard', () => {
     expect(userDashboard.find(Sidebar)).to.have.lengthOf(1)
   })
 
-  it('renders the <ListSelect /> component', () => {
-    expect(userDashboard.find(ListSelect)).to.have.lengthOf(1)
-  })
-
 })

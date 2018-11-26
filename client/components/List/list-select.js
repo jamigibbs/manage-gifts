@@ -2,12 +2,18 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Cookies from 'js-cookie'
-
 import { updateCurrentListId, getListsForuser } from '../../actions'
 import ListSelectDialog from './list-select-dialog'
-import ListName from './list-name'
+import { withStyles } from '@material-ui/core/styles'
+import { ListItemText } from '@material-ui/core'
 
-import { Button, Typography } from '@material-ui/core'
+const styles = theme => ({
+  listItem: {
+    flex: '1 1 auto',
+    padding: '0 16px',
+    minWidth: 0,
+  }
+})
 
 class ListSelect extends Component {
   state = {
@@ -34,22 +40,21 @@ class ListSelect extends Component {
   }
 
   render() {
-    const { userLists, currentId } = this.props
+    const { userLists, classes } = this.props
     return (
       <div>
-        <Button variant="contained" onClick={this.handleClickOpen}>Select List</Button>
+        <div className={classes.listItem}>
+          <ListItemText
+            primary="Select List"
+            onClick={this.handleClickOpen}
+          />
+        </div>
         <ListSelectDialog
           selectedList={this.state.selectedList}
           open={this.state.open}
           onClose={this.handleClose}
           lists={userLists}
         />
-        <br />
-        <Typography variant="h6">
-          { currentId && userLists.length &&
-            <ListName listId={currentId} userLists={userLists} />
-          }
-        </Typography>
       </div>
     )
   }
@@ -58,7 +63,6 @@ class ListSelect extends Component {
 const mapStateToProps = (state) => {
   return {
     userLists: state.list.userLists,
-    currentId: state.list.currentId,
     userId: state.user.id
   }
 }
@@ -76,10 +80,9 @@ const mapDispatchToProps = (dispatch) => {
 
 ListSelectDialog.propTypes = {
   userLists: PropTypes.array,
-  currentId: PropTypes.number,
   userId: PropTypes.number,
   updateCurrentListId: PropTypes.func,
   getListsForuser: PropTypes.func
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListSelect)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ListSelect))
