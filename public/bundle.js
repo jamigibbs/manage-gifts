@@ -1135,15 +1135,21 @@ var styles = function styles(theme) {
 var DashboardHeader = function DashboardHeader(_ref) {
   var name = _ref.name,
       userLists = _ref.userLists,
-      classes = _ref.classes;
-  var match = Object(react_router__WEBPACK_IMPORTED_MODULE_3__["matchPath"])(_history__WEBPACK_IMPORTED_MODULE_4__["default"].location.pathname, {
+      classes = _ref.classes,
+      currentId = _ref.currentId;
+  var matchList = Object(react_router__WEBPACK_IMPORTED_MODULE_3__["matchPath"])(_history__WEBPACK_IMPORTED_MODULE_4__["default"].location.pathname, {
     path: '/dashboard/list/:listName/:listId',
+    exact: true,
+    strict: false
+  });
+  var matchReceiver = Object(react_router__WEBPACK_IMPORTED_MODULE_3__["matchPath"])(_history__WEBPACK_IMPORTED_MODULE_4__["default"].location.pathname, {
+    path: '/dashboard/list/:listId/receiver/:receiverName/:receiverId',
     exact: true,
     strict: false
   }); // Display list name in header
 
-  if (match && match.params.listId) {
-    var listId = parseInt(match.params.listId);
+  if (matchList && matchList.params.listId) {
+    var listId = parseInt(matchList.params.listId);
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: classes.root
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Typography"], {
@@ -1151,6 +1157,20 @@ var DashboardHeader = function DashboardHeader(_ref) {
       className: classes.header
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_List__WEBPACK_IMPORTED_MODULE_5__["ListName"], {
       listId: listId,
+      userLists: userLists
+    })));
+  }
+
+  if (matchReceiver && matchReceiver.params.listId) {
+    var _listId = parseInt(matchReceiver.params.listId);
+
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: classes.root
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Typography"], {
+      variant: "h4",
+      className: classes.header
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_List__WEBPACK_IMPORTED_MODULE_5__["ListName"], {
+      listId: _listId,
       userLists: userLists
     })));
   } // Starting dashboard view user welcome header
@@ -3344,7 +3364,7 @@ function (_Component) {
           component: "th",
           scope: "row"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-          to: "/dashboard/receiver/".concat(Object(_utilities__WEBPACK_IMPORTED_MODULE_6__["strToLowercaseDashed"])(receiver.name), "/").concat(receiver.id)
+          to: "/dashboard/list/".concat(listId, "/receiver/").concat(Object(_utilities__WEBPACK_IMPORTED_MODULE_6__["strToLowercaseDashed"])(receiver.name), "/").concat(receiver.id)
         }, receiver.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], {
           numeric: true
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_10__["GiftCount"], {
@@ -3882,14 +3902,16 @@ function (_Component) {
       var _this$props = this.props,
           email = _this$props.email,
           classes = _this$props.classes,
-          userLists = _this$props.userLists;
+          userLists = _this$props.userLists,
+          currentId = _this$props.currentId;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: classes.root
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Sidebar__WEBPACK_IMPORTED_MODULE_7__["Sidebar"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
         className: classes.content
       }, userLists.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Dashboard__WEBPACK_IMPORTED_MODULE_8__["DashboardHeader"], {
         name: email,
-        userLists: userLists
+        userLists: userLists,
+        currentId: currentId
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
         exact: true,
         path: '/dashboard/list/:listName/:listId',
@@ -3898,7 +3920,7 @@ function (_Component) {
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
         exact: true,
-        path: '/dashboard/receiver/:receiverName/:receiverId',
+        path: '/dashboard/list/:listId/receiver/:receiverName/:receiverId',
         render: function render(props) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_6__["ReceiverDetails"], props);
         }
@@ -3913,7 +3935,8 @@ var mapState = function mapState(state) {
   return {
     email: state.user.email,
     isLoggedIn: !!state.user.id,
-    userLists: state.list.userLists
+    userLists: state.list.userLists,
+    currentId: state.list.currentId
   };
 };
 

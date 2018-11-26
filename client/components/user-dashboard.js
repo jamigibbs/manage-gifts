@@ -35,7 +35,7 @@ export class UserDashboard extends Component {
   }
 
   render(){
-    const { email, classes, userLists } = this.props
+    const { email, classes, userLists, currentId } = this.props
 
     return (
       <div className={classes.root}>
@@ -43,7 +43,10 @@ export class UserDashboard extends Component {
         <main className={classes.content}>
 
         { userLists.length &&
-          <DashboardHeader name={email} userLists={userLists} />
+          <DashboardHeader
+            name={email}
+            userLists={userLists}
+            currentId={currentId} />
         }
 
           <Switch>
@@ -52,7 +55,7 @@ export class UserDashboard extends Component {
               render={(props) => <ReceiversList {...props} /> }
             />
             <Route
-              exact path={'/dashboard/receiver/:receiverName/:receiverId'}
+              exact path={'/dashboard/list/:listId/receiver/:receiverName/:receiverId'}
               render={(props) => <ReceiverDetails {...props} /> }
             />
           </Switch>
@@ -67,7 +70,8 @@ const mapState = state => {
   return {
     email: state.user.email,
     isLoggedIn: !!state.user.id,
-    userLists: state.list.userLists
+    userLists: state.list.userLists,
+    currentId: state.list.currentId
   }
 }
 

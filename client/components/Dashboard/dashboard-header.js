@@ -16,17 +16,39 @@ const styles = theme => ({
   }
 })
 
-const DashboardHeader = ({name, userLists, classes}) => {
+const DashboardHeader = ({name, userLists, classes, currentId}) => {
 
-  const match = matchPath(history.location.pathname, {
+  const matchList = matchPath(history.location.pathname, {
     path: '/dashboard/list/:listName/:listId',
     exact: true,
     strict: false
   })
 
+  const matchReceiver = matchPath(history.location.pathname, {
+    path: '/dashboard/list/:listId/receiver/:receiverName/:receiverId',
+    exact: true,
+    strict: false
+  })
+
   // Display list name in header
-  if (match && match.params.listId) {
-    const listId = parseInt(match.params.listId)
+  if (matchList && matchList.params.listId) {
+    const listId = parseInt(matchList.params.listId)
+    return (
+      <div className={classes.root}>
+        <Typography
+          variant="h4"
+          className={classes.header}>
+          <ListName
+            listId={listId}
+            userLists={userLists}
+          />
+        </Typography>
+      </div>
+    )
+  }
+
+  if (matchReceiver && matchReceiver.params.listId) {
+    const listId = parseInt(matchReceiver.params.listId)
     return (
       <div className={classes.root}>
         <Typography
