@@ -10,6 +10,9 @@ const styles = theme => ({
     flex: '1 1 auto',
     padding: '0 16px',
     minWidth: 0,
+  },
+  listItemText: {
+    color: '#C2C6CB'
   }
 })
 
@@ -48,6 +51,7 @@ export class ListAdd extends Component {
     return (
       <div className={classes.root}>
         <ListItemText
+          classes={{ primary: classes.listItemText }}
           primary="Add New List"
           onClick={this.handleClickOpen} />
         <Dialog

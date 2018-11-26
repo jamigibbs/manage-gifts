@@ -29,7 +29,7 @@ const theme = createMuiTheme({
   overrides: {
     MuiPaper: {
       root: {
-        boxShadow: '0 1px rgba(0,0,0,0.06)'
+        borderBottom: '1px solid #e1e5eb'
       }
     },
     MuiButton: {
