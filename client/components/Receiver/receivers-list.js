@@ -15,7 +15,8 @@ import { Typography, Table, TableBody, TableCell, TableHead, TableRow, Paper } f
 const styles = theme => ({
   root: {
     marginTop: theme.spacing.unit * 2,
-    marginLeft: theme.spacing.unit * 2
+    marginLeft: theme.spacing.unit * 2,
+    borderRadius: 0
   },
   table: {
     minWidth: 700
