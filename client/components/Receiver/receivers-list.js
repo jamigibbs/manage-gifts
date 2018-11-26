@@ -14,12 +14,17 @@ import { Typography, Table, TableBody, TableCell, TableHead, TableRow, Paper } f
 
 const styles = theme => ({
   root: {
-    width: '100%',
-    marginTop: theme.spacing.unit * 3,
-    overflowX: 'auto'
+    marginTop: theme.spacing.unit * 2,
+    marginLeft: theme.spacing.unit * 2
   },
   table: {
     minWidth: 700
+  },
+  receiver: {
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline'
+    }
   }
 })
 
@@ -55,7 +60,7 @@ class ReceiversList extends Component {
   }
 
   render(){
-    const { receivers, classes, match, userLists, gifts } = this.props
+    const { receivers, classes, match, gifts } = this.props
     const listId = parseInt(match.params.listId)
 
     if (receivers.length === 0 ) {
@@ -68,7 +73,7 @@ class ReceiversList extends Component {
     }
 
     return (
-      <div>
+      <div className={classes.root}>
 
         <ReceiverAdd listId={listId} />
 
@@ -89,15 +94,21 @@ class ReceiversList extends Component {
                     return (
                       <TableRow key={receiver.id}>
                         <TableCell component="th" scope="row">
-                          <Link to={`/dashboard/list/${listId}/receiver/${strToLowercaseDashed(receiver.name)}/${receiver.id}`}>
-                            {receiver.name}
+                          <Link
+                            className={classes.receiver}
+                            to={`/dashboard/list/${listId}/receiver/${strToLowercaseDashed(receiver.name)}/${receiver.id}`}>
+                            <Typography variant="body1">{receiver.name}</Typography>
                           </Link>
                         </TableCell>
                         <TableCell numeric>
-                          <GiftCount receiverId={receiver.id} gifts={gifts} />
+                          <GiftCount
+                            receiverId={receiver.id}
+                            gifts={gifts} />
                         </TableCell>
                         <TableCell numeric>
-                          <GiftPurchaseCount receiverId={receiver.id} gifts={gifts} />
+                          <GiftPurchaseCount
+                            receiverId={receiver.id}
+                            gifts={gifts} />
                         </TableCell>
                         <TableCell>
                           <ReceiverActions

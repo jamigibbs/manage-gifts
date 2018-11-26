@@ -8,8 +8,8 @@ import { Typography, TextField, Button } from '@material-ui/core'
 const styles = theme => ({
   root: {
     backgroundColor: 'white',
-    margin: '20px',
-    padding: '20px'
+    marginLeft: theme.spacing.unit * 2,
+    padding: theme.spacing.unit * 3,
   },
   header: {
     fontWeight: 'bold',

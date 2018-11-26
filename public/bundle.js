@@ -2436,8 +2436,8 @@ var styles = function styles(theme) {
   return {
     root: {
       backgroundColor: 'white',
-      margin: '20px',
-      padding: '20px'
+      marginLeft: theme.spacing.unit * 2,
+      padding: theme.spacing.unit * 3
     },
     header: {
       fontWeight: 'bold',
@@ -3317,12 +3317,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var styles = function styles(theme) {
   return {
     root: {
-      width: '100%',
-      marginTop: theme.spacing.unit * 3,
-      overflowX: 'auto'
+      marginTop: theme.spacing.unit * 2,
+      marginLeft: theme.spacing.unit * 2
     },
     table: {
       minWidth: 700
+    },
+    receiver: {
+      textDecoration: 'none',
+      '&:hover': {
+        textDecoration: 'underline'
+      }
     }
   };
 };
@@ -3389,7 +3394,6 @@ function (_Component) {
           receivers = _this$props.receivers,
           classes = _this$props.classes,
           match = _this$props.match,
-          userLists = _this$props.userLists,
           gifts = _this$props.gifts;
       var listId = parseInt(match.params.listId);
 
@@ -3401,7 +3405,9 @@ function (_Component) {
         }));
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_add__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: classes.root
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_add__WEBPACK_IMPORTED_MODULE_8__["default"], {
         listId: listId
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["Paper"], {
         className: classes.root
@@ -3422,8 +3428,11 @@ function (_Component) {
           component: "th",
           scope: "row"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+          className: classes.receiver,
           to: "/dashboard/list/".concat(listId, "/receiver/").concat(Object(_utilities__WEBPACK_IMPORTED_MODULE_6__["strToLowercaseDashed"])(receiver.name), "/").concat(receiver.id)
-        }, receiver.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["Typography"], {
+          variant: "body1"
+        }, receiver.name))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], {
           numeric: true
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_10__["GiftCount"], {
           receiverId: receiver.id,
@@ -4164,6 +4173,16 @@ var theme = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_8__["create
     MuiOutlinedInput: {
       input: {
         padding: '13.5px 14px'
+      }
+    },
+    MuiTableCell: {
+      head: {
+        fontWeight: 'bold',
+        color: '#30363d',
+        fontSize: '0.85rem'
+      },
+      body: {
+        fontSize: '1rem'
       }
     }
   }

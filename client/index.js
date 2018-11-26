@@ -48,6 +48,16 @@ const theme = createMuiTheme({
       input: {
         padding: '13.5px 14px'
       }
+    },
+    MuiTableCell: {
+      head: {
+        fontWeight: 'bold',
+        color: '#30363d',
+        fontSize: '0.85rem'
+      },
+      body: {
+        fontSize: '1rem'
+      }
     }
   }
 })
