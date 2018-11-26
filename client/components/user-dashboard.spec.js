@@ -6,7 +6,7 @@ import enzyme, {shallow} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import { UserDashboard } from './user-dashboard'
 import { ReceiverList, Sidebar } from './Receiver'
-import { ListAdd, ListSelect } from './List'
+import { ListSelect } from './List'
 
 const adapter = new Adapter()
 enzyme.configure({adapter})
@@ -35,10 +35,6 @@ describe('UserDashboard', () => {
       getCurrentListId={getCurrentListId}
       currentListId={1}
       match={match} />)
-  })
-
-  it('renders the <ListAdd /> component', () => {
-    expect(userDashboard.find(ListAdd)).to.have.lengthOf(1)
   })
 
   xit('renders the <ReceiversList /> component', () => {
