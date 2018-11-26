@@ -41,8 +41,6 @@ export class UserDashboard extends Component {
         <main className={classes.content}>
           <Typography variant="h6" align="center">Welcome, {email}</Typography>
 
-          <ListSelect />
-
           <Switch>
             <Route
               exact path={'/dashboard/list/:listName/:listId'}

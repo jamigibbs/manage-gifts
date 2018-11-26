@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
 import { Drawer, List, Divider, ListItem, ListItemIcon, ListItemText, Typography, Button } from '@material-ui/core'
-import NotesIcon from '@material-ui/icons/Notes'
+import ListSelectIcon from '@material-ui/icons/ListAlt'
 import AddListIcon from '@material-ui/icons/PlaylistAdd'
 import LogoutIcon from '@material-ui/icons/LastPage'
 
-import { ListAdd } from '../List'
+import { ListAdd, ListSelect } from '../List'
 import { logout } from '../../actions'
 
 const drawerWidth = 240
@@ -47,8 +47,8 @@ function Sidebar (props) {
             <ListAdd />
           </ListItem>
           <ListItem button>
-            <ListItemIcon><NotesIcon /></ListItemIcon>
-            <ListItemText primary="Select List" />
+            <ListItemIcon><ListSelectIcon /></ListItemIcon>
+            <ListSelect />
           </ListItem>
         </List>
         <Divider />
