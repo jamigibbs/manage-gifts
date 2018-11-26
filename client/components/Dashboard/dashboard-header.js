@@ -16,7 +16,7 @@ const styles = theme => ({
   }
 })
 
-const DashboardHeader = ({name, userLists, classes, currentId}) => {
+const DashboardHeader = ({name, userLists, classes}) => {
 
   const matchList = matchPath(history.location.pathname, {
     path: '/dashboard/list/:listName/:listId',
@@ -30,7 +30,7 @@ const DashboardHeader = ({name, userLists, classes, currentId}) => {
     strict: false
   })
 
-  if (!userLists) {
+  if (userLists.length === 0) {
     return (
       <div className={classes.root}>
         <Typography

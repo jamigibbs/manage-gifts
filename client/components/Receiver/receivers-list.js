@@ -7,7 +7,7 @@ import { getAllListReceivers, updateCurrentListId, getAllGiftsForList } from '..
 import { strToLowercaseDashed } from '../../utilities'
 import ReceiverActions from './receiver-actions'
 import ReceiverAdd from './receiver-add'
-import { ListDelete, ListName } from '../List'
+import { ListDelete } from '../List'
 import { GiftCount, GiftPurchaseCount } from '../Receiver'
 
 import { Typography, Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@material-ui/core/'
