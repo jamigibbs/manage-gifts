@@ -30,6 +30,18 @@ const DashboardHeader = ({name, userLists, classes, currentId}) => {
     strict: false
   })
 
+  if (!userLists) {
+    return (
+      <div className={classes.root}>
+        <Typography
+          variant="h4"
+          className={classes.header}>
+          Hello, {name}
+        </Typography>
+      </div>
+    )
+  }
+
   // Display list name in header
   if (matchList && matchList.params.listId) {
     const listId = parseInt(matchList.params.listId)

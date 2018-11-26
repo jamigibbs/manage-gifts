@@ -974,7 +974,7 @@ var me = function me() {
     }()
   );
 };
-var auth = function auth(email, password, method) {
+var auth = function auth(email, password, method, firstName, lastName) {
   return (
     /*#__PURE__*/
     function () {
@@ -990,7 +990,9 @@ var auth = function auth(email, password, method) {
                 _context2.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/auth/".concat(method), {
                   email: email,
-                  password: password
+                  password: password,
+                  firstName: firstName,
+                  lastName: lastName
                 });
 
               case 3:
@@ -1146,7 +1148,17 @@ var DashboardHeader = function DashboardHeader(_ref) {
     path: '/dashboard/list/:listId/receiver/:receiverName/:receiverId',
     exact: true,
     strict: false
-  }); // Display list name in header
+  });
+
+  if (!userLists) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: classes.root
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Typography"], {
+      variant: "h4",
+      className: classes.header
+    }, "Hello, ", name));
+  } // Display list name in header
+
 
   if (matchList && matchList.params.listId) {
     var listId = parseInt(matchList.params.listId);
@@ -1878,6 +1890,12 @@ var styles = {
   },
   paper: {
     borderRadius: 0
+  },
+  notice: {
+    padding: '40px'
+  },
+  noticeHeader: {
+    marginBottom: '20px'
   }
 };
 
@@ -1929,9 +1947,18 @@ function (_Component) {
         onClose: this.handleClose,
         "aria-labelledby": "list-select-title",
         open: open
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["DialogTitle"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, !lists.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: classes.notice
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Typography"], {
+        variant: "h5",
+        className: classes.noticeHeader
+      }, "No Gift Lists Yet"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Typography"], {
+        variant: "body1"
+      }, "You don't seem to have any gift lists yet."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Typography"], {
+        variant: "body1"
+      }, "Add one by selecting ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Create New List"), " from the sidebar.")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["DialogTitle"], {
         id: "list-select-title"
-      }, "Select List"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["List"], null, lists.map(function (list) {
+      }, "Select List"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["List"], null, lists.map(function (list) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
           key: list.id,
           to: "/dashboard/list/".concat(Object(_utilities__WEBPACK_IMPORTED_MODULE_5__["strToLowercaseDashed"])(list.name), "/").concat(list.id)
@@ -1945,7 +1972,7 @@ function (_Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Person__WEBPACK_IMPORTED_MODULE_8___default.a, null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["ListItemText"], {
           primary: list.name
         })));
-      }))));
+      })))));
     }
   }]);
 
@@ -3820,12 +3847,32 @@ var AuthForm = function AuthForm(props) {
     direction: "column",
     justify: "center",
     alignItems: "center"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["TextField"], {
+  }, name === 'signup' && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["TextField"], {
+    id: "outlined-firstname-input",
+    label: "First Name",
+    type: "text",
+    name: "firstName",
+    autoComplete: "give-name",
+    margin: "normal",
+    required: true,
+    fullWidth: true,
+    variant: "outlined"
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["TextField"], {
+    id: "outlined-lastname-input",
+    label: "Last Name",
+    type: "text",
+    name: "lastName",
+    autoComplete: "family-name",
+    margin: "normal",
+    required: true,
+    fullWidth: true,
+    variant: "outlined"
+  })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["TextField"], {
     id: "outlined-email-input",
     label: "Email",
     type: "email",
     name: "email",
-    autoComplete: "email",
+    autoComplete: "family-name",
     margin: "normal",
     required: true,
     fullWidth: true,
@@ -3891,7 +3938,14 @@ var mapDispatch = function mapDispatch(dispatch) {
       var formName = evt.target.name;
       var email = evt.target.email.value;
       var password = evt.target.password.value;
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["auth"])(email, password, formName));
+
+      if (formName === 'signup') {
+        var firstName = evt.target.firstName.value;
+        var lastName = evt.target.lastName.value;
+        dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["auth"])(email, password, formName, firstName, lastName));
+      } else {
+        dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["auth"])(email, password, formName, null, null));
+      }
     }
   };
 };
@@ -4061,7 +4115,7 @@ function (_Component) {
     key: "render",
     value: function render() {
       var _this$props = this.props,
-          email = _this$props.email,
+          firstName = _this$props.firstName,
           classes = _this$props.classes,
           userLists = _this$props.userLists,
           currentId = _this$props.currentId;
@@ -4069,8 +4123,8 @@ function (_Component) {
         className: classes.root
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Sidebar__WEBPACK_IMPORTED_MODULE_7__["Sidebar"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
         className: classes.content
-      }, userLists.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Dashboard__WEBPACK_IMPORTED_MODULE_8__["DashboardHeader"], {
-        name: email,
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Dashboard__WEBPACK_IMPORTED_MODULE_8__["DashboardHeader"], {
+        name: firstName,
         userLists: userLists,
         currentId: currentId
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
@@ -4094,7 +4148,7 @@ function (_Component) {
 
 var mapState = function mapState(state) {
   return {
-    email: state.user.email,
+    firstName: state.user.firstName,
     isLoggedIn: !!state.user.id,
     userLists: state.list.userLists,
     currentId: state.list.currentId
