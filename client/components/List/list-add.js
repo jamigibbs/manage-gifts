@@ -3,11 +3,13 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { addNewList } from '../../actions'
 import { withStyles } from '@material-ui/core/styles'
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, ListItemText } from '@material-ui/core'
 
 const styles = theme => ({
   root: {
-    marginBottom: '20px',
+    flex: '1 1 auto',
+    padding: '0 16px',
+    minWidth: 0,
   }
 })
 
@@ -45,7 +47,9 @@ export class ListAdd extends Component {
 
     return (
       <div className={classes.root}>
-        <Button variant="contained" onClick={this.handleClickOpen}>Add New List</Button>
+        <ListItemText
+          primary="Add New List"
+          onClick={this.handleClickOpen} />
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}

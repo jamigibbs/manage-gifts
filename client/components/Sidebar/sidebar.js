@@ -4,9 +4,10 @@ import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
 import { Drawer, List, Divider, ListItem, ListItemIcon, ListItemText, Typography, Button } from '@material-ui/core'
 import NotesIcon from '@material-ui/icons/Notes'
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
+import AddListIcon from '@material-ui/icons/PlaylistAdd'
 import LogoutIcon from '@material-ui/icons/LastPage'
 
+import { ListAdd } from '../List'
 import { logout } from '../../actions'
 
 const drawerWidth = 240
@@ -42,8 +43,9 @@ function Sidebar (props) {
         </div>
         <List>
           <ListItem button>
-            <ListItemIcon><MoreHorizIcon /></ListItemIcon>
-            <ListItemText primary="Add New List" />
+            <ListItemIcon><AddListIcon /></ListItemIcon>
+            {/* <ListItemText primary="Add New List" /> */}
+            <ListAdd />
           </ListItem>
           <ListItem button>
             <ListItemIcon><NotesIcon /></ListItemIcon>
