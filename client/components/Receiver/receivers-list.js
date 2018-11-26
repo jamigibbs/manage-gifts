@@ -31,6 +31,9 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 2,
     marginBottom: theme.spacing.unit * 2,
     padding: theme.spacing.unit * 3,
+  },
+  deleteButton: {
+    float: 'right'
   }
 })
 
@@ -77,6 +80,10 @@ class ReceiversList extends Component {
             <Typography variant="body1">Next you'll want to add names to the list below for the people you're finding gifts.</Typography>
           </Paper>
           <ReceiverAdd listId={listId} />
+
+          <div className={classes.deleteButton} >
+            <ListDelete listId={listId} />
+          </div>
         </div>
       )
     }
@@ -94,7 +101,6 @@ class ReceiversList extends Component {
                   <TableCell numeric>Assigned Gifts</TableCell>
                   <TableCell numeric>Purchased Gifts</TableCell>
                   <TableCell>Actions</TableCell>
-                  <TableCell numeric><ListDelete listId={listId} /></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -125,7 +131,6 @@ class ReceiversList extends Component {
                             listId={listId}
                           />
                         </TableCell>
-                        <TableCell></TableCell>
                       </TableRow>
                     )
                   })
@@ -133,6 +138,9 @@ class ReceiversList extends Component {
               </TableBody>
           </Table>
         </Paper>
+        <div className={classes.deleteButton} >
+          <ListDelete listId={listId} />
+        </div>
       </div>
     )
   }
