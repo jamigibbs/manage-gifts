@@ -1146,8 +1146,9 @@ var styles = function styles(theme) {
     root: {
       flexGrow: 1
     },
-    grow: {
-      flexGrow: 1
+    logo: {
+      flexGrow: 1,
+      fontWeight: 'bold'
     },
     button: {
       padding: 0,
@@ -1173,10 +1174,10 @@ var Navbar = function Navbar(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Toolbar"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Typography"], {
     variant: "h6",
     color: "inherit",
-    className: classes.grow
+    className: classes.logo
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
     to: "/"
-  }, "Gift Manager")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", null, isLoggedIn ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Button"], {
+  }, "Manage Gifts")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", null, isLoggedIn ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Button"], {
     color: "inherit",
     className: classes.button
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["NavLink"], {
@@ -3457,8 +3458,8 @@ var styles = function styles(theme) {
       marginBottom: '20px'
     },
     title: {
-      marginTop: '20px',
-      lineHeight: '2.33'
+      margin: '20px 0',
+      fontWeight: 'bold'
     }
   };
 };
@@ -3912,7 +3913,7 @@ var theme = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_8__["create
     fontFamily: "\"Helvetica Neue\", \"Helvetica\", \"Arial\", sans-serif",
     color: '#686c73'
   },
-  shadows: ["none"],
+  shadows: Array(25).fill('none'),
   overrides: {
     MuiPaper: {
       root: {
@@ -3928,7 +3929,7 @@ var theme = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_8__["create
     MuiPrivateNotchedOutline: {
       root: {
         borderRadius: 0,
-        top: '3px'
+        top: 0
       }
     },
     MuiOutlinedInput: {

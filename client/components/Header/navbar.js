@@ -13,8 +13,9 @@ const styles = theme => ({
   root: {
     flexGrow: 1
   },
-  grow: {
-    flexGrow: 1
+  logo: {
+    flexGrow: 1,
+    fontWeight: 'bold'
   },
   button: {
     padding: 0,
@@ -31,8 +32,8 @@ const Navbar = ({handleClick, isLoggedIn, classes}) => (
   <div className="nav-main">
   <AppBar position="relative" className={classes.appBar}>
   <Toolbar>
-    <Typography variant="h6" color="inherit" className={classes.grow}>
-      <Link to="/">Gift Manager</Link>
+    <Typography variant="h6" color="inherit" className={classes.logo}>
+      <Link to="/">Manage Gifts</Link>
     </Typography >
     <nav>
       {isLoggedIn ? (

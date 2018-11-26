@@ -25,7 +25,7 @@ const theme = createMuiTheme({
     fontFamily: "\"Helvetica Neue\", \"Helvetica\", \"Arial\", sans-serif",
     color: '#686c73'
   },
-  shadows: ["none"],
+  shadows: Array(25).fill('none'),
   overrides: {
     MuiPaper: {
       root: {
@@ -41,7 +41,7 @@ const theme = createMuiTheme({
     MuiPrivateNotchedOutline: {
       root: {
         borderRadius: 0,
-        top: '3px'
+        top: 0
       }
     },
     MuiOutlinedInput: {

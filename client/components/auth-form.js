@@ -19,8 +19,8 @@ const styles = theme => ({
     marginBottom: '20px',
   },
   title: {
-    marginTop: '20px',
-    lineHeight: '2.33',
+    margin: '20px 0',
+    fontWeight: 'bold'
   }
 })
 
