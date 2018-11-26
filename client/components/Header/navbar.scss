@@ -1,11 +1,13 @@
 .nav-main {
   a {
     text-decoration: none;
+    padding: 8px 16px;
     &:visited {
       color: white;
     }
   }
   &__active {
-    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.08);
+    padding: 8px 16px;
   }
 }
