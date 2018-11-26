@@ -1150,7 +1150,8 @@ var styles = function styles(theme) {
       flexGrow: 1
     },
     button: {
-      fontWeight: 100
+      padding: 0,
+      marginLeft: '20px'
     },
     appBar: {
       zIndex: theme.zIndex.drawer + 1
@@ -3448,7 +3449,7 @@ __webpack_require__.r(__webpack_exports__);
 var styles = function styles(theme) {
   return {
     submitButton: {
-      marginTop: '10px',
+      marginTop: '40px',
       marginBottom: '20px'
     },
     googleButton: {
@@ -3499,7 +3500,8 @@ var AuthForm = function AuthForm(props) {
     autoComplete: "email",
     margin: "normal",
     required: true,
-    fullWidth: true
+    fullWidth: true,
+    variant: "outlined"
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["TextField"], {
     id: "outlined-password-input",
     label: "Password",
@@ -3507,7 +3509,8 @@ var AuthForm = function AuthForm(props) {
     name: "password",
     margin: "normal",
     required: true,
-    fullWidth: true
+    fullWidth: true,
+    variant: "outlined"
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Button"], {
     variant: "outlined",
     color: "primary",
@@ -3885,9 +3888,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/CssBaseline */ "./node_modules/@material-ui/core/CssBaseline/index.js");
 /* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _material_ui_core_colors___WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/colors/ */ "./node_modules/@material-ui/core/colors/index.js");
-/* harmony import */ var _material_ui_core_colors___WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_colors___WEBPACK_IMPORTED_MODULE_10__);
-
 
 
 
@@ -3900,10 +3900,42 @@ __webpack_require__.r(__webpack_exports__);
 
 var theme = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_8__["createMuiTheme"])({
   palette: {
-    primary: _material_ui_core_colors___WEBPACK_IMPORTED_MODULE_10__["blue"]
+    primary: {
+      main: '#296AE5'
+    },
+    background: {
+      default: '#F3F4F8'
+    }
   },
   typography: {
-    useNextVariants: true
+    useNextVariants: true,
+    fontFamily: "\"Helvetica Neue\", \"Helvetica\", \"Arial\", sans-serif",
+    color: '#686c73'
+  },
+  shadows: ["none"],
+  overrides: {
+    MuiPaper: {
+      root: {
+        boxShadow: '0 1px rgba(0,0,0,0.06)'
+      }
+    },
+    MuiButton: {
+      root: {
+        borderRadius: 0,
+        textTransform: 'none'
+      }
+    },
+    MuiPrivateNotchedOutline: {
+      root: {
+        borderRadius: 0,
+        top: '3px'
+      }
+    },
+    MuiOutlinedInput: {
+      input: {
+        padding: '13.5px 14px'
+      }
+    }
   }
 });
 react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
@@ -50634,7 +50666,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".nav-main a {\n  text-decoration: none; }\n  .nav-main a:visited {\n    color: white; }\n\n.nav-main__active {\n  font-weight: bold; }\n", ""]);
+exports.push([module.i, ".nav-main a {\n  text-decoration: none;\n  padding: 8px 16px; }\n  .nav-main a:visited {\n    color: white; }\n\n.nav-main__active {\n  background-color: rgba(0, 0, 0, 0.08);\n  padding: 8px 16px; }\n", ""]);
 
 // exports
 
@@ -50672,7 +50704,7 @@ exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/li
 
 
 // module
-exports.push([module.i, "/*\n  @import 'base/module';\n  - contains global styles, such as resets, typography, colors, etc.\n\n  @import 'components/module';\n  - contains each self-contained component in its own .scss partial\n\n  @import 'layout/module';\n  - contains styling for larger layout components; e.g. nav, header, footer, etc.\n\n  @import 'pages/module';\n  - contains page-specific styling, if necessary\n\n  @import 'themes/module';\n  - contains styling for different themes\n\n  @import 'utils/module';\n  - contains global mixins, functions, helper selectors, etc.\n\n  @import 'vendors/module';\n  - contains 3rd-party styles, mixins, etc.\n*/\nbody {\n  margin: 0; }\n", ""]);
+exports.push([module.i, "/*\n  @import 'base/module';\n  - contains global styles, such as resets, typography, colors, etc.\n\n  @import 'components/module';\n  - contains each self-contained component in its own .scss partial\n\n  @import 'layout/module';\n  - contains styling for larger layout components; e.g. nav, header, footer, etc.\n\n  @import 'pages/module';\n  - contains page-specific styling, if necessary\n\n  @import 'themes/module';\n  - contains styling for different themes\n\n  @import 'utils/module';\n  - contains global mixins, functions, helper selectors, etc.\n\n  @import 'vendors/module';\n  - contains 3rd-party styles, mixins, etc.\n*/\n", ""]);
 
 // exports
 

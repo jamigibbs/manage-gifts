@@ -17,7 +17,8 @@ const styles = theme => ({
     flexGrow: 1
   },
   button: {
-    fontWeight: 100
+    padding: 0,
+    marginLeft: '20px'
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1

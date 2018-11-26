@@ -11,7 +11,7 @@ import { Grid, Paper, TextField, Button, Typography, Divider } from '@material-u
 
 const styles = theme => ({
   submitButton: {
-    marginTop: '10px',
+    marginTop: '40px',
     marginBottom: '20px'
   },
   googleButton: {
@@ -67,6 +67,7 @@ const AuthForm = props => {
             margin="normal"
             required={true}
             fullWidth={true}
+            variant="outlined"
           />
 
           <TextField
@@ -77,6 +78,7 @@ const AuthForm = props => {
             margin="normal"
             required={true}
             fullWidth={true}
+            variant="outlined"
           />
           <Button
             variant="outlined"

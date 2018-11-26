@@ -10,14 +10,45 @@ import App from './app'
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import { blue } from '@material-ui/core/colors/'
 
 const theme = createMuiTheme({
   palette: {
-    primary: blue
+    primary: {
+      main: '#296AE5'
+    },
+    background: {
+      default: '#F3F4F8'
+    }
   },
   typography: {
     useNextVariants: true,
+    fontFamily: "\"Helvetica Neue\", \"Helvetica\", \"Arial\", sans-serif",
+    color: '#686c73'
+  },
+  shadows: ["none"],
+  overrides: {
+    MuiPaper: {
+      root: {
+        boxShadow: '0 1px rgba(0,0,0,0.06)'
+      }
+    },
+    MuiButton: {
+      root: {
+        borderRadius: 0,
+        textTransform: 'none'
+      }
+    },
+    MuiPrivateNotchedOutline: {
+      root: {
+        borderRadius: 0,
+        top: '3px'
+      }
+    },
+    MuiOutlinedInput: {
+      input: {
+        padding: '13.5px 14px'
+      }
+    }
   }
 })
 
