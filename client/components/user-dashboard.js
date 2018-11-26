@@ -17,6 +17,10 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
+  },
+  header: {
+    fontWeight: 'bold',
+    margin: '20px 0 40px 0'
   }
 })
 
@@ -39,7 +43,12 @@ export class UserDashboard extends Component {
       <div className={classes.root}>
         <Sidebar />
         <main className={classes.content}>
-          <Typography variant="h6" align="center">Welcome, {email}</Typography>
+
+          <Typography
+            variant="h4"
+            className={classes.header}>
+            Hello, {email}
+          </Typography>
 
           <Switch>
             <Route
