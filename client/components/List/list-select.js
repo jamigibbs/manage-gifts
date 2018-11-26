@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import Cookies from 'js-cookie'
 
 import { updateCurrentListId, getListsForuser } from '../../actions'
 import ListSelectDialog from './list-select-dialog'
@@ -13,6 +14,11 @@ class ListSelect extends Component {
     open: false,
     selectedList: 'None',
     listId: null
+  }
+
+  componentDidMount = () => {
+    const userId = this.props.userId ? this.props.userId : Cookies.get('mg_id')
+    this.props.getListsForuser(userId)
   }
 
   handleClickOpen = () => {

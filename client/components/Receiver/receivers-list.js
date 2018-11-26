@@ -60,7 +60,10 @@ class ReceiversList extends Component {
 
     if (receivers.length === 0 ) {
       return (
-        <ReceiverAdd listId={listId} />
+        <div>
+          <Typography variant="subtitle1">**No Receivers Added Yet**</Typography>
+          <ReceiverAdd listId={listId} />
+        </div>
       )
     }
 
@@ -69,9 +72,9 @@ class ReceiversList extends Component {
 
         <ReceiverAdd listId={listId} />
 
-        { userLists &&
+        { userLists.length &&
           <Typography variant="subtitle1">
-            Receivers <ListName listId={listId} userLists={userLists} />
+            List Name: <ListName listId={listId} userLists={userLists} />
           </Typography>
         }
 
