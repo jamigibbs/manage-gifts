@@ -3372,6 +3372,11 @@ var styles = function styles(theme) {
       '&:hover': {
         textDecoration: 'underline'
       }
+    },
+    notice: {
+      marginLeft: theme.spacing.unit * 2,
+      marginBottom: theme.spacing.unit * 2,
+      padding: theme.spacing.unit * 3
     }
   };
 };
@@ -3442,9 +3447,15 @@ function (_Component) {
       var listId = parseInt(match.params.listId);
 
       if (receivers.length === 0) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["Typography"], {
-          variant: "subtitle1"
-        }, "**No Receivers Added Yet**"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_add__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: classes.root
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["Paper"], {
+          className: classes.notice
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["Typography"], {
+          variant: "h6"
+        }, "Nice work creating a new list!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["Typography"], {
+          variant: "body1"
+        }, "Next you'll want to add names to the list below for the people you're finding gifts.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_add__WEBPACK_IMPORTED_MODULE_8__["default"], {
           listId: listId
         }));
       }
@@ -4211,6 +4222,9 @@ var theme = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_8__["create
     MuiPaper: {
       root: {
         borderBottom: '1px solid #e1e5eb'
+      },
+      rounded: {
+        borderRadius: 0
       }
     },
     MuiButton: {

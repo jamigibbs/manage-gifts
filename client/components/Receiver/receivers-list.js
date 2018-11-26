@@ -26,6 +26,11 @@ const styles = theme => ({
     '&:hover': {
       textDecoration: 'underline'
     }
+  },
+  notice: {
+    marginLeft: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit * 2,
+    padding: theme.spacing.unit * 3,
   }
 })
 
@@ -66,8 +71,11 @@ class ReceiversList extends Component {
 
     if (receivers.length === 0 ) {
       return (
-        <div>
-          <Typography variant="subtitle1">**No Receivers Added Yet**</Typography>
+        <div className={classes.root}>
+          <Paper className={classes.notice}>
+            <Typography variant="h6">Nice work creating a new list!</Typography>
+            <Typography variant="body1">Next you'll want to add names to the list below for the people you're finding gifts.</Typography>
+          </Paper>
           <ReceiverAdd listId={listId} />
         </div>
       )

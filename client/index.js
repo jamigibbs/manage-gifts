@@ -29,7 +29,10 @@ const theme = createMuiTheme({
   overrides: {
     MuiPaper: {
       root: {
-        borderBottom: '1px solid #e1e5eb'
+        borderBottom: '1px solid #e1e5eb',
+      },
+      rounded: {
+        borderRadius: 0
       }
     },
     MuiButton: {
