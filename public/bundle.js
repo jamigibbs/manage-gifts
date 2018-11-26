@@ -1137,8 +1137,7 @@ var styles = function styles(theme) {
 var DashboardHeader = function DashboardHeader(_ref) {
   var name = _ref.name,
       userLists = _ref.userLists,
-      classes = _ref.classes,
-      currentId = _ref.currentId;
+      classes = _ref.classes;
   var matchList = Object(react_router__WEBPACK_IMPORTED_MODULE_3__["matchPath"])(_history__WEBPACK_IMPORTED_MODULE_4__["default"].location.pathname, {
     path: '/dashboard/list/:listName/:listId',
     exact: true,
@@ -1150,7 +1149,7 @@ var DashboardHeader = function DashboardHeader(_ref) {
     strict: false
   });
 
-  if (!userLists) {
+  if (userLists.length === 0) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: classes.root
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Typography"], {

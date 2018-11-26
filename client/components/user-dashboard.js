@@ -42,6 +42,7 @@ export class UserDashboard extends Component {
         <Sidebar />
         <main className={classes.content}>
 
+
           <DashboardHeader
             name={firstName}
             userLists={userLists}
