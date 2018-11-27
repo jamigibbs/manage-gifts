@@ -7,7 +7,7 @@ import { updatePreviousListId } from '../../actions'
 import { strToLowercaseDashed } from '../../utilities'
 
 import { withStyles } from '@material-ui/core/styles'
-import { Avatar, List, ListItem, ListItemAvatar, ListItemText, DialogTitle, Dialog } from '@material-ui/core'
+import { Avatar, List, ListItem, ListItemAvatar, ListItemText, DialogTitle, Dialog, Typography } from '@material-ui/core'
 import PersonIcon from '@material-ui/icons/Person'
 import { blue } from '@material-ui/core/colors'
 
@@ -15,6 +15,15 @@ const styles = {
   avatar: {
     backgroundColor: blue[100],
     color: blue[600]
+  },
+  paper: {
+    borderRadius: 0
+  },
+  notice: {
+    padding: '40px'
+  },
+  noticeHeader: {
+    marginBottom: '20px'
   }
 }
 
@@ -33,13 +42,23 @@ class ListSelectDialog extends Component {
     const { classes, lists, open } = this.props
     return (
       <Dialog
+        classes={{ paper: classes.paper }}
+        fullWidth={true}
         onClose={this.handleClose}
         aria-labelledby="list-select-title"
         open={open}
       >
-        <DialogTitle id="list-select-title">Select List</DialogTitle>
         <div>
-          <List>
+          { !lists.length ? (
+            <div className={classes.notice}>
+              <Typography variant="h5" className={classes.noticeHeader}>No Gift Lists Yet</Typography>
+              <Typography variant="body1">You don't seem to have any gift lists yet.</Typography>
+              <Typography variant="body1">Add one by selecting <strong>Create New List</strong> from the sidebar.</Typography>
+            </div>
+           ) : (
+            <div>
+            <DialogTitle id="list-select-title">Select List</DialogTitle>
+            <List>
             {lists.map(list => (
               <Link key={list.id} to={`/dashboard/list/${strToLowercaseDashed(list.name)}/${list.id}`} >
                 <ListItem
@@ -54,8 +73,11 @@ class ListSelectDialog extends Component {
                   <ListItemText primary={list.name} />
                 </ListItem>
               </Link>
-            ))}
-          </List>
+              ))}
+            </List>
+            </div>
+           )}
+
         </div>
       </Dialog>
     )

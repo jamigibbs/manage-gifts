@@ -1,12 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { Drawer, List, Divider, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core'
-import NotesIcon from '@material-ui/icons/Notes'
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
+import ListSelectIcon from '@material-ui/icons/ListAlt'
+import AddListIcon from '@material-ui/icons/PlaylistAdd'
 import LogoutIcon from '@material-ui/icons/LastPage'
 
-const drawerWidth = 240
+import { ListAdd, ListSelect } from '../List'
+import { logout } from '../../actions'
+
+const drawerWidth = 260
 
 const styles = theme => ({
   root: {
@@ -18,12 +23,39 @@ const styles = theme => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    backgroundColor: '#30363D'
   },
-  toolbar: theme.mixins.toolbar
+  toolbar: theme.mixins.toolbar,
+  logo: {
+    margin: '20px 0 0 25px'
+  },
+  logoLink: {
+    textDecoration: 'none',
+    color: 'white',
+    fontWeight: 'bold',
+    '&:hover': {
+      cursor: 'pointer'
+    }
+  },
+  icon: {
+    color: '#C2C6CB'
+  },
+  listItem: {
+    backgroundColor: 'transparent',
+    '&:hover': {
+      backgroundColor: 'rgba(0, 0, 0, 0.5)'
+    }
+  },
+  listItemText: {
+    color: '#C2C6CB'
+  },
+  divider: {
+    backgroundColor: '#686C73'
+  }
 })
 
 function Sidebar (props) {
-  const { classes } = props;
+  const { classes, logout } = props
 
   return (
     <div className={classes.root}>
@@ -31,27 +63,33 @@ function Sidebar (props) {
         className={classes.drawer}
         variant="permanent"
         classes={{
-          paper: classes.drawerPaper,
+          paper: classes.drawerPaper
         }}
       >
         <div className={classes.toolbar}>
-          <Typography variant="h6">Manage Gifts</Typography>
+          <Typography variant="h6" className={classes.logo}>
+          <Link to="/dashboard" className={classes.logoLink}>Manage Gifts</Link>
+          </Typography>
         </div>
         <List>
-          <ListItem button>
-            <ListItemIcon><MoreHorizIcon /></ListItemIcon>
-            <ListItemText primary="Add New List" />
+          <ListItem button classes={{ button: classes.listItem }}>
+            <ListItemIcon><ListSelectIcon className={classes.icon}/></ListItemIcon>
+            <ListSelect />
           </ListItem>
-          <ListItem button>
-            <ListItemIcon><NotesIcon /></ListItemIcon>
-            <ListItemText primary="Select List" />
+          <ListItem button classes={{ button: classes.listItem }}>
+            <ListItemIcon className={classes.icon}><AddListIcon /></ListItemIcon>
+            <ListAdd />
           </ListItem>
         </List>
-        <Divider />
+        <Divider light={true} classes={{ root: classes.divider }} />
         <List>
-          <ListItem button>
-            <ListItemIcon><LogoutIcon /></ListItemIcon>
-            <ListItemText primary="Logout" />
+          <ListItem button classes={{ button: classes.listItem }}>
+            <ListItemIcon><LogoutIcon className={classes.icon}/></ListItemIcon>
+            <ListItemText
+              classes={{ primary: classes.listItemText }}
+              primary="Logout"
+              onClick={logout}
+            />
           </ListItem>
         </List>
       </Drawer>
@@ -61,6 +99,15 @@ function Sidebar (props) {
 
 Sidebar.propTypes = {
   classes: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired
 }
 
-export default withStyles(styles)(Sidebar)
+const mapDispatchToProps = dispatch => {
+  return {
+    logout() {
+      dispatch(logout())
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(Sidebar))

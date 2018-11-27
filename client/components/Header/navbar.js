@@ -13,11 +13,13 @@ const styles = theme => ({
   root: {
     flexGrow: 1
   },
-  grow: {
-    flexGrow: 1
+  logo: {
+    flexGrow: 1,
+    fontWeight: 'bold'
   },
   button: {
-    fontWeight: 100
+    padding: 0,
+    marginLeft: '20px'
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1
@@ -30,8 +32,8 @@ const Navbar = ({handleClick, isLoggedIn, classes}) => (
   <div className="nav-main">
   <AppBar position="relative" className={classes.appBar}>
   <Toolbar>
-    <Typography variant="h6" color="inherit" className={classes.grow}>
-      <Link to="/">Gift Manager</Link>
+    <Typography variant="h6" color="inherit" className={classes.logo}>
+      <Link to="/">Manage Gifts</Link>
     </Typography >
     <nav>
       {isLoggedIn ? (
@@ -62,9 +64,6 @@ const Navbar = ({handleClick, isLoggedIn, classes}) => (
   </div>
 )
 
-/**
- * CONTAINER
- */
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id
@@ -81,9 +80,6 @@ const mapDispatch = dispatch => {
 
 export default withRouter(connect(mapState, mapDispatch)(withStyles(styles)(Navbar)))
 
-/**
- * PROP TYPES
- */
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,

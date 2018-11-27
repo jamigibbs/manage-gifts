@@ -3,11 +3,19 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { addNewList } from '../../actions'
 import { withStyles } from '@material-ui/core/styles'
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, ListItemText } from '@material-ui/core'
 
 const styles = theme => ({
   root: {
-    marginBottom: '20px',
+    flex: '1 1 auto',
+    padding: '0 16px',
+    minWidth: 0,
+  },
+  listItemText: {
+    color: '#C2C6CB'
+  },
+  paper: {
+    borderRadius: 0
   }
 })
 
@@ -45,16 +53,21 @@ export class ListAdd extends Component {
 
     return (
       <div className={classes.root}>
-        <Button variant="contained" onClick={this.handleClickOpen}>Add New List</Button>
+        <ListItemText
+          classes={{ primary: classes.listItemText }}
+          primary="Create New List"
+          onClick={this.handleClickOpen} />
         <Dialog
+          classes={{ paper: classes.paper }}
           open={this.state.open}
           onClose={this.handleClose}
+          fullWidth={true}
           aria-labelledby="add-new-list-form-title"
         >
-          <DialogTitle id="add-new-list-form-title">Add New List</DialogTitle>
+          <DialogTitle id="add-new-list-form-title">Create New List</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Enter the name of the list you'd like to add
+              Enter the name of the list you'd like to add. eg. Christmas 2019
             </DialogContentText>
             <TextField
               onChange={this.handleChange('name')}

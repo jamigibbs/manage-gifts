@@ -11,7 +11,7 @@ import { Grid, Paper, TextField, Button, Typography, Divider } from '@material-u
 
 const styles = theme => ({
   submitButton: {
-    marginTop: '10px',
+    marginTop: '40px',
     marginBottom: '20px'
   },
   googleButton: {
@@ -19,14 +19,13 @@ const styles = theme => ({
     marginBottom: '20px',
   },
   title: {
-    marginTop: '20px',
-    lineHeight: '2.33',
+    margin: '20px 0',
+    fontWeight: 'bold'
   }
 })
 
 const AuthForm = props => {
   const { name, displayName, handleSubmit, error, classes } = props
-
   return (
     <div>
       <Navbar />
@@ -58,15 +57,44 @@ const AuthForm = props => {
             alignItems="center"
           >
 
+          { name === 'signup' &&
+            <div>
+              <TextField
+                id="outlined-firstname-input"
+                label="First Name"
+                type="text"
+                name="firstName"
+                autoComplete="give-name"
+                margin="normal"
+                required={true}
+                fullWidth={true}
+                variant="outlined"
+              />
+
+              <TextField
+                id="outlined-lastname-input"
+                label="Last Name"
+                type="text"
+                name="lastName"
+                autoComplete="family-name"
+                margin="normal"
+                required={true}
+                fullWidth={true}
+                variant="outlined"
+              />
+            </div>
+          }
+
           <TextField
             id="outlined-email-input"
             label="Email"
             type="email"
             name="email"
-            autoComplete="email"
+            autoComplete="family-name"
             margin="normal"
             required={true}
             fullWidth={true}
+            variant="outlined"
           />
 
           <TextField
@@ -77,6 +105,7 @@ const AuthForm = props => {
             margin="normal"
             required={true}
             fullWidth={true}
+            variant="outlined"
           />
           <Button
             variant="outlined"
@@ -146,7 +175,14 @@ const mapDispatch = dispatch => {
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      if (formName === 'signup') {
+        const firstName = evt.target.firstName.value
+        const lastName = evt.target.lastName.value
+        dispatch(auth(email, password, formName, firstName, lastName))
+      } else {
+        dispatch(auth(email, password, formName, null, null))
+      }
+
     }
   }
 }

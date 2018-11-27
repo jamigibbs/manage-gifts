@@ -1,7 +1,35 @@
 import React, { Component } from 'react'
+import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { addReceiver } from '../../actions'
+import { Typography, TextField, Button } from '@material-ui/core'
+
+const styles = theme => ({
+  root: {
+    backgroundColor: 'white',
+    marginLeft: theme.spacing.unit * 2,
+    padding: theme.spacing.unit * 3,
+  },
+  header: {
+    fontWeight: 'bold',
+    textTransform: 'uppercase'
+  },
+  body: {
+    color: '#686C73'
+  },
+  form: {
+    display: 'flex',
+    height: '80%'
+  },
+  textField: {
+    marginBottom: 0,
+    marginRight: '10px'
+  },
+  submitButton: {
+    alignSelf: 'flex-end'
+  }
+})
 
 export class ReceiverAdd extends Component {
   constructor(props){
@@ -31,16 +59,32 @@ export class ReceiverAdd extends Component {
 
   render(){
     const { name } = this.state
+    const { classes } = this.props
     return(
-      <div>
-        <h3>Add new receiver</h3>
+      <div className={classes.root}>
+        <Typography className={classes.header} variant="h6">Add new receiver</Typography>
+        <Typography className={classes.body} variant="body1">Enter a name to add a new receiver to your gift list</Typography>
         <form
           onChange={(event) => this.onFormChange(event)}
           onSubmit={(event) => this.onFormSubmit(event)}
-        >
-          <label htmlFor="name">Receiver Name</label>
-          <input type="text" name="name" value={name} onChange={this.onFormChange('name')}/>
-          <button type="submit">Add Receiver</button>
+          className={classes.form}
+          noValidate autoComplete="off" >
+
+          <TextField
+            id="name"
+            label="Name"
+            className={classes.textField}
+            value={name}
+            onChange={this.onFormChange('name')}
+            margin="normal"
+          />
+
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            className={classes.submitButton}
+          >Add Receiver</Button>
         </form>
       </div>
     )
@@ -66,4 +110,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReceiverAdd)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ReceiverAdd))
