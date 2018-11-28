@@ -25,9 +25,26 @@ const isDomain = (url, domain) => {
   return url.includes(domain)
 }
 
+/**
+ * Used with the loading reducer, this will identify if an action is  
+ * in the loading state.
+ *
+ * @param {arr}   actions       The actions to log in the loading reducer.
+ * @param {obj}   state         The apps state for us to update.
+ *
+ * @return {bool}
+ */
+  
+const createLoadingSelector = (actions) => {
+  return function(state) {
+    return actions.some(action => state.loading[action])
+  }
+}
+
 module.exports = {
   isDomain,
   removeLinkParams,
   centsToUSD,
-  strToLowercaseDashed
+  strToLowercaseDashed,
+  createLoadingSelector
 }

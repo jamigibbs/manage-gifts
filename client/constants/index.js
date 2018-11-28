@@ -1,7 +1,8 @@
 /**
  * USER ACTION TYPES
  */
-export const GET_USER = 'GET_USER'
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS'
+export const GET_USER_REQUEST = 'GET_USER_REQUEST'
 export const REMOVE_USER = 'REMOVE_USER'
 
 /**

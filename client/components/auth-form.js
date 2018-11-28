@@ -1,5 +1,5 @@
 import './auth-form.scss'
-
+import { createLoadingSelector } from '../utilities'
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -8,6 +8,8 @@ import { Navbar } from './Header'
 
 import { withStyles } from '@material-ui/core/styles'
 import { Grid, Paper, TextField, Button, Typography, Divider } from '@material-ui/core'
+
+const loadingSelector = createLoadingSelector(['GET_USER'])
 
 const styles = theme => ({
   submitButton: {
@@ -156,7 +158,8 @@ const mapLogin = state => {
   return {
     name: 'login',
     displayName: 'Login',
-    error: state.user.error
+    error: state.user.error,
+    isFetching: loadingSelector(state)
   }
 }
 
@@ -164,7 +167,8 @@ const mapSignup = state => {
   return {
     name: 'signup',
     displayName: 'Sign Up',
-    error: state.user.error
+    error: state.user.error,
+    isFetching: loadingSelector(state)
   }
 }
 

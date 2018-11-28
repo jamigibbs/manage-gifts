@@ -1,14 +1,16 @@
 import axios from 'axios'
 import history from '../history'
-import { GET_USER, REMOVE_USER} from '../constants'
+import { GET_USER_REQUEST, GET_USER_SUCCESS, REMOVE_USER} from '../constants'
 
-const getUser = user => ({type: GET_USER, user})
+const getUserSuccess = user => ({type: GET_USER_SUCCESS, user})
+const getUserRequest = () => ({type: GET_USER_REQUEST})
 const removeUser = () => ({type: REMOVE_USER})
 
 export const me = () => async dispatch => {
   try {
+    dispatch(getUserRequest())
     const res = await axios.get('/auth/me')
-    dispatch(getUser(res.data || {} ))
+    dispatch(getUserSuccess(res.data || {} ))
   } catch (err) {
     console.error(err)
   }
