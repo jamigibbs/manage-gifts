@@ -1,12 +1,32 @@
+/**
+ * Replaces all string spaces with a dash "-" and turns to lowercase.
+ * Example: "Lowercase With dashes" to "lowercase-with-dashes"
+ * 
+ * @param {str}  str  The string to modify
+ * @return {str}
+ */
 const strToLowercaseDashed = (str) => {
   return str.replace(/\s+/g, '-').toLowerCase()
 }
 
+/**
+ * Converts a non-decimal number into a USD currency value.
+ * Example: 1000 to "$10.00"
+ * 
+ * @param {num}  num  The value to convert to USD
+ * @return {str}
+ */
 const centsToUSD = (num) => {
   const dollars = num / 100
   return dollars.toLocaleString("en-US", {style:"currency", currency:"USD"});
 }
 
+/**
+ * Removes all parameters from a url starting with the first '?' flag.
+ *
+ * @param {str}  url  The url that we want paramenters removed from.
+ * @return {str}
+ */
 const removeLinkParams = (url) => {
   return url.split('?')[0]
 }
@@ -18,7 +38,6 @@ const removeLinkParams = (url) => {
  *
  * @param {str}  url  The link to match a domain against.
  * @param {str}  domain  The domain to match against the link.
- *
  * @return {bool}
  */
 const isDomain = (url, domain) => {
@@ -28,14 +47,12 @@ const isDomain = (url, domain) => {
 /**
  * Used with the loading reducer, this will identify if an action is  
  * in the loading state.
+ * 
  * @param {arr}  actions  The actions to log in the loading reducer.
+ * @param {obj}  state The redux store state object
+ * @return {bool}
  */
 const createLoadingSelector = (actions) => {
-  /**
-   * The apps state for us to update.
-   * @param {obj}  state The redux store state object
-   * @return {bool}
-   */
   return function(state) {
     return actions.some(action => state.loading[action])
   }
@@ -44,6 +61,7 @@ const createLoadingSelector = (actions) => {
 /**
  * Function checks if a given object has values that all equal
  * the boolean value false.
+ * 
  * @param {obj}  obj  The apps state for us to update.
  * @return {bool}
  */
