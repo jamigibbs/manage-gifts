@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import { Link, NavLink, withRouter } from 'react-router-dom'
 import { logout } from '../../actions'
 import LoadingIndicator from '../loading-indicator'
+import { allFalseValues } from '../../utilities'
 import { withStyles } from '@material-ui/core/styles'
 import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
 
@@ -25,10 +26,6 @@ const styles = theme => ({
     zIndex: theme.zIndex.drawer + 1
   }
 })
-
-const allFalse = function(myObj){
-  return Object.keys(myObj).every(function(k){ return myObj[k] === false });
-} 
 
 const Navbar = ({handleClick, isLoggedIn, classes, isLoading}) => (
 
@@ -68,7 +65,7 @@ const Navbar = ({handleClick, isLoggedIn, classes, isLoading}) => (
     </AppBar>
     </div>
     
-    { !allFalse(isLoading) && <LoadingIndicator /> }
+    { !allFalseValues(isLoading) && <LoadingIndicator /> }
     
   </div>
 )
