@@ -933,9 +933,15 @@ var getUserRequest = function getUserRequest() {
   };
 };
 
-var removeUser = function removeUser() {
+var logoutUserRequest = function logoutUserRequest() {
   return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_2__["REMOVE_USER"]
+    type: _constants__WEBPACK_IMPORTED_MODULE_2__["LOGOUT_USER_REQUEST"]
+  };
+};
+
+var logoutUserSuccess = function logoutUserSuccess() {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_2__["LOGOUT_USER_SUCCESS"]
   };
 };
 
@@ -1049,26 +1055,27 @@ var logout = function logout() {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.prev = 0;
-                _context3.next = 3;
+                dispatch(logoutUserRequest());
+                _context3.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/auth/logout');
 
-              case 3:
-                dispatch(removeUser());
+              case 4:
+                dispatch(logoutUserSuccess());
                 _history__WEBPACK_IMPORTED_MODULE_1__["default"].push('/login');
-                _context3.next = 10;
+                _context3.next = 11;
                 break;
 
-              case 7:
-                _context3.prev = 7;
+              case 8:
+                _context3.prev = 8;
                 _context3.t0 = _context3["catch"](0);
                 console.error(_context3.t0);
 
-              case 10:
+              case 11:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this, [[0, 7]]);
+        }, _callee3, this, [[0, 8]]);
       }));
 
       return function (_x3) {
@@ -3646,19 +3653,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
-/* harmony import */ var _material_ui_icons_ListAlt__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/icons/ListAlt */ "./node_modules/@material-ui/icons/ListAlt.js");
-/* harmony import */ var _material_ui_icons_ListAlt__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_ListAlt__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _material_ui_icons_PlaylistAdd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/icons/PlaylistAdd */ "./node_modules/@material-ui/icons/PlaylistAdd.js");
-/* harmony import */ var _material_ui_icons_PlaylistAdd__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_PlaylistAdd__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _material_ui_icons_LastPage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/icons/LastPage */ "./node_modules/@material-ui/icons/LastPage.js");
-/* harmony import */ var _material_ui_icons_LastPage__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_LastPage__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _List__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../List */ "./client/components/List/index.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utilities */ "./client/utilities/index.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_utilities__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+/* harmony import */ var _material_ui_icons_ListAlt__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/icons/ListAlt */ "./node_modules/@material-ui/icons/ListAlt.js");
+/* harmony import */ var _material_ui_icons_ListAlt__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_ListAlt__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _material_ui_icons_PlaylistAdd__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/icons/PlaylistAdd */ "./node_modules/@material-ui/icons/PlaylistAdd.js");
+/* harmony import */ var _material_ui_icons_PlaylistAdd__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_PlaylistAdd__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _material_ui_icons_LastPage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/icons/LastPage */ "./node_modules/@material-ui/icons/LastPage.js");
+/* harmony import */ var _material_ui_icons_LastPage__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_LastPage__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _List__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../List */ "./client/components/List/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
+
 
 
 
@@ -3720,7 +3730,7 @@ function Sidebar(props) {
       logout = props.logout;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: classes.root
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Drawer"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Drawer"], {
     className: classes.drawer,
     variant: "permanent",
     classes: {
@@ -3728,39 +3738,39 @@ function Sidebar(props) {
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: classes.toolbar
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Typography"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Typography"], {
     variant: "h6",
     className: classes.logo
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["Link"], {
     to: "/dashboard",
     className: classes.logoLink
-  }, "Manage Gifts"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["List"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["ListItem"], {
+  }, "Manage Gifts"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["List"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["ListItem"], {
     button: true,
     classes: {
       button: classes.listItem
     }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["ListItemIcon"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_ListAlt__WEBPACK_IMPORTED_MODULE_6___default.a, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["ListItemIcon"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_ListAlt__WEBPACK_IMPORTED_MODULE_7___default.a, {
     className: classes.icon
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_List__WEBPACK_IMPORTED_MODULE_9__["ListSelect"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["ListItem"], {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_List__WEBPACK_IMPORTED_MODULE_10__["ListSelect"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["ListItem"], {
     button: true,
     classes: {
       button: classes.listItem
     }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["ListItemIcon"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["ListItemIcon"], {
     className: classes.icon
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_PlaylistAdd__WEBPACK_IMPORTED_MODULE_7___default.a, null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_List__WEBPACK_IMPORTED_MODULE_9__["ListAdd"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Divider"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_PlaylistAdd__WEBPACK_IMPORTED_MODULE_8___default.a, null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_List__WEBPACK_IMPORTED_MODULE_10__["ListAdd"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Divider"], {
     light: true,
     classes: {
       root: classes.divider
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["List"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["ListItem"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["List"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["ListItem"], {
     button: true,
     classes: {
       button: classes.listItem
     }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["ListItemIcon"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_LastPage__WEBPACK_IMPORTED_MODULE_8___default.a, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["ListItemIcon"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_LastPage__WEBPACK_IMPORTED_MODULE_9___default.a, {
     className: classes.icon
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["ListItemText"], {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["ListItemText"], {
     classes: {
       primary: classes.listItemText
     },
@@ -3773,16 +3783,23 @@ Sidebar.propTypes = {
   classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
   logout: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
 };
+var loadingSelector = Object(_utilities__WEBPACK_IMPORTED_MODULE_2__["createLoadingSelector"])(['LOGOUT_USER']);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    isFetching: loadingSelector(state)
+  };
+};
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     logout: function logout() {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_10__["logout"])());
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_11__["logout"])());
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(null, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["withStyles"])(styles)(Sidebar)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["withStyles"])(styles)(Sidebar)));
 
 /***/ }),
 
@@ -4240,14 +4257,15 @@ UserDashboard.propTypes = {
 /*!***********************************!*\
   !*** ./client/constants/index.js ***!
   \***********************************/
-/*! exports provided: GET_USER_SUCCESS, GET_USER_REQUEST, REMOVE_USER, ADD_RECEIVER, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS, ADD_GIFT_TO_RECEIVER, REMOVE_GIFT_FROM_RECEIVER, GET_RECEIVER_NAME, TOGGLE_GIFT_STATUS, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID, UPDATE_PREVIOUS_LIST_ID, GET_LISTS_FOR_USER, ADD_NEW_LIST, DELETE_LIST, GET_ALL_GIFTS_FOR_LIST */
+/*! exports provided: GET_USER_SUCCESS, GET_USER_REQUEST, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, ADD_RECEIVER, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS, ADD_GIFT_TO_RECEIVER, REMOVE_GIFT_FROM_RECEIVER, GET_RECEIVER_NAME, TOGGLE_GIFT_STATUS, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID, UPDATE_PREVIOUS_LIST_ID, GET_LISTS_FOR_USER, ADD_NEW_LIST, DELETE_LIST, GET_ALL_GIFTS_FOR_LIST */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_USER_SUCCESS", function() { return GET_USER_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_USER_REQUEST", function() { return GET_USER_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_USER", function() { return REMOVE_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGOUT_USER_REQUEST", function() { return LOGOUT_USER_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGOUT_USER_SUCCESS", function() { return LOGOUT_USER_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_RECEIVER", function() { return ADD_RECEIVER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_LIST_RECEIVERS", function() { return GET_ALL_LIST_RECEIVERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_RECEIVER_FROM_LIST", function() { return REMOVE_RECEIVER_FROM_LIST; });
@@ -4269,7 +4287,8 @@ __webpack_require__.r(__webpack_exports__);
  */
 var GET_USER_SUCCESS = 'GET_USER_SUCCESS';
 var GET_USER_REQUEST = 'GET_USER_REQUEST';
-var REMOVE_USER = 'REMOVE_USER';
+var LOGOUT_USER_REQUEST = 'LOGOUT_USER_REQUEST';
+var LOGOUT_USER_SUCCESS = 'LOGOUT_USER_SUCCESS';
 /**
  * RECEIVER ACTION TYPES
  */
@@ -4675,7 +4694,7 @@ var defaultUser = {};
     case _constants__WEBPACK_IMPORTED_MODULE_0__["GET_USER_SUCCESS"]:
       return action.user;
 
-    case _constants__WEBPACK_IMPORTED_MODULE_0__["REMOVE_USER"]:
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["LOGOUT_USER_SUCCESS"]:
       return defaultUser;
 
     default:

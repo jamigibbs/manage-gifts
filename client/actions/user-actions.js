@@ -1,10 +1,11 @@
 import axios from 'axios'
 import history from '../history'
-import { GET_USER_REQUEST, GET_USER_SUCCESS, REMOVE_USER} from '../constants'
+import { GET_USER_REQUEST, GET_USER_SUCCESS, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS} from '../constants'
 
 const getUserSuccess = user => ({type: GET_USER_SUCCESS, user})
 const getUserRequest = () => ({type: GET_USER_REQUEST})
-const removeUser = () => ({type: REMOVE_USER})
+const logoutUserRequest = () => ({type: LOGOUT_USER_REQUEST})
+const logoutUserSuccess = () => ({type: LOGOUT_USER_SUCCESS})
 
 export const me = () => async dispatch => {
   try {
@@ -22,6 +23,7 @@ export const auth = (email, password, method, firstName, lastName) => async disp
     dispatch(getUserRequest())
     res = await axios.post(`/auth/${method}`, {email, password, firstName, lastName})
   } catch (authError) {
+    // TODO: Add error handling action
     return dispatch(getUserSuccess({error: authError}))
   }
 
@@ -35,8 +37,9 @@ export const auth = (email, password, method, firstName, lastName) => async disp
 
 export const logout = () => async dispatch => {
   try {
+    dispatch(logoutUserRequest())
     await axios.post('/auth/logout')
-    dispatch(removeUser())
+    dispatch(logoutUserSuccess())
     history.push('/login')
   } catch (err) {
     console.error(err)

@@ -1,5 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
+import { createLoadingSelector } from '../../utilities'
 import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -102,6 +103,14 @@ Sidebar.propTypes = {
   logout: PropTypes.func.isRequired
 }
 
+const loadingSelector = createLoadingSelector(['LOGOUT_USER'])
+
+const mapStateToProps = state => {
+  return {
+    isFetching: loadingSelector(state)
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     logout() {
@@ -110,4 +119,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(Sidebar))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Sidebar))
