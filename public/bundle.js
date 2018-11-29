@@ -3941,14 +3941,6 @@ var AuthForm = function AuthForm(props) {
     className: classes.googleButton
   }, displayName, " with Google"))));
 };
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
-
 
 var mapLogin = function mapLogin(state) {
   return {
@@ -4279,16 +4271,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_NEW_LIST", function() { return ADD_NEW_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_LIST", function() { return DELETE_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_GIFTS_FOR_LIST", function() { return GET_ALL_GIFTS_FOR_LIST; });
-/**
- * USER ACTION TYPES
- */
+// USER ACTION TYPES
 var GET_USER_SUCCESS = 'GET_USER_SUCCESS';
 var GET_USER_REQUEST = 'GET_USER_REQUEST';
 var LOGOUT_USER_REQUEST = 'LOGOUT_USER_REQUEST';
-var LOGOUT_USER_SUCCESS = 'LOGOUT_USER_SUCCESS';
-/**
- * RECEIVER ACTION TYPES
- */
+var LOGOUT_USER_SUCCESS = 'LOGOUT_USER_SUCCESS'; // RECEIVER ACTION TYPES
 
 var ADD_RECEIVER = 'ADD_RECEIVER';
 var GET_ALL_LIST_RECEIVERS = 'GET_ALL_LIST_RECEIVERS';
@@ -4298,10 +4285,7 @@ var GET_ALL_RECEIVER_GIFTS = 'GET_ALL_RECEIVER_GIFTS';
 var ADD_GIFT_TO_RECEIVER = 'ADD_GIFT_TO_RECEIVER';
 var REMOVE_GIFT_FROM_RECEIVER = 'REMOVE_GIFT_FROM_RECEIVER';
 var GET_RECEIVER_NAME = 'GET_RECEIVER_NAME';
-var TOGGLE_GIFT_STATUS = 'TOGGLE_GIFT_STATUS';
-/**
- * LIST ACTION TYPES
- */
+var TOGGLE_GIFT_STATUS = 'TOGGLE_GIFT_STATUS'; // LIST ACTION TYPES
 
 var GET_CURRENT_LIST_ID = 'GET_CURRENT_LIST_ID';
 var UPDATE_CURRENT_LIST_ID = 'UPDATE_CURRENT_LIST_ID';
@@ -4905,9 +4889,24 @@ var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, m
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+/**
+ * Replaces all string spaces with a dash "-" and turns to lowercase.
+ * Example: "Lowercase With dashes" to "lowercase-with-dashes"
+ * 
+ * @param {str}  str  The string to modify
+ * @return {str}
+ */
 var strToLowercaseDashed = function strToLowercaseDashed(str) {
   return str.replace(/\s+/g, '-').toLowerCase();
 };
+/**
+ * Converts a non-decimal number into a USD currency value.
+ * Example: 1000 to "$10.00"
+ * 
+ * @param {num}  num  The value to convert to USD
+ * @return {str}
+ */
+
 
 var centsToUSD = function centsToUSD(num) {
   var dollars = num / 100;
@@ -4916,6 +4915,13 @@ var centsToUSD = function centsToUSD(num) {
     currency: "USD"
   });
 };
+/**
+ * Removes all parameters from a url starting with the first '?' flag.
+ *
+ * @param {str}  url  The url that we want paramenters removed from.
+ * @return {str}
+ */
+
 
 var removeLinkParams = function removeLinkParams(url) {
   return url.split('?')[0];
@@ -4927,7 +4933,6 @@ var removeLinkParams = function removeLinkParams(url) {
  *
  * @param {str}  url  The link to match a domain against.
  * @param {str}  domain  The domain to match against the link.
- *
  * @return {bool}
  */
 
@@ -4938,16 +4943,14 @@ var isDomain = function isDomain(url, domain) {
 /**
  * Used with the loading reducer, this will identify if an action is  
  * in the loading state.
+ * 
  * @param {arr}  actions  The actions to log in the loading reducer.
+ * @param {obj}  state The redux store state object
+ * @return {bool}
  */
 
 
 var createLoadingSelector = function createLoadingSelector(actions) {
-  /**
-   * The apps state for us to update.
-   * @param {obj}  state The redux store state object
-   * @return {bool}
-   */
   return function (state) {
     return actions.some(function (action) {
       return state.loading[action];
@@ -4957,6 +4960,7 @@ var createLoadingSelector = function createLoadingSelector(actions) {
 /**
  * Function checks if a given object has values that all equal
  * the boolean value false.
+ * 
  * @param {obj}  obj  The apps state for us to update.
  * @return {bool}
  */
