@@ -1,18 +1,12 @@
-import { GET_USER, REMOVE_USER} from '../constants'
+import { GET_USER_SUCCESS, LOGOUT_USER_SUCCESS} from '../constants'
 
-/**
- * INITIAL STATE
- */
 const defaultUser = {}
 
-/**
- * REDUCER
- */
 export default function(state = defaultUser, action) {
   switch (action.type) {
-    case GET_USER:
+    case GET_USER_SUCCESS:
       return action.user
-    case REMOVE_USER:
+    case LOGOUT_USER_SUCCESS:
       return defaultUser
     default:
       return state
