@@ -3,7 +3,8 @@ import history from '../history'
 import { strToLowercaseDashed } from '../utilities'
 import {
   GET_CURRENT_LIST_ID,
-  UPDATE_CURRENT_LIST_ID,
+  UPDATE_CURRENT_LIST_ID_REQUEST,
+  UPDATE_CURRENT_LIST_ID_SUCCESS,
   GET_LISTS_FOR_USER,
   ADD_NEW_LIST,
   DELETE_LIST,
@@ -13,7 +14,8 @@ import {
 import { removedAllListReceivers } from './receiver-actions'
 
 export const getCurrentListId = () => ({type: GET_CURRENT_LIST_ID})
-export const updatedCurrentListId = (id) => ({type: UPDATE_CURRENT_LIST_ID, id})
+export const updatedCurrentListIdSuccess = (id) => ({type: UPDATE_CURRENT_LIST_ID_SUCCESS, id})
+export const updatedCurrentListIdRequest = () => ({type: UPDATE_CURRENT_LIST_ID_REQUEST})
 export const updatedPreviousListId = (id) => ({type: UPDATE_PREVIOUS_LIST_ID, id})
 export const gotListsForUser = (userLists) => ({type: GET_LISTS_FOR_USER, userLists})
 export const addedNewList = (newList) => ({type: ADD_NEW_LIST, newList})
@@ -22,7 +24,8 @@ export const gotAllGiftsForList = (gifts) => ({type: GET_ALL_GIFTS_FOR_LIST, gif
 
 export const updateCurrentListId = (id) => dispatch => {
   try {
-    dispatch(updatedCurrentListId(id))
+    dispatch(updatedCurrentListIdRequest())
+    dispatch(updatedCurrentListIdSuccess(id))
   } catch (err) {
     console.error(err)
   }

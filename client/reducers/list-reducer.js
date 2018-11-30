@@ -1,6 +1,6 @@
 import {
   GET_CURRENT_LIST_ID,
-  UPDATE_CURRENT_LIST_ID,
+  UPDATE_CURRENT_LIST_ID_SUCCESS,
   GET_LISTS_FOR_USER,
   ADD_NEW_LIST,
   DELETE_LIST,
@@ -22,7 +22,7 @@ export default function(state = list, action) {
       return {...state, currentId: null, userLists: state.userLists.filter((list) => {
         return list.id !== action.list.listId
       })}
-    case UPDATE_CURRENT_LIST_ID:
+    case UPDATE_CURRENT_LIST_ID_SUCCESS:
       return {...state, currentId: action.id}
     case UPDATE_PREVIOUS_LIST_ID:
       return {...state, prevId: action.id}

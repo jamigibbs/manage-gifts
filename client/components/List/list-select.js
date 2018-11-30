@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Cookies from 'js-cookie'
+import { createLoadingSelector } from '../../utilities'
 import { updateCurrentListId, getListsForuser } from '../../actions'
 import ListSelectDialog from './list-select-dialog'
 import { withStyles } from '@material-ui/core/styles'
@@ -64,10 +65,13 @@ class ListSelect extends Component {
   }
 }
 
+const loadingSelector = createLoadingSelector(['UPDATE_CURRENT_LIST_ID'])
+
 const mapStateToProps = (state) => {
   return {
     userLists: state.list.userLists,
-    userId: state.user.id
+    userId: state.user.id,
+    isLoading: loadingSelector(state)
   }
 }
 
