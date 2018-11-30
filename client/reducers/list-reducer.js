@@ -1,7 +1,7 @@
 import {
   GET_CURRENT_LIST_ID,
   UPDATE_CURRENT_LIST_ID_SUCCESS,
-  GET_LISTS_FOR_USER,
+  GET_LISTS_FOR_USER_SUCCESS,
   ADD_NEW_LIST,
   DELETE_LIST,
   UPDATE_PREVIOUS_LIST_ID,
@@ -28,7 +28,7 @@ export default function(state = list, action) {
       return {...state, prevId: action.id}
     case GET_CURRENT_LIST_ID:
       return state
-    case GET_LISTS_FOR_USER:
+    case GET_LISTS_FOR_USER_SUCCESS:
       return {...state, userLists: action.userLists}
     case GET_ALL_GIFTS_FOR_LIST:
       return {...state, gifts: action.gifts}

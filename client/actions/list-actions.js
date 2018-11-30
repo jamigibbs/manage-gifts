@@ -5,7 +5,8 @@ import {
   GET_CURRENT_LIST_ID,
   UPDATE_CURRENT_LIST_ID_REQUEST,
   UPDATE_CURRENT_LIST_ID_SUCCESS,
-  GET_LISTS_FOR_USER,
+  GET_LISTS_FOR_USER_REQUEST,
+  GET_LISTS_FOR_USER_SUCCESS,
   ADD_NEW_LIST,
   DELETE_LIST,
   UPDATE_PREVIOUS_LIST_ID,
@@ -17,7 +18,8 @@ export const getCurrentListId = () => ({type: GET_CURRENT_LIST_ID})
 export const updatedCurrentListIdSuccess = (id) => ({type: UPDATE_CURRENT_LIST_ID_SUCCESS, id})
 export const updatedCurrentListIdRequest = () => ({type: UPDATE_CURRENT_LIST_ID_REQUEST})
 export const updatedPreviousListId = (id) => ({type: UPDATE_PREVIOUS_LIST_ID, id})
-export const gotListsForUser = (userLists) => ({type: GET_LISTS_FOR_USER, userLists})
+export const gotListsForUserSuccess = (userLists) => ({type: GET_LISTS_FOR_USER_SUCCESS, userLists})
+export const gotListsForUserRequest = () => ({type: GET_LISTS_FOR_USER_REQUEST})
 export const addedNewList = (newList) => ({type: ADD_NEW_LIST, newList})
 export const deletedList = (list) => ({type: DELETE_LIST, list})
 export const gotAllGiftsForList = (gifts) => ({type: GET_ALL_GIFTS_FOR_LIST, gifts})
@@ -41,12 +43,13 @@ export const updatePreviousListId = (id) => dispatch => {
 
 export const getListsForuser = (userId) => async dispatch => {
   try {
+    dispatch(gotListsForUserRequest(data))
     const { data } = await axios.get('/api/list/all', {
       params: {
         userId
       }
     })
-    dispatch(gotListsForUser(data))
+    dispatch(gotListsForUserSuccess(data))
   } catch (err) {
     console.error(err)
   }

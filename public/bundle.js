@@ -144,7 +144,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************!*\
   !*** ./client/actions/list-actions.js ***!
   \****************************************/
-/*! exports provided: getCurrentListId, updatedCurrentListIdSuccess, updatedCurrentListIdRequest, updatedPreviousListId, gotListsForUser, addedNewList, deletedList, gotAllGiftsForList, updateCurrentListId, updatePreviousListId, getListsForuser, addNewList, deleteList, getAllGiftsForList */
+/*! exports provided: getCurrentListId, updatedCurrentListIdSuccess, updatedCurrentListIdRequest, updatedPreviousListId, gotListsForUserSuccess, gotListsForUserRequest, addedNewList, deletedList, gotAllGiftsForList, updateCurrentListId, updatePreviousListId, getListsForuser, addNewList, deleteList, getAllGiftsForList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -153,7 +153,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updatedCurrentListIdSuccess", function() { return updatedCurrentListIdSuccess; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updatedCurrentListIdRequest", function() { return updatedCurrentListIdRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updatedPreviousListId", function() { return updatedPreviousListId; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gotListsForUser", function() { return gotListsForUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gotListsForUserSuccess", function() { return gotListsForUserSuccess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gotListsForUserRequest", function() { return gotListsForUserRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addedNewList", function() { return addedNewList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deletedList", function() { return deletedList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gotAllGiftsForList", function() { return gotAllGiftsForList; });
@@ -201,10 +202,15 @@ var updatedPreviousListId = function updatedPreviousListId(id) {
     id: id
   };
 };
-var gotListsForUser = function gotListsForUser(userLists) {
+var gotListsForUserSuccess = function gotListsForUserSuccess(userLists) {
   return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_3__["GET_LISTS_FOR_USER"],
+    type: _constants__WEBPACK_IMPORTED_MODULE_3__["GET_LISTS_FOR_USER_SUCCESS"],
     userLists: userLists
+  };
+};
+var gotListsForUserRequest = function gotListsForUserRequest() {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_3__["GET_LISTS_FOR_USER_REQUEST"]
   };
 };
 var addedNewList = function addedNewList(newList) {
@@ -258,31 +264,32 @@ var getListsForuser = function getListsForuser(userId) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                _context.next = 3;
+                dispatch(gotListsForUserRequest(data));
+                _context.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/list/all', {
                   params: {
                     userId: userId
                   }
                 });
 
-              case 3:
+              case 4:
                 _ref2 = _context.sent;
                 data = _ref2.data;
-                dispatch(gotListsForUser(data));
-                _context.next = 11;
+                dispatch(gotListsForUserSuccess(data));
+                _context.next = 12;
                 break;
 
-              case 8:
-                _context.prev = 8;
+              case 9:
+                _context.prev = 9;
                 _context.t0 = _context["catch"](0);
                 console.error(_context.t0);
 
-              case 11:
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 8]]);
+        }, _callee, this, [[0, 9]]);
       }));
 
       return function (_x) {
@@ -4259,7 +4266,7 @@ UserDashboard.propTypes = {
 /*!***********************************!*\
   !*** ./client/constants/index.js ***!
   \***********************************/
-/*! exports provided: GET_USER_SUCCESS, GET_USER_REQUEST, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, ADD_RECEIVER, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS, ADD_GIFT_TO_RECEIVER, REMOVE_GIFT_FROM_RECEIVER, GET_RECEIVER_NAME, TOGGLE_GIFT_STATUS, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID_REQUEST, UPDATE_CURRENT_LIST_ID_SUCCESS, UPDATE_PREVIOUS_LIST_ID, GET_LISTS_FOR_USER, ADD_NEW_LIST, DELETE_LIST, GET_ALL_GIFTS_FOR_LIST */
+/*! exports provided: GET_USER_SUCCESS, GET_USER_REQUEST, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, ADD_RECEIVER, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS, ADD_GIFT_TO_RECEIVER, REMOVE_GIFT_FROM_RECEIVER, GET_RECEIVER_NAME, TOGGLE_GIFT_STATUS, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID_REQUEST, UPDATE_CURRENT_LIST_ID_SUCCESS, UPDATE_PREVIOUS_LIST_ID, GET_LISTS_FOR_USER_REQUEST, GET_LISTS_FOR_USER_SUCCESS, ADD_NEW_LIST, DELETE_LIST, GET_ALL_GIFTS_FOR_LIST */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4281,7 +4288,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_CURRENT_LIST_ID_REQUEST", function() { return UPDATE_CURRENT_LIST_ID_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_CURRENT_LIST_ID_SUCCESS", function() { return UPDATE_CURRENT_LIST_ID_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_PREVIOUS_LIST_ID", function() { return UPDATE_PREVIOUS_LIST_ID; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_LISTS_FOR_USER", function() { return GET_LISTS_FOR_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_LISTS_FOR_USER_REQUEST", function() { return GET_LISTS_FOR_USER_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_LISTS_FOR_USER_SUCCESS", function() { return GET_LISTS_FOR_USER_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_NEW_LIST", function() { return ADD_NEW_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_LIST", function() { return DELETE_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_GIFTS_FOR_LIST", function() { return GET_ALL_GIFTS_FOR_LIST; });
@@ -4305,7 +4313,8 @@ var GET_CURRENT_LIST_ID = 'GET_CURRENT_LIST_ID';
 var UPDATE_CURRENT_LIST_ID_REQUEST = 'UPDATE_CURRENT_LIST_ID_REQUEST';
 var UPDATE_CURRENT_LIST_ID_SUCCESS = 'UPDATE_CURRENT_LIST_ID_SUCCESS';
 var UPDATE_PREVIOUS_LIST_ID = 'UPDATE_PREVIOUS_LIST_ID';
-var GET_LISTS_FOR_USER = 'GET_LISTS_FOR_USER';
+var GET_LISTS_FOR_USER_REQUEST = 'GET_LISTS_FOR_USER_REQUEST';
+var GET_LISTS_FOR_USER_SUCCESS = 'GET_LISTS_FOR_USER_SUCCESS';
 var ADD_NEW_LIST = 'ADD_NEW_LIST';
 var DELETE_LIST = 'DELETE_LIST';
 var GET_ALL_GIFTS_FOR_LIST = 'GET_ALL_GIFTS_FOR_LIST';
@@ -4518,7 +4527,7 @@ var list = {
     case _constants__WEBPACK_IMPORTED_MODULE_0__["GET_CURRENT_LIST_ID"]:
       return state;
 
-    case _constants__WEBPACK_IMPORTED_MODULE_0__["GET_LISTS_FOR_USER"]:
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["GET_LISTS_FOR_USER_SUCCESS"]:
       return _objectSpread({}, state, {
         userLists: action.userLists
       });
