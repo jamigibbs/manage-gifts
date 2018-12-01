@@ -42,6 +42,7 @@ export class ListAdd extends Component {
   }
 
   handleSubmit = () => {
+    if (!this.state.name) return null
     this.props.addNewList(this.state.name, this.props.userId)
     this.handleClose()
 
@@ -71,6 +72,7 @@ export class ListAdd extends Component {
               Enter the name of the list you'd like to add. eg. Christmas 2019
             </DialogContentText>
             <TextField
+              required={true}
               onChange={this.handleChange('name')}
               value={this.state.name}
               autoFocus
