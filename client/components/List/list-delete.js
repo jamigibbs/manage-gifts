@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { createLoadingSelector } from '../../utilities'
 import { deleteList, updatePreviousListId } from '../../actions'
 import history from '../../history'
 
@@ -72,9 +73,12 @@ export class ListDelete extends Component {
   }
 }
 
+const loadingSelector = createLoadingSelector(['DELETE_LIST, UPDATE_PREVIOUS_LIST_ID'])
+
 const mapStateToProps = (state) => {
   return {
-    userId: state.user.id
+    userId: state.user.id,
+    isLoading: loadingSelector(state)
   }
 }
 

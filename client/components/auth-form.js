@@ -9,8 +9,6 @@ import { Navbar } from './Header'
 import { withStyles } from '@material-ui/core/styles'
 import { Grid, Paper, TextField, Button, Typography, Divider } from '@material-ui/core'
 
-const loadingSelector = createLoadingSelector(['GET_USER'])
-
 const styles = theme => ({
   submitButton: {
     marginTop: '40px',
@@ -146,6 +144,8 @@ const AuthForm = props => {
     </div>
   )
 }
+
+const loadingSelector = createLoadingSelector(['GET_USER'])
 
 const mapLogin = state => {
   return {

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { createLoadingSelector } from '../../utilities'
 
 import { updatePreviousListId } from '../../actions'
 import { strToLowercaseDashed } from '../../utilities'
@@ -96,11 +97,14 @@ ListSelectDialog.propTypes = {
   open: PropTypes.bool
 }
 
+const loadingSelector = createLoadingSelector(['UPDATE_PREVIOUS_LIST_ID'])
+
 const mapStateToProps = (state) => {
   return {
     prevId: state.list.prevId,
     userLists: state.list.userLists,
-    currentId: state.list.currentId
+    currentId: state.list.currentId,
+    isLoading: loadingSelector(state)
   }
 }
 

@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { createLoadingSelector } from '../../utilities'
 import { withStyles } from '@material-ui/core/styles'
-import { ReceiverGiftAdd, ReceiverGiftDelete, ReceiverGiftToggle } from '../Receiver'
+import { ReceiverGiftDelete, ReceiverGiftToggle } from '../Receiver'
 import { getAllReceiverGifts } from '../../actions'
 import { Table, TableBody, TableCell, TableHead, TableRow, Paper, Typography } from '@material-ui/core/'
 
@@ -85,6 +86,8 @@ class ReceiverGiftsList extends Component {
   }
 }
 
+const loadingSelector = createLoadingSelector(['GET_ALL_RECEIVER_GIFTS'])
+
 ReceiverGiftsList.propTypes = {
   gifts: PropTypes.arrayOf(PropTypes.object),
   classes: PropTypes.object,
@@ -93,7 +96,8 @@ ReceiverGiftsList.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    gifts: state.receivers.gifts
+    gifts: state.receivers.gifts,
+    isLoading: loadingSelector(state)
   }
 }
 

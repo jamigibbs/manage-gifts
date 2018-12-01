@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { createLoadingSelector } from '../../utilities'
 import { addReceiver } from '../../actions'
 import { Typography, TextField, Button } from '@material-ui/core'
 
@@ -91,6 +92,8 @@ export class ReceiverAdd extends Component {
   }
 }
 
+const loadingSelector = createLoadingSelector(['ADD_RECEIVER'])
+
 ReceiverAdd.propTypes = {
   currentListId: PropTypes.number,
   addReceiver: PropTypes.func
@@ -98,7 +101,8 @@ ReceiverAdd.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    currentListId: state.list.currentId
+    currentListId: state.list.currentId,
+    isLoading: loadingSelector(state)
   }
 }
 

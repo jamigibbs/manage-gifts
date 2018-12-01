@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { createLoadingSelector } from '../../utilities'
 import { addNewList } from '../../actions'
 import { withStyles } from '@material-ui/core/styles'
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, ListItemText } from '@material-ui/core'
@@ -94,9 +95,12 @@ export class ListAdd extends Component {
   }
 }
 
+const loadingSelector = createLoadingSelector(['ADD_NEW_LIST'])
+
 const mapStateToProps = (state) => {
   return {
-    userId: state.user.id
+    userId: state.user.id,
+    loading: loadingSelector(state)
   }
 }
 

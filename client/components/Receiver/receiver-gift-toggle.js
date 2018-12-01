@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { createLoadingSelector } from '../../utilities'
 import { Checkbox } from '@material-ui/core/'
 import { toggleGiftStatus } from '../../actions'
 
@@ -25,9 +26,17 @@ class ReceiveGiftToggle extends Component {
   }
 }
 
+const loadingSelector = createLoadingSelector(['TOGGLE_GIFT_STATUS'])
+
 ReceiveGiftToggle.propTypes = {
   gift: PropTypes.object,
   toggleGiftStatus: PropTypes.func
+}
+
+const mapStateToProps = (state) => {
+  return {
+    isLoading: loadingSelector(state)
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -38,4 +47,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(ReceiveGiftToggle)
+export default connect(mapStateToProps, mapDispatchToProps)(ReceiveGiftToggle)

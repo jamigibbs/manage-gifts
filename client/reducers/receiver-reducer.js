@@ -1,13 +1,13 @@
 import {
-  ADD_RECEIVER,
-  GET_ALL_LIST_RECEIVERS,
-  REMOVE_RECEIVER_FROM_LIST,
+  ADD_RECEIVER_SUCCESS,
+  GET_ALL_LIST_RECEIVERS_SUCCESS,
+  REMOVE_RECEIVER_FROM_LIST_SUCCESS,
   REMOVE_ALL_LIST_RECEIVERS,
-  GET_ALL_RECEIVER_GIFTS,
-  ADD_GIFT_TO_RECEIVER,
-  GET_RECEIVER_NAME,
-  REMOVE_GIFT_FROM_RECEIVER,
-  TOGGLE_GIFT_STATUS } from '../constants'
+  GET_ALL_RECEIVER_GIFTS_SUCCESS,
+  ADD_GIFT_TO_RECEIVER_SUCCESS,
+  GET_RECEIVER_NAME_SUCCESS,
+  REMOVE_GIFT_FROM_RECEIVER_SUCCESS,
+  TOGGLE_GIFT_STATUS_SUCCESS } from '../constants'
 
 const receivers = {
   allFromList: [],
@@ -17,27 +17,27 @@ const receivers = {
 
 export default function(state = receivers, action) {
   switch (action.type) {
-    case ADD_RECEIVER:
+    case ADD_RECEIVER_SUCCESS:
       return {...state, allFromList: [...state.allFromList, action.receiver]}
-    case REMOVE_RECEIVER_FROM_LIST:
+    case REMOVE_RECEIVER_FROM_LIST_SUCCESS:
       return {...state, allFromList: state.allFromList.filter((receiver) => {
         return receiver.id !== action.receiver.receiverId
       })}
     case REMOVE_ALL_LIST_RECEIVERS:
       return {...state, allFromList: [] }
-    case GET_ALL_LIST_RECEIVERS:
+    case GET_ALL_LIST_RECEIVERS_SUCCESS:
       return {...state, allFromList: action.receivers}
-    case GET_ALL_RECEIVER_GIFTS:
+    case GET_ALL_RECEIVER_GIFTS_SUCCESS:
       return {...state, gifts: action.gifts}
-    case ADD_GIFT_TO_RECEIVER:
+    case ADD_GIFT_TO_RECEIVER_SUCCESS:
       return {...state, gifts: [...state.gifts, action.gift]}
-    case GET_RECEIVER_NAME:
+    case GET_RECEIVER_NAME_SUCCESS:
       return {...state, currentReceiver: action.receiver}
-    case REMOVE_GIFT_FROM_RECEIVER:
+    case REMOVE_GIFT_FROM_RECEIVER_SUCCESS:
       return {...state, gifts: state.gifts.filter((gift) => {
         return gift.id !== action.id
       })}
-    case TOGGLE_GIFT_STATUS:
+    case TOGGLE_GIFT_STATUS_SUCCESS:
       return {...state, gifts: state.gifts.map((gift) => {
         if (gift.id === action.gift.id) {
           return Object.assign({}, gift, {

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { createLoadingSelector } from '../../utilities'
 import { getReceiver } from '../../actions'
-
 
 class ReceiverName extends Component {
 
@@ -19,6 +19,8 @@ class ReceiverName extends Component {
 
 }
 
+const loadingSelector = createLoadingSelector(['GET_RECEIVER'])
+
 ReceiverName.propTypes = {
   currentReceiver: PropTypes.object,
   getReceiver: PropTypes.func
@@ -26,7 +28,8 @@ ReceiverName.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    currentReceiver: state.receivers.currentReceiver
+    currentReceiver: state.receivers.currentReceiver,
+    isLoading: loadingSelector(state)
   }
 }
 
