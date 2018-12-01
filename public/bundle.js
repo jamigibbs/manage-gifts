@@ -4315,12 +4315,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _loading_indicator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./loading-indicator */ "./client/components/loading-indicator.js");
-/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utilities */ "./client/utilities/index.js");
-/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_utilities__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utilities */ "./client/utilities/index.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_utilities__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _loading_indicator__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./loading-indicator */ "./client/components/loading-indicator.js");
 /* harmony import */ var _Receiver__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Receiver */ "./client/components/Receiver/index.js");
 /* harmony import */ var _Sidebar__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Sidebar */ "./client/components/Sidebar/index.js");
 /* harmony import */ var _Dashboard__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Dashboard */ "./client/components/Dashboard/index.js");
@@ -4341,6 +4341,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -4394,12 +4395,12 @@ function (_Component) {
           classes = _this$props.classes,
           userLists = _this$props.userLists,
           currentId = _this$props.currentId,
-          isLoading = _this$props.isLoading;
+          loading = _this$props.loading;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: classes.root
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Sidebar__WEBPACK_IMPORTED_MODULE_9__["Sidebar"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
         className: classes.content
-      }, !Object(_utilities__WEBPACK_IMPORTED_MODULE_7__["allFalseValues"])(isLoading) && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_loading_indicator__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Dashboard__WEBPACK_IMPORTED_MODULE_10__["DashboardHeader"], {
+      }, !Object(_utilities__WEBPACK_IMPORTED_MODULE_4__["allFalseValues"])(loading) && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_loading_indicator__WEBPACK_IMPORTED_MODULE_7__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Dashboard__WEBPACK_IMPORTED_MODULE_10__["DashboardHeader"], {
         name: firstName,
         userLists: userLists,
         currentId: currentId
@@ -4421,6 +4422,7 @@ function (_Component) {
 
   return UserDashboard;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+var loadingSelector = Object(_utilities__WEBPACK_IMPORTED_MODULE_4__["createLoadingSelector"])(['UPDATE_CURRENT_LIST_ID']);
 
 var mapState = function mapState(state) {
   return {
@@ -4428,14 +4430,15 @@ var mapState = function mapState(state) {
     isLoggedIn: !!state.user.id,
     userLists: state.list.userLists,
     currentId: state.list.currentId,
-    isLoading: state.loading
+    loading: state.loading,
+    isLoading: loadingSelector(state)
   };
 };
 
 var mapProps = function mapProps(dispatch) {
   return {
     updateCurrentListId: function updateCurrentListId(listId) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["updateCurrentListId"])(listId));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_5__["updateCurrentListId"])(listId));
     }
   };
 };
@@ -4445,7 +4448,7 @@ UserDashboard.propTypes = {
   classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
   currentListId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
 };
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapState, mapProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["withStyles"])(styles)(UserDashboard)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapState, mapProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6__["withStyles"])(styles)(UserDashboard)));
 
 /***/ }),
 

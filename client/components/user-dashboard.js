@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
+import { createLoadingSelector } from '../utilities'
 import { updateCurrentListId } from '../actions'
 import { withStyles } from '@material-ui/core/styles'
 import LoadingIndicator from './loading-indicator'
@@ -34,14 +35,14 @@ export class UserDashboard extends Component {
   // }
 
   render(){
-    const { firstName, classes, userLists, currentId, isLoading } = this.props
+    const { firstName, classes, userLists, currentId, loading } = this.props
 
     return (
       <div className={classes.root}>
         <Sidebar />
         <main className={classes.content}>
 
-          { !allFalseValues(isLoading) && <LoadingIndicator /> }
+          { !allFalseValues(loading) && <LoadingIndicator /> }
 
           <DashboardHeader
             name={firstName}
@@ -65,13 +66,16 @@ export class UserDashboard extends Component {
   }
 }
 
+const loadingSelector = createLoadingSelector(['UPDATE_CURRENT_LIST_ID'])
+
 const mapState = state => {
   return {
     firstName: state.user.firstName,
     isLoggedIn: !!state.user.id,
     userLists: state.list.userLists,
     currentId: state.list.currentId,
-    isLoading: state.loading
+    loading: state.loading,
+    isLoading: loadingSelector(state)
   }
 }
 
