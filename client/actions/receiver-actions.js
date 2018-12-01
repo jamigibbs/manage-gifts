@@ -15,8 +15,7 @@ import {
   GET_RECEIVER_NAME_REQUEST,
   REMOVE_GIFT_FROM_RECEIVER_SUCCESS,
   REMOVE_GIFT_FROM_RECEIVER_REQUEST,
-  TOGGLE_GIFT_STATUS_SUCCESS,
-  TOGGLE_GIFT_STATUS_REQUEST } from '../constants'
+  TOGGLE_GIFT_STATUS_SUCCESS } from '../constants'
 
 const addedReceiverSuccess = (receiver) => ({type: ADD_RECEIVER_SUCCESS, receiver})
 const addedReceiverRequest = () => ({type: ADD_RECEIVER_REQUEST})
@@ -39,7 +38,6 @@ const removedGiftFromReceiverSuccess = (id) => ({type: REMOVE_GIFT_FROM_RECEIVER
 const removedGiftFromReceiverRequest = () => ({type: REMOVE_GIFT_FROM_RECEIVER_REQUEST})
 
 const toggledGiftStatusSuccess = (gift) => ({type: TOGGLE_GIFT_STATUS_SUCCESS, gift})
-const toggledGiftStatusRequest = () => ({type: TOGGLE_GIFT_STATUS_REQUEST})
 
 const removedReceiverFromListRequest = () => ({type: REMOVE_RECEIVER_FROM_LIST_REQUEST})
 const removedReceiverFromListSuccess = (receiver) => {
@@ -140,7 +138,6 @@ export const removeGiftFromReceiver = (id) => async dispatch => {
 
 export const toggleGiftStatus = (gift) => async dispatch => {
   try {
-    dispatch(toggledGiftStatusRequest())
     const { data } = await axios.post('/api/receiver/gift/status', { gift })
     dispatch(toggledGiftStatusSuccess(data))
   } catch (err) {
