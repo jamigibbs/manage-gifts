@@ -144,7 +144,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************!*\
   !*** ./client/actions/list-actions.js ***!
   \****************************************/
-/*! exports provided: getCurrentListId, updatedCurrentListIdSuccess, updatedCurrentListIdRequest, updatedPreviousListIdSuccess, updatedPreviousListIdRequest, gotListsForUserSuccess, gotListsForUserRequest, addedNewList, deletedListSuccess, deletedListRequest, gotAllGiftsForList, updateCurrentListId, updatePreviousListId, getListsForuser, addNewList, deleteList, getAllGiftsForList */
+/*! exports provided: getCurrentListId, updatedCurrentListIdSuccess, updatedCurrentListIdRequest, updatedPreviousListIdSuccess, updatedPreviousListIdRequest, gotListsForUserSuccess, gotListsForUserRequest, addedNewListSuccess, addedNewListRequest, deletedListSuccess, deletedListRequest, gotAllGiftsForList, updateCurrentListId, updatePreviousListId, getListsForuser, addNewList, deleteList, getAllGiftsForList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -156,7 +156,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updatedPreviousListIdRequest", function() { return updatedPreviousListIdRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gotListsForUserSuccess", function() { return gotListsForUserSuccess; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gotListsForUserRequest", function() { return gotListsForUserRequest; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addedNewList", function() { return addedNewList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addedNewListSuccess", function() { return addedNewListSuccess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addedNewListRequest", function() { return addedNewListRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deletedListSuccess", function() { return deletedListSuccess; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deletedListRequest", function() { return deletedListRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gotAllGiftsForList", function() { return gotAllGiftsForList; });
@@ -220,10 +221,15 @@ var gotListsForUserRequest = function gotListsForUserRequest() {
     type: _constants__WEBPACK_IMPORTED_MODULE_3__["GET_LISTS_FOR_USER_REQUEST"]
   };
 };
-var addedNewList = function addedNewList(newList) {
+var addedNewListSuccess = function addedNewListSuccess(newList) {
   return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_3__["ADD_NEW_LIST"],
+    type: _constants__WEBPACK_IMPORTED_MODULE_3__["ADD_NEW_LIST_SUCCESS"],
     newList: newList
+  };
+};
+var addedNewListRequest = function addedNewListRequest() {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_3__["ADD_NEW_LIST_REQUEST"]
   };
 };
 var deletedListSuccess = function deletedListSuccess(list) {
@@ -325,31 +331,32 @@ var addNewList = function addNewList(name, userId) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
-                _context2.next = 3;
+                dispatch(addedNewListRequest());
+                _context2.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/list/add', {
                   name: name,
                   userId: userId
                 });
 
-              case 3:
+              case 4:
                 _ref4 = _context2.sent;
                 data = _ref4.data;
-                dispatch(addedNewList(data));
+                dispatch(addedNewListSuccess(data));
                 _history__WEBPACK_IMPORTED_MODULE_1__["default"].push("/dashboard/list/".concat(Object(_utilities__WEBPACK_IMPORTED_MODULE_2__["strToLowercaseDashed"])(data.name), "/").concat(data.id));
-                _context2.next = 12;
+                _context2.next = 13;
                 break;
 
-              case 9:
-                _context2.prev = 9;
+              case 10:
+                _context2.prev = 10;
                 _context2.t0 = _context2["catch"](0);
                 console.error(_context2.t0);
 
-              case 12:
+              case 13:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[0, 9]]);
+        }, _callee2, this, [[0, 10]]);
       }));
 
       return function (_x2) {
@@ -1510,10 +1517,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utilities */ "./client/utilities/index.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_utilities__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1533,6 +1542,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1617,13 +1627,13 @@ function (_Component) {
       var classes = this.props.classes;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: classes.root
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["ListItemText"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["ListItemText"], {
         classes: {
           primary: classes.listItemText
         },
         primary: "Create New List",
         onClick: this.handleClickOpen
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Dialog"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Dialog"], {
         classes: {
           paper: classes.paper
         },
@@ -1631,9 +1641,9 @@ function (_Component) {
         onClose: this.handleClose,
         fullWidth: true,
         "aria-labelledby": "add-new-list-form-title"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["DialogTitle"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["DialogTitle"], {
         id: "add-new-list-form-title"
-      }, "Create New List"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["DialogContentText"], null, "Enter the name of the list you'd like to add. eg. Christmas 2019"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["TextField"], {
+      }, "Create New List"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["DialogContentText"], null, "Enter the name of the list you'd like to add. eg. Christmas 2019"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TextField"], {
         onChange: this.handleChange('name'),
         value: this.state.name,
         autoFocus: true,
@@ -1642,10 +1652,10 @@ function (_Component) {
         label: "List Name",
         type: "text",
         fullWidth: true
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["DialogActions"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Button"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["DialogActions"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
         onClick: this.handleClose,
         color: "primary"
-      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Button"], {
+      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
         onClick: this.handleSubmit,
         color: "primary"
       }, "Submit"))));
@@ -1654,17 +1664,19 @@ function (_Component) {
 
   return ListAdd;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+var loadingSelector = Object(_utilities__WEBPACK_IMPORTED_MODULE_3__["createLoadingSelector"])(['ADD_NEW_LIST']);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    userId: state.user.id
+    userId: state.user.id,
+    loading: loadingSelector(state)
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     addNewList: function addNewList(name, userId) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["addNewList"])(name, userId));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["addNewList"])(name, userId));
     }
   };
 };
@@ -1674,7 +1686,7 @@ ListAdd.propTypes = {
   userId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
   classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
 };
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__["withStyles"])(styles)(ListAdd)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["withStyles"])(styles)(ListAdd)));
 
 /***/ }),
 
@@ -4288,7 +4300,7 @@ UserDashboard.propTypes = {
 /*!***********************************!*\
   !*** ./client/constants/index.js ***!
   \***********************************/
-/*! exports provided: GET_USER_SUCCESS, GET_USER_REQUEST, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, ADD_RECEIVER, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS, ADD_GIFT_TO_RECEIVER, REMOVE_GIFT_FROM_RECEIVER, GET_RECEIVER_NAME, TOGGLE_GIFT_STATUS, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID_REQUEST, UPDATE_CURRENT_LIST_ID_SUCCESS, UPDATE_PREVIOUS_LIST_ID_REQUEST, UPDATE_PREVIOUS_LIST_ID_SUCCESS, GET_LISTS_FOR_USER_REQUEST, GET_LISTS_FOR_USER_SUCCESS, ADD_NEW_LIST, DELETE_LIST_REQUEST, DELETE_LIST_SUCCESS, GET_ALL_GIFTS_FOR_LIST */
+/*! exports provided: GET_USER_SUCCESS, GET_USER_REQUEST, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, ADD_RECEIVER, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS, ADD_GIFT_TO_RECEIVER, REMOVE_GIFT_FROM_RECEIVER, GET_RECEIVER_NAME, TOGGLE_GIFT_STATUS, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID_REQUEST, UPDATE_CURRENT_LIST_ID_SUCCESS, UPDATE_PREVIOUS_LIST_ID_REQUEST, UPDATE_PREVIOUS_LIST_ID_SUCCESS, GET_LISTS_FOR_USER_REQUEST, GET_LISTS_FOR_USER_SUCCESS, ADD_NEW_LIST_REQUEST, ADD_NEW_LIST_SUCCESS, DELETE_LIST_REQUEST, DELETE_LIST_SUCCESS, GET_ALL_GIFTS_FOR_LIST */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4313,7 +4325,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_PREVIOUS_LIST_ID_SUCCESS", function() { return UPDATE_PREVIOUS_LIST_ID_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_LISTS_FOR_USER_REQUEST", function() { return GET_LISTS_FOR_USER_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_LISTS_FOR_USER_SUCCESS", function() { return GET_LISTS_FOR_USER_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_NEW_LIST", function() { return ADD_NEW_LIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_NEW_LIST_REQUEST", function() { return ADD_NEW_LIST_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_NEW_LIST_SUCCESS", function() { return ADD_NEW_LIST_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_LIST_REQUEST", function() { return DELETE_LIST_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_LIST_SUCCESS", function() { return DELETE_LIST_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_GIFTS_FOR_LIST", function() { return GET_ALL_GIFTS_FOR_LIST; });
@@ -4340,7 +4353,8 @@ var UPDATE_PREVIOUS_LIST_ID_REQUEST = 'UPDATE_PREVIOUS_LIST_ID_REQUEST';
 var UPDATE_PREVIOUS_LIST_ID_SUCCESS = 'UPDATE_PREVIOUS_LIST_ID_SUCCESS';
 var GET_LISTS_FOR_USER_REQUEST = 'GET_LISTS_FOR_USER_REQUEST';
 var GET_LISTS_FOR_USER_SUCCESS = 'GET_LISTS_FOR_USER_SUCCESS';
-var ADD_NEW_LIST = 'ADD_NEW_LIST';
+var ADD_NEW_LIST_REQUEST = 'ADD_NEW_LIST_REQUEST';
+var ADD_NEW_LIST_SUCCESS = 'ADD_NEW_LIST_SUCCESS';
 var DELETE_LIST_REQUEST = 'DELETE_LIST_REQUEST';
 var DELETE_LIST_SUCCESS = 'DELETE_LIST_SUCCESS';
 var GET_ALL_GIFTS_FOR_LIST = 'GET_ALL_GIFTS_FOR_LIST';
@@ -4526,7 +4540,7 @@ var list = {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _constants__WEBPACK_IMPORTED_MODULE_0__["ADD_NEW_LIST"]:
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["ADD_NEW_LIST_SUCCESS"]:
       return _objectSpread({}, state, {
         currentId: action.newList.id,
         userLists: _toConsumableArray(state.userLists).concat([action.newList])

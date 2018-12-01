@@ -7,7 +7,8 @@ import {
   UPDATE_CURRENT_LIST_ID_SUCCESS,
   GET_LISTS_FOR_USER_REQUEST,
   GET_LISTS_FOR_USER_SUCCESS,
-  ADD_NEW_LIST,
+  ADD_NEW_LIST_SUCCESS,
+  ADD_NEW_LIST_REQUEST,
   DELETE_LIST_REQUEST,
   DELETE_LIST_SUCCESS,
   UPDATE_PREVIOUS_LIST_ID_REQUEST,
@@ -23,7 +24,8 @@ export const updatedPreviousListIdSuccess = (id) => ({type: UPDATE_PREVIOUS_LIST
 export const updatedPreviousListIdRequest = () => ({type: UPDATE_PREVIOUS_LIST_ID_REQUEST})
 export const gotListsForUserSuccess = (userLists) => ({type: GET_LISTS_FOR_USER_SUCCESS, userLists})
 export const gotListsForUserRequest = () => ({type: GET_LISTS_FOR_USER_REQUEST})
-export const addedNewList = (newList) => ({type: ADD_NEW_LIST, newList})
+export const addedNewListSuccess = (newList) => ({type: ADD_NEW_LIST_SUCCESS, newList})
+export const addedNewListRequest = () => ({type: ADD_NEW_LIST_REQUEST})
 export const deletedListSuccess = (list) => ({type: DELETE_LIST_SUCCESS, list})
 export const deletedListRequest = () => ({type: DELETE_LIST_REQUEST})
 export const gotAllGiftsForList = (gifts) => ({type: GET_ALL_GIFTS_FOR_LIST, gifts})
@@ -62,8 +64,9 @@ export const getListsForuser = (userId) => async dispatch => {
 
 export const addNewList = (name, userId) => async dispatch => {
   try {
+    dispatch(addedNewListRequest())
     const { data } = await axios.post('/api/list/add', { name, userId })
-    dispatch(addedNewList(data))
+    dispatch(addedNewListSuccess(data))
     history.push(`/dashboard/list/${strToLowercaseDashed(data.name)}/${data.id}`)
   } catch (err) {
     console.error(err)
