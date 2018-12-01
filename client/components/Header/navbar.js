@@ -5,8 +5,6 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import { Link, NavLink, withRouter } from 'react-router-dom'
 import { logout } from '../../actions'
-import LoadingIndicator from '../loading-indicator'
-import { allFalseValues } from '../../utilities'
 import { withStyles } from '@material-ui/core/styles'
 import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
 
@@ -27,9 +25,8 @@ const styles = theme => ({
   }
 })
 
-const Navbar = ({handleClick, isLoggedIn, classes, isLoading}) => (
+const Navbar = ({handleClick, isLoggedIn, classes}) => (
 
-  
   <div className={classes.root}>
 
   <div className="nav-main">
@@ -64,16 +61,13 @@ const Navbar = ({handleClick, isLoggedIn, classes, isLoading}) => (
     </Toolbar>
     </AppBar>
     </div>
-    
-    { !allFalseValues(isLoading) && <LoadingIndicator /> }
-    
+
   </div>
 )
 
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id,
-    isLoading: state.loading
+    isLoggedIn: !!state.user.id
   }
 }
 

@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
 import { updateCurrentListId } from '../actions'
 import { withStyles } from '@material-ui/core/styles'
+import LoadingIndicator from './loading-indicator'
+import { allFalseValues } from '../utilities'
 
 import { ReceiversList, ReceiverDetails } from './Receiver'
 import { Sidebar } from './Sidebar'
@@ -23,25 +25,23 @@ const styles = theme => ({
 })
 
 export class UserDashboard extends Component {
-  constructor(){
-    super()
-  }
 
-  componentWillReceiveProps = (newProps) => {
-    // Re-setting active list state when on root /dashboard view
-    if (newProps.location.pathname === this.props.match.path) {
-      this.props.updateCurrentListId(null)
-    }
-  }
+  // componentWillReceiveProps = (newProps) => {
+  //   // Re-setting active list state when on root /dashboard view
+  //   if (newProps.location.pathname === this.props.match.path) {
+  //     this.props.updateCurrentListId(null)
+  //   }
+  // }
 
   render(){
-    const { firstName, classes, userLists, currentId } = this.props
+    const { firstName, classes, userLists, currentId, isLoading } = this.props
 
     return (
       <div className={classes.root}>
         <Sidebar />
         <main className={classes.content}>
 
+          { !allFalseValues(isLoading) && <LoadingIndicator /> }
 
           <DashboardHeader
             name={firstName}
@@ -70,7 +70,8 @@ const mapState = state => {
     firstName: state.user.firstName,
     isLoggedIn: !!state.user.id,
     userLists: state.list.userLists,
-    currentId: state.list.currentId
+    currentId: state.list.currentId,
+    isLoading: state.loading
   }
 }
 
