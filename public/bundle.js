@@ -560,10 +560,16 @@ var removedGiftFromReceiverRequest = function removedGiftFromReceiverRequest() {
   };
 };
 
-var toggledGiftStatus = function toggledGiftStatus(gift) {
+var toggledGiftStatusSuccess = function toggledGiftStatusSuccess(gift) {
   return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_1__["TOGGLE_GIFT_STATUS"],
+    type: _constants__WEBPACK_IMPORTED_MODULE_1__["TOGGLE_GIFT_STATUS_SUCCESS"],
     gift: gift
+  };
+};
+
+var toggledGiftStatusRequest = function toggledGiftStatusRequest() {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_1__["TOGGLE_GIFT_STATUS_REQUEST"]
   };
 };
 
@@ -926,29 +932,30 @@ var toggleGiftStatus = function toggleGiftStatus(gift) {
             switch (_context8.prev = _context8.next) {
               case 0:
                 _context8.prev = 0;
-                _context8.next = 3;
+                dispatch(toggledGiftStatusRequest());
+                _context8.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/receiver/gift/status', {
                   gift: gift
                 });
 
-              case 3:
+              case 4:
                 _ref16 = _context8.sent;
                 data = _ref16.data;
-                dispatch(toggledGiftStatus(data));
-                _context8.next = 11;
+                dispatch(toggledGiftStatusSuccess(data));
+                _context8.next = 12;
                 break;
 
-              case 8:
-                _context8.prev = 8;
+              case 9:
+                _context8.prev = 9;
                 _context8.t0 = _context8["catch"](0);
                 console.error(_context8.t0);
 
-              case 11:
+              case 12:
               case "end":
                 return _context8.stop();
             }
           }
-        }, _callee8, this, [[0, 8]]);
+        }, _callee8, this, [[0, 9]]);
       }));
 
       return function (_x8) {
@@ -3135,8 +3142,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utilities */ "./client/utilities/index.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_utilities__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3156,6 +3165,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -3194,7 +3204,7 @@ function (_Component) {
     key: "render",
     value: function render() {
       var gift = this.props.gift;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Checkbox"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_4__["Checkbox"], {
         checked: gift.purchased,
         onChange: this.handleChange(),
         value: "checkedB",
@@ -3206,20 +3216,27 @@ function (_Component) {
   return ReceiveGiftToggle;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
+var loadingSelector = Object(_utilities__WEBPACK_IMPORTED_MODULE_3__["createLoadingSelector"])(['TOGGLE_GIFT_STATUS']);
 ReceiveGiftToggle.propTypes = {
   gift: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
   toggleGiftStatus: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
 };
 
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    isLoading: loadingSelector(state)
+  };
+};
+
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     toggleGiftStatus: function toggleGiftStatus(gift) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["toggleGiftStatus"])(gift));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_5__["toggleGiftStatus"])(gift));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, mapDispatchToProps)(ReceiveGiftToggle));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ReceiveGiftToggle));
 
 /***/ }),
 
@@ -4365,7 +4382,7 @@ UserDashboard.propTypes = {
 /*!***********************************!*\
   !*** ./client/constants/index.js ***!
   \***********************************/
-/*! exports provided: GET_USER_SUCCESS, GET_USER_REQUEST, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, ADD_RECEIVER_REQUEST, ADD_RECEIVER_SUCCESS, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST_REQUEST, REMOVE_RECEIVER_FROM_LIST_SUCCESS, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS, ADD_GIFT_TO_RECEIVER_REQUEST, ADD_GIFT_TO_RECEIVER_SUCCESS, REMOVE_GIFT_FROM_RECEIVER_REQUEST, REMOVE_GIFT_FROM_RECEIVER_SUCCESS, GET_RECEIVER_NAME, TOGGLE_GIFT_STATUS, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID_REQUEST, UPDATE_CURRENT_LIST_ID_SUCCESS, UPDATE_PREVIOUS_LIST_ID_REQUEST, UPDATE_PREVIOUS_LIST_ID_SUCCESS, GET_LISTS_FOR_USER_REQUEST, GET_LISTS_FOR_USER_SUCCESS, ADD_NEW_LIST_REQUEST, ADD_NEW_LIST_SUCCESS, DELETE_LIST_REQUEST, DELETE_LIST_SUCCESS, GET_ALL_GIFTS_FOR_LIST */
+/*! exports provided: GET_USER_SUCCESS, GET_USER_REQUEST, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, ADD_RECEIVER_REQUEST, ADD_RECEIVER_SUCCESS, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST_REQUEST, REMOVE_RECEIVER_FROM_LIST_SUCCESS, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS, ADD_GIFT_TO_RECEIVER_REQUEST, ADD_GIFT_TO_RECEIVER_SUCCESS, REMOVE_GIFT_FROM_RECEIVER_REQUEST, REMOVE_GIFT_FROM_RECEIVER_SUCCESS, GET_RECEIVER_NAME, TOGGLE_GIFT_STATUS_REQUEST, TOGGLE_GIFT_STATUS_SUCCESS, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID_REQUEST, UPDATE_CURRENT_LIST_ID_SUCCESS, UPDATE_PREVIOUS_LIST_ID_REQUEST, UPDATE_PREVIOUS_LIST_ID_SUCCESS, GET_LISTS_FOR_USER_REQUEST, GET_LISTS_FOR_USER_SUCCESS, ADD_NEW_LIST_REQUEST, ADD_NEW_LIST_SUCCESS, DELETE_LIST_REQUEST, DELETE_LIST_SUCCESS, GET_ALL_GIFTS_FOR_LIST */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4386,7 +4403,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_GIFT_FROM_RECEIVER_REQUEST", function() { return REMOVE_GIFT_FROM_RECEIVER_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_GIFT_FROM_RECEIVER_SUCCESS", function() { return REMOVE_GIFT_FROM_RECEIVER_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_RECEIVER_NAME", function() { return GET_RECEIVER_NAME; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOGGLE_GIFT_STATUS", function() { return TOGGLE_GIFT_STATUS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOGGLE_GIFT_STATUS_REQUEST", function() { return TOGGLE_GIFT_STATUS_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOGGLE_GIFT_STATUS_SUCCESS", function() { return TOGGLE_GIFT_STATUS_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_CURRENT_LIST_ID", function() { return GET_CURRENT_LIST_ID; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_CURRENT_LIST_ID_REQUEST", function() { return UPDATE_CURRENT_LIST_ID_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_CURRENT_LIST_ID_SUCCESS", function() { return UPDATE_CURRENT_LIST_ID_SUCCESS; });
@@ -4417,7 +4435,8 @@ var ADD_GIFT_TO_RECEIVER_SUCCESS = 'ADD_GIFT_TO_RECEIVER_SUCCESS';
 var REMOVE_GIFT_FROM_RECEIVER_REQUEST = 'REMOVE_GIFT_FROM_RECEIVER_REQUEST';
 var REMOVE_GIFT_FROM_RECEIVER_SUCCESS = 'REMOVE_GIFT_FROM_RECEIVER_SUCCESS';
 var GET_RECEIVER_NAME = 'GET_RECEIVER_NAME';
-var TOGGLE_GIFT_STATUS = 'TOGGLE_GIFT_STATUS'; // LIST ACTION TYPES
+var TOGGLE_GIFT_STATUS_REQUEST = 'TOGGLE_GIFT_STATUS_REQUEST';
+var TOGGLE_GIFT_STATUS_SUCCESS = 'TOGGLE_GIFT_STATUS_SUCCESS'; // LIST ACTION TYPES
 
 var GET_CURRENT_LIST_ID = 'GET_CURRENT_LIST_ID';
 var UPDATE_CURRENT_LIST_ID_REQUEST = 'UPDATE_CURRENT_LIST_ID_REQUEST';
@@ -4772,7 +4791,7 @@ var receivers = {
         })
       });
 
-    case _constants__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_GIFT_STATUS"]:
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_GIFT_STATUS_SUCCESS"]:
       return _objectSpread({}, state, {
         gifts: state.gifts.map(function (gift) {
           if (gift.id === action.gift.id) {

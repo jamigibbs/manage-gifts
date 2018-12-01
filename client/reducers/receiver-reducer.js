@@ -7,7 +7,7 @@ import {
   ADD_GIFT_TO_RECEIVER_SUCCESS,
   GET_RECEIVER_NAME,
   REMOVE_GIFT_FROM_RECEIVER_SUCCESS,
-  TOGGLE_GIFT_STATUS } from '../constants'
+  TOGGLE_GIFT_STATUS_SUCCESS } from '../constants'
 
 const receivers = {
   allFromList: [],
@@ -37,7 +37,7 @@ export default function(state = receivers, action) {
       return {...state, gifts: state.gifts.filter((gift) => {
         return gift.id !== action.id
       })}
-    case TOGGLE_GIFT_STATUS:
+    case TOGGLE_GIFT_STATUS_SUCCESS:
       return {...state, gifts: state.gifts.map((gift) => {
         if (gift.id === action.gift.id) {
           return Object.assign({}, gift, {
