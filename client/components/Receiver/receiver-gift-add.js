@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { createLoadingSelector } from '../../utilities'
 import { addGiftToReceiver } from '../../actions'
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
 
@@ -85,8 +86,16 @@ export class ReceiverGiftAdd extends Component {
   }
 }
 
+const loadingSelector = createLoadingSelector(['ADD_GIFT_TO_RECEIVER'])
+
 ReceiverGiftAdd.propTypes = {
   addGiftToReceiver: PropTypes.func
+}
+
+const mapStateToProps = (state) => {
+  return {
+    isLoading: loadingSelector(state)
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -97,4 +106,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(ReceiverGiftAdd))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ReceiverGiftAdd))

@@ -527,10 +527,16 @@ var gotAllReceiverGifts = function gotAllReceiverGifts(gifts) {
   };
 };
 
-var addedGiftToReceiver = function addedGiftToReceiver(gift) {
+var addedGiftToReceiverSuccess = function addedGiftToReceiverSuccess(gift) {
   return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_1__["ADD_GIFT_TO_RECEIVER"],
+    type: _constants__WEBPACK_IMPORTED_MODULE_1__["ADD_GIFT_TO_RECEIVER_SUCCESS"],
     gift: gift
+  };
+};
+
+var addedGiftToReceiverRequest = function addedGiftToReceiverRequest() {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_1__["ADD_GIFT_TO_RECEIVER_REQUEST"]
   };
 };
 
@@ -772,30 +778,31 @@ var addGiftToReceiver = function addGiftToReceiver(url, receiverId) {
             switch (_context5.prev = _context5.next) {
               case 0:
                 _context5.prev = 0;
-                _context5.next = 3;
+                dispatch(addedGiftToReceiverRequest());
+                _context5.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/gift/add', {
                   url: url,
                   receiverId: receiverId
                 });
 
-              case 3:
+              case 4:
                 _ref10 = _context5.sent;
                 data = _ref10.data;
-                dispatch(addedGiftToReceiver(data));
-                _context5.next = 11;
+                dispatch(addedGiftToReceiverSuccess(data));
+                _context5.next = 12;
                 break;
 
-              case 8:
-                _context5.prev = 8;
+              case 9:
+                _context5.prev = 9;
                 _context5.t0 = _context5["catch"](0);
                 console.error(_context5.t0);
 
-              case 11:
+              case 12:
               case "end":
                 return _context5.stop();
             }
           }
-        }, _callee5, this, [[0, 8]]);
+        }, _callee5, this, [[0, 9]]);
       }));
 
       return function (_x5) {
@@ -2807,8 +2814,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utilities */ "./client/utilities/index.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_utilities__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2828,6 +2837,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -2900,19 +2910,19 @@ function (_Component) {
     key: "render",
     value: function render() {
       var classes = this.props.classes;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Button"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
         variant: "contained",
         color: "primary",
         className: classes.button,
         onClick: this.handleClickOpen
-      }, "Add a Gift Idea"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Dialog"], {
+      }, "Add a Gift Idea"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Dialog"], {
         open: this.state.open,
         fullWidth: true,
         onClose: this.handleClose,
         "aria-labelledby": "add-new-gift-form-title"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["DialogTitle"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["DialogTitle"], {
         id: "add-new-gift-form-title"
-      }, "Paste Link to Gift Idea"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["DialogContentText"], null, "Paste the link of the gift idea you'd like to add"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["TextField"], {
+      }, "Paste Link to Gift Idea"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["DialogContentText"], null, "Paste the link of the gift idea you'd like to add"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TextField"], {
         onChange: this.handleChange('url'),
         value: this.state.name,
         autoFocus: true,
@@ -2921,10 +2931,10 @@ function (_Component) {
         label: "Gift Link",
         type: "text",
         fullWidth: true
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["DialogActions"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Button"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["DialogActions"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
         onClick: this.handleClose,
         color: "primary"
-      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Button"], {
+      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
         onClick: this.handleSubmit,
         color: "primary"
       }, "Add"))));
@@ -2933,19 +2943,26 @@ function (_Component) {
 
   return ReceiverGiftAdd;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+var loadingSelector = Object(_utilities__WEBPACK_IMPORTED_MODULE_4__["createLoadingSelector"])(['ADD_GIFT_TO_RECEIVER']);
 ReceiverGiftAdd.propTypes = {
   addGiftToReceiver: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    isLoading: loadingSelector(state)
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     addGiftToReceiver: function addGiftToReceiver(url, receiverId) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["addGiftToReceiver"])(url, receiverId));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_5__["addGiftToReceiver"])(url, receiverId));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(null, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["withStyles"])(styles)(ReceiverGiftAdd)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["withStyles"])(styles)(ReceiverGiftAdd)));
 
 /***/ }),
 
@@ -4331,7 +4348,7 @@ UserDashboard.propTypes = {
 /*!***********************************!*\
   !*** ./client/constants/index.js ***!
   \***********************************/
-/*! exports provided: GET_USER_SUCCESS, GET_USER_REQUEST, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, ADD_RECEIVER_REQUEST, ADD_RECEIVER_SUCCESS, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST_REQUEST, REMOVE_RECEIVER_FROM_LIST_SUCCESS, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS, ADD_GIFT_TO_RECEIVER, REMOVE_GIFT_FROM_RECEIVER, GET_RECEIVER_NAME, TOGGLE_GIFT_STATUS, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID_REQUEST, UPDATE_CURRENT_LIST_ID_SUCCESS, UPDATE_PREVIOUS_LIST_ID_REQUEST, UPDATE_PREVIOUS_LIST_ID_SUCCESS, GET_LISTS_FOR_USER_REQUEST, GET_LISTS_FOR_USER_SUCCESS, ADD_NEW_LIST_REQUEST, ADD_NEW_LIST_SUCCESS, DELETE_LIST_REQUEST, DELETE_LIST_SUCCESS, GET_ALL_GIFTS_FOR_LIST */
+/*! exports provided: GET_USER_SUCCESS, GET_USER_REQUEST, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, ADD_RECEIVER_REQUEST, ADD_RECEIVER_SUCCESS, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST_REQUEST, REMOVE_RECEIVER_FROM_LIST_SUCCESS, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS, ADD_GIFT_TO_RECEIVER_REQUEST, ADD_GIFT_TO_RECEIVER_SUCCESS, REMOVE_GIFT_FROM_RECEIVER, GET_RECEIVER_NAME, TOGGLE_GIFT_STATUS, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID_REQUEST, UPDATE_CURRENT_LIST_ID_SUCCESS, UPDATE_PREVIOUS_LIST_ID_REQUEST, UPDATE_PREVIOUS_LIST_ID_SUCCESS, GET_LISTS_FOR_USER_REQUEST, GET_LISTS_FOR_USER_SUCCESS, ADD_NEW_LIST_REQUEST, ADD_NEW_LIST_SUCCESS, DELETE_LIST_REQUEST, DELETE_LIST_SUCCESS, GET_ALL_GIFTS_FOR_LIST */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4347,7 +4364,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_RECEIVER_FROM_LIST_SUCCESS", function() { return REMOVE_RECEIVER_FROM_LIST_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_ALL_LIST_RECEIVERS", function() { return REMOVE_ALL_LIST_RECEIVERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_RECEIVER_GIFTS", function() { return GET_ALL_RECEIVER_GIFTS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_GIFT_TO_RECEIVER", function() { return ADD_GIFT_TO_RECEIVER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_GIFT_TO_RECEIVER_REQUEST", function() { return ADD_GIFT_TO_RECEIVER_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_GIFT_TO_RECEIVER_SUCCESS", function() { return ADD_GIFT_TO_RECEIVER_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_GIFT_FROM_RECEIVER", function() { return REMOVE_GIFT_FROM_RECEIVER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_RECEIVER_NAME", function() { return GET_RECEIVER_NAME; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOGGLE_GIFT_STATUS", function() { return TOGGLE_GIFT_STATUS; });
@@ -4376,7 +4394,8 @@ var REMOVE_RECEIVER_FROM_LIST_REQUEST = 'REMOVE_RECEIVER_FROM_LIST_REQUEST';
 var REMOVE_RECEIVER_FROM_LIST_SUCCESS = 'REMOVE_RECEIVER_FROM_LIST_SUCCESS';
 var REMOVE_ALL_LIST_RECEIVERS = 'REMOVE_ALL_LIST_RECEIVERS';
 var GET_ALL_RECEIVER_GIFTS = 'GET_ALL_RECEIVER_GIFTS';
-var ADD_GIFT_TO_RECEIVER = 'ADD_GIFT_TO_RECEIVER';
+var ADD_GIFT_TO_RECEIVER_REQUEST = 'ADD_GIFT_TO_RECEIVER_REQUEST';
+var ADD_GIFT_TO_RECEIVER_SUCCESS = 'ADD_GIFT_TO_RECEIVER_SUCCESS';
 var REMOVE_GIFT_FROM_RECEIVER = 'REMOVE_GIFT_FROM_RECEIVER';
 var GET_RECEIVER_NAME = 'GET_RECEIVER_NAME';
 var TOGGLE_GIFT_STATUS = 'TOGGLE_GIFT_STATUS'; // LIST ACTION TYPES
@@ -4717,7 +4736,7 @@ var receivers = {
         gifts: action.gifts
       });
 
-    case _constants__WEBPACK_IMPORTED_MODULE_0__["ADD_GIFT_TO_RECEIVER"]:
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["ADD_GIFT_TO_RECEIVER_SUCCESS"]:
       return _objectSpread({}, state, {
         gifts: _toConsumableArray(state.gifts).concat([action.gift])
       });
