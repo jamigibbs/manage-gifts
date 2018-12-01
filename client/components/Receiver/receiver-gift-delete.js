@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { createLoadingSelector } from '../../utilities'
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core/'
 import ReceiverName from './receiver-name'
 import { removeGiftFromReceiver } from '../../actions'
@@ -55,9 +56,17 @@ class ReceiverGiftDelete extends Component {
   }
 }
 
+const loadingSelector = createLoadingSelector(['REMOVE_GIFT_FROM_RECEIVER'])
+
 ReceiverGiftDelete.propTypes = {
   removeGiftFromReceiver: PropTypes.func,
   receiverId: PropTypes.number
+}
+
+const mapStateToProps = (state) => {
+  return {
+    isLoading: loadingSelector(state)
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -68,4 +77,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(ReceiverGiftDelete)
+export default connect(mapStateToProps, mapDispatchToProps)(ReceiverGiftDelete)
