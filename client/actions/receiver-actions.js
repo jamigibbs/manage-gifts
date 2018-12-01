@@ -10,7 +10,8 @@ import {
   GET_ALL_RECEIVER_GIFTS_REQUEST,
   ADD_GIFT_TO_RECEIVER_SUCCESS,
   ADD_GIFT_TO_RECEIVER_REQUEST,
-  GET_RECEIVER_NAME,
+  GET_RECEIVER_NAME_SUCCESS,
+  GET_RECEIVER_NAME_REQUEST,
   REMOVE_GIFT_FROM_RECEIVER_SUCCESS,
   REMOVE_GIFT_FROM_RECEIVER_REQUEST,
   TOGGLE_GIFT_STATUS_SUCCESS,
@@ -29,7 +30,8 @@ const gotAllReceiverGiftsRequest = () => ({type: GET_ALL_RECEIVER_GIFTS_REQUEST}
 const addedGiftToReceiverSuccess = (gift) => ({type: ADD_GIFT_TO_RECEIVER_SUCCESS, gift})
 const addedGiftToReceiverRequest = () => ({type: ADD_GIFT_TO_RECEIVER_REQUEST})
 
-const gotReceiver = (receiver) => ({type: GET_RECEIVER_NAME, receiver})
+const gotReceiverSuccess = (receiver) => ({type: GET_RECEIVER_NAME_SUCCESS, receiver})
+const gotReceiverRequest = () => ({type: GET_RECEIVER_NAME_REQUEST})
 
 const removedGiftFromReceiverSuccess = (id) => ({type: REMOVE_GIFT_FROM_RECEIVER_SUCCESS, id})
 const removedGiftFromReceiverRequest = () => ({type: REMOVE_GIFT_FROM_RECEIVER_REQUEST})
@@ -109,12 +111,13 @@ export const addGiftToReceiver = (url, receiverId) => async dispatch => {
 
 export const getReceiver = (receiverId) => async dispatch => {
   try {
+    dispatch(gotReceiverRequest())
     const { data } = await axios.get('/api/receiver', {
       params: {
         receiverId
       }
     })
-    dispatch(gotReceiver(data))
+    dispatch(gotReceiverSuccess(data))
   } catch(err) {
     console.error(err)
   }
