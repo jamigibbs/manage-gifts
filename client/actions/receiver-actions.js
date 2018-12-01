@@ -6,7 +6,8 @@ import {
   REMOVE_RECEIVER_FROM_LIST_SUCCESS,
   REMOVE_RECEIVER_FROM_LIST_REQUEST,
   REMOVE_ALL_LIST_RECEIVERS,
-  GET_ALL_RECEIVER_GIFTS,
+  GET_ALL_RECEIVER_GIFTS_SUCCESS,
+  GET_ALL_RECEIVER_GIFTS_REQUEST,
   ADD_GIFT_TO_RECEIVER_SUCCESS,
   ADD_GIFT_TO_RECEIVER_REQUEST,
   GET_RECEIVER_NAME,
@@ -16,17 +17,26 @@ import {
   TOGGLE_GIFT_STATUS_REQUEST } from '../constants'
 
 const addedReceiverSuccess = (receiver) => ({type: ADD_RECEIVER_SUCCESS, receiver})
-const addedReceiverRequest = (receiver) => ({type: ADD_RECEIVER_REQUEST, receiver})
+const addedReceiverRequest = () => ({type: ADD_RECEIVER_REQUEST})
+
 const gotAllListReceivers = (receivers) => ({type: GET_ALL_LIST_RECEIVERS, receivers})
+
 export const removedAllListReceivers = () => ({type: REMOVE_ALL_LIST_RECEIVERS})
-const gotAllReceiverGifts = (gifts) => ({type: GET_ALL_RECEIVER_GIFTS, gifts})
+
+const gotAllReceiverGiftsSuccess = (gifts) => ({type: GET_ALL_RECEIVER_GIFTS_SUCCESS, gifts})
+const gotAllReceiverGiftsRequest = () => ({type: GET_ALL_RECEIVER_GIFTS_REQUEST})
+
 const addedGiftToReceiverSuccess = (gift) => ({type: ADD_GIFT_TO_RECEIVER_SUCCESS, gift})
 const addedGiftToReceiverRequest = () => ({type: ADD_GIFT_TO_RECEIVER_REQUEST})
+
 const gotReceiver = (receiver) => ({type: GET_RECEIVER_NAME, receiver})
+
 const removedGiftFromReceiverSuccess = (id) => ({type: REMOVE_GIFT_FROM_RECEIVER_SUCCESS, id})
 const removedGiftFromReceiverRequest = () => ({type: REMOVE_GIFT_FROM_RECEIVER_REQUEST})
+
 const toggledGiftStatusSuccess = (gift) => ({type: TOGGLE_GIFT_STATUS_SUCCESS, gift})
 const toggledGiftStatusRequest = () => ({type: TOGGLE_GIFT_STATUS_REQUEST})
+
 const removedReceiverFromListRequest = () => ({type: REMOVE_RECEIVER_FROM_LIST_REQUEST})
 const removedReceiverFromListSuccess = (receiver) => {
   return {
@@ -75,12 +85,13 @@ export const removeReceiverFromList = (listId, receiverId) => async dispatch => 
 
 export const getAllReceiverGifts = (receiverId) => async dispatch => {
   try {
+    dispatch(gotAllReceiverGiftsRequest(data))
     const { data } = await axios.get('/api/receiver/gifts', {
       params: {
         receiverId
       }
     })
-    dispatch(gotAllReceiverGifts(data))
+    dispatch(gotAllReceiverGiftsSuccess(data))
   } catch(err) {
     console.error(err)
   }

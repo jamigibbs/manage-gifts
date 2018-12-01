@@ -500,10 +500,9 @@ var addedReceiverSuccess = function addedReceiverSuccess(receiver) {
   };
 };
 
-var addedReceiverRequest = function addedReceiverRequest(receiver) {
+var addedReceiverRequest = function addedReceiverRequest() {
   return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_1__["ADD_RECEIVER_REQUEST"],
-    receiver: receiver
+    type: _constants__WEBPACK_IMPORTED_MODULE_1__["ADD_RECEIVER_REQUEST"]
   };
 };
 
@@ -520,10 +519,16 @@ var removedAllListReceivers = function removedAllListReceivers() {
   };
 };
 
-var gotAllReceiverGifts = function gotAllReceiverGifts(gifts) {
+var gotAllReceiverGiftsSuccess = function gotAllReceiverGiftsSuccess(gifts) {
   return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_1__["GET_ALL_RECEIVER_GIFTS"],
+    type: _constants__WEBPACK_IMPORTED_MODULE_1__["GET_ALL_RECEIVER_GIFTS_SUCCESS"],
     gifts: gifts
+  };
+};
+
+var gotAllReceiverGiftsRequest = function gotAllReceiverGiftsRequest() {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_1__["GET_ALL_RECEIVER_GIFTS_REQUEST"]
   };
 };
 
@@ -743,31 +748,32 @@ var getAllReceiverGifts = function getAllReceiverGifts(receiverId) {
             switch (_context4.prev = _context4.next) {
               case 0:
                 _context4.prev = 0;
-                _context4.next = 3;
+                dispatch(gotAllReceiverGiftsRequest(data));
+                _context4.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/receiver/gifts', {
                   params: {
                     receiverId: receiverId
                   }
                 });
 
-              case 3:
+              case 4:
                 _ref8 = _context4.sent;
                 data = _ref8.data;
-                dispatch(gotAllReceiverGifts(data));
-                _context4.next = 11;
+                dispatch(gotAllReceiverGiftsSuccess(data));
+                _context4.next = 12;
                 break;
 
-              case 8:
-                _context4.prev = 8;
+              case 9:
+                _context4.prev = 9;
                 _context4.t0 = _context4["catch"](0);
                 console.error(_context4.t0);
 
-              case 11:
+              case 12:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, this, [[0, 8]]);
+        }, _callee4, this, [[0, 9]]);
       }));
 
       return function (_x4) {
@@ -3254,11 +3260,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _Receiver__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Receiver */ "./client/components/Receiver/index.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
-/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utilities */ "./client/utilities/index.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_utilities__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _Receiver__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Receiver */ "./client/components/Receiver/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
+/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3276,6 +3284,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -3336,30 +3345,30 @@ function (_Component) {
           gifts = _this$props.gifts;
 
       if (gifts.length === 0) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["Paper"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_7__["Paper"], {
           className: classes.notice
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["Typography"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_7__["Typography"], {
           variant: "h6"
-        }, "Your Gift Receiver Has No Gifts Ideas Yet!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["Typography"], {
+        }, "Your Gift Receiver Has No Gifts Ideas Yet!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_7__["Typography"], {
           variant: "body1"
         }, "When you find gift ideas on the internet, simply click \"Add a Gift Idea\" and paste the link to start keeping track")));
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["Paper"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_7__["Paper"], {
         className: classes.root
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["Table"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_7__["Table"], {
         className: classes.table
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableHead"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableRow"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], null, "Purchased"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], null, "Image"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_7__["TableHead"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_7__["TableRow"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_7__["TableCell"], null, "Purchased"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_7__["TableCell"], null, "Image"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_7__["TableCell"], null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_7__["TableCell"], {
         numeric: true
-      }, "Actions"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableBody"], null, gifts.map(function (gift) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableRow"], {
+      }, "Actions"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_7__["TableBody"], null, gifts.map(function (gift) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_7__["TableRow"], {
           key: gift.id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_4__["ReceiverGiftToggle"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_7__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_5__["ReceiverGiftToggle"], {
           gift: gift
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_7__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: gift.item.image,
           width: "50"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_7__["TableCell"], {
           component: "th",
           scope: "row"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -3367,9 +3376,9 @@ function (_Component) {
           className: classes.giftLink,
           target: "_blank",
           rel: "noopener"
-        }, gift.item.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_6__["TableCell"], {
+        }, gift.item.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_7__["TableCell"], {
           numeric: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_4__["ReceiverGiftDelete"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_5__["ReceiverGiftDelete"], {
           itemId: gift.id,
           receiverId: receiverId
         })));
@@ -3380,6 +3389,7 @@ function (_Component) {
   return ReceiverGiftsList;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
+var loadingSelector = Object(_utilities__WEBPACK_IMPORTED_MODULE_3__["createLoadingSelector"])(['GET_ALL_RECEIVER_GIFTS']);
 ReceiverGiftsList.propTypes = {
   gifts: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object),
   classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
@@ -3388,19 +3398,20 @@ ReceiverGiftsList.propTypes = {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    gifts: state.receivers.gifts
+    gifts: state.receivers.gifts,
+    isLoading: loadingSelector(state)
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     getAllReceiverGifts: function getAllReceiverGifts(receiverId) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_5__["getAllReceiverGifts"])(receiverId));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_6__["getAllReceiverGifts"])(receiverId));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["withStyles"])(styles)(ReceiverGiftsList)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__["withStyles"])(styles)(ReceiverGiftsList)));
 
 /***/ }),
 
@@ -4382,7 +4393,7 @@ UserDashboard.propTypes = {
 /*!***********************************!*\
   !*** ./client/constants/index.js ***!
   \***********************************/
-/*! exports provided: GET_USER_SUCCESS, GET_USER_REQUEST, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, ADD_RECEIVER_REQUEST, ADD_RECEIVER_SUCCESS, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST_REQUEST, REMOVE_RECEIVER_FROM_LIST_SUCCESS, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS, ADD_GIFT_TO_RECEIVER_REQUEST, ADD_GIFT_TO_RECEIVER_SUCCESS, REMOVE_GIFT_FROM_RECEIVER_REQUEST, REMOVE_GIFT_FROM_RECEIVER_SUCCESS, GET_RECEIVER_NAME, TOGGLE_GIFT_STATUS_REQUEST, TOGGLE_GIFT_STATUS_SUCCESS, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID_REQUEST, UPDATE_CURRENT_LIST_ID_SUCCESS, UPDATE_PREVIOUS_LIST_ID_REQUEST, UPDATE_PREVIOUS_LIST_ID_SUCCESS, GET_LISTS_FOR_USER_REQUEST, GET_LISTS_FOR_USER_SUCCESS, ADD_NEW_LIST_REQUEST, ADD_NEW_LIST_SUCCESS, DELETE_LIST_REQUEST, DELETE_LIST_SUCCESS, GET_ALL_GIFTS_FOR_LIST */
+/*! exports provided: GET_USER_SUCCESS, GET_USER_REQUEST, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, ADD_RECEIVER_REQUEST, ADD_RECEIVER_SUCCESS, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST_REQUEST, REMOVE_RECEIVER_FROM_LIST_SUCCESS, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS_REQUEST, GET_ALL_RECEIVER_GIFTS_SUCCESS, ADD_GIFT_TO_RECEIVER_REQUEST, ADD_GIFT_TO_RECEIVER_SUCCESS, REMOVE_GIFT_FROM_RECEIVER_REQUEST, REMOVE_GIFT_FROM_RECEIVER_SUCCESS, GET_RECEIVER_NAME, TOGGLE_GIFT_STATUS_REQUEST, TOGGLE_GIFT_STATUS_SUCCESS, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID_REQUEST, UPDATE_CURRENT_LIST_ID_SUCCESS, UPDATE_PREVIOUS_LIST_ID_REQUEST, UPDATE_PREVIOUS_LIST_ID_SUCCESS, GET_LISTS_FOR_USER_REQUEST, GET_LISTS_FOR_USER_SUCCESS, ADD_NEW_LIST_REQUEST, ADD_NEW_LIST_SUCCESS, DELETE_LIST_REQUEST, DELETE_LIST_SUCCESS, GET_ALL_GIFTS_FOR_LIST */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4397,7 +4408,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_RECEIVER_FROM_LIST_REQUEST", function() { return REMOVE_RECEIVER_FROM_LIST_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_RECEIVER_FROM_LIST_SUCCESS", function() { return REMOVE_RECEIVER_FROM_LIST_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_ALL_LIST_RECEIVERS", function() { return REMOVE_ALL_LIST_RECEIVERS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_RECEIVER_GIFTS", function() { return GET_ALL_RECEIVER_GIFTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_RECEIVER_GIFTS_REQUEST", function() { return GET_ALL_RECEIVER_GIFTS_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_RECEIVER_GIFTS_SUCCESS", function() { return GET_ALL_RECEIVER_GIFTS_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_GIFT_TO_RECEIVER_REQUEST", function() { return ADD_GIFT_TO_RECEIVER_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_GIFT_TO_RECEIVER_SUCCESS", function() { return ADD_GIFT_TO_RECEIVER_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_GIFT_FROM_RECEIVER_REQUEST", function() { return REMOVE_GIFT_FROM_RECEIVER_REQUEST; });
@@ -4429,7 +4441,8 @@ var GET_ALL_LIST_RECEIVERS = 'GET_ALL_LIST_RECEIVERS';
 var REMOVE_RECEIVER_FROM_LIST_REQUEST = 'REMOVE_RECEIVER_FROM_LIST_REQUEST';
 var REMOVE_RECEIVER_FROM_LIST_SUCCESS = 'REMOVE_RECEIVER_FROM_LIST_SUCCESS';
 var REMOVE_ALL_LIST_RECEIVERS = 'REMOVE_ALL_LIST_RECEIVERS';
-var GET_ALL_RECEIVER_GIFTS = 'GET_ALL_RECEIVER_GIFTS';
+var GET_ALL_RECEIVER_GIFTS_REQUEST = 'GET_ALL_RECEIVER_GIFTS_REQUEST';
+var GET_ALL_RECEIVER_GIFTS_SUCCESS = 'GET_ALL_RECEIVER_GIFTS_SUCCESS';
 var ADD_GIFT_TO_RECEIVER_REQUEST = 'ADD_GIFT_TO_RECEIVER_REQUEST';
 var ADD_GIFT_TO_RECEIVER_SUCCESS = 'ADD_GIFT_TO_RECEIVER_SUCCESS';
 var REMOVE_GIFT_FROM_RECEIVER_REQUEST = 'REMOVE_GIFT_FROM_RECEIVER_REQUEST';
@@ -4769,7 +4782,7 @@ var receivers = {
         allFromList: action.receivers
       });
 
-    case _constants__WEBPACK_IMPORTED_MODULE_0__["GET_ALL_RECEIVER_GIFTS"]:
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["GET_ALL_RECEIVER_GIFTS_SUCCESS"]:
       return _objectSpread({}, state, {
         gifts: action.gifts
       });

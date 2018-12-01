@@ -3,7 +3,7 @@ import {
   GET_ALL_LIST_RECEIVERS,
   REMOVE_RECEIVER_FROM_LIST_SUCCESS,
   REMOVE_ALL_LIST_RECEIVERS,
-  GET_ALL_RECEIVER_GIFTS,
+  GET_ALL_RECEIVER_GIFTS_SUCCESS,
   ADD_GIFT_TO_RECEIVER_SUCCESS,
   GET_RECEIVER_NAME,
   REMOVE_GIFT_FROM_RECEIVER_SUCCESS,
@@ -27,7 +27,7 @@ export default function(state = receivers, action) {
       return {...state, allFromList: [] }
     case GET_ALL_LIST_RECEIVERS:
       return {...state, allFromList: action.receivers}
-    case GET_ALL_RECEIVER_GIFTS:
+    case GET_ALL_RECEIVER_GIFTS_SUCCESS:
       return {...state, gifts: action.gifts}
     case ADD_GIFT_TO_RECEIVER_SUCCESS:
       return {...state, gifts: [...state.gifts, action.gift]}
