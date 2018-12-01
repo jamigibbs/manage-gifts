@@ -9,7 +9,8 @@ import {
   GET_LISTS_FOR_USER_SUCCESS,
   ADD_NEW_LIST,
   DELETE_LIST,
-  UPDATE_PREVIOUS_LIST_ID,
+  UPDATE_PREVIOUS_LIST_ID_REQUEST,
+  UPDATE_PREVIOUS_LIST_ID_SUCCESS,
   GET_ALL_GIFTS_FOR_LIST } from '../constants'
 
 import { removedAllListReceivers } from './receiver-actions'
@@ -17,7 +18,8 @@ import { removedAllListReceivers } from './receiver-actions'
 export const getCurrentListId = () => ({type: GET_CURRENT_LIST_ID})
 export const updatedCurrentListIdSuccess = (id) => ({type: UPDATE_CURRENT_LIST_ID_SUCCESS, id})
 export const updatedCurrentListIdRequest = () => ({type: UPDATE_CURRENT_LIST_ID_REQUEST})
-export const updatedPreviousListId = (id) => ({type: UPDATE_PREVIOUS_LIST_ID, id})
+export const updatedPreviousListIdSuccess = (id) => ({type: UPDATE_PREVIOUS_LIST_ID_SUCCESS, id})
+export const updatedPreviousListIdRequest = () => ({type: UPDATE_PREVIOUS_LIST_ID_REQUEST})
 export const gotListsForUserSuccess = (userLists) => ({type: GET_LISTS_FOR_USER_SUCCESS, userLists})
 export const gotListsForUserRequest = () => ({type: GET_LISTS_FOR_USER_REQUEST})
 export const addedNewList = (newList) => ({type: ADD_NEW_LIST, newList})
@@ -35,7 +37,8 @@ export const updateCurrentListId = (id) => dispatch => {
 
 export const updatePreviousListId = (id) => dispatch => {
   try {
-    dispatch(updatedPreviousListId(id))
+    dipsatch(updatedPreviousListIdRequest())
+    dispatch(updatedPreviousListIdSuccess(id))
   } catch (err) {
     console.error(err)
   }
