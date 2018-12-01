@@ -3,7 +3,7 @@ import {
   UPDATE_CURRENT_LIST_ID_SUCCESS,
   GET_LISTS_FOR_USER_SUCCESS,
   ADD_NEW_LIST,
-  DELETE_LIST,
+  DELETE_LIST_SUCCESS,
   UPDATE_PREVIOUS_LIST_ID_SUCCESS,
   GET_ALL_GIFTS_FOR_LIST } from '../constants'
 
@@ -18,7 +18,7 @@ export default function(state = list, action) {
   switch (action.type) {
     case ADD_NEW_LIST:
       return {...state, currentId: action.newList.id, userLists: [...state.userLists, action.newList]}
-    case DELETE_LIST:
+    case DELETE_LIST_SUCCESS:
       return {...state, currentId: null, userLists: state.userLists.filter((list) => {
         return list.id !== action.list.listId
       })}

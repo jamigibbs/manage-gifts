@@ -8,7 +8,8 @@ import {
   GET_LISTS_FOR_USER_REQUEST,
   GET_LISTS_FOR_USER_SUCCESS,
   ADD_NEW_LIST,
-  DELETE_LIST,
+  DELETE_LIST_REQUEST,
+  DELETE_LIST_SUCCESS,
   UPDATE_PREVIOUS_LIST_ID_REQUEST,
   UPDATE_PREVIOUS_LIST_ID_SUCCESS,
   GET_ALL_GIFTS_FOR_LIST } from '../constants'
@@ -23,7 +24,8 @@ export const updatedPreviousListIdRequest = () => ({type: UPDATE_PREVIOUS_LIST_I
 export const gotListsForUserSuccess = (userLists) => ({type: GET_LISTS_FOR_USER_SUCCESS, userLists})
 export const gotListsForUserRequest = () => ({type: GET_LISTS_FOR_USER_REQUEST})
 export const addedNewList = (newList) => ({type: ADD_NEW_LIST, newList})
-export const deletedList = (list) => ({type: DELETE_LIST, list})
+export const deletedListSuccess = (list) => ({type: DELETE_LIST_SUCCESS, list})
+export const deletedListRequest = () => ({type: DELETE_LIST_REQUEST})
 export const gotAllGiftsForList = (gifts) => ({type: GET_ALL_GIFTS_FOR_LIST, gifts})
 
 export const updateCurrentListId = (id) => dispatch => {
@@ -37,7 +39,7 @@ export const updateCurrentListId = (id) => dispatch => {
 
 export const updatePreviousListId = (id) => dispatch => {
   try {
-    dipsatch(updatedPreviousListIdRequest())
+    dispatch(updatedPreviousListIdRequest())
     dispatch(updatedPreviousListIdSuccess(id))
   } catch (err) {
     console.error(err)
@@ -70,9 +72,10 @@ export const addNewList = (name, userId) => async dispatch => {
 
 export const deleteList = (listId, userId) => async dispatch => {
   try {
+    dispatch(deletedListRequest())
     const { data } = await axios.delete('/api/list', { data: {listId, userId} })
     dispatch(removedAllListReceivers())
-    dispatch(deletedList(data))
+    dispatch(deletedListSuccess(data))
   } catch (err) {
     console.error(err)
   }

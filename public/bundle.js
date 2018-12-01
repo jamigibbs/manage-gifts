@@ -144,7 +144,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************!*\
   !*** ./client/actions/list-actions.js ***!
   \****************************************/
-/*! exports provided: getCurrentListId, updatedCurrentListIdSuccess, updatedCurrentListIdRequest, updatedPreviousListIdSuccess, updatedPreviousListIdRequest, gotListsForUserSuccess, gotListsForUserRequest, addedNewList, deletedList, gotAllGiftsForList, updateCurrentListId, updatePreviousListId, getListsForuser, addNewList, deleteList, getAllGiftsForList */
+/*! exports provided: getCurrentListId, updatedCurrentListIdSuccess, updatedCurrentListIdRequest, updatedPreviousListIdSuccess, updatedPreviousListIdRequest, gotListsForUserSuccess, gotListsForUserRequest, addedNewList, deletedListSuccess, deletedListRequest, gotAllGiftsForList, updateCurrentListId, updatePreviousListId, getListsForuser, addNewList, deleteList, getAllGiftsForList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -157,7 +157,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gotListsForUserSuccess", function() { return gotListsForUserSuccess; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gotListsForUserRequest", function() { return gotListsForUserRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addedNewList", function() { return addedNewList; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deletedList", function() { return deletedList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deletedListSuccess", function() { return deletedListSuccess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deletedListRequest", function() { return deletedListRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gotAllGiftsForList", function() { return gotAllGiftsForList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateCurrentListId", function() { return updateCurrentListId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updatePreviousListId", function() { return updatePreviousListId; });
@@ -225,10 +226,15 @@ var addedNewList = function addedNewList(newList) {
     newList: newList
   };
 };
-var deletedList = function deletedList(list) {
+var deletedListSuccess = function deletedListSuccess(list) {
   return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_3__["DELETE_LIST"],
+    type: _constants__WEBPACK_IMPORTED_MODULE_3__["DELETE_LIST_SUCCESS"],
     list: list
+  };
+};
+var deletedListRequest = function deletedListRequest() {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_3__["DELETE_LIST_REQUEST"]
   };
 };
 var gotAllGiftsForList = function gotAllGiftsForList(gifts) {
@@ -250,7 +256,7 @@ var updateCurrentListId = function updateCurrentListId(id) {
 var updatePreviousListId = function updatePreviousListId(id) {
   return function (dispatch) {
     try {
-      dipsatch(updatedPreviousListIdRequest());
+      dispatch(updatedPreviousListIdRequest());
       dispatch(updatedPreviousListIdSuccess(id));
     } catch (err) {
       console.error(err);
@@ -366,7 +372,8 @@ var deleteList = function deleteList(listId, userId) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.prev = 0;
-                _context3.next = 3;
+                dispatch(deletedListRequest());
+                _context3.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.delete('/api/list', {
                   data: {
                     listId: listId,
@@ -374,25 +381,25 @@ var deleteList = function deleteList(listId, userId) {
                   }
                 });
 
-              case 3:
+              case 4:
                 _ref6 = _context3.sent;
                 data = _ref6.data;
                 dispatch(Object(_receiver_actions__WEBPACK_IMPORTED_MODULE_4__["removedAllListReceivers"])());
-                dispatch(deletedList(data));
-                _context3.next = 12;
+                dispatch(deletedListSuccess(data));
+                _context3.next = 13;
                 break;
 
-              case 9:
-                _context3.prev = 9;
+              case 10:
+                _context3.prev = 10;
                 _context3.t0 = _context3["catch"](0);
                 console.error(_context3.t0);
 
-              case 12:
+              case 13:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this, [[0, 9]]);
+        }, _callee3, this, [[0, 10]]);
       }));
 
       return function (_x3) {
@@ -1686,11 +1693,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
-/* harmony import */ var _history__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../history */ "./client/history.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utilities */ "./client/utilities/index.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_utilities__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
+/* harmony import */ var _history__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../history */ "./client/history.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1710,6 +1719,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1772,7 +1782,7 @@ function (_Component) {
 
       _this.handleClose();
 
-      _history__WEBPACK_IMPORTED_MODULE_4__["default"].push('/dashboard');
+      _history__WEBPACK_IMPORTED_MODULE_5__["default"].push('/dashboard');
     });
 
     return _this;
@@ -1782,21 +1792,21 @@ function (_Component) {
     key: "render",
     value: function render() {
       var classes = this.props.classes;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Button"], {
         className: classes.button,
         color: "secondary",
         onClick: this.handleClickOpen
-      }, "Delete List"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Dialog"], {
+      }, "Delete List"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Dialog"], {
         open: this.state.open,
         onClose: this.handleClose,
         "aria-labelledby": "delete-list",
         "aria-describedby": "delete-list"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["DialogTitle"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["DialogTitle"], {
         id: "delete-list-title"
-      }, "Warning: Deleting List Data"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["DialogContentText"], null, "When you delete a list, all added receivers and their associated gifts will be removed too. Are you sure?")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["DialogActions"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
+      }, "Warning: Deleting List Data"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["DialogContentText"], null, "When you delete a list, all added receivers and their associated gifts will be removed too. Are you sure?")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["DialogActions"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Button"], {
         color: "primary",
         onClick: this.handleClose
-      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
+      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Button"], {
         color: "secondary",
         onClick: this.handleDelete
       }, "Confirm"))));
@@ -1805,20 +1815,22 @@ function (_Component) {
 
   return ListDelete;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+var loadingSelector = Object(_utilities__WEBPACK_IMPORTED_MODULE_3__["createLoadingSelector"])(['DELETE_LIST, UPDATE_PREVIOUS_LIST_ID']);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    userId: state.user.id
+    userId: state.user.id,
+    isLoading: loadingSelector(state)
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     deleteList: function deleteList(listId, userId) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["deleteList"])(listId, userId));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["deleteList"])(listId, userId));
     },
     updatePreviousListId: function updatePreviousListId(id) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["updatePreviousListId"])(id));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["updatePreviousListId"])(id));
     }
   };
 };
@@ -1829,7 +1841,7 @@ ListDelete.propTypes = {
   userId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
   classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
 };
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["withStyles"])(styles)(ListDelete)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6__["withStyles"])(styles)(ListDelete)));
 
 /***/ }),
 
@@ -2199,7 +2211,7 @@ function (_Component) {
   return ListSelect;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-var loadingSelector = Object(_utilities__WEBPACK_IMPORTED_MODULE_4__["createLoadingSelector"])(['UPDATE_CURRENT_LIST_ID']);
+var loadingSelector = Object(_utilities__WEBPACK_IMPORTED_MODULE_4__["createLoadingSelector"])(['UPDATE_CURRENT_LIST_ID, GET_LISTS_FOR_USER']);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
@@ -4276,7 +4288,7 @@ UserDashboard.propTypes = {
 /*!***********************************!*\
   !*** ./client/constants/index.js ***!
   \***********************************/
-/*! exports provided: GET_USER_SUCCESS, GET_USER_REQUEST, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, ADD_RECEIVER, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS, ADD_GIFT_TO_RECEIVER, REMOVE_GIFT_FROM_RECEIVER, GET_RECEIVER_NAME, TOGGLE_GIFT_STATUS, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID_REQUEST, UPDATE_CURRENT_LIST_ID_SUCCESS, UPDATE_PREVIOUS_LIST_ID_REQUEST, UPDATE_PREVIOUS_LIST_ID_SUCCESS, GET_LISTS_FOR_USER_REQUEST, GET_LISTS_FOR_USER_SUCCESS, ADD_NEW_LIST, DELETE_LIST, GET_ALL_GIFTS_FOR_LIST */
+/*! exports provided: GET_USER_SUCCESS, GET_USER_REQUEST, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, ADD_RECEIVER, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS, ADD_GIFT_TO_RECEIVER, REMOVE_GIFT_FROM_RECEIVER, GET_RECEIVER_NAME, TOGGLE_GIFT_STATUS, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID_REQUEST, UPDATE_CURRENT_LIST_ID_SUCCESS, UPDATE_PREVIOUS_LIST_ID_REQUEST, UPDATE_PREVIOUS_LIST_ID_SUCCESS, GET_LISTS_FOR_USER_REQUEST, GET_LISTS_FOR_USER_SUCCESS, ADD_NEW_LIST, DELETE_LIST_REQUEST, DELETE_LIST_SUCCESS, GET_ALL_GIFTS_FOR_LIST */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4302,7 +4314,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_LISTS_FOR_USER_REQUEST", function() { return GET_LISTS_FOR_USER_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_LISTS_FOR_USER_SUCCESS", function() { return GET_LISTS_FOR_USER_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_NEW_LIST", function() { return ADD_NEW_LIST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_LIST", function() { return DELETE_LIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_LIST_REQUEST", function() { return DELETE_LIST_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_LIST_SUCCESS", function() { return DELETE_LIST_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_GIFTS_FOR_LIST", function() { return GET_ALL_GIFTS_FOR_LIST; });
 // USER ACTION TYPES
 var GET_USER_SUCCESS = 'GET_USER_SUCCESS';
@@ -4328,7 +4341,8 @@ var UPDATE_PREVIOUS_LIST_ID_SUCCESS = 'UPDATE_PREVIOUS_LIST_ID_SUCCESS';
 var GET_LISTS_FOR_USER_REQUEST = 'GET_LISTS_FOR_USER_REQUEST';
 var GET_LISTS_FOR_USER_SUCCESS = 'GET_LISTS_FOR_USER_SUCCESS';
 var ADD_NEW_LIST = 'ADD_NEW_LIST';
-var DELETE_LIST = 'DELETE_LIST';
+var DELETE_LIST_REQUEST = 'DELETE_LIST_REQUEST';
+var DELETE_LIST_SUCCESS = 'DELETE_LIST_SUCCESS';
 var GET_ALL_GIFTS_FOR_LIST = 'GET_ALL_GIFTS_FOR_LIST';
 
 /***/ }),
@@ -4518,7 +4532,7 @@ var list = {
         userLists: _toConsumableArray(state.userLists).concat([action.newList])
       });
 
-    case _constants__WEBPACK_IMPORTED_MODULE_0__["DELETE_LIST"]:
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["DELETE_LIST_SUCCESS"]:
       return _objectSpread({}, state, {
         currentId: null,
         userLists: state.userLists.filter(function (list) {

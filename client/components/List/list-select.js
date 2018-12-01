@@ -65,7 +65,7 @@ class ListSelect extends Component {
   }
 }
 
-const loadingSelector = createLoadingSelector(['UPDATE_CURRENT_LIST_ID'])
+const loadingSelector = createLoadingSelector(['UPDATE_CURRENT_LIST_ID, GET_LISTS_FOR_USER'])
 
 const mapStateToProps = (state) => {
   return {
