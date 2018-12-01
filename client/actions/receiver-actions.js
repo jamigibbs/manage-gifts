@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {
-  ADD_RECEIVER,
+  ADD_RECEIVER_SUCCESS,
+  ADD_RECEIVER_REQUEST,
   GET_ALL_LIST_RECEIVERS,
   REMOVE_RECEIVER_FROM_LIST_SUCCESS,
   REMOVE_RECEIVER_FROM_LIST_REQUEST,
@@ -11,7 +12,8 @@ import {
   REMOVE_GIFT_FROM_RECEIVER,
   TOGGLE_GIFT_STATUS } from '../constants'
 
-const addedReceiver = (receiver) => ({type: ADD_RECEIVER, receiver})
+const addedReceiverSuccess = (receiver) => ({type: ADD_RECEIVER_SUCCESS, receiver})
+const addedReceiverRequest = (receiver) => ({type: ADD_RECEIVER_REQUEST, receiver})
 const gotAllListReceivers = (receivers) => ({type: GET_ALL_LIST_RECEIVERS, receivers})
 export const removedAllListReceivers = () => ({type: REMOVE_ALL_LIST_RECEIVERS})
 const gotAllReceiverGifts = (gifts) => ({type: GET_ALL_RECEIVER_GIFTS, gifts})
@@ -19,7 +21,7 @@ const addedGiftToReceiver = (gift) => ({type: ADD_GIFT_TO_RECEIVER, gift})
 const gotReceiver = (receiver) => ({type: GET_RECEIVER_NAME, receiver})
 const removedGiftFromReceiver = (id) => ({type: REMOVE_GIFT_FROM_RECEIVER, id})
 const toggledGiftStatus = (gift) => ({type: TOGGLE_GIFT_STATUS, gift})
-const removedReceiverFromListRequeset = () => ({type: REMOVE_RECEIVER_FROM_LIST_REQUEST})
+const removedReceiverFromListRequest = () => ({type: REMOVE_RECEIVER_FROM_LIST_REQUEST})
 const removedReceiverFromListSuccess = (receiver) => {
   return {
     type: REMOVE_RECEIVER_FROM_LIST_SUCCESS,
@@ -29,8 +31,9 @@ const removedReceiverFromListSuccess = (receiver) => {
 
 export const addReceiver = (name, listId) => async dispatch => {
   try {
+    dispatch(addedReceiverRequest(data))
     const { data } = await axios.post('/api/receiver', {name, listId})
-    dispatch(addedReceiver(data))
+    dispatch(addedReceiverSuccess(data))
   } catch (err) {
     console.error(err)
   }
@@ -51,7 +54,7 @@ export const getAllListReceivers = (listId) => async dispatch => {
 
 export const removeReceiverFromList = (listId, receiverId) => async dispatch => {
   try {
-    dispatch(removedReceiverFromListRequeset())
+    dispatch(removedReceiverFromListRequest())
     const { data } = await axios.delete('/api/receiver', {
       data: {
         listId,

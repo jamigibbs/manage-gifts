@@ -493,9 +493,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-var addedReceiver = function addedReceiver(receiver) {
+var addedReceiverSuccess = function addedReceiverSuccess(receiver) {
   return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_1__["ADD_RECEIVER"],
+    type: _constants__WEBPACK_IMPORTED_MODULE_1__["ADD_RECEIVER_SUCCESS"],
+    receiver: receiver
+  };
+};
+
+var addedReceiverRequest = function addedReceiverRequest(receiver) {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_1__["ADD_RECEIVER_REQUEST"],
     receiver: receiver
   };
 };
@@ -548,7 +555,7 @@ var toggledGiftStatus = function toggledGiftStatus(gift) {
   };
 };
 
-var removedReceiverFromListRequeset = function removedReceiverFromListRequeset() {
+var removedReceiverFromListRequest = function removedReceiverFromListRequest() {
   return {
     type: _constants__WEBPACK_IMPORTED_MODULE_1__["REMOVE_RECEIVER_FROM_LIST_REQUEST"]
   };
@@ -575,30 +582,31 @@ var addReceiver = function addReceiver(name, listId) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                _context.next = 3;
+                dispatch(addedReceiverRequest(data));
+                _context.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/receiver', {
                   name: name,
                   listId: listId
                 });
 
-              case 3:
+              case 4:
                 _ref2 = _context.sent;
                 data = _ref2.data;
-                dispatch(addedReceiver(data));
-                _context.next = 11;
+                dispatch(addedReceiverSuccess(data));
+                _context.next = 12;
                 break;
 
-              case 8:
-                _context.prev = 8;
+              case 9:
+                _context.prev = 9;
                 _context.t0 = _context["catch"](0);
                 console.error(_context.t0);
 
-              case 11:
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 8]]);
+        }, _callee, this, [[0, 9]]);
       }));
 
       return function (_x) {
@@ -668,7 +676,7 @@ var removeReceiverFromList = function removeReceiverFromList(listId, receiverId)
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.prev = 0;
-                dispatch(removedReceiverFromListRequeset());
+                dispatch(removedReceiverFromListRequest());
                 _context3.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.delete('/api/receiver', {
                   data: {
@@ -2522,8 +2530,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utilities */ "./client/utilities/index.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_utilities__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2543,6 +2553,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -2626,10 +2637,10 @@ function (_Component) {
       var classes = this.props.classes;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: classes.root
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Typography"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Typography"], {
         className: classes.header,
         variant: "h6"
-      }, "Add new receiver"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Typography"], {
+      }, "Add new receiver"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Typography"], {
         className: classes.body,
         variant: "body1"
       }, "Enter a name to add a new receiver to your gift list"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
@@ -2642,14 +2653,14 @@ function (_Component) {
         className: classes.form,
         noValidate: true,
         autoComplete: "off"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["TextField"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TextField"], {
         id: "name",
         label: "Name",
         className: classes.textField,
         value: name,
         onChange: this.onFormChange('name'),
         margin: "normal"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Button"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
         variant: "contained",
         color: "primary",
         type: "submit",
@@ -2660,6 +2671,7 @@ function (_Component) {
 
   return ReceiverAdd;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+var loadingSelector = Object(_utilities__WEBPACK_IMPORTED_MODULE_4__["createLoadingSelector"])(['ADD_RECEIVER']);
 ReceiverAdd.propTypes = {
   currentListId: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number,
   addReceiver: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func
@@ -2667,14 +2679,15 @@ ReceiverAdd.propTypes = {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    currentListId: state.list.currentId
+    currentListId: state.list.currentId,
+    isLoading: loadingSelector(state)
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     addReceiver: function addReceiver(receiver, listId) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["addReceiver"])(receiver, listId));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_5__["addReceiver"])(receiver, listId));
     }
   };
 };
@@ -4318,7 +4331,7 @@ UserDashboard.propTypes = {
 /*!***********************************!*\
   !*** ./client/constants/index.js ***!
   \***********************************/
-/*! exports provided: GET_USER_SUCCESS, GET_USER_REQUEST, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, ADD_RECEIVER, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST_REQUEST, REMOVE_RECEIVER_FROM_LIST_SUCCESS, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS, ADD_GIFT_TO_RECEIVER, REMOVE_GIFT_FROM_RECEIVER, GET_RECEIVER_NAME, TOGGLE_GIFT_STATUS, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID_REQUEST, UPDATE_CURRENT_LIST_ID_SUCCESS, UPDATE_PREVIOUS_LIST_ID_REQUEST, UPDATE_PREVIOUS_LIST_ID_SUCCESS, GET_LISTS_FOR_USER_REQUEST, GET_LISTS_FOR_USER_SUCCESS, ADD_NEW_LIST_REQUEST, ADD_NEW_LIST_SUCCESS, DELETE_LIST_REQUEST, DELETE_LIST_SUCCESS, GET_ALL_GIFTS_FOR_LIST */
+/*! exports provided: GET_USER_SUCCESS, GET_USER_REQUEST, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, ADD_RECEIVER_REQUEST, ADD_RECEIVER_SUCCESS, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST_REQUEST, REMOVE_RECEIVER_FROM_LIST_SUCCESS, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS, ADD_GIFT_TO_RECEIVER, REMOVE_GIFT_FROM_RECEIVER, GET_RECEIVER_NAME, TOGGLE_GIFT_STATUS, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID_REQUEST, UPDATE_CURRENT_LIST_ID_SUCCESS, UPDATE_PREVIOUS_LIST_ID_REQUEST, UPDATE_PREVIOUS_LIST_ID_SUCCESS, GET_LISTS_FOR_USER_REQUEST, GET_LISTS_FOR_USER_SUCCESS, ADD_NEW_LIST_REQUEST, ADD_NEW_LIST_SUCCESS, DELETE_LIST_REQUEST, DELETE_LIST_SUCCESS, GET_ALL_GIFTS_FOR_LIST */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4327,7 +4340,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_USER_REQUEST", function() { return GET_USER_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGOUT_USER_REQUEST", function() { return LOGOUT_USER_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGOUT_USER_SUCCESS", function() { return LOGOUT_USER_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_RECEIVER", function() { return ADD_RECEIVER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_RECEIVER_REQUEST", function() { return ADD_RECEIVER_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_RECEIVER_SUCCESS", function() { return ADD_RECEIVER_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_LIST_RECEIVERS", function() { return GET_ALL_LIST_RECEIVERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_RECEIVER_FROM_LIST_REQUEST", function() { return REMOVE_RECEIVER_FROM_LIST_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_RECEIVER_FROM_LIST_SUCCESS", function() { return REMOVE_RECEIVER_FROM_LIST_SUCCESS; });
@@ -4355,7 +4369,8 @@ var GET_USER_REQUEST = 'GET_USER_REQUEST';
 var LOGOUT_USER_REQUEST = 'LOGOUT_USER_REQUEST';
 var LOGOUT_USER_SUCCESS = 'LOGOUT_USER_SUCCESS'; // RECEIVER ACTION TYPES
 
-var ADD_RECEIVER = 'ADD_RECEIVER';
+var ADD_RECEIVER_REQUEST = 'ADD_RECEIVER_REQUEST';
+var ADD_RECEIVER_SUCCESS = 'ADD_RECEIVER_SUCCESS';
 var GET_ALL_LIST_RECEIVERS = 'GET_ALL_LIST_RECEIVERS';
 var REMOVE_RECEIVER_FROM_LIST_REQUEST = 'REMOVE_RECEIVER_FROM_LIST_REQUEST';
 var REMOVE_RECEIVER_FROM_LIST_SUCCESS = 'REMOVE_RECEIVER_FROM_LIST_SUCCESS';
@@ -4675,7 +4690,7 @@ var receivers = {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _constants__WEBPACK_IMPORTED_MODULE_0__["ADD_RECEIVER"]:
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["ADD_RECEIVER_SUCCESS"]:
       return _objectSpread({}, state, {
         allFromList: _toConsumableArray(state.allFromList).concat([action.receiver])
       });
