@@ -1658,6 +1658,8 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleSubmit", function () {
+      if (!_this.state.name) return null;
+
       _this.props.addNewList(_this.state.name, _this.props.userId);
 
       _this.handleClose();
@@ -1693,6 +1695,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["DialogTitle"], {
         id: "add-new-list-form-title"
       }, "Create New List"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["DialogContentText"], null, "Enter the name of the list you'd like to add. eg. Christmas 2019"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TextField"], {
+        required: true,
         onChange: this.handleChange('name'),
         value: this.state.name,
         autoFocus: true,
@@ -2652,6 +2655,7 @@ function (_Component) {
     key: "onFormSubmit",
     value: function onFormSubmit(event) {
       event.preventDefault();
+      if (!event.target.value) return null;
       this.props.addReceiver(this.state.name, this.props.currentListId);
       this.resetFormState();
     }
@@ -2688,6 +2692,7 @@ function (_Component) {
         noValidate: true,
         autoComplete: "off"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TextField"], {
+        required: true,
         id: "name",
         label: "Name",
         className: classes.textField,
@@ -2925,6 +2930,8 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleSubmit", function () {
+      if (!_this.state.url) return null;
+
       _this.props.addGiftToReceiver(_this.state.url, _this.props.receiverId);
 
       _this.handleClose();
@@ -2950,6 +2957,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["DialogTitle"], {
         id: "add-new-gift-form-title"
       }, "Paste Link to Gift Idea"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["DialogContentText"], null, "Paste the link of the gift idea you'd like to add"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["TextField"], {
+        required: true,
         onChange: this.handleChange('url'),
         value: this.state.name,
         autoFocus: true,

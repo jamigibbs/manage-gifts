@@ -48,6 +48,7 @@ export class ReceiverAdd extends Component {
 
   onFormSubmit(event) {
     event.preventDefault()
+    if (!event.target.value) return null
     this.props.addReceiver(this.state.name, this.props.currentListId)
     this.resetFormState()
   }
@@ -72,6 +73,7 @@ export class ReceiverAdd extends Component {
           noValidate autoComplete="off" >
 
           <TextField
+            required={true}
             id="name"
             label="Name"
             className={classes.textField}

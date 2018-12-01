@@ -35,6 +35,7 @@ export class ReceiverGiftAdd extends Component {
   }
 
   handleSubmit = () => {
+    if (!this.state.url) return null
     this.props.addGiftToReceiver(this.state.url, this.props.receiverId)
     this.handleClose()
   }
@@ -62,6 +63,7 @@ export class ReceiverGiftAdd extends Component {
               Paste the link of the gift idea you'd like to add
             </DialogContentText>
             <TextField
+              required={true}
               onChange={this.handleChange('url')}
               value={this.state.name}
               autoFocus
