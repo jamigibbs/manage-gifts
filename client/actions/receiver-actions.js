@@ -2,7 +2,8 @@ import axios from 'axios'
 import {
   ADD_RECEIVER_SUCCESS,
   ADD_RECEIVER_REQUEST,
-  GET_ALL_LIST_RECEIVERS,
+  GET_ALL_LIST_RECEIVERS_REQUEST,
+  GET_ALL_LIST_RECEIVERS_SUCCESS,
   REMOVE_RECEIVER_FROM_LIST_SUCCESS,
   REMOVE_RECEIVER_FROM_LIST_REQUEST,
   REMOVE_ALL_LIST_RECEIVERS,
@@ -20,7 +21,8 @@ import {
 const addedReceiverSuccess = (receiver) => ({type: ADD_RECEIVER_SUCCESS, receiver})
 const addedReceiverRequest = () => ({type: ADD_RECEIVER_REQUEST})
 
-const gotAllListReceivers = (receivers) => ({type: GET_ALL_LIST_RECEIVERS, receivers})
+const gotAllListReceiversSuccess = (receivers) => ({type: GET_ALL_LIST_RECEIVERS_SUCCESS, receivers})
+const gotAllListReceiversRequest = () => ({type: GET_ALL_LIST_RECEIVERS_REQUEST})
 
 export const removedAllListReceivers = () => ({type: REMOVE_ALL_LIST_RECEIVERS})
 
@@ -59,12 +61,13 @@ export const addReceiver = (name, listId) => async dispatch => {
 
 export const getAllListReceivers = (listId) => async dispatch => {
   try {
+    dispatch(gotAllListReceiversRequest())
     const { data } = await axios.get('/api/receiver/all', {
       params: {
         listId
       }
     })
-    dispatch(gotAllListReceivers(data))
+    dispatch(gotAllListReceiversSuccess(data))
   } catch (err) {
     console.error(err)
   }

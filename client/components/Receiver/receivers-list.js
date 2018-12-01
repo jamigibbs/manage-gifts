@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
+import { createLoadingSelector } from '../../utilities'
 import { getAllListReceivers, updateCurrentListId, getAllGiftsForList } from '../../actions'
 import { strToLowercaseDashed } from '../../utilities'
 import ReceiverActions from './receiver-actions'
@@ -157,11 +158,14 @@ ReceiversList.propTypes = {
   match: PropTypes.object
 }
 
+const loadingSelector = createLoadingSelector(['GET_ALL_LIST_RECEIVERS, UPDATE_CURRENT_LIST_ID, GET_ALL_GIFTS_FOR_LIST'])
+
 const mapStateToProps = (state) => {
   return {
     receivers: state.receivers.allFromList,
     gifts: state.list.gifts,
-    userLists: state.list.userLists
+    userLists: state.list.userLists,
+    isLoading: loadingSelector(state)
   }
 }
 

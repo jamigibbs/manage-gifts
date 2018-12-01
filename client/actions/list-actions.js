@@ -13,22 +13,30 @@ import {
   DELETE_LIST_SUCCESS,
   UPDATE_PREVIOUS_LIST_ID_REQUEST,
   UPDATE_PREVIOUS_LIST_ID_SUCCESS,
-  GET_ALL_GIFTS_FOR_LIST } from '../constants'
+  GET_ALL_GIFTS_FOR_LIST_SUCCESS,
+  GET_ALL_GIFTS_FOR_LIST_REQUEST } from '../constants'
 
 import { removedAllListReceivers } from './receiver-actions'
 
 export const getCurrentListId = () => ({type: GET_CURRENT_LIST_ID})
+
 export const updatedCurrentListIdSuccess = (id) => ({type: UPDATE_CURRENT_LIST_ID_SUCCESS, id})
 export const updatedCurrentListIdRequest = () => ({type: UPDATE_CURRENT_LIST_ID_REQUEST})
+
 export const updatedPreviousListIdSuccess = (id) => ({type: UPDATE_PREVIOUS_LIST_ID_SUCCESS, id})
 export const updatedPreviousListIdRequest = () => ({type: UPDATE_PREVIOUS_LIST_ID_REQUEST})
+
 export const gotListsForUserSuccess = (userLists) => ({type: GET_LISTS_FOR_USER_SUCCESS, userLists})
 export const gotListsForUserRequest = () => ({type: GET_LISTS_FOR_USER_REQUEST})
+
 export const addedNewListSuccess = (newList) => ({type: ADD_NEW_LIST_SUCCESS, newList})
 export const addedNewListRequest = () => ({type: ADD_NEW_LIST_REQUEST})
+
 export const deletedListSuccess = (list) => ({type: DELETE_LIST_SUCCESS, list})
 export const deletedListRequest = () => ({type: DELETE_LIST_REQUEST})
-export const gotAllGiftsForList = (gifts) => ({type: GET_ALL_GIFTS_FOR_LIST, gifts})
+
+export const gotAllGiftsForListSuccess = (gifts) => ({type: GET_ALL_GIFTS_FOR_LIST_SUCCESS, gifts})
+export const gotAllGiftsForListRequest = () => ({type: GET_ALL_GIFTS_FOR_LIST_REQUEST})
 
 export const updateCurrentListId = (id) => dispatch => {
   try {
@@ -86,12 +94,13 @@ export const deleteList = (listId, userId) => async dispatch => {
 
 export const getAllGiftsForList = (receiverIds) => async dispatch => {
   try {
+    dispatch(gotAllGiftsForListRequest())
     const { data } = await axios.get('/api/list/gifts', {
       params: {
         receiverIds: JSON.stringify(receiverIds)
       }
     })
-    dispatch(gotAllGiftsForList(data))
+    dispatch(gotAllGiftsForListSuccess(data))
   } catch (err) {
     console.error(err)
   }

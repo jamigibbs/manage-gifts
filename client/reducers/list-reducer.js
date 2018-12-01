@@ -5,7 +5,7 @@ import {
   ADD_NEW_LIST_SUCCESS,
   DELETE_LIST_SUCCESS,
   UPDATE_PREVIOUS_LIST_ID_SUCCESS,
-  GET_ALL_GIFTS_FOR_LIST } from '../constants'
+  GET_ALL_GIFTS_FOR_LIST_SUCCESS } from '../constants'
 
 const list = {
   currentId: null,
@@ -30,7 +30,7 @@ export default function(state = list, action) {
       return state
     case GET_LISTS_FOR_USER_SUCCESS:
       return {...state, userLists: action.userLists}
-    case GET_ALL_GIFTS_FOR_LIST:
+    case GET_ALL_GIFTS_FOR_LIST_SUCCESS:
       return {...state, gifts: action.gifts}
     default:
       return state
