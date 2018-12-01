@@ -2,7 +2,8 @@ import axios from 'axios'
 import {
   ADD_RECEIVER,
   GET_ALL_LIST_RECEIVERS,
-  REMOVE_RECEIVER_FROM_LIST,
+  REMOVE_RECEIVER_FROM_LIST_SUCCESS,
+  REMOVE_RECEIVER_FROM_LIST_REQUEST,
   REMOVE_ALL_LIST_RECEIVERS,
   GET_ALL_RECEIVER_GIFTS,
   ADD_GIFT_TO_RECEIVER,
@@ -18,10 +19,10 @@ const addedGiftToReceiver = (gift) => ({type: ADD_GIFT_TO_RECEIVER, gift})
 const gotReceiver = (receiver) => ({type: GET_RECEIVER_NAME, receiver})
 const removedGiftFromReceiver = (id) => ({type: REMOVE_GIFT_FROM_RECEIVER, id})
 const toggledGiftStatus = (gift) => ({type: TOGGLE_GIFT_STATUS, gift})
-
-const removedReceiverFromList = (receiver) => {
+const removedReceiverFromListRequeset = () => ({type: REMOVE_RECEIVER_FROM_LIST_REQUEST})
+const removedReceiverFromListSuccess = (receiver) => {
   return {
-    type: REMOVE_RECEIVER_FROM_LIST,
+    type: REMOVE_RECEIVER_FROM_LIST_SUCCESS,
     receiver
   }
 }
@@ -50,13 +51,14 @@ export const getAllListReceivers = (listId) => async dispatch => {
 
 export const removeReceiverFromList = (listId, receiverId) => async dispatch => {
   try {
+    dispatch(removedReceiverFromListRequeset())
     const { data } = await axios.delete('/api/receiver', {
       data: {
         listId,
         receiverId
       }
     })
-    dispatch(removedReceiverFromList(data))
+    dispatch(removedReceiverFromListSuccess(data))
   } catch (err) {
     console.error(err)
   }

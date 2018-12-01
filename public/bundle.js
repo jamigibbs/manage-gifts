@@ -548,9 +548,15 @@ var toggledGiftStatus = function toggledGiftStatus(gift) {
   };
 };
 
-var removedReceiverFromList = function removedReceiverFromList(receiver) {
+var removedReceiverFromListRequeset = function removedReceiverFromListRequeset() {
   return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_1__["REMOVE_RECEIVER_FROM_LIST"],
+    type: _constants__WEBPACK_IMPORTED_MODULE_1__["REMOVE_RECEIVER_FROM_LIST_REQUEST"]
+  };
+};
+
+var removedReceiverFromListSuccess = function removedReceiverFromListSuccess(receiver) {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_1__["REMOVE_RECEIVER_FROM_LIST_SUCCESS"],
     receiver: receiver
   };
 };
@@ -662,7 +668,8 @@ var removeReceiverFromList = function removeReceiverFromList(listId, receiverId)
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.prev = 0;
-                _context3.next = 3;
+                dispatch(removedReceiverFromListRequeset());
+                _context3.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.delete('/api/receiver', {
                   data: {
                     listId: listId,
@@ -670,24 +677,24 @@ var removeReceiverFromList = function removeReceiverFromList(listId, receiverId)
                   }
                 });
 
-              case 3:
+              case 4:
                 _ref6 = _context3.sent;
                 data = _ref6.data;
-                dispatch(removedReceiverFromList(data));
-                _context3.next = 11;
+                dispatch(removedReceiverFromListSuccess(data));
+                _context3.next = 12;
                 break;
 
-              case 8:
-                _context3.prev = 8;
+              case 9:
+                _context3.prev = 9;
                 _context3.t0 = _context3["catch"](0);
                 console.error(_context3.t0);
 
-              case 11:
+              case 12:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this, [[0, 8]]);
+        }, _callee3, this, [[0, 9]]);
       }));
 
       return function (_x3) {
@@ -2400,8 +2407,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
-/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utilities */ "./client/utilities/index.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_utilities__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
+/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2421,6 +2430,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -2460,7 +2470,7 @@ function (_Component) {
   _createClass(ReceiverActions, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_4__["Button"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["Button"], {
         color: "secondary",
         onClick: this.handleRemove
       }, "Remove"));
@@ -2470,21 +2480,28 @@ function (_Component) {
   return ReceiverActions;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
+var loadingSelector = Object(_utilities__WEBPACK_IMPORTED_MODULE_3__["createLoadingSelector"])(['REMOVE_RECEIVER_FROM_LIST']);
 ReceiverActions.propTypes = {
   listId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
   receiverId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
   removeReceiverFromList: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
 };
 
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    isLoading: loadingSelector(state)
+  };
+};
+
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     removeReceiverFromList: function removeReceiverFromList(listId, receiverId) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["removeReceiverFromList"])(listId, receiverId));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["removeReceiverFromList"])(listId, receiverId));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, mapDispatchToProps)(ReceiverActions));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ReceiverActions));
 
 /***/ }),
 
@@ -3888,7 +3905,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var loadingSelector = Object(_utilities__WEBPACK_IMPORTED_MODULE_1__["createLoadingSelector"])(['GET_USER']);
 
 var styles = function styles(theme) {
   return {
@@ -3995,6 +4011,8 @@ var AuthForm = function AuthForm(props) {
     className: classes.googleButton
   }, displayName, " with Google"))));
 };
+
+var loadingSelector = Object(_utilities__WEBPACK_IMPORTED_MODULE_1__["createLoadingSelector"])(['GET_USER']);
 
 var mapLogin = function mapLogin(state) {
   return {
@@ -4300,7 +4318,7 @@ UserDashboard.propTypes = {
 /*!***********************************!*\
   !*** ./client/constants/index.js ***!
   \***********************************/
-/*! exports provided: GET_USER_SUCCESS, GET_USER_REQUEST, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, ADD_RECEIVER, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS, ADD_GIFT_TO_RECEIVER, REMOVE_GIFT_FROM_RECEIVER, GET_RECEIVER_NAME, TOGGLE_GIFT_STATUS, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID_REQUEST, UPDATE_CURRENT_LIST_ID_SUCCESS, UPDATE_PREVIOUS_LIST_ID_REQUEST, UPDATE_PREVIOUS_LIST_ID_SUCCESS, GET_LISTS_FOR_USER_REQUEST, GET_LISTS_FOR_USER_SUCCESS, ADD_NEW_LIST_REQUEST, ADD_NEW_LIST_SUCCESS, DELETE_LIST_REQUEST, DELETE_LIST_SUCCESS, GET_ALL_GIFTS_FOR_LIST */
+/*! exports provided: GET_USER_SUCCESS, GET_USER_REQUEST, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS, ADD_RECEIVER, GET_ALL_LIST_RECEIVERS, REMOVE_RECEIVER_FROM_LIST_REQUEST, REMOVE_RECEIVER_FROM_LIST_SUCCESS, REMOVE_ALL_LIST_RECEIVERS, GET_ALL_RECEIVER_GIFTS, ADD_GIFT_TO_RECEIVER, REMOVE_GIFT_FROM_RECEIVER, GET_RECEIVER_NAME, TOGGLE_GIFT_STATUS, GET_CURRENT_LIST_ID, UPDATE_CURRENT_LIST_ID_REQUEST, UPDATE_CURRENT_LIST_ID_SUCCESS, UPDATE_PREVIOUS_LIST_ID_REQUEST, UPDATE_PREVIOUS_LIST_ID_SUCCESS, GET_LISTS_FOR_USER_REQUEST, GET_LISTS_FOR_USER_SUCCESS, ADD_NEW_LIST_REQUEST, ADD_NEW_LIST_SUCCESS, DELETE_LIST_REQUEST, DELETE_LIST_SUCCESS, GET_ALL_GIFTS_FOR_LIST */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4311,7 +4329,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGOUT_USER_SUCCESS", function() { return LOGOUT_USER_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_RECEIVER", function() { return ADD_RECEIVER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_LIST_RECEIVERS", function() { return GET_ALL_LIST_RECEIVERS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_RECEIVER_FROM_LIST", function() { return REMOVE_RECEIVER_FROM_LIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_RECEIVER_FROM_LIST_REQUEST", function() { return REMOVE_RECEIVER_FROM_LIST_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_RECEIVER_FROM_LIST_SUCCESS", function() { return REMOVE_RECEIVER_FROM_LIST_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_ALL_LIST_RECEIVERS", function() { return REMOVE_ALL_LIST_RECEIVERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_RECEIVER_GIFTS", function() { return GET_ALL_RECEIVER_GIFTS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_GIFT_TO_RECEIVER", function() { return ADD_GIFT_TO_RECEIVER; });
@@ -4338,7 +4357,8 @@ var LOGOUT_USER_SUCCESS = 'LOGOUT_USER_SUCCESS'; // RECEIVER ACTION TYPES
 
 var ADD_RECEIVER = 'ADD_RECEIVER';
 var GET_ALL_LIST_RECEIVERS = 'GET_ALL_LIST_RECEIVERS';
-var REMOVE_RECEIVER_FROM_LIST = 'REMOVE_RECEIVER_FROM_LIST';
+var REMOVE_RECEIVER_FROM_LIST_REQUEST = 'REMOVE_RECEIVER_FROM_LIST_REQUEST';
+var REMOVE_RECEIVER_FROM_LIST_SUCCESS = 'REMOVE_RECEIVER_FROM_LIST_SUCCESS';
 var REMOVE_ALL_LIST_RECEIVERS = 'REMOVE_ALL_LIST_RECEIVERS';
 var GET_ALL_RECEIVER_GIFTS = 'GET_ALL_RECEIVER_GIFTS';
 var ADD_GIFT_TO_RECEIVER = 'ADD_GIFT_TO_RECEIVER';
@@ -4660,7 +4680,7 @@ var receivers = {
         allFromList: _toConsumableArray(state.allFromList).concat([action.receiver])
       });
 
-    case _constants__WEBPACK_IMPORTED_MODULE_0__["REMOVE_RECEIVER_FROM_LIST"]:
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["REMOVE_RECEIVER_FROM_LIST_SUCCESS"]:
       return _objectSpread({}, state, {
         allFromList: state.allFromList.filter(function (receiver) {
           return receiver.id !== action.receiver.receiverId;

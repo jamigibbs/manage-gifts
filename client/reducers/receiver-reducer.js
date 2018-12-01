@@ -1,7 +1,7 @@
 import {
   ADD_RECEIVER,
   GET_ALL_LIST_RECEIVERS,
-  REMOVE_RECEIVER_FROM_LIST,
+  REMOVE_RECEIVER_FROM_LIST_SUCCESS,
   REMOVE_ALL_LIST_RECEIVERS,
   GET_ALL_RECEIVER_GIFTS,
   ADD_GIFT_TO_RECEIVER,
@@ -19,7 +19,7 @@ export default function(state = receivers, action) {
   switch (action.type) {
     case ADD_RECEIVER:
       return {...state, allFromList: [...state.allFromList, action.receiver]}
-    case REMOVE_RECEIVER_FROM_LIST:
+    case REMOVE_RECEIVER_FROM_LIST_SUCCESS:
       return {...state, allFromList: state.allFromList.filter((receiver) => {
         return receiver.id !== action.receiver.receiverId
       })}
