@@ -1322,6 +1322,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _info_box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./info-box */ "./client/components/Dashboard/info-box.js");
+/* harmony import */ var _info_card_list_count__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./info-card-list-count */ "./client/components/Dashboard/info-card-list-count.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+
+
 
 
 
@@ -1329,7 +1333,18 @@ var DashboardRoot = function DashboardRoot() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_info_box__WEBPACK_IMPORTED_MODULE_1__["default"], {
     title: "Welcome to your dashboard",
     content: "From here you can view information about your gift lists, create new lists, or update existing lists from the sidebar."
-  }));
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Grid"], {
+    container: true
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Grid"], {
+    item: true,
+    xs: 4
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_info_card_list_count__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Grid"], {
+    item: true,
+    xs: 4
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_info_card_list_count__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Grid"], {
+    item: true,
+    xs: 4
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_info_card_list_count__WEBPACK_IMPORTED_MODULE_2__["default"], null))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (DashboardRoot);
@@ -1340,7 +1355,7 @@ var DashboardRoot = function DashboardRoot() {
 /*!**********************************************!*\
   !*** ./client/components/Dashboard/index.js ***!
   \**********************************************/
-/*! exports provided: DashboardHeader, InfoBox, DashboardRoot */
+/*! exports provided: DashboardHeader, InfoBox, DashboardRoot, InfoCardListCount */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1351,8 +1366,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _info_box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./info-box */ "./client/components/Dashboard/info-box.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "InfoBox", function() { return _info_box__WEBPACK_IMPORTED_MODULE_1__["default"]; });
 
-/* harmony import */ var _dashboard_root__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dashboard-root */ "./client/components/Dashboard/dashboard-root.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DashboardRoot", function() { return _dashboard_root__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+/* harmony import */ var _dashboard_root__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dashboard-root */ "./client/components/Dashboard/dashboard-root.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DashboardRoot", function() { return _dashboard_root__WEBPACK_IMPORTED_MODULE_2__["default"]; });
+
+/* harmony import */ var _info_card_list_count__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./info-card-list-count */ "./client/components/Dashboard/info-card-list-count.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "InfoCardListCount", function() { return _info_card_list_count__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+
 
 
 
@@ -1420,6 +1439,82 @@ InfoBox.propTypes = {
   classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["withStyles"])(styles)(InfoBox));
+
+/***/ }),
+
+/***/ "./client/components/Dashboard/info-card-list-count.js":
+/*!*************************************************************!*\
+  !*** ./client/components/Dashboard/info-card-list-count.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+var styles = function styles(theme) {
+  var _card;
+
+  return {
+    card: (_card = {
+      marginTop: theme.spacing.unit * 2,
+      marginLeft: theme.spacing.unit * 4
+    }, _defineProperty(_card, "marginTop", '25px'), _defineProperty(_card, "maxWidth", '300px'), _card),
+    bullet: {
+      display: 'inline-block',
+      margin: '0 2px',
+      transform: 'scale(0.8)'
+    },
+    pos: {
+      marginBottom: 12
+    }
+  };
+};
+
+var InfoCardListCount = function InfoCardListCount(_ref) {
+  var classes = _ref.classes,
+      lists = _ref.lists;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["Card"], {
+    className: classes.card
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["CardContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["Typography"], {
+    variant: "h6",
+    align: "center",
+    color: "textSecondary",
+    gutterBottom: true
+  }, "Total Lists Created"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["Typography"], {
+    variant: "h3",
+    component: "h3",
+    align: "center"
+  }, lists.length)));
+};
+
+InfoCardListCount.propTypes = {
+  classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
+  lists: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object).isRequired
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    lists: state.list.userLists
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, null)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["withStyles"])(styles)(InfoCardListCount)));
 
 /***/ }),
 
