@@ -1,19 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import classNames from 'classnames';
 import { createLoadingSelector } from '../../utilities'
 import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { AppBar, Toolbar, Drawer, List, Divider, ListItem, ListItemIcon, ListItemText, Typography, IconButton } from '@material-ui/core'
+import { AppBar, Toolbar, Drawer, Divider, Typography, IconButton } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-import ListSelectIcon from '@material-ui/icons/ListAlt'
-import AddListIcon from '@material-ui/icons/PlaylistAdd'
-import LogoutIcon from '@material-ui/icons/LastPage'
-
-import { ListAdd, ListSelect } from '../List'
+import SidebarList from './sidebar-list'
 import { logout } from '../../actions'
 
 const drawerWidth = 260;
@@ -69,22 +65,10 @@ const styles = theme => ({
   },
   icon: {
     color: '#C2C6CB'
-  },
-  listItem: {
-    backgroundColor: 'transparent',
-    '&:hover': {
-      backgroundColor: 'rgba(0, 0, 0, 0.5)'
-    }
-  },
-  listItemText: {
-    color: '#C2C6CB'
-  },
-  divider: {
-    backgroundColor: '#686C73'
   }
 })
 
-class SidebarMobile extends React.Component {
+class SidebarMobile extends Component {
   state = {
     open: false,
   }
@@ -144,27 +128,9 @@ class SidebarMobile extends React.Component {
             </IconButton>
           </div>
           <Divider />
-          <List>
-          <ListItem button classes={{ button: classes.listItem }} onClick={this.handleListItemClick}>
-            <ListItemIcon><ListSelectIcon className={classes.icon}/></ListItemIcon>
-            <ListSelect />
-          </ListItem>
-          <ListItem button classes={{ button: classes.listItem }} onClick={this.handleListItemClick}>
-            <ListItemIcon className={classes.icon}><AddListIcon /></ListItemIcon>
-            <ListAdd />
-          </ListItem>
-        </List>
-        <Divider light={true} classes={{ root: classes.divider }} />
-        <List>
-          <ListItem button classes={{ button: classes.listItem }} onClick={this.handleListItemClick}>
-            <ListItemIcon><LogoutIcon className={classes.icon}/></ListItemIcon>
-            <ListItemText
-              classes={{ primary: classes.listItemText }}
-              primary="Logout"
-              onClick={logout}
-            />
-          </ListItem>
-        </List>
+          <SidebarList
+            logout={logout}
+            handleListItemClick={this.handleListItemClick} />
         </Drawer>
       </div>
     );
