@@ -69,7 +69,7 @@ function SidebarDesktop (props) {
       >
         <div className={classes.toolbar}>
           <Typography variant="h6" className={classes.logo}>
-          <Link to="/dashboard" className={classes.logoLink}>Manage Gifts - Desktop</Link>
+          <Link to="/dashboard" className={classes.logoLink}>Manage Gifts</Link>
           </Typography>
         </div>
         <List>

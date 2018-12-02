@@ -6,11 +6,9 @@ import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { AppBar, Toolbar, Drawer, List, Divider, ListItem, ListItemIcon, ListItemText, Typography, IconButton } from '@material-ui/core'
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import MenuIcon from '@material-ui/icons/Menu'
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import ListSelectIcon from '@material-ui/icons/ListAlt'
 import AddListIcon from '@material-ui/icons/PlaylistAdd'
 import LogoutIcon from '@material-ui/icons/LastPage'
@@ -89,20 +87,23 @@ const styles = theme => ({
 class SidebarMobile extends React.Component {
   state = {
     open: false,
-  };
+  }
 
   handleDrawerOpen = () => {
     this.setState({ open: true });
-  };
+  }
 
   handleDrawerClose = () => {
     this.setState({ open: false });
-  };
+  }
+
+  handleListItemClick = () => {
+    this.setState({open: false})
+  }
 
   render() {
-    const { classes, theme } = this.props;
-    const { open } = this.state;
-
+    const { classes, theme, logout } = this.props
+    const { open } = this.state
     return (
       <div className={classes.root}>
 
@@ -122,8 +123,8 @@ class SidebarMobile extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" noWrap>
-              <Link to="/dashboard" className={classes.logoLink}>
-                Manage Gifts - Mobile
+              <Link to="/dashboard" className={classes.logoLink} onClick={this.handleListItemClick}>
+                Manage Gifts
               </Link>
             </Typography>
           </Toolbar>
@@ -139,23 +140,23 @@ class SidebarMobile extends React.Component {
         >
           <div className={classes.drawerHeader}>
             <IconButton onClick={this.handleDrawerClose}>
-              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+              {theme.direction === 'ltr' ? <ChevronLeftIcon className={classes.icon} /> : <ChevronRightIcon className={classes.icon} />}
             </IconButton>
           </div>
           <Divider />
           <List>
-          <ListItem button classes={{ button: classes.listItem }}>
+          <ListItem button classes={{ button: classes.listItem }} onClick={this.handleListItemClick}>
             <ListItemIcon><ListSelectIcon className={classes.icon}/></ListItemIcon>
             <ListSelect />
           </ListItem>
-          <ListItem button classes={{ button: classes.listItem }}>
+          <ListItem button classes={{ button: classes.listItem }} onClick={this.handleListItemClick}>
             <ListItemIcon className={classes.icon}><AddListIcon /></ListItemIcon>
             <ListAdd />
           </ListItem>
         </List>
         <Divider light={true} classes={{ root: classes.divider }} />
         <List>
-          <ListItem button classes={{ button: classes.listItem }}>
+          <ListItem button classes={{ button: classes.listItem }} onClick={this.handleListItemClick}>
             <ListItemIcon><LogoutIcon className={classes.icon}/></ListItemIcon>
             <ListItemText
               classes={{ primary: classes.listItemText }}
