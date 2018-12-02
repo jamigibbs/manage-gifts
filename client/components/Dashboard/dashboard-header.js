@@ -15,7 +15,7 @@ const styles = theme => ({
   },
   header: {
     fontWeight: 'bold',
-    margin: '20px 0 40px 0'
+    margin: '20px 0 30px 0'
   }
 })
 
