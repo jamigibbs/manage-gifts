@@ -4,7 +4,7 @@ const db = require('../db')
 const Item = db.define('item', {
   url: {
     type: Sequelize.STRING(1000),
-    allowNull: false
+    allowNull: true
   },
   name: {
     type: Sequelize.STRING(1000)

@@ -100,10 +100,10 @@ export const getAllReceiverGifts = (receiverId) => async dispatch => {
   }
 }
 
-export const addGiftToReceiver = (url, receiverId) => async dispatch => {
+export const addGiftToReceiver = (gift, receiverId, isUrl) => async dispatch => {
   try {
     dispatch(addedGiftToReceiverRequest())
-    const { data } = await axios.post('/api/gift/add', {url, receiverId})
+    const { data } = await axios.post('/api/gift/add', {gift, receiverId, isUrl})
     dispatch(addedGiftToReceiverSuccess(data))
   } catch (err) {
     console.error(err)

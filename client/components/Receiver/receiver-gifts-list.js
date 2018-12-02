@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createLoadingSelector } from '../../utilities'
 import { withStyles } from '@material-ui/core/styles'
+import GiftIcon from '@material-ui/icons/Photo'
 import { ReceiverGiftDelete, ReceiverGiftToggle } from '../Receiver'
 import { getAllReceiverGifts } from '../../actions'
 import { Table, TableBody, TableCell, TableHead, TableRow, Paper, Typography } from '@material-ui/core/'
@@ -67,9 +68,21 @@ class ReceiverGiftsList extends Component {
             return (
               <TableRow key={gift.id}>
                 <TableCell><ReceiverGiftToggle gift={gift}/></TableCell>
-                <TableCell><img src={gift.item.image} width="50" /></TableCell>
+                <TableCell>
+                  { gift.item.image ? (
+                    <img src={gift.item.image} width="50" />
+                  ) : (
+                    <GiftIcon style={{ fontSize: 50 }} color="disabled" />
+                  )
+
+                  }
+                </TableCell>
                 <TableCell component="th" scope="row">
-                  <a href={gift.item.url} className={classes.giftLink} target="_blank"  rel="noopener">{gift.item.name}</a>
+                { gift.item.url ? (
+                  <a href={gift.item.url} className={classes.giftLink} target="_blank" rel="noopener">{gift.item.name}</a>
+                ) : (
+                  gift.item.name
+                )}
                 </TableCell>
                 <TableCell numeric>
                   <ReceiverGiftDelete

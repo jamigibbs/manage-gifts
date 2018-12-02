@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { createLoadingSelector } from '../../utilities'
+import { createLoadingSelector, isURL } from '../../utilities'
 import { addGiftToReceiver } from '../../actions'
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
 
@@ -17,7 +17,7 @@ export class ReceiverGiftAdd extends Component {
 
   state = {
     open: false,
-    url: ''
+    gift: ''
   }
 
   handleClickOpen = () => {
@@ -25,7 +25,7 @@ export class ReceiverGiftAdd extends Component {
   }
 
   handleClose = () => {
-    this.setState({ open: false, url: '' })
+    this.setState({ open: false, gift: '' })
   }
 
   handleChange = name => event => {
@@ -35,8 +35,10 @@ export class ReceiverGiftAdd extends Component {
   }
 
   handleSubmit = () => {
-    if (!this.state.url) return null
-    this.props.addGiftToReceiver(this.state.url, this.props.receiverId)
+    if (!this.state.gift) return null
+
+    const isUrl = isURL(this.state.gift)
+    this.props.addGiftToReceiver(this.state.gift, this.props.receiverId, isUrl)
     this.handleClose()
   }
 
@@ -57,19 +59,19 @@ export class ReceiverGiftAdd extends Component {
           onClose={this.handleClose}
           aria-labelledby="add-new-gift-form-title"
         >
-          <DialogTitle id="add-new-gift-form-title">Paste Link to Gift Idea</DialogTitle>
+          <DialogTitle id="add-new-gift-form-title">Add A Gift Idea</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Paste the link of the gift idea you'd like to add
+              You can paste a link to the gift idea or simply enter some text. Using a valid link will automatically add an image and description though. 😎
             </DialogContentText>
             <TextField
               required={true}
-              onChange={this.handleChange('url')}
-              value={this.state.name}
+              onChange={this.handleChange('gift')}
+              value={this.state.gift}
               autoFocus
               margin="dense"
-              id="gift-link"
-              label="Gift Link"
+              id="gift-input"
+              label="Gift Link or Name"
               type="text"
               fullWidth
             />
@@ -102,8 +104,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addGiftToReceiver: (url, receiverId) => {
-      dispatch(addGiftToReceiver(url, receiverId))
+    addGiftToReceiver: (gift, receiverId, isUrl) => {
+      dispatch(addGiftToReceiver(gift, receiverId, isUrl))
     }
   }
 }
