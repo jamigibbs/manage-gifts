@@ -55,7 +55,7 @@ const styles = theme => ({
   }
 })
 
-function Sidebar (props) {
+function SidebarDesktop (props) {
   const { classes, logout } = props
 
   return (
@@ -98,7 +98,7 @@ function Sidebar (props) {
   )
 }
 
-Sidebar.propTypes = {
+SidebarDesktop.propTypes = {
   classes: PropTypes.object.isRequired,
   logout: PropTypes.func.isRequired
 }
@@ -119,4 +119,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Sidebar))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SidebarDesktop))

@@ -14,7 +14,10 @@ const styles = theme => ({
   },
   logo: {
     flexGrow: 1,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    [theme.breakpoints.down('sm')]: {
+      width: '100%'
+    }
   },
   button: {
     padding: 0,
