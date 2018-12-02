@@ -11,7 +11,7 @@ import { allFalseValues } from '../utilities'
 
 import { ReceiversList, ReceiverDetails } from './Receiver'
 import { SidebarDesktop, SidebarMobile } from './Sidebar'
-import { DashboardHeader } from './Dashboard'
+import { DashboardHeader, DashboardRoot } from './Dashboard'
 
 const styles = theme => ({
   root: {
@@ -59,6 +59,10 @@ export class UserDashboard extends Component {
             currentId={currentId} />
 
           <Switch>
+            <Route
+              exact path={'/dashboard'}
+              render={(props) => <DashboardRoot {...props} /> }
+            />
             <Route
               exact path={'/dashboard/list/:listName/:listId'}
               render={(props) => <ReceiversList {...props} /> }

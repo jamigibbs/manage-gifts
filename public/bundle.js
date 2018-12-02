@@ -1240,7 +1240,7 @@ var styles = function styles(theme) {
     }),
     header: {
       fontWeight: 'bold',
-      margin: '20px 0 40px 0'
+      margin: '20px 0 30px 0'
     }
   };
 };
@@ -1310,11 +1310,37 @@ var DashboardHeader = function DashboardHeader(_ref) {
 
 /***/ }),
 
+/***/ "./client/components/Dashboard/dashboard-root.js":
+/*!*******************************************************!*\
+  !*** ./client/components/Dashboard/dashboard-root.js ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _info_box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./info-box */ "./client/components/Dashboard/info-box.js");
+
+
+
+var DashboardRoot = function DashboardRoot() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_info_box__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    title: "Welcome to your dashboard",
+    content: "From here you can view information about your gift lists, create new lists, or update existing lists from the sidebar."
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (DashboardRoot);
+
+/***/ }),
+
 /***/ "./client/components/Dashboard/index.js":
 /*!**********************************************!*\
   !*** ./client/components/Dashboard/index.js ***!
   \**********************************************/
-/*! exports provided: DashboardHeader */
+/*! exports provided: DashboardHeader, InfoBox, DashboardRoot */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1322,7 +1348,78 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _dashboard_header__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dashboard-header */ "./client/components/Dashboard/dashboard-header.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DashboardHeader", function() { return _dashboard_header__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
+/* harmony import */ var _info_box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./info-box */ "./client/components/Dashboard/info-box.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "InfoBox", function() { return _info_box__WEBPACK_IMPORTED_MODULE_1__["default"]; });
 
+/* harmony import */ var _dashboard_root__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dashboard-root */ "./client/components/Dashboard/dashboard-root.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DashboardRoot", function() { return _dashboard_root__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+
+
+
+
+
+/***/ }),
+
+/***/ "./client/components/Dashboard/info-box.js":
+/*!*************************************************!*\
+  !*** ./client/components/Dashboard/info-box.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+var styles = function styles(theme) {
+  return {
+    card: _defineProperty({
+      marginTop: theme.spacing.unit * 2,
+      marginLeft: theme.spacing.unit * 4
+    }, "marginTop", '25px'),
+    bullet: {
+      display: 'inline-block',
+      margin: '0 2px',
+      transform: 'scale(0.8)'
+    },
+    pos: {
+      marginBottom: 12
+    }
+  };
+};
+
+var InfoBox = function InfoBox(_ref) {
+  var classes = _ref.classes,
+      title = _ref.title,
+      content = _ref.content;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Card"], {
+    className: classes.card
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["CardContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Typography"], {
+    variant: "h5",
+    color: "textSecondary",
+    gutterBottom: true
+  }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Typography"], {
+    component: "p",
+    color: "textSecondary"
+  }, content)));
+};
+
+InfoBox.propTypes = {
+  classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["withStyles"])(styles)(InfoBox));
 
 /***/ }),
 
@@ -4732,6 +4829,12 @@ function (_Component) {
         userLists: userLists,
         currentId: currentId
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+        exact: true,
+        path: '/dashboard',
+        render: function render(props) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Dashboard__WEBPACK_IMPORTED_MODULE_11__["DashboardRoot"], props);
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
         exact: true,
         path: '/dashboard/list/:listName/:listId',
         render: function render(props) {
