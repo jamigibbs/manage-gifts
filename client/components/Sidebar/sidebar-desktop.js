@@ -4,13 +4,9 @@ import { createLoadingSelector } from '../../utilities'
 import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Drawer, List, Divider, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core'
-import ListSelectIcon from '@material-ui/icons/ListAlt'
-import AddListIcon from '@material-ui/icons/PlaylistAdd'
-import LogoutIcon from '@material-ui/icons/LastPage'
-
-import { ListAdd, ListSelect } from '../List'
+import { Drawer, Typography } from '@material-ui/core'
 import { logout } from '../../actions'
+import SidebarList from './sidebar-list'
 
 const drawerWidth = 260
 
@@ -55,9 +51,7 @@ const styles = theme => ({
   }
 })
 
-function SidebarDesktop (props) {
-  const { classes, logout } = props
-
+const SidebarDesktop = ({ classes, logout }) => {
   return (
     <div className={classes.root}>
       <Drawer
@@ -65,34 +59,15 @@ function SidebarDesktop (props) {
         variant="permanent"
         classes={{
           paper: classes.drawerPaper
-        }}
-      >
+        }}>
         <div className={classes.toolbar}>
           <Typography variant="h6" className={classes.logo}>
           <Link to="/dashboard" className={classes.logoLink}>Manage Gifts</Link>
           </Typography>
         </div>
-        <List>
-          <ListItem button classes={{ button: classes.listItem }}>
-            <ListItemIcon><ListSelectIcon className={classes.icon}/></ListItemIcon>
-            <ListSelect />
-          </ListItem>
-          <ListItem button classes={{ button: classes.listItem }}>
-            <ListItemIcon className={classes.icon}><AddListIcon /></ListItemIcon>
-            <ListAdd />
-          </ListItem>
-        </List>
-        <Divider light={true} classes={{ root: classes.divider }} />
-        <List>
-          <ListItem button classes={{ button: classes.listItem }}>
-            <ListItemIcon><LogoutIcon className={classes.icon}/></ListItemIcon>
-            <ListItemText
-              classes={{ primary: classes.listItemText }}
-              primary="Logout"
-              onClick={logout}
-            />
-          </ListItem>
-        </List>
+        <SidebarList
+          logout={logout}
+          handleListItemClick={null} />
       </Drawer>
     </div>
   )
