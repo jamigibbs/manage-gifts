@@ -12,19 +12,25 @@ const userAuth = function(req, res, next) {
 
 // GET /api/gift/add
 router.post('/add', userAuth, async (req, res, next) => {
-  let url = decodeURIComponent(req.body.url)
-  const receiverId = req.body.receiverId
+  console.log(req.body)
+  const {receiverId, isUrl } = req.body
+  let gift = req.body.gift
   let addedGift = {}
   let data = {}
 
+  if (req.body.isUrl) {
+    gift = decodeURIComponent(gift)
+  }
+
   try {
-    if ( isDomain(url, 'amazon.com') ) {
-      url = removeLinkParams(url)
+    // Cleanup those hairy amazon links
+    if ( isDomain(gift, 'amazon.com') ) {
+      gift = removeLinkParams(gift)
     }
 
     // check if url exists already in db
     const foundItem = await Item.findOne({
-      where: { url }
+      where: { url: gift }
     })
 
     if (foundItem) {
@@ -40,12 +46,22 @@ router.post('/add', userAuth, async (req, res, next) => {
       data.item = foundItem.dataValues
 
     } else {
-      const giftMetaData = await metadata(url)
-      const item = await Item.create({
-        url,
-        image: giftMetaData.image,
-        name: giftMetaData.title
-      })
+      let item
+
+      if (isUrl) {
+        const giftMetaData = await metadata(gift)
+        item = await Item.create({
+          url: gift,
+          image: giftMetaData.image,
+          name: giftMetaData.title
+        })
+      } else {
+        item = await Item.create({
+          url: null,
+          image: null,
+          name: gift
+        })
+      }
 
       // update the gifts table with item id
       addedGift = await Gift.create({
