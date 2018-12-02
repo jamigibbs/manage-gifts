@@ -5,11 +5,12 @@ import { Route, Switch } from 'react-router-dom'
 import { createLoadingSelector } from '../utilities'
 import { updateCurrentListId } from '../actions'
 import { withStyles } from '@material-ui/core/styles'
+import { Hidden } from '@material-ui/core'
 import LoadingIndicator from './loading-indicator'
 import { allFalseValues } from '../utilities'
 
 import { ReceiversList, ReceiverDetails } from './Receiver'
-import { Sidebar } from './Sidebar'
+import { SidebarDesktop, SidebarMobile } from './Sidebar'
 import { DashboardHeader } from './Dashboard'
 
 const styles = theme => ({
@@ -39,8 +40,16 @@ export class UserDashboard extends Component {
 
     return (
       <div className={classes.root}>
-        <Sidebar />
+
+        <Hidden smDown>
+          <SidebarDesktop />
+        </Hidden>
+
         <main className={classes.content}>
+
+        <Hidden smUp>
+          <SidebarMobile/>
+        </Hidden>
 
           { !allFalseValues(loading) && <LoadingIndicator /> }
 

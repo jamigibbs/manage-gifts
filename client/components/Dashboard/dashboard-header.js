@@ -8,7 +8,10 @@ import { ListName } from '../List'
 const styles = theme => ({
   root: {
     backgroundColor: 'white',
-    padding: '15px'
+    padding: '15px',
+    [theme.breakpoints.down('sm')]: {
+      marginTop: '50px'
+    }
   },
   header: {
     fontWeight: 'bold',
