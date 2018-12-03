@@ -2835,7 +2835,7 @@ function (_Component) {
     key: "onFormSubmit",
     value: function onFormSubmit(event) {
       event.preventDefault();
-      if (!event.target.value) return null;
+      if (!this.state.name) return null;
       this.props.addReceiver(this.state.name, this.props.currentListId);
       this.resetFormState();
     }
