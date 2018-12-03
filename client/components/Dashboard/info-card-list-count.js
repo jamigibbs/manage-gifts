@@ -10,15 +10,7 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 4,
     marginTop: '25px',
     maxWidth: '300px'
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  pos: {
-    marginBottom: 12,
-  },
+  }
 })
 
 const InfoCardListCount = ({classes, lists}) => {

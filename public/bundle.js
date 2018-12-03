@@ -1332,19 +1332,8 @@ __webpack_require__.r(__webpack_exports__);
 var DashboardRoot = function DashboardRoot() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_info_box__WEBPACK_IMPORTED_MODULE_1__["default"], {
     title: "Welcome to your dashboard",
-    content: "From here you can view information about your gift lists, create new lists, or update existing lists from the sidebar."
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Grid"], {
-    container: true
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Grid"], {
-    item: true,
-    xs: 4
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_info_card_list_count__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Grid"], {
-    item: true,
-    xs: 4
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_info_card_list_count__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Grid"], {
-    item: true,
-    xs: 4
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_info_card_list_count__WEBPACK_IMPORTED_MODULE_2__["default"], null))));
+    content: "From here you can view information about your gift lists, create new lists, or update existing lists from the sidebar.\n        \nMore dashboard info is coming soon like stats and gift recommendations. \uD83C\uDD92 "
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (DashboardRoot);
@@ -1403,18 +1392,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var styles = function styles(theme) {
+  var _card;
+
   return {
-    card: _defineProperty({
+    card: (_card = {
       marginTop: theme.spacing.unit * 2,
       marginLeft: theme.spacing.unit * 4
-    }, "marginTop", '25px'),
-    bullet: {
-      display: 'inline-block',
-      margin: '0 2px',
-      transform: 'scale(0.8)'
-    },
-    pos: {
-      marginBottom: 12
+    }, _defineProperty(_card, "marginTop", '25px'), _defineProperty(_card, "whiteSpace", "pre-wrap"), _card),
+    content: {
+      lineHeight: 1
     }
   };
 };
@@ -1425,11 +1411,12 @@ var InfoBox = function InfoBox(_ref) {
       content = _ref.content;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Card"], {
     className: classes.card
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["CardContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Typography"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["CardContent"], null, title && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Typography"], {
     variant: "h5",
     color: "textSecondary",
     gutterBottom: true
-  }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Typography"], {
+  }, title), content && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Typography"], {
+    className: classes.content,
     component: "p",
     color: "textSecondary"
   }, content)));
@@ -1474,15 +1461,7 @@ var styles = function styles(theme) {
     card: (_card = {
       marginTop: theme.spacing.unit * 2,
       marginLeft: theme.spacing.unit * 4
-    }, _defineProperty(_card, "marginTop", '25px'), _defineProperty(_card, "maxWidth", '300px'), _card),
-    bullet: {
-      display: 'inline-block',
-      margin: '0 2px',
-      transform: 'scale(0.8)'
-    },
-    pos: {
-      marginBottom: 12
-    }
+    }, _defineProperty(_card, "marginTop", '25px'), _defineProperty(_card, "maxWidth", '300px'), _card)
   };
 };
 
