@@ -7,32 +7,34 @@ const styles = theme => ({
   card: {
     marginTop: theme.spacing.unit * 2,
     marginLeft: theme.spacing.unit * 4,
-    marginTop: '25px'
+    marginTop: '25px',
+    whiteSpace: `pre-wrap`
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  pos: {
-    marginBottom: 12,
-  },
+  content: {
+    lineHeight: 1
+  }
 })
 
 const InfoBox = ({classes, title, content}) => {
   return (
     <Card className={classes.card}>
       <CardContent>
-        <Typography
-          variant="h5"
-          color="textSecondary" gutterBottom>
-          {title}
-        </Typography>
-        <Typography
-          component="p"
-          color="textSecondary">
-          {content}
-        </Typography>
+        {title &&
+          <Typography
+            variant="h5"
+            color="textSecondary" gutterBottom>
+            {title}
+          </Typography>
+          }
+
+        { content &&
+          <Typography
+            className={classes.content}
+            component="p"
+            color="textSecondary">
+            {content}
+          </Typography>
+        }
       </CardContent>
     </Card>
   )

@@ -8,9 +8,10 @@ const DashboardRoot = () => {
     <div>
       <InfoBox
         title="Welcome to your dashboard"
-        content="From here you can view information about your gift lists, create new lists, or update existing lists from the sidebar." />
+        content={`From here you can view information about your gift lists, create new lists, or update existing lists from the sidebar.
+        \nMore dashboard info is coming soon like stats and gift recommendations. 🆒 `} />
 
-      <Grid container>
+      {/* <Grid container>
         <Grid item xs={4}>
           <InfoCardListCount />
         </Grid>
@@ -20,7 +21,7 @@ const DashboardRoot = () => {
         <Grid item xs={4}>
           <InfoCardListCount />
         </Grid>
-      </Grid>
+      </Grid> */}
     </div>
   )
 }
