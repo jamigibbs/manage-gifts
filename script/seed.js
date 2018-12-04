@@ -3,19 +3,27 @@
 const db = require('../server/db')
 const data = require('./data.json')
 const {User, List, Item, Gift, Receiver} = require('../server/db/models')
+if (process.env.NODE_ENV !== 'production') require('../secrets')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
   // Users
-  await Promise.all(
-    data.user.map( async (user) => {
-      await User.create(user)
-    })
-  ).then(() => {
-    console.log(`seeded ${data.user.length} users`)
-  }).catch(error => console.log(error))
+  // await Promise.all(
+  //   data.user.map( async (user) => {
+  //     await User.create(user)
+  //   })
+  // ).then(() => {
+  //   console.log(`seeded ${data.user.length} users`)
+  // }).catch(error => console.log(error))
+
+  await User.create({
+    email: process.env.DEMO_USER_EMAIL,
+    password: process.env.DEMO_USER_PW,
+    firstName: "Michael",
+    lastName: "Scott"
+  })
 
   // Lists
   await Promise.all(

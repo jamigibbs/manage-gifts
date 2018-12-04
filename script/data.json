@@ -1,7 +1,4 @@
 {
-  "user": [
-    {"email": "michael@scott.com", "password": "123", "firstName": "Michael", "lastName": "Scott"}
-  ],
   "list": [
     {"name": "Christmas 2018", "userId": 1},
     {"name": "Birthdays 2019", "userId": 1}
