@@ -10,8 +10,8 @@ async function seed() {
   console.log('db synced!')
 
   await User.create({
-    email: process.env.DEMO_USER_EMAIL,
-    password: process.env.DEMO_USER_PW,
+    email: process.env.DEMO_USER_EMAIL || 'local@test.com',
+    password: process.env.DEMO_USER_PW || 'localtest123',
     firstName: "Michael",
     lastName: "Scott"
   })
