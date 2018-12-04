@@ -4146,7 +4146,7 @@ var SidebarDesktop = function SidebarDesktop(_ref) {
     variant: "h6",
     className: classes.logo
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["Link"], {
-    to: "/",
+    to: "/dashboard",
     className: classes.logoLink
   }, "Manage Gifts"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sidebar_list__WEBPACK_IMPORTED_MODULE_8__["default"], {
     logout: logout,
@@ -4238,21 +4238,6 @@ var SidebarList = function SidebarList(_ref2) {
       handleListItemClick = _ref2.handleListItemClick,
       classes = _ref2.classes;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["List"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["ListItem"], {
-    button: true,
-    classes: {
-      button: classes.listItem
-    },
-    component: react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"],
-    to: "/dashboard",
-    onClick: handleListItemClick
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["ListItemIcon"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_ListAlt__WEBPACK_IMPORTED_MODULE_5___default.a, {
-    className: classes.icon
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["ListItemText"], {
-    classes: {
-      primary: classes.listItemText
-    },
-    primary: "Dashboard"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["ListItem"], {
     button: true,
     classes: {
       button: classes.listItem
