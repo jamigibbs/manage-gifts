@@ -62,7 +62,7 @@ const SidebarDesktop = ({ classes, logout }) => {
         }}>
         <div className={classes.toolbar}>
           <Typography variant="h6" className={classes.logo}>
-          <Link to="/" className={classes.logoLink}>Manage Gifts</Link>
+          <Link to="/dashboard" className={classes.logoLink}>Manage Gifts</Link>
           </Typography>
         </div>
         <SidebarList

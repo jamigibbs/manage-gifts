@@ -32,16 +32,6 @@ const SidebarList = ({logout, handleListItemClick, classes}) => {
   return(
     <div>
       <List>
-        <ListItem button 
-          classes={{ button: classes.listItem }} 
-          component={Link} to="/dashboard" 
-          onClick={handleListItemClick}>
-          <ListItemIcon><ListSelectIcon className={classes.icon}/></ListItemIcon>
-          <ListItemText
-            classes={{ primary: classes.listItemText }}
-            primary="Dashboard"
-          />
-        </ListItem>
         <ListItem button classes={{ button: classes.listItem }} onClick={handleListItemClick}>
           <ListItemIcon><ListSelectIcon className={classes.icon}/></ListItemIcon>
           <ListSelect />
