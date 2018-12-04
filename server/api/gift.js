@@ -24,9 +24,9 @@ router.post('/add', userAuth, async (req, res, next) => {
 
   try {
     // Cleanup those hairy amazon links
-    if ( isDomain(gift, 'amazon.com') ) {
-      gift = removeLinkParams(gift)
-    }
+    // if ( isDomain(gift, 'amazon.com') ) {
+    //   gift = removeLinkParams(gift)
+    // }
 
     // check if url exists already in db
     const foundItem = await Item.findOne({
@@ -51,10 +51,11 @@ router.post('/add', userAuth, async (req, res, next) => {
       if (isUrl) {
         const giftMetaData = await metadata(gift)
         item = await Item.create({
-          url: gift,
+          url: giftMetaData.url,
           image: giftMetaData.image,
           name: giftMetaData.title
         })
+        console.log(giftMetaData)
       } else {
         item = await Item.create({
           url: null,
