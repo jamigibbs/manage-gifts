@@ -3,19 +3,18 @@
 const db = require('../server/db')
 const data = require('./data.json')
 const {User, List, Item, Gift, Receiver} = require('../server/db/models')
+if (process.env.NODE_ENV !== 'production') require('../secrets')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  // Users
-  await Promise.all(
-    data.user.map( async (user) => {
-      await User.create(user)
-    })
-  ).then(() => {
-    console.log(`seeded ${data.user.length} users`)
-  }).catch(error => console.log(error))
+  await User.create({
+    email: process.env.DEMO_USER_EMAIL || 'local@test.com',
+    password: process.env.DEMO_USER_PW || 'localtest123',
+    firstName: "Michael",
+    lastName: "Scott"
+  })
 
   // Lists
   await Promise.all(
@@ -26,15 +25,6 @@ async function seed() {
     console.log(`seeded ${data.list.length} lists`)
   }).catch(error => console.log(error))
 
-  // Items
-  await Promise.all(
-    data.item.map( async (item) => {
-      await Item.create(item)
-    })
-  ).then(() => {
-    console.log(`seeded ${data.item.length} items`)
-  }).catch(error => console.log(error))
-
   // Receivers
   await Promise.all(
     data.receiver.map( async (receiver) => {
@@ -42,6 +32,15 @@ async function seed() {
     })
   ).then(() => {
     console.log(`seeded ${data.receiver.length} receivers`)
+  }).catch(error => console.log(error))
+
+  // Items
+  await Promise.all(
+    data.item.map( async (item) => {
+      await Item.create(item)
+    })
+  ).then(() => {
+    console.log(`seeded ${data.item.length} items`)
   }).catch(error => console.log(error))
 
   // Gifts
