@@ -1684,7 +1684,7 @@ var styles = function styles(theme) {
   return {
     cta: {
       maxWidth: '600px',
-      marginTop: '100px'
+      margin: '100px 0'
     },
     header: {
       lineHeight: '1.4',
@@ -1694,6 +1694,10 @@ var styles = function styles(theme) {
       textTransform: 'uppercase',
       fontWeight: 'bold',
       marginBottom: '10px'
+    },
+    card: {
+      maxWidth: 1000,
+      boxShadow: '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)'
     }
   };
 };
@@ -1721,7 +1725,19 @@ var Home = function Home(_ref) {
     component: "h2",
     align: "center",
     className: classes.header
-  }, "Organize your gifts for holidays, events, or just in the spirit of giving")))))));
+  }, "Organize your gifts for holidays, events, or just in the spirit of giving")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
+    container: true,
+    justify: "center"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
+    item: true
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Card"], {
+    className: classes.card
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["CardMedia"], {
+    component: "img",
+    className: classes.media,
+    image: "/img/gifts-list.png",
+    title: "Gifts list"
+  })))))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["withStyles"])(styles)(Home));
