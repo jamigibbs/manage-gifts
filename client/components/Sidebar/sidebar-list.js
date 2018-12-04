@@ -1,5 +1,6 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
+import { Link } from 'react-router-dom'
 import { ListAdd, ListSelect } from '../List'
 import { List, Divider, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
 import ListSelectIcon from '@material-ui/icons/ListAlt'
@@ -21,6 +22,9 @@ const styles = theme => ({
   },
   divider: {
     backgroundColor: '#686C73'
+  },
+  listItemText: {
+    color: '#C2C6CB'
   }
 })
 
@@ -28,6 +32,16 @@ const SidebarList = ({logout, handleListItemClick, classes}) => {
   return(
     <div>
       <List>
+        <ListItem button 
+          classes={{ button: classes.listItem }} 
+          component={Link} to="/dashboard" 
+          onClick={handleListItemClick}>
+          <ListItemIcon><ListSelectIcon className={classes.icon}/></ListItemIcon>
+          <ListItemText
+            classes={{ primary: classes.listItemText }}
+            primary="Dashboard"
+          />
+        </ListItem>
         <ListItem button classes={{ button: classes.listItem }} onClick={handleListItemClick}>
           <ListItemIcon><ListSelectIcon className={classes.icon}/></ListItemIcon>
           <ListSelect />
