@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles'
 import { createLoadingSelector } from '../../utilities'
 import { getAllListReceivers, updateCurrentListId, getAllGiftsForList } from '../../actions'
 import { strToLowercaseDashed } from '../../utilities'
-import ReceiverActions from './receiver-actions'
+import ReceiverRemove from './receiver-remove'
 import ReceiverAdd from './receiver-add'
 import { ListDelete } from '../List'
 import { GiftCount, GiftPurchaseCount } from '../Receiver'
@@ -127,7 +127,7 @@ class ReceiversList extends Component {
                             gifts={gifts} />
                         </TableCell>
                         <TableCell>
-                          <ReceiverActions
+                          <ReceiverRemove
                             receiverId={receiver.id}
                             listId={listId}
                           />

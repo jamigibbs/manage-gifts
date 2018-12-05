@@ -1,4 +1,4 @@
-export {default as ReceiverActions} from './receiver-actions'
+export {default as ReceiverRemove} from './receiver-remove'
 export {default as ReceiverAdd} from './receiver-add'
 export {default as ReceiverDetails} from './receiver-details'
 export {default as ReceiverGiftAdd} from './receiver-gift-add'

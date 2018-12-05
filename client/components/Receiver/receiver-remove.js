@@ -1,29 +1,29 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createLoadingSelector } from '../../utilities'
 import { removeReceiverFromList } from '../../actions'
-import { Button } from '@material-ui/core/'
+import RemoveConfirmation from '../remove-confirmation'
 
-class ReceiverActions extends Component {
+const ReceiverRemove = ({listId, receiverId, removeReceiverFromList}) => {
 
-  handleRemove = () => {
-    const { listId, receiverId } = this.props
-    this.props.removeReceiverFromList(listId, receiverId)
+  const handleRemove = () => {
+    removeReceiverFromList(listId, receiverId)
   }
 
-  render(){
-    return (
-      <div>
-        <Button color="secondary" onClick={this.handleRemove}>Remove</Button>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <RemoveConfirmation
+        title="Are you sure you want to remove this receiver?"
+        content="When you remove them, all of their associated gifts will be removed too."
+        handleRemove={handleRemove} />
+    </div>
+  )
 }
 
 const loadingSelector = createLoadingSelector(['REMOVE_RECEIVER_FROM_LIST'])
 
-ReceiverActions.propTypes = {
+ReceiverRemove.propTypes = {
   listId: PropTypes.number,
   receiverId: PropTypes.number,
   removeReceiverFromList: PropTypes.func
@@ -43,4 +43,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReceiverActions)
+export default connect(mapStateToProps, mapDispatchToProps)(ReceiverRemove)

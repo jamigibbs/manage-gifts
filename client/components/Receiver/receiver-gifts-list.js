@@ -93,8 +93,7 @@ class ReceiverGiftsList extends Component {
                 </TableCell>
                 <TableCell numeric>
                   <ReceiverGiftDelete
-                    itemId={gift.id}
-                    receiverId={receiverId} />
+                    itemId={gift.id} />
                 </TableCell>
               </TableRow>
             )

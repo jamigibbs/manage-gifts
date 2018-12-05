@@ -1985,12 +1985,11 @@ ListAdd.propTypes = {
 /*!***********************************************!*\
   !*** ./client/components/List/list-delete.js ***!
   \***********************************************/
-/*! exports provided: ListDelete, default */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ListDelete", function() { return ListDelete; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
@@ -2000,28 +1999,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_utilities__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
 /* harmony import */ var _history__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../history */ "./client/history.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+/* harmony import */ var _remove_confirmation__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../remove-confirmation */ "./client/components/remove-confirmation.js");
 
 
 
@@ -2030,94 +2008,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+var ListDelete = function ListDelete(_ref) {
+  var listId = _ref.listId,
+      userId = _ref.userId,
+      deleteList = _ref.deleteList,
+      updatePreviousListId = _ref.updatePreviousListId;
 
-
-var styles = function styles(theme) {
-  return {
-    button: {
-      margin: theme.spacing.unit
-    }
+  var handleRemove = function handleRemove() {
+    deleteList(listId, userId);
+    updatePreviousListId(null);
+    _history__WEBPACK_IMPORTED_MODULE_5__["default"].push('/dashboard');
   };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_remove_confirmation__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    title: "Warning: Deleting List Data",
+    content: "When you delete a list, all added receivers and their associated gifts will be removed too. Are you sure?",
+    buttonRemove: "Remove List",
+    handleRemove: handleRemove
+  }));
 };
 
-var ListDelete =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(ListDelete, _Component);
-
-  function ListDelete() {
-    var _getPrototypeOf2;
-
-    var _this;
-
-    _classCallCheck(this, ListDelete);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ListDelete)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      open: false
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleClickOpen", function () {
-      _this.setState({
-        open: true
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleClose", function () {
-      _this.setState({
-        open: false
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleDelete", function () {
-      var _this$props = _this.props,
-          listId = _this$props.listId,
-          userId = _this$props.userId;
-
-      _this.props.deleteList(listId, userId);
-
-      _this.props.updatePreviousListId(null);
-
-      _this.handleClose();
-
-      _history__WEBPACK_IMPORTED_MODULE_5__["default"].push('/dashboard');
-    });
-
-    return _this;
-  }
-
-  _createClass(ListDelete, [{
-    key: "render",
-    value: function render() {
-      var classes = this.props.classes;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Button"], {
-        className: classes.button,
-        color: "secondary",
-        onClick: this.handleClickOpen
-      }, "Delete List"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Dialog"], {
-        open: this.state.open,
-        onClose: this.handleClose,
-        "aria-labelledby": "delete-list",
-        "aria-describedby": "delete-list"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["DialogTitle"], {
-        id: "delete-list-title"
-      }, "Warning: Deleting List Data"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["DialogContentText"], null, "When you delete a list, all added receivers and their associated gifts will be removed too. Are you sure?")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["DialogActions"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Button"], {
-        color: "primary",
-        onClick: this.handleClose
-      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Button"], {
-        color: "secondary",
-        onClick: this.handleDelete
-      }, "Confirm"))));
-    }
-  }]);
-
-  return ListDelete;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+ListDelete.propTypes = {
+  deleteList: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  updatePreviousListId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  userId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired,
+  listId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired
+};
 var loadingSelector = Object(_utilities__WEBPACK_IMPORTED_MODULE_3__["createLoadingSelector"])(['DELETE_LIST, UPDATE_PREVIOUS_LIST_ID']);
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -2138,13 +2054,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-ListDelete.propTypes = {
-  deleteList: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  updatePreviousListId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  userId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
-  classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
-};
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6__["withStyles"])(styles)(ListDelete)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ListDelete));
 
 /***/ }),
 
@@ -2625,13 +2535,13 @@ GiftPurchaseCount.propTypes = {
 /*!*********************************************!*\
   !*** ./client/components/Receiver/index.js ***!
   \*********************************************/
-/*! exports provided: ReceiverActions, ReceiverAdd, ReceiverDetails, ReceiverGiftAdd, ReceiverGiftDelete, ReceiverGiftsList, ReceiverName, ReceiversList, ReceiverGiftToggle, GiftCount, GiftPurchaseCount */
+/*! exports provided: ReceiverRemove, ReceiverAdd, ReceiverDetails, ReceiverGiftAdd, ReceiverGiftDelete, ReceiverGiftsList, ReceiverName, ReceiversList, ReceiverGiftToggle, GiftCount, GiftPurchaseCount */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _receiver_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./receiver-actions */ "./client/components/Receiver/receiver-actions.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ReceiverActions", function() { return _receiver_actions__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+/* harmony import */ var _receiver_remove__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./receiver-remove */ "./client/components/Receiver/receiver-remove.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ReceiverRemove", function() { return _receiver_remove__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
 /* harmony import */ var _receiver_add__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./receiver-add */ "./client/components/Receiver/receiver-add.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ReceiverAdd", function() { return _receiver_add__WEBPACK_IMPORTED_MODULE_1__["default"]; });
@@ -2674,118 +2584,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-/***/ }),
-
-/***/ "./client/components/Receiver/receiver-actions.js":
-/*!********************************************************!*\
-  !*** ./client/components/Receiver/receiver-actions.js ***!
-  \********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utilities */ "./client/utilities/index.js");
-/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_utilities__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
-/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-
-
-
-
-var ReceiverActions =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(ReceiverActions, _Component);
-
-  function ReceiverActions() {
-    var _getPrototypeOf2;
-
-    var _this;
-
-    _classCallCheck(this, ReceiverActions);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ReceiverActions)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleRemove", function () {
-      var _this$props = _this.props,
-          listId = _this$props.listId,
-          receiverId = _this$props.receiverId;
-
-      _this.props.removeReceiverFromList(listId, receiverId);
-    });
-
-    return _this;
-  }
-
-  _createClass(ReceiverActions, [{
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_5__["Button"], {
-        color: "secondary",
-        onClick: this.handleRemove
-      }, "Remove"));
-    }
-  }]);
-
-  return ReceiverActions;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-var loadingSelector = Object(_utilities__WEBPACK_IMPORTED_MODULE_3__["createLoadingSelector"])(['REMOVE_RECEIVER_FROM_LIST']);
-ReceiverActions.propTypes = {
-  listId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
-  receiverId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
-  removeReceiverFromList: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
-};
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    isLoading: loadingSelector(state)
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    removeReceiverFromList: function removeReceiverFromList(listId, receiverId) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["removeReceiverFromList"])(listId, receiverId));
-    }
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ReceiverActions));
 
 /***/ }),
 
@@ -3282,28 +3080,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utilities */ "./client/utilities/index.js");
 /* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_utilities__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
-/* harmony import */ var _receiver_name__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./receiver-name */ "./client/components/Receiver/receiver-name.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+/* harmony import */ var _remove_confirmation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../remove-confirmation */ "./client/components/remove-confirmation.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
 
 
 
@@ -3311,89 +3089,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+var ReceiverGiftDelete = function ReceiverGiftDelete(_ref) {
+  var itemId = _ref.itemId,
+      removeGiftFromReceiver = _ref.removeGiftFromReceiver;
 
+  var handleRemove = function handleRemove() {
+    removeGiftFromReceiver(itemId);
+  };
 
-var ReceiverGiftDelete =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(ReceiverGiftDelete, _Component);
-
-  function ReceiverGiftDelete() {
-    var _getPrototypeOf2;
-
-    var _this;
-
-    _classCallCheck(this, ReceiverGiftDelete);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ReceiverGiftDelete)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      open: false
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleClickOpen", function () {
-      _this.setState({
-        open: true
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleClose", function () {
-      _this.setState({
-        open: false
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleRemove", function () {
-      var itemId = _this.props.itemId;
-
-      _this.props.removeGiftFromReceiver(itemId);
-
-      _this.handleClose();
-    });
-
-    return _this;
-  }
-
-  _createClass(ReceiverGiftDelete, [{
-    key: "render",
-    value: function render() {
-      var receiverId = this.props.receiverId;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_4__["Button"], {
-        color: "primary",
-        onClick: this.handleClickOpen
-      }, "Remove"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_4__["Dialog"], {
-        open: this.state.open,
-        onClose: this.handleClose,
-        "aria-labelledby": "receiver-gift-delete",
-        "aria-describedby": "receiver-gift-delete-dialog"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_4__["DialogTitle"], {
-        id: "receiver-gift-delete"
-      }, "Are you sure you want to delete this gift idea?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_4__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_4__["DialogContentText"], {
-        id: "receiver-gift-delete-dialog"
-      }, "Confirm to remove this gift from ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_name__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        id: receiverId
-      }), "'s gift list.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_4__["DialogActions"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_4__["Button"], {
-        onClick: this.handleClose,
-        color: "primary"
-      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_4__["Button"], {
-        onClick: this.handleRemove,
-        color: "primary",
-        autoFocus: true
-      }, "Remove"))));
-    }
-  }]);
-
-  return ReceiverGiftDelete;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_remove_confirmation__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    title: "Are you sure you want to delete this gift idea?",
+    content: "Confirm to remove this gift from your receiver's gift list",
+    handleRemove: handleRemove
+  }));
+};
 
 var loadingSelector = Object(_utilities__WEBPACK_IMPORTED_MODULE_3__["createLoadingSelector"])(['REMOVE_GIFT_FROM_RECEIVER']);
 ReceiverGiftDelete.propTypes = {
-  removeGiftFromReceiver: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  receiverId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number
+  itemId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired,
+  removeGiftFromReceiver: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
 };
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -3405,7 +3119,7 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     removeGiftFromReceiver: function removeGiftFromReceiver(itemId) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_6__["removeGiftFromReceiver"])(itemId));
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_5__["removeGiftFromReceiver"])(itemId));
     }
   };
 };
@@ -3670,8 +3384,7 @@ function (_Component) {
         }, "$", gift.price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_9__["TableCell"], {
           numeric: true
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_6__["ReceiverGiftDelete"], {
-          itemId: gift.id,
-          receiverId: receiverId
+          itemId: gift.id
         })));
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_back_button__WEBPACK_IMPORTED_MODULE_7__["default"], {
         text: "Go Back"
@@ -3812,6 +3525,72 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./client/components/Receiver/receiver-remove.js":
+/*!*******************************************************!*\
+  !*** ./client/components/Receiver/receiver-remove.js ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utilities */ "./client/utilities/index.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_utilities__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
+/* harmony import */ var _remove_confirmation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../remove-confirmation */ "./client/components/remove-confirmation.js");
+
+
+
+
+
+
+
+var ReceiverRemove = function ReceiverRemove(_ref) {
+  var listId = _ref.listId,
+      receiverId = _ref.receiverId,
+      removeReceiverFromList = _ref.removeReceiverFromList;
+
+  var handleRemove = function handleRemove() {
+    removeReceiverFromList(listId, receiverId);
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_remove_confirmation__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    title: "Are you sure you want to remove this receiver?",
+    content: "When you remove them, all of their associated gifts will be removed too.",
+    handleRemove: handleRemove
+  }));
+};
+
+var loadingSelector = Object(_utilities__WEBPACK_IMPORTED_MODULE_3__["createLoadingSelector"])(['REMOVE_RECEIVER_FROM_LIST']);
+ReceiverRemove.propTypes = {
+  listId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  receiverId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  removeReceiverFromList: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    isLoading: loadingSelector(state)
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    removeReceiverFromList: function removeReceiverFromList(listId, receiverId) {
+      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["removeReceiverFromList"])(listId, receiverId));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ReceiverRemove));
+
+/***/ }),
+
 /***/ "./client/components/Receiver/receivers-list.js":
 /*!******************************************************!*\
   !*** ./client/components/Receiver/receivers-list.js ***!
@@ -3832,7 +3611,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utilities */ "./client/utilities/index.js");
 /* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_utilities__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
-/* harmony import */ var _receiver_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./receiver-actions */ "./client/components/Receiver/receiver-actions.js");
+/* harmony import */ var _receiver_remove__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./receiver-remove */ "./client/components/Receiver/receiver-remove.js");
 /* harmony import */ var _receiver_add__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./receiver-add */ "./client/components/Receiver/receiver-add.js");
 /* harmony import */ var _List__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../List */ "./client/components/List/index.js");
 /* harmony import */ var _Receiver__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../Receiver */ "./client/components/Receiver/index.js");
@@ -4014,7 +3793,7 @@ function (_Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_10__["GiftPurchaseCount"], {
           receiverId: receiver.id,
           gifts: gifts
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_actions__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_remove__WEBPACK_IMPORTED_MODULE_7__["default"], {
           receiverId: receiver.id,
           listId: listId
         })));
@@ -4939,6 +4718,130 @@ function (_Component) {
   return LoadingIndicator;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 /* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["withStyles"])(styles)(LoadingIndicator));
+
+/***/ }),
+
+/***/ "./client/components/remove-confirmation.js":
+/*!**************************************************!*\
+  !*** ./client/components/remove-confirmation.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+var RemoveConfirmation =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(RemoveConfirmation, _Component);
+
+  function RemoveConfirmation() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    _classCallCheck(this, RemoveConfirmation);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(RemoveConfirmation)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+      open: false
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleClickOpen", function () {
+      _this.setState({
+        open: true
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleClose", function () {
+      _this.setState({
+        open: false
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleRemove", function () {
+      _this.props.handleRemove();
+
+      _this.handleClose;
+    });
+
+    return _this;
+  }
+
+  _createClass(RemoveConfirmation, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          title = _this$props.title,
+          content = _this$props.content,
+          buttonRemove = _this$props.buttonRemove;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_2__["Button"], {
+        color: "secondary",
+        onClick: this.handleClickOpen
+      }, buttonRemove ? buttonRemove : 'Remove'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_2__["Dialog"], {
+        open: this.state.open,
+        onClose: this.handleClose,
+        "aria-labelledby": "receiver-gift-delete",
+        "aria-describedby": "receiver-gift-delete-dialog"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_2__["DialogTitle"], {
+        id: "receiver-gift-delete"
+      }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_2__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_2__["DialogContentText"], {
+        id: "receiver-gift-delete-dialog"
+      }, content)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_2__["DialogActions"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_2__["Button"], {
+        onClick: this.handleClose,
+        color: "primary"
+      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_2__["Button"], {
+        onClick: this.handleRemove,
+        color: "secondary",
+        autoFocus: true
+      }, "Confirm"))));
+    }
+  }]);
+
+  return RemoveConfirmation;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+RemoveConfirmation.propTypes = {
+  title: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
+  content: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
+  handleRemove: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  buttonRemove: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+};
+/* harmony default export */ __webpack_exports__["default"] = (RemoveConfirmation);
 
 /***/ }),
 
