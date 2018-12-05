@@ -41,12 +41,21 @@ router.get('/all/', userAuth, async (req, res, next) => {
 router.delete('/', userAuth, async (req, res, next) => {
   const { listId, receiverId } = req.body
   try {
+    // Remove gifts for receiver
+    await Gift.destroy({
+      where: {
+        receiverId
+      }
+    })
+
+    // Remove the receiver
     await Receiver.destroy({
       where: {
         listId,
         id: receiverId
       }
     })
+
     res.json({ listId, receiverId })
   } catch (err) { next(err) }
 })
@@ -93,9 +102,9 @@ router.post('/gift/status', userAuth, async (req, res, next) => {
   purchased = !purchased
   try {
     const updated = await Gift.update({ purchased }, { where: { id } })
-    
+
     if (updated[0] === 0) throw Error('No rows updated')
-    
+
     res.json({ id, purchased })
   } catch (err) { next(err) }
 })
