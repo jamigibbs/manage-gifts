@@ -12,9 +12,9 @@ const userAuth = function(req, res, next) {
 
 // GET /api/gift/add
 router.post('/add', userAuth, async (req, res, next) => {
-  console.log(req.body)
-  const {receiverId, isUrl } = req.body
-  let gift = req.body.gift
+  const { receiverId, isUrl } = req.body.giftData
+  let gift = req.body.giftData.gift.name
+  let price = Number(req.body.giftData.gift.price)
   let addedGift = {}
   let data = {}
 
@@ -23,11 +23,6 @@ router.post('/add', userAuth, async (req, res, next) => {
   }
 
   try {
-    // Cleanup those hairy amazon links
-    // if ( isDomain(gift, 'amazon.com') ) {
-    //   gift = removeLinkParams(gift)
-    // }
-
     // check if url exists already in db
     const foundItem = await Item.findOne({
       where: { url: gift }
@@ -38,7 +33,8 @@ router.post('/add', userAuth, async (req, res, next) => {
       addedGift = await Gift.create({
         status: 'Pending',
         itemId: foundItem.id,
-        receiverId
+        receiverId,
+        price
       })
 
       // send back correctly formed data
@@ -46,6 +42,8 @@ router.post('/add', userAuth, async (req, res, next) => {
       data.item = foundItem.dataValues
 
     } else {
+      // For item that doesn't already exist on our db,
+      // let's create it
       let item
 
       if (isUrl) {
@@ -55,7 +53,6 @@ router.post('/add', userAuth, async (req, res, next) => {
           image: giftMetaData.image,
           name: giftMetaData.title
         })
-        console.log(giftMetaData)
       } else {
         item = await Item.create({
           url: null,
@@ -68,7 +65,8 @@ router.post('/add', userAuth, async (req, res, next) => {
       addedGift = await Gift.create({
         status: 'Pending',
         itemId: item.id,
-        receiverId
+        receiverId,
+        price
       })
 
       // send back correctly formed data

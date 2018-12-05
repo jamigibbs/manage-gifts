@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createLoadingSelector, isURL } from '../../utilities'
+import USNumberFormat from '../us-number-format'
 import { addGiftToReceiver } from '../../actions'
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
 
@@ -17,7 +18,8 @@ export class ReceiverGiftAdd extends Component {
 
   state = {
     open: false,
-    gift: ''
+    gift: '',
+    price: ''
   }
 
   handleClickOpen = () => {
@@ -25,7 +27,7 @@ export class ReceiverGiftAdd extends Component {
   }
 
   handleClose = () => {
-    this.setState({ open: false, gift: '' })
+    this.setState({ open: false, gift: '', price: '' })
   }
 
   handleChange = name => event => {
@@ -37,13 +39,21 @@ export class ReceiverGiftAdd extends Component {
   handleSubmit = () => {
     if (!this.state.gift) return null
 
-    const isUrl = isURL(this.state.gift)
-    this.props.addGiftToReceiver(this.state.gift, this.props.receiverId, isUrl)
+    const giftData = {
+      gift: {
+        name: this.state.gift,
+        price: this.state.price
+      },
+      receiverId: this.props.receiverId,
+      isUrl: isURL(this.state.gift)
+    }
+    this.props.addGiftToReceiver(giftData)
     this.handleClose()
   }
 
   render(){
     const { classes } = this.props
+    const { gift, price, open } = this.state
     return (
       <div>
         <Button
@@ -54,7 +64,7 @@ export class ReceiverGiftAdd extends Component {
           Add a Gift Idea
         </Button>
         <Dialog
-          open={this.state.open}
+          open={open}
           fullWidth={true}
           onClose={this.handleClose}
           aria-labelledby="add-new-gift-form-title"
@@ -67,13 +77,24 @@ export class ReceiverGiftAdd extends Component {
             <TextField
               required={true}
               onChange={this.handleChange('gift')}
-              value={this.state.gift}
+              value={gift}
               autoFocus
               margin="dense"
               id="gift-input"
               label="Gift Link or Name"
               type="text"
               fullWidth
+            />
+            <TextField
+              required={true}
+              onChange={this.handleChange('price')}
+              value={price}
+              InputProps={{
+                inputComponent: USNumberFormat
+              }}
+              margin="dense"
+              id="price-input"
+              label="Price"
             />
           </DialogContent>
           <DialogActions>
@@ -104,8 +125,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addGiftToReceiver: (gift, receiverId, isUrl) => {
-      dispatch(addGiftToReceiver(gift, receiverId, isUrl))
+    addGiftToReceiver: (giftData) => {
+      dispatch(addGiftToReceiver(giftData))
     }
   }
 }
