@@ -5,6 +5,7 @@ import { createLoadingSelector } from '../../utilities'
 import { withStyles } from '@material-ui/core/styles'
 import GiftIcon from '@material-ui/icons/Photo'
 import { ReceiverGiftDelete, ReceiverGiftToggle } from '../Receiver'
+import BackButton from '../back-button'
 import { getAllReceiverGifts } from '../../actions'
 import { Table, TableBody, TableCell, TableHead, TableRow, Paper, Typography } from '@material-ui/core/'
 
@@ -15,7 +16,7 @@ const styles = theme => ({
     borderRadius: 0
   },
   table: {
-    minWidth: 700,
+    minWidth: 700
   },
   giftLink: {
     textDecoration: 'none',
@@ -48,12 +49,14 @@ class ReceiverGiftsList extends Component {
             <Typography variant="h6">Your Gift Receiver Has No Gifts Ideas Yet!</Typography>
             <Typography variant="body1">When you find gift ideas on the internet, simply click "Add a Gift Idea" and paste the link to start keeping track</Typography>
           </Paper>
+          <div className={classes.root}><BackButton text="Go Back" /></div>
         </div>
       )
     }
 
     return (
-      <Paper className={classes.root}>
+      <div className={classes.root}>
+      <Paper>
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
@@ -95,6 +98,9 @@ class ReceiverGiftsList extends Component {
         </TableBody>
       </Table>
     </Paper>
+
+    <BackButton text="Go Back" />
+    </div>
     )
   }
 }
