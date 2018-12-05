@@ -25,18 +25,18 @@
     {"name": "Pam Beesly", "listId": 1}
   ],
   "gift": [
-    {"purchased": false, "itemId": 1, "receiverId": 1},
-    {"purchased": false, "itemId": 2, "receiverId": 1},
-    {"purchased": false, "itemId": 3, "receiverId": 1},
-    {"purchased": false, "itemId": 4, "receiverId": 1},
-    {"purchased": false, "itemId": 5, "receiverId": 2},
-    {"purchased": false, "itemId": 6, "receiverId": 2},
-    {"purchased": false, "itemId": 7, "receiverId": 2},
-    {"purchased": false, "itemId": 8, "receiverId": 3},
-    {"purchased": false, "itemId": 9, "receiverId": 3},
-    {"purchased": false, "itemId": 10, "receiverId": 3},
-    {"purchased": false, "itemId": 11, "receiverId": 4},
-    {"purchased": false, "itemId": 12, "receiverId": 4},
-    {"purchased": false, "itemId": 13, "receiverId": 4}
+    {"purchased": false, "itemId": 1, "receiverId": 1, "price": 9.99},
+    {"purchased": false, "itemId": 2, "receiverId": 1, "price": 9.99},
+    {"purchased": false, "itemId": 3, "receiverId": 1, "price": 9.99},
+    {"purchased": false, "itemId": 4, "receiverId": 1, "price": 9.99},
+    {"purchased": false, "itemId": 5, "receiverId": 2, "price": 9.99},
+    {"purchased": false, "itemId": 6, "receiverId": 2, "price": 9.99},
+    {"purchased": false, "itemId": 7, "receiverId": 2, "price": 9.99},
+    {"purchased": false, "itemId": 8, "receiverId": 3, "price": 9.99},
+    {"purchased": false, "itemId": 9, "receiverId": 3, "price": 9.99},
+    {"purchased": false, "itemId": 10, "receiverId": 3, "price": 9.99},
+    {"purchased": false, "itemId": 11, "receiverId": 4, "price": 9.99},
+    {"purchased": false, "itemId": 12, "receiverId": 4, "price": 9.99},
+    {"purchased": false, "itemId": 13, "receiverId": 4, "price": 9.99}
   ]
 }

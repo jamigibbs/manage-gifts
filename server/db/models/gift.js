@@ -6,6 +6,10 @@ const Gift = db.define('gift', {
     type: Sequelize.BOOLEAN,
     allowNull: false,
     defaultValue: false
+  },
+  price: {
+    type: Sequelize.DECIMAL,
+    allowNull: true
   }
 })
 

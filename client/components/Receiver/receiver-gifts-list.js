@@ -63,6 +63,7 @@ class ReceiverGiftsList extends Component {
             <TableCell>Purchased</TableCell>
             <TableCell>Image</TableCell>
             <TableCell>Name</TableCell>
+            <TableCell numeric>Price</TableCell>
             <TableCell numeric>Actions</TableCell>
           </TableRow>
         </TableHead>
@@ -86,6 +87,9 @@ class ReceiverGiftsList extends Component {
                 ) : (
                   gift.item.name
                 )}
+                </TableCell>
+                <TableCell numeric>
+                  ${gift.price}
                 </TableCell>
                 <TableCell numeric>
                   <ReceiverGiftDelete
