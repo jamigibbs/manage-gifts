@@ -29,7 +29,8 @@ router.get('/all/', userAuth, async (req, res, next) => {
     const receivers = await Receiver.findAll({
       where: {
         listId
-      }
+      },
+      include: [{model: Gift}]
     })
 
     receivers.length === 0 ? res.send([]) : res.json(receivers)
