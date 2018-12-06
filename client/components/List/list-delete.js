@@ -28,8 +28,8 @@ const ListDelete = ({listId, userId, deleteList, updatePreviousListId}) => {
 ListDelete.propTypes = {
   deleteList: PropTypes.func.isRequired,
   updatePreviousListId: PropTypes.func.isRequired,
-  userId: PropTypes.number.isRequired,
-  listId: PropTypes.number.isRequired
+  userId: PropTypes.number,
+  listId: PropTypes.number
 }
 
 const loadingSelector = createLoadingSelector(['DELETE_LIST, UPDATE_PREVIOUS_LIST_ID'])

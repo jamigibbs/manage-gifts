@@ -2031,8 +2031,8 @@ var ListDelete = function ListDelete(_ref) {
 ListDelete.propTypes = {
   deleteList: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   updatePreviousListId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
-  userId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired,
-  listId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired
+  userId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  listId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number
 };
 var loadingSelector = Object(_utilities__WEBPACK_IMPORTED_MODULE_3__["createLoadingSelector"])(['DELETE_LIST, UPDATE_PREVIOUS_LIST_ID']);
 
@@ -2455,87 +2455,11 @@ _list_select_dialog__WEBPACK_IMPORTED_MODULE_6__["default"].propTypes = {
 
 /***/ }),
 
-/***/ "./client/components/Receiver/gift-count.js":
-/*!**************************************************!*\
-  !*** ./client/components/Receiver/gift-count.js ***!
-  \**************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-
-
-
-var GiftCount = function GiftCount(_ref) {
-  var receiverId = _ref.receiverId,
-      gifts = _ref.gifts;
-
-  var receiverGiftCount = function receiverGiftCount(receiverId) {
-    return gifts.reduce(function (acc, gift) {
-      if (gift.receiverId === receiverId) acc++;
-      return acc;
-    }, 0);
-  };
-
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, receiverGiftCount(receiverId));
-};
-
-GiftCount.propTypes = {
-  receiverId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
-  gifts: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object)
-};
-/* harmony default export */ __webpack_exports__["default"] = (GiftCount);
-
-/***/ }),
-
-/***/ "./client/components/Receiver/gift-purchase-count.js":
-/*!***********************************************************!*\
-  !*** ./client/components/Receiver/gift-purchase-count.js ***!
-  \***********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-
-
-
-var GiftPurchaseCount = function GiftPurchaseCount(_ref) {
-  var receiverId = _ref.receiverId,
-      gifts = _ref.gifts;
-
-  var purchasedCount = function purchasedCount(receiverId) {
-    return gifts.reduce(function (acc, gift) {
-      if (gift.purchased && receiverId == gift.receiverId) acc++;
-      return acc;
-    }, 0);
-  };
-
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, purchasedCount(receiverId));
-};
-
-GiftPurchaseCount.propTypes = {
-  receiverId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
-  gifts: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object)
-};
-/* harmony default export */ __webpack_exports__["default"] = (GiftPurchaseCount);
-
-/***/ }),
-
 /***/ "./client/components/Receiver/index.js":
 /*!*********************************************!*\
   !*** ./client/components/Receiver/index.js ***!
   \*********************************************/
-/*! exports provided: ReceiverRemove, ReceiverAdd, ReceiverDetails, ReceiverGiftAdd, ReceiverGiftDelete, ReceiverGiftsList, ReceiverName, ReceiversList, ReceiverGiftToggle, GiftCount, GiftPurchaseCount */
+/*! exports provided: ReceiverRemove, ReceiverAdd, ReceiverDetails, ReceiverGiftAdd, ReceiverGiftDelete, ReceiverGiftsList, ReceiverName, ReceiversList, ReceiverGiftToggle */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2566,14 +2490,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _receiver_gift_toggle__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./receiver-gift-toggle */ "./client/components/Receiver/receiver-gift-toggle.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ReceiverGiftToggle", function() { return _receiver_gift_toggle__WEBPACK_IMPORTED_MODULE_8__["default"]; });
-
-/* harmony import */ var _gift_count__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./gift-count */ "./client/components/Receiver/gift-count.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GiftCount", function() { return _gift_count__WEBPACK_IMPORTED_MODULE_9__["default"]; });
-
-/* harmony import */ var _gift_purchase_count__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./gift-purchase-count */ "./client/components/Receiver/gift-purchase-count.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GiftPurchaseCount", function() { return _gift_purchase_count__WEBPACK_IMPORTED_MODULE_10__["default"]; });
-
-
 
 
 
@@ -3591,6 +3507,85 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./client/components/Receiver/receivers-list-head.js":
+/*!***********************************************************!*\
+  !*** ./client/components/Receiver/receivers-list-head.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+var _this = undefined;
+
+
+
+
+var rows = [{
+  id: 'name',
+  numeric: false,
+  disablePadding: false,
+  label: 'Receiver Name'
+}, {
+  id: 'giftsCount',
+  numeric: true,
+  disablePadding: false,
+  label: 'Assigned Gifts'
+}, {
+  id: 'purchasedCount',
+  numeric: true,
+  disablePadding: false,
+  label: 'Purchased Gifts'
+}, {
+  id: 'actions',
+  numeric: false,
+  disablePadding: false,
+  label: 'Actions'
+}];
+
+var ReceiversListHead = function ReceiversListHead(_ref) {
+  var onRequestSort = _ref.onRequestSort,
+      order = _ref.order,
+      orderBy = _ref.orderBy;
+
+  var createSortHandler = function createSortHandler(property) {
+    return function (event) {
+      onRequestSort(event, property);
+    };
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["TableHead"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["TableRow"], null, rows.map(function (row) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["TableCell"], {
+      key: row.id,
+      numeric: row.numeric,
+      padding: row.disablePadding ? 'none' : 'default',
+      sortDirection: orderBy === row.id ? order : false
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Tooltip"], {
+      title: "Sort",
+      placement: row.numeric ? 'bottom-end' : 'bottom-start',
+      enterDelay: 300
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["TableSortLabel"], {
+      active: orderBy === row.id,
+      direction: order,
+      onClick: createSortHandler(row.id)
+    }, row.label)));
+  }, _this)));
+};
+
+ReceiversListHead.propTypes = {
+  onRequestSort: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  order: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
+  orderBy: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (ReceiversListHead);
+
+/***/ }),
+
 /***/ "./client/components/Receiver/receivers-list.js":
 /*!******************************************************!*\
   !*** ./client/components/Receiver/receivers-list.js ***!
@@ -3613,8 +3608,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../actions */ "./client/actions/index.js");
 /* harmony import */ var _receiver_remove__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./receiver-remove */ "./client/components/Receiver/receiver-remove.js");
 /* harmony import */ var _receiver_add__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./receiver-add */ "./client/components/Receiver/receiver-add.js");
-/* harmony import */ var _List__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../List */ "./client/components/List/index.js");
-/* harmony import */ var _Receiver__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../Receiver */ "./client/components/Receiver/index.js");
+/* harmony import */ var _receivers_list_head__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./receivers-list-head */ "./client/components/Receiver/receivers-list-head.js");
+/* harmony import */ var _List__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../List */ "./client/components/List/index.js");
 /* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/index.es.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -3695,6 +3690,13 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ReceiversList)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+      order: 'asc',
+      orderBy: 'name',
+      selected: [],
+      data: []
+    });
+
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentDidMount", function () {
       var listId = _this.props.match.params.listId;
 
@@ -3703,11 +3705,36 @@ function (_Component) {
       _this.props.updateCurrentListId(parseInt(listId));
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleRequestSort", function (event, property) {
+      var orderBy = property;
+      var order = 'desc';
+
+      if (_this.state.orderBy === property && _this.state.order === 'desc') {
+        order = 'asc';
+      }
+
+      _this.setState({
+        order: order,
+        orderBy: orderBy
+      });
+    });
+
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentWillReceiveProps", function (nextProps) {
       if (_this.props.receivers !== nextProps.receivers) {
-        var receiverIds = _this.receiverIdsArray(nextProps.receivers);
+        var data = nextProps.receivers.map(function (receiver) {
+          var giftsCount = receiver.gifts ? _this.giftsCount(receiver.gifts, receiver.id) : 0;
+          var purchasedCount = receiver.gifts ? _this.purchasedCount(receiver.gifts, receiver.id) : 0;
+          return {
+            id: receiver.id,
+            name: receiver.name,
+            giftsCount: giftsCount,
+            purchasedCount: purchasedCount
+          };
+        });
 
-        _this.props.getAllGiftsForList(receiverIds);
+        _this.setState({
+          data: data
+        });
       }
     });
 
@@ -3721,12 +3748,18 @@ function (_Component) {
       }
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "receiverIdsArray", function (receivers) {
-      if (receivers) {
-        return receivers.map(function (receiver) {
-          return parseInt(receiver.id);
-        });
-      }
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "giftsCount", function (gifts, id) {
+      return gifts.reduce(function (acc, gift) {
+        if (gift.receiverId === id) acc++;
+        return acc;
+      }, 0);
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "purchasedCount", function (gifts, id) {
+      return gifts.reduce(function (acc, gift) {
+        if (gift.purchased && id == gift.receiverId) acc++;
+        return acc;
+      }, 0);
     });
 
     return _this;
@@ -3738,8 +3771,11 @@ function (_Component) {
       var _this$props = this.props,
           receivers = _this$props.receivers,
           classes = _this$props.classes,
-          match = _this$props.match,
-          gifts = _this$props.gifts;
+          match = _this$props.match;
+      var _this$state = this.state,
+          order = _this$state.order,
+          orderBy = _this$state.orderBy,
+          data = _this$state.data;
       var listId = parseInt(match.params.listId);
 
       if (receivers.length === 0) {
@@ -3755,7 +3791,7 @@ function (_Component) {
           listId: listId
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: classes.deleteButton
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_List__WEBPACK_IMPORTED_MODULE_9__["ListDelete"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_List__WEBPACK_IMPORTED_MODULE_10__["ListDelete"], {
           listId: listId
         })));
       }
@@ -3768,11 +3804,11 @@ function (_Component) {
         className: classes.root
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["Table"], {
         className: classes.table
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableHead"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableRow"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], null, "Receiver Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], {
-        numeric: true
-      }, "Assigned Gifts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], {
-        numeric: true
-      }, "Purchased Gifts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], null, "Actions"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableBody"], null, receivers && receivers.map(function (receiver) {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receivers_list_head__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        order: order,
+        orderBy: orderBy,
+        onRequestSort: this.handleRequestSort
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableBody"], null, receivers && Object(_utilities__WEBPACK_IMPORTED_MODULE_5__["stableSort"])(data, Object(_utilities__WEBPACK_IMPORTED_MODULE_5__["getSorting"])(order, orderBy)).map(function (receiver) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableRow"], {
           key: receiver.id
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], {
@@ -3785,21 +3821,15 @@ function (_Component) {
           variant: "body1"
         }, receiver.name))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], {
           numeric: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_10__["GiftCount"], {
-          receiverId: receiver.id,
-          gifts: gifts
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], {
+        }, receiver.giftsCount), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], {
           numeric: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Receiver__WEBPACK_IMPORTED_MODULE_10__["GiftPurchaseCount"], {
-          receiverId: receiver.id,
-          gifts: gifts
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_remove__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        }, receiver.purchasedCount), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_receiver_remove__WEBPACK_IMPORTED_MODULE_7__["default"], {
           receiverId: receiver.id,
           listId: listId
         })));
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: classes.deleteButton
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_List__WEBPACK_IMPORTED_MODULE_9__["ListDelete"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_List__WEBPACK_IMPORTED_MODULE_10__["ListDelete"], {
         listId: listId
       })));
     }
@@ -3810,11 +3840,9 @@ function (_Component) {
 
 ReceiversList.propTypes = {
   receivers: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object),
-  gifts: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object),
   userLists: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object),
   getAllListReceivers: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
   updateCurrentListId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  getAllGiftsForList: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
   classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
   match: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
 };
@@ -3823,7 +3851,6 @@ var loadingSelector = Object(_utilities__WEBPACK_IMPORTED_MODULE_5__["createLoad
 var mapStateToProps = function mapStateToProps(state) {
   return {
     receivers: state.receivers.allFromList,
-    gifts: state.list.gifts,
     userLists: state.list.userLists,
     isLoading: loadingSelector(state)
   };
@@ -3836,9 +3863,6 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     updateCurrentListId: function updateCurrentListId(listId) {
       dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_6__["updateCurrentListId"])(listId));
-    },
-    getAllGiftsForList: function getAllGiftsForList(receiverIds) {
-      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_6__["getAllGiftsForList"])(receiverIds));
     }
   };
 };
@@ -5824,6 +5848,40 @@ var allFalseValues = function allFalseValues(obj) {
   });
 };
 
+var stableSort = function stableSort(array, cmp) {
+  var stabilizedThis = array.map(function (el, index) {
+    return [el, index];
+  });
+  stabilizedThis.sort(function (a, b) {
+    var order = cmp(a[0], b[0]);
+    if (order !== 0) return order;
+    return a[1] - b[1];
+  });
+  return stabilizedThis.map(function (el) {
+    return el[0];
+  });
+};
+
+var desc = function desc(a, b, orderBy) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+
+  return 0;
+};
+
+var getSorting = function getSorting(order, orderBy) {
+  return order === 'desc' ? function (a, b) {
+    return desc(a, b, orderBy);
+  } : function (a, b) {
+    return -desc(a, b, orderBy);
+  };
+};
+
 module.exports = {
   isDomain: isDomain,
   isURL: isURL,
@@ -5831,7 +5889,9 @@ module.exports = {
   centsToUSD: centsToUSD,
   strToLowercaseDashed: strToLowercaseDashed,
   createLoadingSelector: createLoadingSelector,
-  allFalseValues: allFalseValues
+  allFalseValues: allFalseValues,
+  stableSort: stableSort,
+  getSorting: getSorting
 };
 
 /***/ }),
