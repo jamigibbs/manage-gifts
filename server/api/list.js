@@ -31,6 +31,22 @@ router.post('/add', userAuth, async (req, res, next) => {
   } catch(err) { next(err) }
 })
 
+// POST /api/list/name
+router.post('/name', async (req, res, next) => {
+  const { name, listId } = req.body
+
+  try {
+    await List.update({ name },
+    {
+      where: {id: listId},
+      returning: true, // needed for affectedRows to be populated
+      plain: true // makes sure that the returned instances are just plain objects
+    })
+
+    res.json(name)
+  } catch(err) { next(err) }
+})
+
 // DELETE /api/list
 router.delete('/', userAuth, async (req, res, next) => {
   const { listId, userId } = req.body

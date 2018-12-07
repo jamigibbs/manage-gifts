@@ -14,11 +14,15 @@ import {
   UPDATE_PREVIOUS_LIST_ID_REQUEST,
   UPDATE_PREVIOUS_LIST_ID_SUCCESS,
   GET_ALL_GIFTS_FOR_LIST_SUCCESS,
-  GET_ALL_GIFTS_FOR_LIST_REQUEST } from '../constants'
+  GET_ALL_GIFTS_FOR_LIST_REQUEST,
+  UPDATE_CURRENT_LIST_NAME_REQUEST,
+  UPDATE_CURRENT_LIST_NAME_SUCCESS } from '../constants'
 
 import { removedAllListReceivers } from './receiver-actions'
 
 export const getCurrentListId = () => ({type: GET_CURRENT_LIST_ID})
+export const updatedCurrentListNameRequest = (name) => ({type: UPDATE_CURRENT_LIST_NAME_REQUEST, name})
+export const updatedCurrentListNameSuccess = (name) => ({type: UPDATE_CURRENT_LIST_NAME_SUCCESS, name})
 
 export const updatedCurrentListIdSuccess = (id) => ({type: UPDATE_CURRENT_LIST_ID_SUCCESS, id})
 export const updatedCurrentListIdRequest = () => ({type: UPDATE_CURRENT_LIST_ID_REQUEST})
@@ -42,6 +46,16 @@ export const updateCurrentListId = (id) => dispatch => {
   try {
     dispatch(updatedCurrentListIdRequest())
     dispatch(updatedCurrentListIdSuccess(id))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const updateCurrentListName = (name, listId) => async dispatch => {
+  try {
+    dispatch(updatedCurrentListNameRequest())
+    const { data } = await axios.post('/api/list/name', { name, listId })
+    dispatch(updatedCurrentListNameSuccess(data))
   } catch (err) {
     console.error(err)
   }

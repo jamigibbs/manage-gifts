@@ -18,4 +18,5 @@ export {
   getListsForuser,
   addNewList,
   deleteList,
-  getAllGiftsForList } from './list-actions'
+  getAllGiftsForList,
+  updateCurrentListName } from './list-actions'
