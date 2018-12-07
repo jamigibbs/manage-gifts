@@ -1,18 +1,28 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { TextField } from '@material-ui/core'
-import EditIcon from '@material-ui/icons/edit'
+import { updateCurrentListName } from '../../actions'
+import { createLoadingSelector } from '../../utilities'
+import EditIcon from '@material-ui/icons/Edit'
 
 class ListName extends React.Component {
 
   state = {
     editing: false,
-    text: ''
+    name: ''
   }
 
   componentDidMount = () => {
     const listId = this.props.listId
-    this.setState({text: this.getListName(listId)})
+    this.setState({name: this.getListName(listId)})
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.listId !== nextProps.listId) {
+      const listId = nextProps.listId
+      this.setState({name: this.getListName(listId)})
+    }
   }
 
   getListName = (id) => {
@@ -27,12 +37,13 @@ class ListName extends React.Component {
 
   handleKeyPress = (e) => {
     if (e.key === 'Enter') {
+      this.props.updateCurrentListName(this.state.name, this.props.listId)
       this.setState({editing: false})
     }
   }
 
   handleChange = (event) => {
-    this.setState({text: event.target.value})
+    this.setState({name: event.target.value})
   }
 
   renderEdit = () => {
@@ -40,13 +51,13 @@ class ListName extends React.Component {
       autoFocus
       id="title-edit"
       helperText="Press enter to save"
-      value={ this.state.text }
+      value={ this.state.name }
       onChange={this.handleChange}
       onKeyPress={this.handleKeyPress} />
   }
 
   renderDefault = () => {
-    return <div><span onClick={this.handleClick}>{ this.state.text }<EditIcon color="disabled" style={{ fontSize: 20, marginLeft: 10 }} /></span></div>
+    return <div><span onClick={this.handleClick}>{ this.state.name }<EditIcon color="disabled" style={{ fontSize: 20, marginLeft: 10 }} /></span></div>
   }
 
   render(){
@@ -58,9 +69,26 @@ class ListName extends React.Component {
   }
 }
 
+const loadingSelector = createLoadingSelector(['UPDATE_CURRENT_LIST_NAME'])
+
 ListName.propTypes = {
   userLists: PropTypes.arrayOf(PropTypes.object),
   listId: PropTypes.number
 }
 
-export default ListName
+const mapStateToProps = (state) => {
+  return {
+    currentListName: state.list.currentListName,
+    isLoading: loadingSelector(state)
+  }
+}
+
+const mapDispatchTopProps = (dispatch) => {
+  return {
+    updateCurrentListName: (name, listId) => {
+      dispatch(updateCurrentListName(name, listId))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchTopProps)(ListName)
