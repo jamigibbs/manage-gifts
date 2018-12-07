@@ -2232,6 +2232,10 @@ function (_React$Component) {
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "renderEdit", function () {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["TextField"], {
         autoFocus: true,
+        style: {
+          width: 300,
+          fontWeight: '500'
+        },
         id: "title-edit",
         helperText: "Press enter to save",
         value: _this.state.name,
