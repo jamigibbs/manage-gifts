@@ -49,6 +49,7 @@ class ListName extends React.Component {
   renderEdit = () => {
     return <TextField
       autoFocus
+      style={{ width: 300, fontWeight: '500' }}
       id="title-edit"
       helperText="Press enter to save"
       value={ this.state.name }
