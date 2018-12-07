@@ -48,6 +48,7 @@ class ListName extends React.Component {
 
   renderEdit = () => {
     return <TextField
+      style={{ width: 300, fontWeight: '500' }}
       autoFocus
       id="title-edit"
       helperText="Press enter to save"
@@ -57,7 +58,13 @@ class ListName extends React.Component {
   }
 
   renderDefault = () => {
-    return <div><span onClick={this.handleClick}>{ this.state.name }<EditIcon color="disabled" style={{ fontSize: 20, marginLeft: 10 }} /></span></div>
+    return (
+      <div>
+        <span onClick={this.handleClick}>
+          { this.state.name }<EditIcon color="disabled" style={{ fontSize: 20, marginLeft: 10 }} />
+        </span>
+      </div>
+    )
   }
 
   render(){

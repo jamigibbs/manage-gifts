@@ -32,7 +32,7 @@ router.post('/add', userAuth, async (req, res, next) => {
 })
 
 // POST /api/list/name
-router.post('/name', async (req, res, next) => {
+router.post('/name', userAuth, async (req, res, next) => {
   const { name, listId } = req.body
 
   try {
