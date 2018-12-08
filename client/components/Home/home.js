@@ -2,6 +2,7 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import { Typography, Grid, Card, CardMedia } from '@material-ui/core'
 import { Navbar } from '../Header'
+import Footer from '../footer'
 
 const styles = theme => ({
   cta: {
@@ -15,32 +16,33 @@ const styles = theme => ({
   eyebrow: {
     textTransform: 'uppercase',
     fontWeight: 'bold',
-    marginBottom: '10px',
+    marginBottom: '20px',
   },
   card: {
     maxWidth: 1000,
-    boxShadow: '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)'
+    boxShadow: '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)',
+    marginBottom: '50px'
   }
 })
 
 const Home = ({classes}) => (
   <div>
     <Navbar />
-    <Grid container>
+    <Grid container className="footer-push">
       <Grid item xs={12}>
-      
+
         <Grid container justify="center">
           <Grid item>
             <div className={classes.cta} >
-              <Typography 
+              <Typography
                 variant="body2"
                 align="center"
                 className={classes.eyebrow}>
                 For it is in giving that we receive
               </Typography>
-              <Typography 
-                variant="h4" 
-                component="h2" 
+              <Typography
+                variant="h4"
+                component="h2"
                 align="center"
                 className={classes.header}>
                 Organize your gifts for holidays, events, or just in the spirit of giving
@@ -48,7 +50,7 @@ const Home = ({classes}) => (
             </div>
           </Grid>
         </Grid>
-        
+
         <Grid container justify="center">
           <Grid item>
             <Card className={classes.card}>
@@ -61,9 +63,11 @@ const Home = ({classes}) => (
             </Card>
           </Grid>
         </Grid>
-        
+
       </Grid>
     </Grid>
+
+    <Footer />
   </div>
 )
 

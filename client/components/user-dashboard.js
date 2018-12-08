@@ -12,10 +12,11 @@ import { allFalseValues } from '../utilities'
 import { ReceiversList, ReceiverDetails } from './Receiver'
 import { SidebarDesktop, SidebarMobile } from './Sidebar'
 import { DashboardHeader, DashboardRoot } from './Dashboard'
+import Footer from './footer'
 
 const styles = theme => ({
   root: {
-    display: 'flex',
+    display: 'flex'
   },
   content: {
     flexGrow: 1
@@ -45,11 +46,11 @@ export class UserDashboard extends Component {
           <SidebarDesktop />
         </Hidden>
 
-        <main className={classes.content}>
+        <main className={classes.content+ ' ' +'footer-push'}>
 
-        <Hidden smUp>
-          <SidebarMobile/>
-        </Hidden>
+          <Hidden smUp>
+            <SidebarMobile/>
+          </Hidden>
 
           { !allFalseValues(loading) && <LoadingIndicator /> }
 
@@ -72,6 +73,8 @@ export class UserDashboard extends Component {
               render={(props) => <ReceiverDetails {...props} /> }
             />
           </Switch>
+
+          <Footer />
 
         </main>
       </div>

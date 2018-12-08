@@ -1,10 +1,8 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
-import { Link } from 'react-router-dom'
 import { ListAdd, ListSelect } from '../List'
 import { List, Divider, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
-import ListSelectIcon from '@material-ui/icons/ListAlt'
-import AddListIcon from '@material-ui/icons/PlaylistAdd'
+import ListIcon from '@material-ui/icons/TurnedIn'
 import LogoutIcon from '@material-ui/icons/LastPage'
 
 const styles = theme => ({
@@ -33,11 +31,11 @@ const SidebarList = ({logout, handleListItemClick, classes}) => {
     <div>
       <List>
         <ListItem button classes={{ button: classes.listItem }} onClick={handleListItemClick}>
-          <ListItemIcon><ListSelectIcon className={classes.icon}/></ListItemIcon>
+          <ListItemIcon><ListIcon className={classes.icon}/></ListItemIcon>
           <ListSelect />
         </ListItem>
         <ListItem button classes={{ button: classes.listItem }} onClick={handleListItemClick}>
-          <ListItemIcon className={classes.icon}><AddListIcon /></ListItemIcon>
+          <ListItemIcon className={classes.icon}><ListIcon /></ListItemIcon>
           <ListAdd />
         </ListItem>
       </List>

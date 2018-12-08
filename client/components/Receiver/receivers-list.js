@@ -34,7 +34,9 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3,
   },
   deleteButton: {
-    float: 'right'
+    float: 'right',
+    marginBottom: '50px',
+    marginTop: '20px'
   }
 })
 
