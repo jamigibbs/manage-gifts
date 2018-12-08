@@ -1,5 +1,6 @@
 const router = require('express').Router()
-const User = require('../db/models/user')
+const { User, List, Item, Gift, Receiver } = require('../db/models')
+const newUserSeed = require('../../script/new-user-seed')
 module.exports = router
 
 router.post('/login', async (req, res, next) => {
@@ -27,8 +28,12 @@ router.post('/login', async (req, res, next) => {
 router.post('/signup', async (req, res, next) => {
   try {
     const user = await User.create(req.body)
+
+    await newUserSeed(user)
+
     req.login(user, (err) => {
       if (err) { next(err) }
+
       res.cookie('mg_iLI', true)
       res.cookie('mg_id', user.id)
       res.json(user)
