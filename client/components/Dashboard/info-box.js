@@ -10,6 +10,9 @@ const styles = theme => ({
     marginTop: '25px',
     whiteSpace: `pre-wrap`
   },
+  header: {
+    fontWeight: 'bold'
+  },
   content: {
     lineHeight: 1
   }
@@ -21,8 +24,9 @@ const InfoBox = ({classes, title, content}) => {
       <CardContent>
         {title &&
           <Typography
+            className={classes.header}
             variant="h5"
-            color="textSecondary" gutterBottom>
+            gutterBottom>
             {title}
           </Typography>
           }
@@ -30,8 +34,7 @@ const InfoBox = ({classes, title, content}) => {
         { content &&
           <Typography
             className={classes.content}
-            component="p"
-            color="textSecondary">
+            component="p">
             {content}
           </Typography>
         }
