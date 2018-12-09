@@ -34,33 +34,6 @@ const styles = theme => ({
     color: 'rgba(0, 0, 0, 0.8)',
     lineHeight: 1,
     paddingTop: theme.spacing.unit
-  },
-  date: {
-    marginBottom: theme.spacing.unit
-  },
-  details: {
-    marginLeft: theme.spacing.unit * 3,
-  },
-  content: {
-    marginBottom: theme.spacing.unit * 3
-  },
-  button: {
-    display: 'inline-block',
-    marginLeft: theme.spacing.unit * 3,
-    padding: '2px 8px',
-    borderRadisu: '2px',
-    fontSize: '12px',
-    backgroundColor: 'gray',
-    color: 'white'
-  },
-  button__new: {
-    backgroundColor: '#FF9900',
-  },
-  button__improvements: {
-    backgroundColor: '#00A7F7'
-  },
-  button__fixes: {
-    backgroundColor: '#47B04B'
   }
 })
 
