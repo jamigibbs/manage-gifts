@@ -11,6 +11,7 @@ class Routes extends Component {
 
   componentDidMount() {
     this.props.loadInitialData()
+    //console.log(this.state.isLoggedIn)
   }
 
   isLoggedInCookie() {

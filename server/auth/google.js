@@ -18,6 +18,7 @@ module.exports = router
  * process.env.GOOGLE_CALLBACK = '/your/google/callback'
  */
 
+let user = null
 if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   console.log('Google client ID / secret not found. Skipping Google OAuth.')
 } else {
@@ -38,14 +39,21 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
         where: {googleId},
         defaults: {name, email}
       })
-        .then(([user]) => done(null, user))
+        .then(([user]) => {
+          user = user
+          done(null, user)
+        })
         .catch(done)
     }
   )
 
   passport.use(strategy)
 
-  router.get('/', passport.authenticate('google', {scope: 'email'}))
+  router.get('/', (req, res) => {
+    passport.authenticate('google', {scope: 'email'})
+    res.cookie('mg_iLI', true)
+    res.cookie('mg_id', user.id)
+  })
 
   router.get(
     '/callback',

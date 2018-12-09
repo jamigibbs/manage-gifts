@@ -1141,7 +1141,7 @@ var me = function me() {
     }()
   );
 };
-var auth = function auth(email, password, method, firstName, lastName) {
+var auth = function auth(email, password, method, name) {
   return (
     /*#__PURE__*/
     function () {
@@ -1159,8 +1159,7 @@ var auth = function auth(email, password, method, firstName, lastName) {
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/auth/".concat(method), {
                   email: email,
                   password: password,
-                  firstName: firstName,
-                  lastName: lastName
+                  name: name
                 });
 
               case 4:
@@ -5041,27 +5040,17 @@ var AuthForm = function AuthForm(props) {
     direction: "column",
     justify: "center",
     alignItems: "center"
-  }, name === 'signup' && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["TextField"], {
-    id: "outlined-firstname-input",
-    label: "First Name",
+  }, name === 'signup' && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["TextField"], {
+    id: "outlined-name-input",
+    label: "Name",
     type: "text",
-    name: "firstName",
+    name: "userName",
     autoComplete: "give-name",
     margin: "normal",
     required: true,
     fullWidth: true,
     variant: "outlined"
   }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["TextField"], {
-    id: "outlined-lastname-input",
-    label: "Last Name",
-    type: "text",
-    name: "lastName",
-    autoComplete: "family-name",
-    margin: "normal",
-    required: true,
-    fullWidth: true,
-    variant: "outlined"
-  })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["TextField"], {
     id: "outlined-email-input",
     label: "Email",
     type: "email",
@@ -5130,11 +5119,10 @@ var mapDispatch = function mapDispatch(dispatch) {
       var password = evt.target.password.value;
 
       if (formName === 'signup') {
-        var firstName = evt.target.firstName.value;
-        var lastName = evt.target.lastName.value;
-        dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_5__["auth"])(email, password, formName, firstName, lastName));
+        var userName = evt.target.userName.value;
+        dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_5__["auth"])(email, password, formName, userName));
       } else {
-        dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_5__["auth"])(email, password, formName, null, null));
+        dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_5__["auth"])(email, password, formName, null));
       }
     }
   };
@@ -5698,7 +5686,7 @@ function (_Component) {
     // }
     value: function render() {
       var _this$props = this.props,
-          firstName = _this$props.firstName,
+          name = _this$props.name,
           classes = _this$props.classes,
           userLists = _this$props.userLists,
           currentId = _this$props.currentId,
@@ -5712,7 +5700,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Hidden"], {
         smUp: true
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Sidebar__WEBPACK_IMPORTED_MODULE_10__["SidebarMobile"], null)), !Object(_utilities__WEBPACK_IMPORTED_MODULE_4__["allFalseValues"])(loading) && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_loading_indicator__WEBPACK_IMPORTED_MODULE_8__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Dashboard__WEBPACK_IMPORTED_MODULE_11__["DashboardHeader"], {
-        name: firstName,
+        name: name,
         userLists: userLists,
         currentId: currentId
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
@@ -5743,7 +5731,7 @@ var loadingSelector = Object(_utilities__WEBPACK_IMPORTED_MODULE_4__["createLoad
 
 var mapState = function mapState(state) {
   return {
-    firstName: state.user.firstName,
+    name: state.user.name,
     isLoggedIn: !!state.user.id,
     userLists: state.list.userLists,
     currentId: state.list.currentId,
@@ -6353,7 +6341,7 @@ function (_Component) {
   _createClass(Routes, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.loadInitialData();
+      this.props.loadInitialData(); //console.log(this.state.isLoggedIn)
     }
   }, {
     key: "isLoggedInCookie",

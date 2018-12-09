@@ -58,31 +58,17 @@ const AuthForm = props => {
           >
 
           { name === 'signup' &&
-            <div>
               <TextField
-                id="outlined-firstname-input"
-                label="First Name"
+                id="outlined-name-input"
+                label="Name"
                 type="text"
-                name="firstName"
+                name="userName"
                 autoComplete="give-name"
                 margin="normal"
                 required={true}
                 fullWidth={true}
                 variant="outlined"
               />
-
-              <TextField
-                id="outlined-lastname-input"
-                label="Last Name"
-                type="text"
-                name="lastName"
-                autoComplete="family-name"
-                margin="normal"
-                required={true}
-                fullWidth={true}
-                variant="outlined"
-              />
-            </div>
           }
 
           <TextField
@@ -173,11 +159,10 @@ const mapDispatch = dispatch => {
       const email = evt.target.email.value
       const password = evt.target.password.value
       if (formName === 'signup') {
-        const firstName = evt.target.firstName.value
-        const lastName = evt.target.lastName.value
-        dispatch(auth(email, password, formName, firstName, lastName))
+        const userName = evt.target.userName.value
+        dispatch(auth(email, password, formName, userName))
       } else {
-        dispatch(auth(email, password, formName, null, null))
+        dispatch(auth(email, password, formName, null))
       }
 
     }
