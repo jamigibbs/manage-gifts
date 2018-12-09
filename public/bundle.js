@@ -1402,7 +1402,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('http://localhost:8080/changelog.json').then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/changelog.json').then(function (res) {
         _this2.setState({
           changelog: res.data.changelog
         });
@@ -1897,7 +1897,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('http://localhost:8080/roadmap.json').then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/roadmap.json').then(function (res) {
         _this2.setState({
           roadmap: res.data.roadmap
         });

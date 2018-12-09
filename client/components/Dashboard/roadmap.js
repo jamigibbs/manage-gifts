@@ -43,7 +43,7 @@ class Roadmap extends React.Component {
   }
 
   componentDidMount () {
-    axios.get('http://localhost:8080/roadmap.json')
+    axios.get('/roadmap.json')
       .then((res) => {
         this.setState({roadmap: res.data.roadmap})
       })

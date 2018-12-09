@@ -70,7 +70,7 @@ class Changelog extends React.Component {
   }
 
   componentDidMount () {
-    axios.get('http://localhost:8080/changelog.json')
+    axios.get('/changelog.json')
       .then((res) => {
         this.setState({changelog: res.data.changelog})
       })
