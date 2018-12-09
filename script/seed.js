@@ -12,8 +12,7 @@ async function seed() {
   await User.create({
     email: process.env.DEMO_USER_EMAIL || 'local@test.com',
     password: process.env.DEMO_USER_PW || 'localtest123',
-    firstName: "Michael",
-    lastName: "Scott"
+    name: "Michael Scott"
   })
 
   // Lists
