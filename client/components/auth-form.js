@@ -58,31 +58,17 @@ const AuthForm = props => {
           >
 
           { name === 'signup' &&
-            <div>
-              <TextField
-                id="outlined-firstname-input"
-                label="First Name"
-                type="text"
-                name="firstName"
-                autoComplete="give-name"
-                margin="normal"
-                required={true}
-                fullWidth={true}
-                variant="outlined"
-              />
-
-              <TextField
-                id="outlined-lastname-input"
-                label="Last Name"
-                type="text"
-                name="lastName"
-                autoComplete="family-name"
-                margin="normal"
-                required={true}
-                fullWidth={true}
-                variant="outlined"
-              />
-            </div>
+            <TextField
+              id="outlined-name-input"
+              label="Name"
+              type="text"
+              name="userName"
+              autoComplete="give-name"
+              margin="normal"
+              required={true}
+              fullWidth={true}
+              variant="outlined"
+            />
           }
 
           <TextField
@@ -135,7 +121,7 @@ const AuthForm = props => {
 
         {/* <a href="/auth/google">{displayName} with Google</a> */}
 
-        <Button href="/auth/google" variant="contained" color="primary" fullWidth={true} className={classes.googleButton}>
+        <Button disabled href="/auth/google" variant="contained" color="primary" fullWidth={true} className={classes.googleButton}>
           {displayName} with Google
         </Button>
 
@@ -173,11 +159,10 @@ const mapDispatch = dispatch => {
       const email = evt.target.email.value
       const password = evt.target.password.value
       if (formName === 'signup') {
-        const firstName = evt.target.firstName.value
-        const lastName = evt.target.lastName.value
-        dispatch(auth(email, password, formName, firstName, lastName))
+        const name = evt.target.userName.value
+        dispatch(auth(email, password, formName, name))
       } else {
-        dispatch(auth(email, password, formName, null, null))
+        dispatch(auth(email, password, formName, null))
       }
 
     }

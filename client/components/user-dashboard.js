@@ -37,7 +37,7 @@ export class UserDashboard extends Component {
   // }
 
   render(){
-    const { firstName, classes, userLists, currentId, loading } = this.props
+    const { name, classes, userLists, currentId, loading } = this.props
 
     return (
       <div className={classes.root}>
@@ -55,7 +55,7 @@ export class UserDashboard extends Component {
           { !allFalseValues(loading) && <LoadingIndicator /> }
 
           <DashboardHeader
-            name={firstName}
+            name={name}
             userLists={userLists}
             currentId={currentId} />
 
@@ -86,7 +86,7 @@ const loadingSelector = createLoadingSelector(['UPDATE_CURRENT_LIST_ID'])
 
 const mapState = state => {
   return {
-    firstName: state.user.firstName,
+    name: state.user.name,
     isLoggedIn: !!state.user.id,
     userLists: state.list.userLists,
     currentId: state.list.currentId,
