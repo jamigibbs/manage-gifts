@@ -1,0 +1,26 @@
+{
+  "changelog": [
+    { "id": "1.0.0-alpha", "title": "Initial Release", "date": "December 9, 2018", "details": [
+      {
+        "type": "new", "items": [
+          { "id": 1, "info": "Create an unlimited number of gift lists"},
+          { "id": 2, "info": "Add an unlimited number of gift receivers"},
+          { "id": 3, "info": "Add an unlimited number of gifts to each receiver"},
+          { "id": 4, "info": "Remove lists, receivers, and gifts"},
+          { "id": 5, "info": "Edit list names on the fly"},
+          { "id": 4, "info": "Add a gift from a URL reference with metadata prepopulated or simple text"}
+        ]
+      },
+      {
+        "type": "improvements", "items": [
+          { "id": 0, "info": "There are many improvements and feature additions planned so stay tuned!"}
+        ]
+      },
+      {
+        "type": "fixes", "items": [
+          { "id": 0, "info": "Please report any bugs or issues through one of the links in the footer"}
+        ]
+      }
+    ]}
+  ]
+}

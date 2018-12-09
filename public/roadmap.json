@@ -1,0 +1,18 @@
+{
+  "roadmap": [
+    {"type": "Features", "details": [
+      { "id": 0, "info": "Chrome Extension to add gifts while browsing online"},
+      { "id": 1, "info": "Edit receiver's name and gift prices"},
+      { "id": 4, "info": "Dashboard stats and/or metrics"},
+      { "id": 5, "info": "Gift list drag/drop custom ordering"},
+      { "id": 6, "info": "Gift list custom ordering"},
+      { "id": 7, "info": "Search functionality"},
+      { "id": 8, "info": "Add a personal text or note to gifts"}
+    ]},
+    {"type": "Improvements", "details": [
+      { "id": 1, "info": "Error handling and user messages"},
+      { "id": 2, "info": "Responsive design for mobile"},
+      { "id": 3, "info": "Testing coverage for routes and components"}
+    ]}
+  ]
+}
