@@ -16,6 +16,7 @@ function USNumberFormat(props) {
         });
       }}
       thousandSeparator
+      fixedDecimalScale={true}
       prefix="$"
       decimalScale={2}
     />
