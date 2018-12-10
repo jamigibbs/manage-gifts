@@ -11,10 +11,12 @@ const styles = theme => ({
     whiteSpace: `pre-wrap`
   },
   header: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginBottom: '20px'
   },
   content: {
-    lineHeight: 1
+    lineHeight: 0.8,
+    fontSize: '18px'
   }
 })
 
