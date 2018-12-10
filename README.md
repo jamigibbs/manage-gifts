@@ -13,6 +13,7 @@ Step away from the spreadsheet and manage your gift giving like a boss.
 - [ ] Search functionality
 - [ ] Add a personal text or note to gifts
 - [ ] Responsive design for mobile
+- [ ] Export gift list to PDF
 
 ## Gitflow
 
