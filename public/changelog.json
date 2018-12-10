@@ -8,7 +8,7 @@
           { "id": 3, "info": "Add an unlimited number of gifts to each receiver"},
           { "id": 4, "info": "Remove lists, receivers, and gifts"},
           { "id": 5, "info": "Edit list names on the fly"},
-          { "id": 4, "info": "Add a gift from a URL reference with metadata prepopulated or simple text"}
+          { "id": 6, "info": "Add a gift from a URL reference with metadata prepopulated or simple text"}
         ]
       },
       {

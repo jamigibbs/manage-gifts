@@ -6341,7 +6341,7 @@ function (_Component) {
   _createClass(Routes, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.loadInitialData(); //console.log(this.state.isLoggedIn)
+      this.props.loadInitialData();
     }
   }, {
     key: "isLoggedInCookie",
@@ -6376,7 +6376,8 @@ function (_Component) {
 
 var mapState = function mapState(state) {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    user: state.user
   };
 };
 
@@ -6392,8 +6393,8 @@ var mapDispatch = function mapDispatch(dispatch) {
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapState, mapDispatch)(Routes)));
 Routes.propTypes = {
-  loadInitialData: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired //isLoggedIn: PropTypes.bool.isRequired
-
+  loadInitialData: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
+  isLoggedIn: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool.isRequired
 };
 
 /***/ }),
