@@ -25,7 +25,6 @@ const newUserSeed = async function(user) {
     await Promise.all(
       receivers.map( async (receiver) => {
         await Receiver.create(receiver).then( async (data) => {
-          console.log(data.dataValues.name)
           const receiverId = data.dataValues.id
           if (data.dataValues.name === 'Jim Halpert') {
             await Gift.create({purchased: true, itemId: 1, receiverId, price: 9.99})
