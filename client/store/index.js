@@ -5,9 +5,15 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import { user, receivers, list, loading } from '../reducers'
 
 const reducer = combineReducers({ user, receivers, list, loading })
+const middlewares = [thunkMiddleware]
+
+if (process.env.NODE_ENV !== 'production') {
+  const logger = createLogger({collapsed: true})
+  middlewares.push(logger)
+}
 
 const middleware = composeWithDevTools(
-  applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
+  applyMiddleware(...middlewares)
 )
 const store = createStore(reducer, middleware)
 
