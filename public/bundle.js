@@ -1317,7 +1317,7 @@ var styles = function styles(theme) {
       backgroundColor: theme.palette.background.paper,
       position: 'relative',
       overflow: 'auto',
-      maxHeight: 400
+      maxHeight: 520
     },
     listSection: {
       backgroundColor: 'inherit'
@@ -1612,16 +1612,13 @@ __webpack_require__.r(__webpack_exports__);
 var DashboardRoot = function DashboardRoot() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_info_box__WEBPACK_IMPORTED_MODULE_1__["default"], {
     title: "Welcome to your dashboard",
-    content: "From here you can view information about your gift lists, create new lists, or update existing lists from the sidebar.\n        \nMore dashboard sparkles like stats and gift recommendations are coming soon."
+    content: "Things are barebones right now but you can access your gift lists, create new lists, or update existing lists from the sidebar on the left.\n        \nMore dashboard updates like stats and gift recommendations are coming soon."
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Grid"], {
     container: true
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Grid"], {
     item: true,
     xs: 6
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_changelog__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Grid"], {
-    item: true,
-    xs: 6
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_roadmap__WEBPACK_IMPORTED_MODULE_5__["default"], null))));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_changelog__WEBPACK_IMPORTED_MODULE_4__["default"], null))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (DashboardRoot);
@@ -1688,10 +1685,12 @@ var styles = function styles(theme) {
       marginLeft: theme.spacing.unit * 4
     }, _defineProperty(_card, "marginTop", '25px'), _defineProperty(_card, "whiteSpace", "pre-wrap"), _card),
     header: {
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      marginBottom: '20px'
     },
     content: {
-      lineHeight: 1
+      lineHeight: 0.8,
+      fontSize: '18px'
     }
   };
 };

@@ -2,7 +2,17 @@
 
 # Gift Manager
 
-Step away from the spreadsheet
+Step away from the spreadsheet and manage your gift giving like a boss.
+
+## Planned Features
+
+- [ ] Chrome Extension to add gifts while browsing online
+- [ ] Dashboard stats/metrics
+- [ ] Gift recommendations
+- [ ] Gift list drag/drop custom ordering
+- [ ] Search functionality
+- [ ] Add a personal text or note to gifts
+- [ ] Responsive design for mobile
 
 ## Gitflow
 

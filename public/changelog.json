@@ -1,6 +1,6 @@
 {
   "changelog": [
-    { "id": "1.0.0-alpha", "title": "Initial Release", "date": "December 9, 2018", "details": [
+    { "id": "1.0.0-alpha", "title": "Initial Release", "date": "December 10, 2018", "details": [
       {
         "type": "new", "items": [
           { "id": 1, "info": "Create an unlimited number of gift lists"},
@@ -13,7 +13,7 @@
       },
       {
         "type": "improvements", "items": [
-          { "id": 0, "info": "There are many improvements and feature additions planned so stay tuned!"}
+          { "id": 0, "info": "There are many improvements and feature additions planned. View them on the Github repo."}
         ]
       },
       {

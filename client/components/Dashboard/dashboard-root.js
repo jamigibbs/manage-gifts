@@ -10,16 +10,16 @@ const DashboardRoot = () => {
     <div>
       <InfoBox
         title="Welcome to your dashboard"
-        content={`From here you can view information about your gift lists, create new lists, or update existing lists from the sidebar.
-        \nMore dashboard sparkles like stats and gift recommendations are coming soon.`} />
+        content={`Things are barebones right now but you can access your gift lists, create new lists, or update existing lists from the sidebar on the left.
+        \nMore dashboard updates like stats and gift recommendations are coming soon.`} />
 
       <Grid container>
         <Grid item xs={6}>
           <Changelog />
         </Grid>
-        <Grid item xs={6}>
+        {/* <Grid item xs={6}>
           <Roadmap />
-        </Grid>
+        </Grid> */}
         {/* <Grid item xs={4}>
           <InfoCardListCount />
         </Grid> */}
