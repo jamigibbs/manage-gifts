@@ -5580,6 +5580,7 @@ function USNumberFormat(props) {
       });
     },
     thousandSeparator: true,
+    fixedDecimalScale: true,
     prefix: "$",
     decimalScale: 2
   }));
@@ -6425,7 +6426,7 @@ var reducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   list: _reducers__WEBPACK_IMPORTED_MODULE_4__["list"],
   loading: _reducers__WEBPACK_IMPORTED_MODULE_4__["loading"]
 });
-var middleware = Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_1___default()({
+var middleware = Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], Object(redux_logger__WEBPACK_IMPORTED_MODULE_1__["createLogger"])({
   collapsed: true
 })));
 var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, middleware);

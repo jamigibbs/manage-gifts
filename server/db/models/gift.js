@@ -8,7 +8,7 @@ const Gift = db.define('gift', {
     defaultValue: false
   },
   price: {
-    type: Sequelize.DECIMAL,
+    type: Sequelize.DECIMAL(12,2),
     allowNull: true
   }
 })
