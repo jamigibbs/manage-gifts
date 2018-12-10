@@ -119,7 +119,7 @@ const AuthForm = props => {
 
         <Divider light />
 
-        <Button disabled href="/auth/google" variant="contained" color="primary" fullWidth={true} className={classes.googleButton}>
+        <Button href="/auth/google" variant="contained" color="primary" fullWidth={true} className={classes.googleButton}>
           {displayName} with Google
         </Button>
 
