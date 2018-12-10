@@ -10,7 +10,7 @@ const userAuth = function(req, res, next) {
   res.status(401).send('Unauthorized user')
 }
 
-// GET /api/gift/add
+// POST /api/gift/add
 router.post('/add', userAuth, async (req, res, next) => {
   const { receiverId, isUrl } = req.body.giftData
   let gift = req.body.giftData.gift.name
@@ -18,8 +18,11 @@ router.post('/add', userAuth, async (req, res, next) => {
   let addedGift = {}
   let data = {}
 
-  if (req.body.isUrl) {
+  if (req.body.giftData.isUrl) {
     gift = decodeURIComponent(gift)
+    if (isDomain(gift, 'amazon.com')) {
+      gift = removeLinkParams(gift) + `?tag=${process.env.AMAZON_TAG}`
+    }
   }
 
   try {
@@ -42,14 +45,18 @@ router.post('/add', userAuth, async (req, res, next) => {
       data.item = foundItem.dataValues
 
     } else {
-      // For item that doesn't already exist on our db,
-      // let's create it
+      // For item that doesn't already exist on our db, let's create it
       let item
 
       if (isUrl) {
         const giftMetaData = await metadata(gift)
+        
+        if (isDomain(gift, 'amazon.com')) {
+          gift = giftMetaData.url + `?tag=${process.env.AMAZON_TAG}`
+        }
+        
         item = await Item.create({
-          url: giftMetaData.url,
+          url: gift,
           image: giftMetaData.image,
           name: giftMetaData.title
         })
