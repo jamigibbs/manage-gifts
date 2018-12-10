@@ -22,11 +22,14 @@ const styles = theme => ({
   table: {
     minWidth: 700
   },
-  receiver: {
+  receiverLink: {
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'underline'
     }
+  },
+  receiver: {
+    fontWeight: 'bold'
   },
   notice: {
     marginLeft: theme.spacing.unit * 2,
@@ -146,9 +149,9 @@ class ReceiversList extends Component {
                       <TableRow key={receiver.id}>
                         <TableCell component="th" scope="row">
                           <Link
-                            className={classes.receiver}
+                            className={classes.receiverLink}
                             to={`/dashboard/list/${listId}/receiver/${strToLowercaseDashed(receiver.name)}/${receiver.id}`}>
-                            <Typography variant="body1">{receiver.name}</Typography>
+                            <Typography className={classes.receiver} variant="body1">{receiver.name}</Typography>
                           </Link>
                         </TableCell>
                         <TableCell numeric>

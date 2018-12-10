@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/jamigibbs/gift-manager.svg?branch=development)](https://travis-ci.com/jamigibbs/gift-manager)
 
-# Gift Manager
+# Manage Gifts
 
 Step away from the spreadsheet and manage your gift giving like a boss.
 

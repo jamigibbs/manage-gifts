@@ -4252,11 +4252,14 @@ var styles = function styles(theme) {
     table: {
       minWidth: 700
     },
-    receiver: {
+    receiverLink: {
       textDecoration: 'none',
       '&:hover': {
         textDecoration: 'underline'
       }
+    },
+    receiver: {
+      fontWeight: 'bold'
     },
     notice: {
       marginLeft: theme.spacing.unit * 2,
@@ -4414,9 +4417,10 @@ function (_Component) {
           component: "th",
           scope: "row"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-          className: classes.receiver,
+          className: classes.receiverLink,
           to: "/dashboard/list/".concat(listId, "/receiver/").concat(Object(_utilities__WEBPACK_IMPORTED_MODULE_5__["strToLowercaseDashed"])(receiver.name), "/").concat(receiver.id)
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["Typography"], {
+          className: classes.receiver,
           variant: "body1"
         }, receiver.name))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_11__["TableCell"], {
           numeric: true
