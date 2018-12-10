@@ -58,17 +58,17 @@ const AuthForm = props => {
           >
 
           { name === 'signup' &&
-            <TextField
-              id="outlined-name-input"
-              label="Name"
-              type="text"
-              name="userName"
-              autoComplete="give-name"
-              margin="normal"
-              required={true}
-              fullWidth={true}
-              variant="outlined"
-            />
+              <TextField
+                id="outlined-name-input"
+                label="Name"
+                type="text"
+                name="userName"
+                autoComplete="give-name"
+                margin="normal"
+                required={true}
+                fullWidth={true}
+                variant="outlined"
+              />
           }
 
           <TextField
@@ -119,8 +119,6 @@ const AuthForm = props => {
 
         <Divider light />
 
-        {/* <a href="/auth/google">{displayName} with Google</a> */}
-
         <Button disabled href="/auth/google" variant="contained" color="primary" fullWidth={true} className={classes.googleButton}>
           {displayName} with Google
         </Button>
@@ -159,8 +157,8 @@ const mapDispatch = dispatch => {
       const email = evt.target.email.value
       const password = evt.target.password.value
       if (formName === 'signup') {
-        const name = evt.target.userName.value
-        dispatch(auth(email, password, formName, name))
+        const userName = evt.target.userName.value
+        dispatch(auth(email, password, formName, userName))
       } else {
         dispatch(auth(email, password, formName, null))
       }

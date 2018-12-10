@@ -2,25 +2,14 @@ const passport = require('passport')
 const router = require('express').Router()
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const {User} = require('../db/models')
+const newUserSeed = require('../../script/new-user-seed')
 module.exports = router
-
-/**
- * For OAuth keys and other secrets, your Node process will search
- * process.env to find environment variables. On your production server,
- * you will be able to set these environment variables with the appropriate
- * values. In development, a good practice is to keep a separate file with
- * these secrets that you only share with your team - it should NOT be tracked
- * by git! In this case, you may use a file called `secrets.js`, which will
- * set these environment variables like so:
- *
- * process.env.GOOGLE_CLIENT_ID = 'your google client id'
- * process.env.GOOGLE_CLIENT_SECRET = 'your google client secret'
- * process.env.GOOGLE_CALLBACK = '/your/google/callback'
- */
 
 if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   console.log('Google client ID / secret not found. Skipping Google OAuth.')
 } else {
+  let userData = null
+  
   const googleConfig = {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -38,20 +27,30 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
         where: {googleId},
         defaults: {name, email}
       })
-        .then(([user]) => done(null, user))
+        .then( async (arr) => {
+          // the first element is the user
+          const user = arr[0].dataValues
+          // the second element tells us if the user was newly created
+          const wasCreated = arr[1]
+          userData = user
+          // Seeding with demo content for new users
+          if (wasCreated) { await newUserSeed(user) }
+          done(null, user)
+        })
         .catch(done)
     }
   )
 
   passport.use(strategy)
 
-  router.get('/', passport.authenticate('google', {scope: 'email'}))
+  router.get('/',
+    passport.authenticate('google', {scope: ['email']}))
 
-  router.get(
-    '/callback',
-    passport.authenticate('google', {
-      successRedirect: '/dashboard',
-      failureRedirect: '/login'
+  router.get('/callback',
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    function(req, res, next) {
+      res.cookie('mg_iLI', true)
+      res.cookie('mg_id', userData.id)
+      res.redirect('/dashboard')
     })
-  )
 }

@@ -5120,8 +5120,8 @@ var mapDispatch = function mapDispatch(dispatch) {
       var password = evt.target.password.value;
 
       if (formName === 'signup') {
-        var name = evt.target.userName.value;
-        dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_5__["auth"])(email, password, formName, name));
+        var userName = evt.target.userName.value;
+        dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_5__["auth"])(email, password, formName, userName));
       } else {
         dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_5__["auth"])(email, password, formName, null));
       }
@@ -6377,7 +6377,8 @@ function (_Component) {
 
 var mapState = function mapState(state) {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    user: state.user
   };
 };
 
@@ -6393,8 +6394,8 @@ var mapDispatch = function mapDispatch(dispatch) {
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapState, mapDispatch)(Routes)));
 Routes.propTypes = {
-  loadInitialData: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired //isLoggedIn: PropTypes.bool.isRequired
-
+  loadInitialData: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
+  isLoggedIn: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool.isRequired
 };
 
 /***/ }),

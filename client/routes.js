@@ -40,7 +40,8 @@ class Routes extends Component {
 
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    user: state.user
   }
 }
 
@@ -58,5 +59,5 @@ export default withRouter(connect(mapState, mapDispatch)(Routes))
 
 Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired,
-  //isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired
 }
