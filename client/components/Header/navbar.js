@@ -20,8 +20,8 @@ const styles = theme => ({
     }
   },
   button: {
-    padding: 0,
-    marginLeft: '20px'
+    // padding: 0,
+    // marginLeft: '20px'
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1
@@ -42,22 +42,20 @@ const Navbar = ({handleClick, isLoggedIn, classes}) => (
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
-          <Button color="inherit" className={classes.button}>
-            <NavLink to="/dashboard" activeClassName="nav-main__active">Dashboard</NavLink>
-          </Button>
-          <Button onClick={handleClick} color="inherit">
-            Logout
-          </Button>
+          <NavLink to="/dashboard" activeClassName="nav-main__active">
+            <Button color="inherit" className={classes.button}>Dashboard</Button>
+          </NavLink>
+          <Button onClick={handleClick} color="inherit">Logout</Button>
         </div>
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <Button color="inherit" className={classes.button}>
-            <NavLink to="/login" activeClassName="nav-main__active">Login</NavLink>
-          </Button>
-          <Button color="inherit" className={classes.button}>
-            <NavLink to="/signup" activeClassName="nav-main__active">Sign Up</NavLink>
-          </Button>
+          <NavLink to="/login" activeClassName="nav-main__active">
+            <Button color="inherit" className={classes.button}>Login</Button> 
+          </NavLink>
+          <NavLink to="/signup" activeClassName="nav-main__active">
+            <Button color="inherit" className={classes.button}>Signup</Button> 
+          </NavLink>
         </div>
       )}
     </nav>

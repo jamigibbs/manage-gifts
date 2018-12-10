@@ -2004,9 +2004,8 @@ var styles = function styles(theme) {
     }, theme.breakpoints.down('sm'), {
       width: '100%'
     }),
-    button: {
-      padding: 0,
-      marginLeft: '20px'
+    button: {// padding: 0,
+      // marginLeft: '20px'
     },
     appBar: {
       zIndex: theme.zIndex.drawer + 1
@@ -2031,28 +2030,28 @@ var Navbar = function Navbar(_ref) {
     className: classes.logo
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
     to: "/"
-  }, "Manage Gifts")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", null, isLoggedIn ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Button"], {
-    color: "inherit",
-    className: classes.button
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["NavLink"], {
+  }, "Manage Gifts")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", null, isLoggedIn ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["NavLink"], {
     to: "/dashboard",
     activeClassName: "nav-main__active"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Button"], {
+    color: "inherit",
+    className: classes.button
   }, "Dashboard")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Button"], {
     onClick: handleClick,
     color: "inherit"
-  }, "Logout")) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Button"], {
-    color: "inherit",
-    className: classes.button
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["NavLink"], {
+  }, "Logout")) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["NavLink"], {
     to: "/login",
     activeClassName: "nav-main__active"
-  }, "Login")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Button"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Button"], {
     color: "inherit",
     className: classes.button
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["NavLink"], {
+  }, "Login")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["NavLink"], {
     to: "/signup",
     activeClassName: "nav-main__active"
-  }, "Sign Up"))))))));
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["Button"], {
+    color: "inherit",
+    className: classes.button
+  }, "Signup"))))))));
 };
 
 var mapState = function mapState(state) {
@@ -5082,7 +5081,6 @@ var AuthForm = function AuthForm(props) {
   }, error.response.data))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Divider"], {
     light: true
   }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Button"], {
-    disabled: true,
     href: "/auth/google",
     variant: "contained",
     color: "primary",
@@ -53425,7 +53423,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".nav-main a {\n  text-decoration: none;\n  padding: 8px 16px; }\n  .nav-main a:visited {\n    color: white; }\n\n.nav-main__active {\n  background-color: rgba(0, 0, 0, 0.08);\n  padding: 8px 16px; }\n", ""]);
+exports.push([module.i, ".nav-main a {\n  color: white;\n  text-decoration: none; }\n  .nav-main a:hover {\n    padding: 10px 0; }\n\n.nav-main__active {\n  background-color: rgba(0, 0, 0, 0.08);\n  padding: 10px 0; }\n", ""]);
 
 // exports
 

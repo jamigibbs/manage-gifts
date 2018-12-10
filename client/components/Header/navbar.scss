@@ -1,13 +1,13 @@
 .nav-main {
   a {
+    color: white;
     text-decoration: none;
-    padding: 8px 16px;
-    &:visited {
-      color: white;
+    &:hover {
+      padding: 10px 0;
     }
   }
   &__active {
     background-color: rgba(0, 0, 0, 0.08);
-    padding: 8px 16px;
+    padding: 10px 0;
   }
 }
