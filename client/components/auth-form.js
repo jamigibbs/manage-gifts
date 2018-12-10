@@ -58,7 +58,6 @@ const AuthForm = props => {
           >
 
           { name === 'signup' &&
-<<<<<<< HEAD
               <TextField
                 id="outlined-name-input"
                 label="Name"
@@ -70,19 +69,6 @@ const AuthForm = props => {
                 fullWidth={true}
                 variant="outlined"
               />
-=======
-            <TextField
-              id="outlined-name-input"
-              label="Name"
-              type="text"
-              name="userName"
-              autoComplete="give-name"
-              margin="normal"
-              required={true}
-              fullWidth={true}
-              variant="outlined"
-            />
->>>>>>> development
           }
 
           <TextField
@@ -132,8 +118,6 @@ const AuthForm = props => {
         </form>
 
         <Divider light />
-
-        {/* <a href="/auth/google">{displayName} with Google</a> */}
 
         <Button disabled href="/auth/google" variant="contained" color="primary" fullWidth={true} className={classes.googleButton}>
           {displayName} with Google

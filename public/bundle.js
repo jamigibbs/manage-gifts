@@ -4964,9 +4964,210 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   !*** ./client/components/auth-form.js ***!
   \****************************************/
 /*! exports provided: Login, Signup */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/jami.gibbs/github/gift-manager/client/components/auth-form.js: Unexpected token (61:1)\n\n\u001b[0m \u001b[90m 59 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 60 | \u001b[39m          { name \u001b[33m===\u001b[39m \u001b[32m'signup'\u001b[39m \u001b[33m&&\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 61 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 62 | \u001b[39m              \u001b[33m<\u001b[39m\u001b[33mTextField\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 63 | \u001b[39m                id\u001b[33m=\u001b[39m\u001b[32m\"outlined-name-input\"\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 64 | \u001b[39m                label\u001b[33m=\u001b[39m\u001b[32m\"Name\"\u001b[39m\u001b[0m\n    at _class.raise (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:4028:15)\n    at _class.unexpected (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:5343:16)\n    at _class.jsxParseIdentifier (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:3504:14)\n    at _class.jsxParseNamespacedName (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:3514:23)\n    at _class.jsxParseElementName (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:3525:23)\n    at _class.jsxParseOpeningElementAt (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:3610:24)\n    at _class.jsxParseElementAt (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:3643:33)\n    at _class.jsxParseElement (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:3712:19)\n    at _class.parseExprAtom (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:3719:21)\n    at _class.parseExprSubscripts (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:6019:21)\n    at _class.parseMaybeUnary (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:5998:21)\n    at _class.parseExprOp (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:5953:46)\n    at _class.parseExprOp (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:5955:21)\n    at _class.parseExprOps (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:5917:17)\n    at _class.parseMaybeConditional (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:5879:21)\n    at _class.parseMaybeAssign (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:5826:21)\n    at _class.parseExpression (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:5779:21)\n    at _class.jsxParseExpressionContainer (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:3580:32)\n    at _class.jsxParseElementAt (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:3670:36)\n    at _class.jsxParseElementAt (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:3659:34)\n    at _class.jsxParseElementAt (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:3659:34)\n    at _class.jsxParseElementAt (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:3659:34)\n    at _class.jsxParseElementAt (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:3659:34)\n    at _class.jsxParseElement (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:3712:19)\n    at _class.parseExprAtom (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:3719:21)\n    at _class.parseExprSubscripts (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:6019:21)\n    at _class.parseMaybeUnary (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:5998:21)\n    at _class.parseExprOps (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:5907:21)\n    at _class.parseMaybeConditional (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:5879:21)\n    at _class.parseMaybeAssign (/Users/jami.gibbs/github/gift-manager/node_modules/@babel/parser/lib/index.js:5826:21)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Login", function() { return Login; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Signup", function() { return Signup; });
+/* harmony import */ var _auth_form_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./auth-form.scss */ "./client/components/auth-form.scss");
+/* harmony import */ var _auth_form_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_auth_form_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utilities */ "./client/utilities/index.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_utilities__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
+/* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Header */ "./client/components/Header/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+
+
+
+
+
+
+
+
+
+
+var styles = function styles(theme) {
+  return {
+    submitButton: {
+      marginTop: '40px',
+      marginBottom: '20px'
+    },
+    googleButton: {
+      marginTop: '20px',
+      marginBottom: '20px'
+    },
+    title: {
+      margin: '20px 0',
+      fontWeight: 'bold'
+    }
+  };
+};
+
+var AuthForm = function AuthForm(props) {
+  var name = props.name,
+      displayName = props.displayName,
+      handleSubmit = props.handleSubmit,
+      error = props.error,
+      classes = props.classes;
+  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_6__["Navbar"], null), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Grid"], {
+    container: true,
+    direction: "column",
+    justify: "center",
+    alignItems: "center"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Typography"], {
+    variant: "h5",
+    color: "default",
+    align: "center",
+    className: classes.title
+  }, displayName), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Paper"], {
+    elevation: 1,
+    square: true,
+    className: "auth-form"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("form", {
+    className: "auth-form__form",
+    onSubmit: handleSubmit,
+    name: name
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Grid"], {
+    container: true,
+    direction: "column",
+    justify: "center",
+    alignItems: "center"
+  }, name === 'signup' && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["TextField"], {
+    id: "outlined-name-input",
+    label: "Name",
+    type: "text",
+    name: "userName",
+    autoComplete: "give-name",
+    margin: "normal",
+    required: true,
+    fullWidth: true,
+    variant: "outlined"
+  }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["TextField"], {
+    id: "outlined-email-input",
+    label: "Email",
+    type: "email",
+    name: "email",
+    autoComplete: "family-name",
+    margin: "normal",
+    required: true,
+    fullWidth: true,
+    variant: "outlined"
+  }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["TextField"], {
+    id: "outlined-password-input",
+    label: "Password",
+    type: "password",
+    name: "password",
+    margin: "normal",
+    required: true,
+    fullWidth: true,
+    variant: "outlined"
+  }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Button"], {
+    variant: "outlined",
+    color: "primary",
+    type: "submit",
+    fullWidth: true,
+    className: classes.submitButton
+  }, displayName), error && error.response && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Typography"], {
+    variant: "body2",
+    color: "error",
+    align: "center"
+  }, error.response.data))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Divider"], {
+    light: true
+  }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Button"], {
+    disabled: true,
+    href: "/auth/google",
+    variant: "contained",
+    color: "primary",
+    fullWidth: true,
+    className: classes.googleButton
+  }, displayName, " with Google"))));
+};
+
+var loadingSelector = Object(_utilities__WEBPACK_IMPORTED_MODULE_1__["createLoadingSelector"])(['GET_USER']);
+
+var mapLogin = function mapLogin(state) {
+  return {
+    name: 'login',
+    displayName: 'Login',
+    error: state.user.error,
+    isFetching: loadingSelector(state)
+  };
+};
+
+var mapSignup = function mapSignup(state) {
+  return {
+    name: 'signup',
+    displayName: 'Sign Up',
+    error: state.user.error,
+    isFetching: loadingSelector(state)
+  };
+};
+
+var mapDispatch = function mapDispatch(dispatch) {
+  return {
+    handleSubmit: function handleSubmit(evt) {
+      evt.preventDefault();
+      var formName = evt.target.name;
+      var email = evt.target.email.value;
+      var password = evt.target.password.value;
+
+      if (formName === 'signup') {
+        var userName = evt.target.userName.value;
+        dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_5__["auth"])(email, password, formName, userName));
+      } else {
+        dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_5__["auth"])(email, password, formName, null));
+      }
+    }
+  };
+};
+
+var Login = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapLogin, mapDispatch)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7__["withStyles"])(styles)(AuthForm));
+var Signup = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapSignup, mapDispatch)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7__["withStyles"])(styles)(AuthForm));
+AuthForm.propTypes = {
+  name: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string.isRequired,
+  displayName: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string.isRequired,
+  handleSubmit: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
+  error: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object,
+  classes: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object
+};
+
+/***/ }),
+
+/***/ "./client/components/auth-form.scss":
+/*!******************************************!*\
+  !*** ./client/components/auth-form.scss ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../node_modules/css-loader!../../node_modules/sass-loader/lib/loader.js!./auth-form.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./client/components/auth-form.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
 
 /***/ }),
 
@@ -53225,6 +53426,25 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, ".nav-main a {\n  text-decoration: none;\n  padding: 8px 16px; }\n  .nav-main a:visited {\n    color: white; }\n\n.nav-main__active {\n  background-color: rgba(0, 0, 0, 0.08);\n  padding: 8px 16px; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./client/components/auth-form.scss":
+/*!*************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./client/components/auth-form.scss ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".auth-form {\n  padding: 1rem 2rem; }\n  .auth-form__form {\n    width: 250px; }\n  .auth-form label {\n    font-size: 12px; }\n", ""]);
 
 // exports
 
