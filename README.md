@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/jamigibbs/gift-manager.svg?branch=development)](https://travis-ci.com/jamigibbs/manage-gifts)
+[![Build Status](https://travis-ci.com/jamigibbs/manage-gifts.svg?branch=development)](https://travis-ci.com/jamigibbs/manage-gifts)
 
 # Manage Gifts
 
