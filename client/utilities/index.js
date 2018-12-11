@@ -108,6 +108,14 @@ const getSorting = function(order, orderBy) {
   return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
 }
 
+const randomString = function(length) {
+  let text = ''
+  const values = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVQXYZ0123456789'
+  for (let i = 0; i < length; i++) {
+    text += values.charAt(Math.floor(Math.random() * values.length))
+  }
+  return text
+}
 
 module.exports = {
   isDomain,
@@ -118,5 +126,6 @@ module.exports = {
   createLoadingSelector,
   allFalseValues,
   stableSort,
-  getSorting
+  getSorting,
+  randomString
 }

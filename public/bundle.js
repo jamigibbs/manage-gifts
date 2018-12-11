@@ -6580,6 +6580,17 @@ var getSorting = function getSorting(order, orderBy) {
   };
 };
 
+var randomString = function randomString(length) {
+  var text = '';
+  var values = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVQXYZ0123456789';
+
+  for (var i = 0; i < length; i++) {
+    text += values.charAt(Math.floor(Math.random() * values.length));
+  }
+
+  return text;
+};
+
 module.exports = {
   isDomain: isDomain,
   isURL: isURL,
@@ -6589,7 +6600,8 @@ module.exports = {
   createLoadingSelector: createLoadingSelector,
   allFalseValues: allFalseValues,
   stableSort: stableSort,
-  getSorting: getSorting
+  getSorting: getSorting,
+  randomString: randomString
 };
 
 /***/ }),
