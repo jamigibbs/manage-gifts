@@ -2,6 +2,10 @@ const router = require('express').Router()
 const { User, Reset } = require('../db/models')
 const newUserSeed = require('../../script/new-user-seed')
 const { randomString } = require('../../client/utilities')
+const sgMail = require('@sendgrid/mail')
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+
 module.exports = router
 
 router.post('/login', async (req, res, next) => {
@@ -48,44 +52,57 @@ router.post('/signup', async (req, res, next) => {
   }
 })
 
-router.post('/forgotpass', async (req, res, next) => {
+// POST /auth/forgot-password
+router.post('/forgot-password', async (req, res, next) => {
   try {
     if (!req.body) return res.status(400).json({message: 'No request body'})
     if (!req.body.email) return res.status(400).json({message: 'No email is request body'})
-    
+
     const token = randomString(40)
-    
+    const submitMessage = `If an account exists for this email, you will receive a reset message shortly`
     // get user id
     const user = await User.findOne({where: {email: req.body.email}})
-    
+
+    if (!user) { return res.json(submitMessage) }
+
     // add token to user's reset row
     await Reset.findOrCreate({ where: {userId: user.id}, defaults: {token}})
       .then(arr => {
         const instance = arr[0] // the first element is the instance
         const wasCreated = arr[1] // the second element tells us if the instance was newly created
+
         // if exists, update token
-        if (!wasCreated) {
+        if (!wasCreated && user.password) {
           return Reset.update({token}, {where: {userId: user.id}})
         }
       })
-    
+
     // Send reset email to user
-    const resetEmailData = {
-      to: req.body.email,
-      subject: 'Manage Gifts Password Reset',
-      html: `Someone has requested to reset the password for an account with this email address. 
-      If this wasn't you, you can ignore this email. Otherwise, please use the following link for 
-      instructions to reset your password: ${req.headers.host}/auth/resetpass/${token}`
+    const resetEmail = {
+      to: user.email,
+      from: process.env.EMAIL_FROM,
+      subject: 'Password Reset Request From Manage Gifts',
+      html: `<p>Hello Friend,</p><p>Someone has requested to reset the password for an account with this email address.
+      If this wasn't you, you can ignore this message. Otherwise, use the following link for
+      instructions to reset your password. Please use immediately as this link will expire:<br />
+      http://${req.headers.host}/password-reset/${token} </p><br />
+      <p>Kind Regards, <br />The Manage Gifts Team<p>
+      http://www.managegifts.com`
     }
-    
-    res.send(token)
+
+    sgMail.send(resetEmail, (error) => {
+      if (error) console.error(error.toString())
+    })
+
+    res.send(submitMessage)
   } catch (err) {
     next(err)
   }
 })
 
-router.post('/resetpass/:token', async (req, res, next) => {
-  
+// api/auth/reset
+router.post('/reset/', async (req, res, next) => {
+
 })
 
 router.post('/logout', (req, res) => {
