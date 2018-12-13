@@ -26,9 +26,7 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 
       if (!name) name = email
 
-      // also checking for email match for users who signed up before we went
-      // entirely oAuth because they wouldn't have a googleId
-      User.findOrCreate({
+      const instance = await User.findOrCreate({
         where: { [Op.or]: [{googleId}, {email}] },
         defaults: {name, email, googleId}
       })
@@ -37,9 +35,17 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
           const user = arr[0].dataValues
           // the second element tells us if the user was newly created
           const wasCreated = arr[1]
+          
           userData = user
-          // Seeding with demo content for new users
-          if (wasCreated) { await newUserSeed(user) }
+          
+          if (wasCreated) {
+            // Seeding with demo content for new users
+            await newUserSeed(user)
+          } else if (!user.googleId) {
+            // Update user table with googleId if it doesn't already exist
+            await User.update({googleId}, {where: {id: user.id}})
+          }
+          
           done(null, user)
         })
         .catch(done)
