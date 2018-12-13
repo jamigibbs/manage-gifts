@@ -1054,13 +1054,12 @@ var toggleGiftStatus = function toggleGiftStatus(gift) {
 /*!****************************************!*\
   !*** ./client/actions/user-actions.js ***!
   \****************************************/
-/*! exports provided: me, auth, logout */
+/*! exports provided: me, logout */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "me", function() { return me; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "auth", function() { return auth; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
@@ -1141,98 +1140,43 @@ var me = function me() {
     }()
   );
 };
-var auth = function auth(email, password, method, name) {
+var logout = function logout() {
   return (
     /*#__PURE__*/
     function () {
       var _ref2 = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee2(dispatch) {
-        var res;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
-                dispatch(getUserRequest());
+                dispatch(logoutUserRequest());
                 _context2.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/auth/".concat(method), {
-                  email: email,
-                  password: password,
-                  name: name
-                });
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/auth/logout');
 
               case 4:
-                res = _context2.sent;
-                _context2.next = 10;
+                dispatch(logoutUserSuccess());
+                _history__WEBPACK_IMPORTED_MODULE_1__["default"].push('/login');
+                _context2.next = 11;
                 break;
 
-              case 7:
-                _context2.prev = 7;
+              case 8:
+                _context2.prev = 8;
                 _context2.t0 = _context2["catch"](0);
-                return _context2.abrupt("return", dispatch(getUserSuccess({
-                  error: _context2.t0
-                })));
-
-              case 10:
-                try {
-                  dispatch(getUserSuccess(res.data));
-                  _history__WEBPACK_IMPORTED_MODULE_1__["default"].push('/dashboard');
-                } catch (dispatchOrHistoryErr) {
-                  console.error(dispatchOrHistoryErr);
-                }
+                console.error(_context2.t0);
 
               case 11:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[0, 7]]);
+        }, _callee2, this, [[0, 8]]);
       }));
 
       return function (_x2) {
         return _ref2.apply(this, arguments);
-      };
-    }()
-  );
-};
-var logout = function logout() {
-  return (
-    /*#__PURE__*/
-    function () {
-      var _ref3 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee3(dispatch) {
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.prev = 0;
-                dispatch(logoutUserRequest());
-                _context3.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/auth/logout');
-
-              case 4:
-                dispatch(logoutUserSuccess());
-                _history__WEBPACK_IMPORTED_MODULE_1__["default"].push('/login');
-                _context3.next = 11;
-                break;
-
-              case 8:
-                _context3.prev = 8;
-                _context3.t0 = _context3["catch"](0);
-                console.error(_context3.t0);
-
-              case 11:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, this, [[0, 8]]);
-      }));
-
-      return function (_x3) {
-        return _ref3.apply(this, arguments);
       };
     }()
   );
@@ -4974,20 +4918,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Signup", function() { return Signup; });
 /* harmony import */ var _auth_form_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./auth-form.scss */ "./client/components/auth-form.scss");
 /* harmony import */ var _auth_form_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_auth_form_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utilities */ "./client/utilities/index.js");
-/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_utilities__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
-/* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Header */ "./client/components/Header/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
-
-
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Header */ "./client/components/Header/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
 
 
 
@@ -4998,10 +4937,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var styles = function styles(theme) {
   return {
-    submitButton: {
-      marginTop: '40px',
-      marginBottom: '20px'
-    },
     googleButton: {
       marginTop: '20px',
       marginBottom: '20px'
@@ -5014,130 +4949,58 @@ var styles = function styles(theme) {
 };
 
 var AuthForm = function AuthForm(props) {
-  var name = props.name,
-      displayName = props.displayName,
-      handleSubmit = props.handleSubmit,
+  var displayName = props.displayName,
       error = props.error,
       classes = props.classes;
-  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_6__["Navbar"], null), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Grid"], {
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_4__["Navbar"], null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Grid"], {
     container: true,
     direction: "column",
     justify: "center",
     alignItems: "center"
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Typography"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Typography"], {
     variant: "h5",
     color: "default",
     align: "center",
     className: classes.title
-  }, displayName), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Paper"], {
+  }, displayName), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Paper"], {
     elevation: 1,
     square: true,
     className: "auth-form"
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("form", {
-    className: "auth-form__form",
-    onSubmit: handleSubmit,
-    name: name
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Grid"], {
-    container: true,
-    direction: "column",
-    justify: "center",
-    alignItems: "center"
-  }, name === 'signup' && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["TextField"], {
-    id: "outlined-name-input",
-    label: "Name",
-    type: "text",
-    name: "userName",
-    autoComplete: "give-name",
-    margin: "normal",
-    required: true,
-    fullWidth: true,
-    variant: "outlined"
-  }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["TextField"], {
-    id: "outlined-email-input",
-    label: "Email",
-    type: "email",
-    name: "email",
-    autoComplete: "family-name",
-    margin: "normal",
-    required: true,
-    fullWidth: true,
-    variant: "outlined"
-  }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["TextField"], {
-    id: "outlined-password-input",
-    label: "Password",
-    type: "password",
-    name: "password",
-    margin: "normal",
-    required: true,
-    fullWidth: true,
-    variant: "outlined"
-  }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Button"], {
-    variant: "outlined",
-    color: "primary",
-    type: "submit",
-    fullWidth: true,
-    className: classes.submitButton
-  }, displayName), error && error.response && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Typography"], {
+  }, error && error.response && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Typography"], {
     variant: "body2",
     color: "error",
     align: "center"
-  }, error.response.data))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Divider"], {
-    light: true
-  }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["Button"], {
+  }, error.response.data), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
     href: "/auth/google",
     variant: "contained",
     color: "primary",
     fullWidth: true,
     className: classes.googleButton
-  }, displayName, " with Google"))));
+  }, displayName, " with Google"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Divider"], {
+    light: true
+  }))));
 };
-
-var loadingSelector = Object(_utilities__WEBPACK_IMPORTED_MODULE_1__["createLoadingSelector"])(['GET_USER']);
 
 var mapLogin = function mapLogin(state) {
   return {
-    name: 'login',
     displayName: 'Login',
-    error: state.user.error,
-    isFetching: loadingSelector(state)
+    error: state.user.error
   };
 };
 
 var mapSignup = function mapSignup(state) {
   return {
-    name: 'signup',
     displayName: 'Sign Up',
-    error: state.user.error,
-    isFetching: loadingSelector(state)
+    error: state.user.error
   };
 };
 
-var mapDispatch = function mapDispatch(dispatch) {
-  return {
-    handleSubmit: function handleSubmit(evt) {
-      evt.preventDefault();
-      var formName = evt.target.name;
-      var email = evt.target.email.value;
-      var password = evt.target.password.value;
-
-      if (formName === 'signup') {
-        var userName = evt.target.userName.value;
-        dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_5__["auth"])(email, password, formName, userName));
-      } else {
-        dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_5__["auth"])(email, password, formName, null));
-      }
-    }
-  };
-};
-
-var Login = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapLogin, mapDispatch)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7__["withStyles"])(styles)(AuthForm));
-var Signup = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapSignup, mapDispatch)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7__["withStyles"])(styles)(AuthForm));
+var Login = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapLogin, null)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["withStyles"])(styles)(AuthForm));
+var Signup = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapSignup, null)(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["withStyles"])(styles)(AuthForm));
 AuthForm.propTypes = {
-  name: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string.isRequired,
-  displayName: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string.isRequired,
-  handleSubmit: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
-  error: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object,
-  classes: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object
+  displayName: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string.isRequired,
+  error: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object,
+  classes: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object
 };
 
 /***/ }),
@@ -53553,7 +53416,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".auth-form {\n  padding: 1rem 2rem; }\n  .auth-form__form {\n    width: 250px; }\n  .auth-form label {\n    font-size: 12px; }\n", ""]);
+exports.push([module.i, ".auth-form {\n  padding: 1rem 2rem;\n  width: 350px; }\n  .auth-form label {\n    font-size: 12px; }\n", ""]);
 
 // exports
 
