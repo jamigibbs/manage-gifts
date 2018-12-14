@@ -1,5 +1,17 @@
 {
   "changelog": [
+    { "id": "1.0.1-alpha",  "title": "Account Updates", "date": "December 14, 2018", "details": [
+      {
+        "type": "new", "items": [
+          {"id": 1, "info": "Sign-in / Sign-up with your Twitter account"}
+        ]
+      },
+      {
+        "type": "improvements", "items": [
+          {"id": 1, "info": "Improved security: Password requirement entirely removed. Signup through either Google or Twitter"}
+        ]
+      }
+    ]},
     { "id": "1.0.0-alpha", "title": "Initial Release", "date": "December 10, 2018", "details": [
       {
         "type": "new", "items": [

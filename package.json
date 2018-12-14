@@ -1,7 +1,7 @@
 {
   "name": "gift-manager",
-  "version": "1.0.0",
-  "description": "No more spreadsheets to manage Christmas gifts.",
+  "version": "1.0.1-alpha",
+  "description": "No more spreadsheets to manage your gift giving.",
   "engines": {
     "node": ">= 7.0.0"
   },
