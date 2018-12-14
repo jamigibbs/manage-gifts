@@ -1,4 +1,4 @@
-const Op = require('Sequelize').Op
+const Op = require('sequelize').Op
 const passport = require('passport')
 const router = require('express').Router()
 const TwitterStrategy = require('passport-twitter').Strategy
