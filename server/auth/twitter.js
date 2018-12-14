@@ -14,6 +14,7 @@ if (!process.env.TWITTER_CONSUMER_KEY || !process.env.TWITTER_CONSUMER_SECRET) {
   const TwitterConfig = {
     consumerKey: process.env.TWITTER_CONSUMER_KEY,
     consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
+    includeEmail: true,
     callbackURL: process.env.TWITTER_CALLBACK
   }
 
@@ -21,10 +22,8 @@ if (!process.env.TWITTER_CONSUMER_KEY || !process.env.TWITTER_CONSUMER_SECRET) {
     TwitterConfig,
     async(token, tokenSecret, profile, done) => {
       const twitterId = profile.id
-      let name = profile.displayName
+      let name = profile.username
       const email = profile.emails[0].value
-
-      // if (!name) name = email
 
       await User.findOrCreate({
         where: { [Op.or]: [{twitterId}, {email}] },
@@ -35,17 +34,17 @@ if (!process.env.TWITTER_CONSUMER_KEY || !process.env.TWITTER_CONSUMER_SECRET) {
           const user = arr[0].dataValues
           // the second element tells us if the user was newly created
           const wasCreated = arr[1]
-          console.log('user', user)
+
           userData = user
-          
+
           if (wasCreated) {
             // Seeding with demo content for new users
             await newUserSeed(user)
           } else if (!user.twitterId) {
-            // Update user table with googleId if it doesn't already exist
+            // Update user table with twitterId if it doesn't already exist
             await User.update({twitterId}, {where: {id: user.id}})
           }
-          
+
           done(null, user)
         })
         .catch(done)
@@ -54,11 +53,11 @@ if (!process.env.TWITTER_CONSUMER_KEY || !process.env.TWITTER_CONSUMER_SECRET) {
 
   passport.use(strategy)
 
-  router.get('/',
-    passport.authenticate('google', {scope: ['email']}))
+  // GET /auth/twitter
+  router.get('/', passport.authenticate('twitter'))
 
-  router.get('/callback',
-    passport.authenticate('google', { failureRedirect: '/login' }),
+  // GET /auth/twitter/callback
+  router.get('/callback', passport.authenticate('twitter', { failureRedirect: '/login' }),
     function(req, res, next) {
       res.cookie('mg_iLI', true)
       res.cookie('mg_id', userData.id)

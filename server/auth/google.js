@@ -35,9 +35,9 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
           const user = arr[0].dataValues
           // the second element tells us if the user was newly created
           const wasCreated = arr[1]
-          
+
           userData = user
-          
+
           if (wasCreated) {
             // Seeding with demo content for new users
             await newUserSeed(user)
@@ -45,7 +45,7 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
             // Update user table with googleId if it doesn't already exist
             await User.update({googleId}, {where: {id: user.id}})
           }
-          
+
           done(null, user)
         })
         .catch(done)
