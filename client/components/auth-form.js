@@ -15,6 +15,13 @@ const styles = theme => ({
   title: {
     margin: '20px 0',
     fontWeight: 'bold'
+  },
+  twitterButton: {
+    color: 'white',
+    backgroundColor: '#3AA1F2',
+    '&:hover': {
+      backgroundColor: '#245FD1',
+    },
   }
 })
 
@@ -41,7 +48,7 @@ const AuthForm = props => {
         </Typography>
 
         <Paper elevation={1} square={true} className="auth-form">
-        
+
         {error && error.response &&
           <Typography
             variant="body2"
@@ -55,10 +62,10 @@ const AuthForm = props => {
         <Button href="/auth/google" variant="contained" color="primary" fullWidth={true} className={classes.googleButton}>
           {displayName} with Google
         </Button>
-        
+
         <Divider light />
-        
-        <Button href="/auth/twitter" variant="contained" color="secondary" fullWidth={true} className={classes.googleButton}>
+
+        <Button href="/auth/twitter" variant="contained" color="secondary" fullWidth={true} className={classes.twitterButton} >
           {displayName} with Twitter
         </Button>
 

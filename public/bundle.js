@@ -4942,6 +4942,13 @@ var styles = function styles(theme) {
     title: {
       margin: '20px 0',
       fontWeight: 'bold'
+    },
+    twitterButton: {
+      color: 'white',
+      backgroundColor: '#3AA1F2',
+      '&:hover': {
+        backgroundColor: '#245FD1'
+      }
     }
   };
 };
@@ -4981,7 +4988,7 @@ var AuthForm = function AuthForm(props) {
     variant: "contained",
     color: "secondary",
     fullWidth: true,
-    className: classes.googleButton
+    className: classes.twitterButton
   }, displayName, " with Twitter"))));
 };
 
