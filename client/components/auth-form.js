@@ -57,6 +57,10 @@ const AuthForm = props => {
         </Button>
         
         <Divider light />
+        
+        <Button href="/auth/twitter" variant="contained" color="secondary" fullWidth={true} className={classes.googleButton}>
+          {displayName} with Twitter
+        </Button>
 
         </Paper>
       </Grid>

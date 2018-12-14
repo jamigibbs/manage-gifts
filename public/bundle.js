@@ -90,15 +90,13 @@
 /*!*********************************!*\
   !*** ./client/actions/index.js ***!
   \*********************************/
-/*! exports provided: me, auth, logout, addReceiver, getAllListReceivers, removeReceiverFromList, getAllReceiverGifts, addGiftToReceiver, getReceiver, removeGiftFromReceiver, toggleGiftStatus, getCurrentListId, updateCurrentListId, updatePreviousListId, getListsForuser, addNewList, deleteList, getAllGiftsForList, updateCurrentListName */
+/*! exports provided: me, logout, addReceiver, getAllListReceivers, removeReceiverFromList, getAllReceiverGifts, addGiftToReceiver, getReceiver, removeGiftFromReceiver, toggleGiftStatus, getCurrentListId, updateCurrentListId, updatePreviousListId, getListsForuser, addNewList, deleteList, getAllGiftsForList, updateCurrentListName */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _user_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user-actions */ "./client/actions/user-actions.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "me", function() { return _user_actions__WEBPACK_IMPORTED_MODULE_0__["me"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "auth", function() { return _user_actions__WEBPACK_IMPORTED_MODULE_0__["auth"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return _user_actions__WEBPACK_IMPORTED_MODULE_0__["logout"]; });
 
@@ -4978,7 +4976,13 @@ var AuthForm = function AuthForm(props) {
     className: classes.googleButton
   }, displayName, " with Google"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Divider"], {
     light: true
-  }))));
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
+    href: "/auth/twitter",
+    variant: "contained",
+    color: "secondary",
+    fullWidth: true,
+    className: classes.googleButton
+  }, displayName, " with Twitter"))));
 };
 
 var mapLogin = function mapLogin(state) {

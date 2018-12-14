@@ -1,6 +1,7 @@
 const router = require('express').Router()
 
 router.use('/google', require('./google'))
+router.use('/twitter', require('./twitter'))
 
 router.post('/logout', (req, res) => {
   req.logout()
