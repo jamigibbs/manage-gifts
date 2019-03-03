@@ -1,7 +1,7 @@
 const Op = require('sequelize').Op
 const passport = require('passport')
 const router = require('express').Router()
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
+const GoogleStrategy = require('passport-google-oauth20').Strategy
 const {User} = require('../db/models')
 const newUserSeed = require('../../script/new-user-seed')
 module.exports = router
@@ -14,7 +14,8 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   const googleConfig = {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_CALLBACK
+    callbackURL: process.env.GOOGLE_CALLBACK,
+    userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo'
   }
 
   const strategy = new GoogleStrategy(
