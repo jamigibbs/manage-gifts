@@ -80,7 +80,7 @@ router.get('/gifts/', userAuth, async (req, res, next) => {
 router.get('/', userAuth, async (req, res, next) => {
   const { receiverId } = req.query
   try {
-    const receiver = await Receiver.findById(receiverId)
+    const receiver = await Receiver.findByPk(receiverId)
     res.json(receiver)
   } catch (err) { next(err) }
 })
