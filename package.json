@@ -3,7 +3,7 @@
   "version": "1.0.1-alpha",
   "description": "No more spreadsheets to manage your gift giving.",
   "engines": {
-    "node": ">= 7.0.0"
+    "node": "16.13.0"
   },
   "main": "index.js",
   "scripts": {
