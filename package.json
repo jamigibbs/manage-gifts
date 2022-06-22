@@ -46,7 +46,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "faker": "^5.5.3",
-    "got": "^11.8.3",
+    "got": "^11.8.5",
     "history": "^4.6.3",
     "js-cookie": "^3.0.1",
     "metascraper": "^5.25.2",
